@@ -1,0 +1,27 @@
+.LeaderboardTag-Stat {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 8rem;
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18rem;
+	line-height: 100%;
+	letter-spacing: -0.01em;
+
+	.Stat-label {
+		color: #D3D6F2;
+	}
+
+	.Stat-value {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 12rem;
+		height: 42rem;
+		background: #3A3D53;
+		border-radius: 6rem;
+		color: white;
+	}
+}

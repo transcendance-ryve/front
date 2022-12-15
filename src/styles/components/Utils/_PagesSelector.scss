@@ -1,0 +1,28 @@
+.PagesSelector {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8rem;
+
+	button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 50rem;
+		height: 48rem;
+		padding: 0 20rem;
+		border: none;
+		border-radius: 6rem;
+		background: #242635;
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16rem;
+		line-height: 100%;
+		letter-spacing: -0.01em;
+		color: #FFFFFF;
+	}
+
+	.Pages--selected {
+		background: #0177FB;
+	}
+}

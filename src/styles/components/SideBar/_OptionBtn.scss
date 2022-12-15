@@ -1,0 +1,28 @@
+.OptionBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32rem;
+	height: 32rem;
+	background: #242635;
+	border: none;
+	border-radius: 50%;
+
+	.OptionBtn-logo {
+		width: 16rem;
+		height: 16rem;
+		svg {
+			top: 0;
+			width: 100%;
+			height: 100%;
+			fill: #787B96;
+		}
+	}
+
+	&:hover {
+		.OptionBtn-logo svg {
+			fill: white;
+			transition: fill 150ms ease-in-out;
+		}
+	}
+}

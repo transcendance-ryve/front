@@ -1,0 +1,35 @@
+html, body, #app {
+	display: block;
+	margin: 0;
+	min-width: 320px;
+	font-size: 0.0520833333vw;	// 1px in 1920px resolution
+}
+
+#app {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Poppins';
+	background: #1B1A26;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+span {
+	-moz-user-select: none; /* Firefox */
+	-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+	-ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+	user-select: none; /* Propriété standard */
+}
+
+button {
+	cursor: pointer;
+	padding: 0;
+}
+
+
+$laptopL: 1440px;	// xl
+$laptop: 1024px;	// lg
+$tablet: 768px;		// md
+$phone: 480px;		// sm

@@ -1,0 +1,50 @@
+@import './settings';
+
+
+//  View
+@import './views/Home';
+@import './views/Login';
+
+//  Login
+@import './components/Login/Form';
+
+//  NavBar
+@import './components/NavBar/NavBar';
+
+//  SideBar
+@import './components/SideBar/SideBar';
+@import './components/SideBar/SwitchBtn';
+@import './components/SideBar/SideBarContent';
+@import './components/SideBar/SideBarTag';
+@import './components/SideBar/SideBarNewChan';
+@import './components/SideBar/NewChanContent';
+@import './components/SideBar/UserTag';
+@import './components/SideBar/Status';
+@import './components/SideBar/Conv';
+@import './components/SideBar/ConvTag';
+@import './components/SideBar/ConvContent';
+@import './components/SideBar/ConvList';
+@import './components/SideBar/DropDownList';
+@import './components/SideBar/OptionBtn';
+
+//  Play
+
+//  Leaderboard
+@import './components/Leaderboard/Leaderboard';
+@import './components/Leaderboard/LeaderboardTag';
+@import './components/Leaderboard/LeaderboardTagStat';
+
+//  Spectate
+@import './components/Spectate/Spectate';
+@import './components/Spectate/VersusTag';
+
+//  Profile
+@import './components/Profile/Profile';
+@import './components/Profile/ProfileTag';
+
+//  Utils
+@import './components/Utils/BaseInput';
+@import './components/Utils/Btn1';
+@import './components/Utils/PagesSelector';
+@import './components/Utils/DropDownMenu';
+@import './components/Utils/UserInfos';

@@ -1,0 +1,38 @@
+.LeaderboardTag {
+	display: flex;
+	align-items: center;
+	border-radius: 16rem;
+	min-height: 130rem;
+	padding: 0 32rem;
+	background: #242635;
+	gap: 32rem;
+
+
+	.LeaderboardTag-rank {
+		min-width: 56rem;
+		height: 56rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #1F1E2C;
+		border-radius: 8rem;
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 18rem;
+		line-height: 100%;
+		color: white;
+	}
+
+	// .LeaderboardTag-StatWrap {
+	// 	display: flex;
+	// 	width: 100%;
+	// 	justify-content: flex-end;
+	// 	gap: 32rem;
+	// }
+	.LeaderboardTag-StatWrap {
+		width: 100%;
+		display: grid;
+		grid-template: 100% / repeat(4, 1fr);
+	}
+}

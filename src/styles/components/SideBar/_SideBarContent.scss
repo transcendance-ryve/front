@@ -1,0 +1,44 @@
+.SideBar-content-wrap {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: calc(100% - 72rem);
+	padding: 32rem 16rem 16rem;
+	gap: 16rem;
+
+	.Content-newChanBtn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20rem 18rem;
+		background: #1F1E2C;
+		border: none;
+		border-radius: 6rem;
+		color: #3092FF;
+		font-family: 'Poppins';
+		font-weight: 600;
+		font-size: 16rem;
+		line-height: 100%;
+		&:hover {
+			background: #0177FB;
+			color: white;
+			transition: 150ms ease-in-out;
+		}
+	}	
+
+	.SideBar-content {
+		display: flex;
+		height: 100%;
+		border-radius: 0 0 14rem 14rem;
+		border-radius: 6rem;
+		flex-direction: column;
+		gap: 16rem;
+		overflow: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+	}
+}

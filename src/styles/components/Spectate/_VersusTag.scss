@@ -1,0 +1,36 @@
+.VersusTag {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 16rem 0 0 16rem;
+	min-height: 136rem;
+	padding: 0 32rem;
+	background: #242635;
+	gap: 32rem;
+
+	.VersusTag-score {
+		// gap: 6rem;
+		display: flex;
+		flex-direction: row-reverse;
+
+		.Score-logo {
+			width: 34.3rem;
+			height: 34.3rem;
+
+			svg {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+
+.VersusTag--reverse {
+	flex-direction: row-reverse;
+	border-radius: 0 16rem 16rem 0;
+
+	.VersusTag-score {
+		flex-direction: row;
+	}
+}

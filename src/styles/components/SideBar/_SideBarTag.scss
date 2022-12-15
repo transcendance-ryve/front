@@ -1,0 +1,141 @@
+.SideBarTag {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 6rem;
+	background: #1F1E2C;
+	width: calc(100% - (2 * 16rem));
+	height: auto;
+	padding: 16rem;
+	cursor: pointer;
+
+	.SideBarTag-content {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 16rem;
+
+		.Content-avatar {
+			width: 64rem;
+			border-radius: 50%;
+			align-self: center;
+		}
+
+		.Content-infosWrap {
+			display: flex;
+			flex-direction: column;
+
+			.Content-infos {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 306rem;
+
+				.Infos-nameWrap {
+					display: flex;
+					align-items: center;
+					gap: 8rem;
+
+					.Infos-name {
+						color: white;
+						font-size: 18rem;
+						font-weight: 600;
+						line-height: 100%;
+					}
+				}
+			}
+
+			.LastMsg {
+				font-style: normal;
+				font-weight: 500;
+				font-size: 14rem;
+				line-height: 100%;
+				color: rgba(255, 255, 255, 0.5);
+				margin-top: 8rem;
+			}
+		}
+	}
+
+	.SideBarTag-options {
+		display: flex;
+		width: 100%;
+		gap: 16rem;
+		opacity: 0;
+		height: 0;
+		transition: height 500ms ease, opacity 180ms ease, margin-top 500ms ease;
+		.SideBarTag-btn {
+			height: 0;
+			transition: height 500ms ease;
+		}
+	}
+
+	.SideBarTag-options--protected {
+		flex-direction: column;
+
+		.input-wrap input {
+			height: 0;
+			transition: height 500ms ease;
+		}
+	}
+
+	&:hover {
+		.SideBarTag-options {
+			animation: 500ms ease slidein;
+			opacity: 1;
+			margin-top: 16rem;
+			height: 44rem;
+			.SideBarTag-btn {
+				height: 44rem;
+			}
+		}
+		.SideBarTag-options--protected {
+			animation: 500ms ease slidein2;
+			height: calc(2 * 40rem + 16rem);
+			.input-wrap	{
+				input {
+					height: 40rem;
+				}
+				.inputLogo {
+					animation: 500ms ease slideininputLogo;
+					opacity: 1;
+				}
+			}
+			.SideBarTag-btn {
+				height: 40rem;
+			}
+		}
+	}
+}
+
+@keyframes slidein {
+	from {
+		height: 0;
+		opacity: 0;
+	}
+	to {
+		height: 44rem;
+		opacity: 1;
+	}
+}
+
+@keyframes slidein2 {
+	from {
+		height: 0;
+		opacity: 0;
+	}
+	to {
+		height: calc(2 * 40rem + 16rem);
+		opacity: 1;
+	}
+}
+
+@keyframes slideininputLogo {
+	from {
+		top: 0;
+		opacity: 0;
+	}
+	to {
+		top: 12rem;
+		opacity: 1;
+	}
+}

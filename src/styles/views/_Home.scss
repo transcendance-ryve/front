@@ -1,0 +1,36 @@
+.BodyLayout {
+	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: calc(100vh - 114px);
+	padding: 32rem 64rem;
+
+	.BodyLayout-mainContent {
+		width: 1310rem;
+		font-size: 1.3vw; //
+	}
+
+	@media (min-width: 1800px) {
+
+		// .BodyLayout-sidebar {
+		// 	width: 355px;
+		// 	font-size: 24px;
+		// }
+		// .BodyLayout-mainContent {
+		// 	width: 1130px;
+		// 	font-size: 24px;
+		// }
+	}
+	@media (max-width: 1200px) {
+		justify-content: center;
+	}
+}
+
+// .SiteFooter {
+// 	width: 100%;
+// 	min-height: 100px;
+// 	text-align: center;
+// 	background-color: rgb(26, 32, 44);
+// 	color: white;
+// }

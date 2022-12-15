@@ -1,0 +1,39 @@
+.newChan-contentWrap {
+	width: 100%;
+	height: calc(100% - (96rem + 2 * 32rem + 48rem));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 8rem;
+
+	.Content-btns {
+		width: 100%;
+		display: flex;
+		margin-bottom: 24rem;
+	}
+
+	.newChan-content {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		flex: 1;
+		border-radius: 6rem;
+		gap: 8rem;
+		overflow: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+
+		.Content-noResult {
+			font-size: 18rem;
+			color: white;
+			text-align: center;
+		}
+	}
+}
+
+.ContentWrap--protected {
+	height: calc(100% - (96rem + 42rem + 48rem + 3 * 32rem));
+}

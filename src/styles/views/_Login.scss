@@ -1,0 +1,37 @@
+.Login {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+	background: #1B1A26;
+	gap: 48rem;
+
+	.Register-redirect {
+		display: flex;
+		text-align: center;
+		font-weight: 600;
+		font-size: 16rem;
+		color: #787B96;
+		gap: 6rem;
+
+		button {
+			font-family: 'Poppins';
+			font-weight: 700;
+			font-size: 16rem;
+			border: none;
+			color: white;
+			background: none;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}
+		
+
+	// @media (min-width: 1400px) {
+	// 	font-size: 28px;
+	// }
+}
+

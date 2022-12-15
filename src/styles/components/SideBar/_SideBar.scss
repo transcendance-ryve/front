@@ -1,0 +1,92 @@
+.BodyLayout-sidebar {
+	width: 450rem;
+	border-radius: 16rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: #242635;
+	box-shadow: 4rem 4rem 6rem rgba(0, 0, 0, 0.3);
+
+	.SideBar-sectionsBtns {
+		width: 100%;
+		display: grid;
+		grid-template: 72rem / 42% 42% 16%;
+		.SectionsBtns {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8rem;
+			font-size: 18rem;
+			border-radius: 0;
+			background: #1F1E2C;
+			color: #787B96;
+			border: none;
+			font-family: 'Poppins';
+			font-weight: 600;
+			&:first-child {
+				border-radius: 16rem 0 0 0;
+			}
+			&:last-child {
+				border-radius: 0 16rem 0 0;
+			}
+			.SectionsBtns-Logo {
+				width: 24rem;
+				height: 24rem;
+				svg {
+					width: 100%;
+					height: 100%;
+					fill: #787B96;
+				}
+			}
+		}
+		.SectionBtns--selected {
+			background: #242635;
+			color: white;
+			.SectionsBtns-Logo svg {
+				fill: white;
+			}
+		}
+	}
+
+	.SideBar-switch {
+		margin-bottom: 16rem;
+	}
+
+	@media (max-width:1200px) {
+		// modifier toutes les rem en px
+		font-size: 0;
+		position: absolute;
+		top: calc(98px + 30px);
+		right: 0;
+		width: 50px;
+		height: calc(100vh - 98px - 64px);
+		.SideBar-sectionsBtns,
+		.SideBar-content-wrap,
+		.SideBar-newChan
+		{
+			visibility: hidden;
+		}
+		&:hover {
+			width: 350px;
+			font-size: 30px;
+			.SideBar-sectionsBtns,
+			.SideBar-content-wrap,
+			.SideBar-newChan {
+				visibility: visible;
+			}
+		}
+	}
+
+	@media (max-width: 400px) {
+		&:hover {
+			width: 75vw;
+			font-size: 5.5vw;
+		}
+	}
+	@media (max-width: 320px) {
+		left: calc(320px - 50px);
+		&:hover {
+			left: calc(320px - (75vw + 2em + 2px));
+		}
+	}
+}

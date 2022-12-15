@@ -1,0 +1,54 @@
+.Status {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 24rem;
+	border-radius: 6rem;
+	font-size: 12rem;
+	font-weight: 600;
+	line-height: 100%;
+}
+
+.Status--Online {
+	width: 59rem;
+	color: #24F182;
+	border: 2px solid #24F182;
+}
+.Status--Public {
+	width: 57rem;
+	color: #24F182;
+	border: 2px solid #24F182;
+}
+.Status--Offline {
+	width: 59rem;
+	color: #787B96;
+	border: 2px solid #787B96;
+}
+.Status--Protected {
+	width: 79rem;
+	color: #FF8A00;
+	border: 2px solid #FF8A00;
+}
+.Status--inGame {
+	width: 71rem;
+	color: #FF8A00;
+	border: 2px solid #FF8A00;
+}
+.Status--Private {
+	width: 63rem;
+	color: #FF4646;
+	border: 2px solid #FF4646;
+}
+
+.Status--users {
+	display: flex;
+	align-items: center;
+	padding: 8rem 10rem;
+	border-radius: 6rem;
+	background: #242635;
+	color: white;
+	font-size: 12rem;
+	font-weight: 600;
+	line-height: 100%;
+}

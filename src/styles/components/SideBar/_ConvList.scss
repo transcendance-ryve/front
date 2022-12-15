@@ -1,0 +1,43 @@
+.ConvList {
+	width: 100%;
+	height: calc(100% - calc(96rem + 32rem));
+	display: flex;
+	flex-direction: column;
+	gap: 32rem;
+
+	.ConvList-switch {
+		display: flex;
+	}
+
+	.ConvList-contentWrap {
+		display: flex;
+		flex-direction: column;
+		gap: 16rem;
+		width: 100%;
+		height: calc(100% - calc(44rem + 32rem));
+
+		.ConvList-content {
+			width: 100%;
+			height: calc(100% - calc(48rem + 16rem));
+			display: flex;
+			flex-direction: column;
+			border-radius: 6rem;
+			gap: 24rem;
+			overflow: scroll;
+			&::-webkit-scrollbar {
+				display: none;
+			}
+			-ms-overflow-style: none;  /* IE and Edge */
+			scrollbar-width: none;  /* Firefox */
+
+			.Content-noResult {
+				font-size: 18rem;
+				color: white;
+				text-align: center;
+			}
+		}
+		.ConvList-content--add {
+			gap: 8rem;
+		}
+	}
+}

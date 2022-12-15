@@ -1,0 +1,51 @@
+.NewChanTag {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12rem 16rem;
+	background: rgba(31, 30, 44, 0.5);
+	border-radius: 6rem;
+
+	.NewChanTag-infos {
+		display: flex;
+		gap: 12rem;
+		.NewChanTag-avatar {
+			width: 32rem;
+			height: 32rem;
+			border-radius: 50%;
+		}
+
+		.NewChanTag-userName {
+			display: flex;
+			align-items: center;
+			height: 32rem;
+			background: #1F1E2C;
+			border-radius: 24rem;
+			padding: 0 16rem;
+			font-weight: 500;
+			font-size: 16rem;
+			color: white;
+		}
+	}
+
+	.NewChanTag-options {
+		display: flex;
+		gap: 16rem;
+
+		.OptionBtn {
+			opacity: 0;
+		}
+	}
+
+	&:hover {
+		.NewChanTag-userName {
+			background: #0177FB;
+			transition: background 150ms ease-in-out;
+		}
+		.OptionBtn {
+			opacity: 1;
+			transition: opacity 150ms ease-in-out;
+			transition: background 150ms ease-in-out;
+		}
+	}
+}

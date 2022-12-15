@@ -1,0 +1,133 @@
+.UserInfos {
+	width: 280rem;
+	height: 64rem;
+	display: flex;
+	align-items: center;
+	gap: 16rem;
+
+	.UserInfos-avatar {
+		width: 64rem;
+		height: 64rem;
+		border-radius: 50%;
+	}
+
+	.UserInfos-content {
+		display: flex;
+		flex-direction: column;
+		gap: 8rem;
+
+		.Content-name {
+			font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 600;
+			font-size: 22rem;
+			line-height: 100%;
+			color: white;
+		}
+
+		.Content-level {
+			display: flex;
+			flex-direction: column;
+			gap: 6rem;
+
+			.Level-perCentWrap {
+				display: flex;
+				width: 200rem;
+				height: 6rem;
+				border-radius: 8rem;
+
+				.Level-perCent {
+					display: flex;
+					border-radius: 8rem;
+					height: 100%;
+					box-shadow: inset 0rem 4rem 4rem rgba(0, 0, 0, 0.1);
+				}
+			}
+
+			.Level {
+				font-family: 'Poppins';
+				font-weight: 600;
+				font-size: 14rem;
+				line-height: 100%;
+				color: #D3D6F2;
+			}
+		}
+	}
+}
+
+.UserInfos--reverse {
+	flex-direction: row-reverse;
+
+	.UserInfos-content {
+		align-items: flex-end;
+	}
+
+	.Content-level {
+		align-items: flex-end;
+	}
+
+	.Level-perCentWrap {
+		flex-direction: row-reverse;
+	}
+}
+
+.UserInfos--static {
+	width: 280px;
+	height: 64px;
+	gap: 16px;
+
+	.UserInfos-avatar {
+		width: 64px;
+		height: 64px;
+	}
+
+	.UserInfos-content {
+		gap: 8px;
+
+		.Content-name {
+			font-size: 22px;
+		}
+
+		.Content-level {
+			gap: 6px;
+
+			.Level-perCentWrap {
+				width: 200px;
+				height: 6px;
+				border-radius: 8px;
+
+				.Level-perCent {
+					border-radius: 8px;
+					box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+				}
+			}
+
+			.Level {
+				font-size: 14px;
+			}
+		}
+	}
+}
+
+.UserInfos--XL {
+	width: 320rem;
+	height: 96rem;
+	gap: 24rem;
+
+	.UserInfos-avatar {
+		width: 96rem;
+		height: 96rem;
+	}
+
+	.UserInfos-content {
+		gap: 12rem;
+
+		.Content-name {
+			font-size: 24rem;
+		}
+
+		.Content-level {
+			gap: 10rem;
+		}
+	}
+}

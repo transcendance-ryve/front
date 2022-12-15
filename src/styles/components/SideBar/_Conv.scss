@@ -1,0 +1,24 @@
+.Conv {
+	width: 100%;
+	height: calc(100% - 72rem);
+
+	.Conv-contentWrap {
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 32rem 16rem 16rem;
+		width: 100%;
+		height: calc(100% - 72rem);
+		gap: 32rem;
+	}
+	.ContentWrap--List {
+		height: 100%;
+	}
+
+	.Cont-input {
+		input {
+			border-radius: 0 0 16rem 16rem;
+		}
+	}
+}

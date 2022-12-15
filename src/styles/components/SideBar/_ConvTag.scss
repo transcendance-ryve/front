@@ -1,0 +1,102 @@
+.ConvTag {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	padding: 16rem;
+	width: 100%;
+	background: #1F1E2C;
+	box-shadow: 4rem 4rem 6rem rgba(0, 0, 0, 0.3);
+	border-radius: 6rem;
+
+	.ConvTag-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		// padding: 0 8rem 0 0;
+		width: 100%;
+
+
+		.ConvTag-infos {
+			display: flex;
+			align-items: center;
+			gap: 16rem;
+
+			.Infos-avatar {
+				width: 64rem;
+				height: 64rem;
+				border-radius: 50%;
+			}
+			.Infos-content {
+				display: flex;
+				flex-direction: column;
+				gap: 6rem;
+
+				.Infos-nameWrap {
+					display: flex;
+					align-items: center;
+					gap: 8rem;
+
+					.Infos-name {
+						color: white;
+						font-size: 16rem;
+						font-weight: 600;
+						line-height: 100%;
+					}
+				}
+
+				.Infos-options {
+					display: flex;
+					align-items: center;
+					gap: 8rem;
+				}
+			}
+		}
+
+		.Infos-CreateDate {
+			font-family: 'Poppins';
+			font-weight: 500;
+			font-size: 14rem;
+			line-height: 100%;
+			color: rgba(255, 255, 255, 0.75);
+		}
+
+		.ConvTag-BtnsWrap {
+			display: flex;
+			align-items: center;
+			gap: 8rem;
+
+			.ConvTag-Btns {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 48rem;
+				height: 48rem;
+				background: #242635;
+				border-radius: 6rem;
+				border: none;
+
+				.ConvTag-Btns-logo {
+					width: 24rem;
+					height: 24rem;
+					svg {
+						width: 100%;
+						height: 100%;
+						fill: white;
+					}
+				}
+
+				&:hover {
+					background: #0177FB;
+					transition: background 150ms ease-in-out;
+				}
+			}
+
+			.ConvTag-Btns--smallLogo {
+				.ConvTag-Btns-logo {
+					width: 20rem;
+					height: 20rem;
+				}
+			}
+		}
+	}
+}

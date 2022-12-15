@@ -1,0 +1,128 @@
+<script setup lang="ts">
+	import { reactive, computed } from 'vue'
+	import BaseInput from '../Utils/BaseInput.vue'
+	import useVuelidate from '@vuelidate/core'
+	import {
+		required,
+		minLength,
+		maxLength,
+		email,
+		sameAs,
+		helpers
+	} from '@vuelidate/validators'
+	import { logoProfile, logoEmail, logoLock, logo42 } from '../../assets/logoSVG'
+
+	const	formData = reactive({
+		username: '',
+		email: '',
+		password: '',
+		confirmPassword: ''
+	})
+
+	const	rules = computed(() => {
+		return {
+			username: {		//	custom error msg with helpers.withMessage
+				required: helpers.withMessage('Please enter a username', required),
+				minLength: helpers.withMessage('Username is too short (6 min)', minLength(6)),
+				maxLength: helpers.withMessage('Username is too long', maxLength(18))
+			},
+			email: {
+				required: helpers.withMessage('Please enter an email address', required),
+				email: helpers.withMessage('Please enter a properly formatted email address', email)
+			},
+			password: {
+				required: helpers.withMessage('Please enter a password', required),
+				minLength: helpers.withMessage('Password is too short (6 min)', minLength(6)),
+			},
+			confirmPassword: {
+				required: helpers.withMessage('Please confirm your password', required),
+				sameAs: helpers.withMessage('Incorrect password', sameAs(formData.password))
+			}
+		}
+	})
+
+	const	v$ = useVuelidate(rules, formData)
+
+	const emit = defineEmits(['success'])
+
+	const	submitForm = async () => {
+		const	result = await v$.value.$validate();
+		if (result)	{
+			emit('success', formData.username, formData.email, formData.password)
+		}
+		else
+			alert('error, form not submitted')
+	}
+
+</script>
+
+<template>
+	<main>
+		<div class="form-wrap">
+			<button class="Form-42btn">
+				Sign up with
+				<span class="Form-42btn-logo" v-html="logo42"></span>
+			</button>
+			<span>OR</span>
+			<h1>Create an account</h1>
+			<form @submit.prevent="submitForm">
+				<div class="Form-inputsWrap">
+					<BaseInput
+						v-model="formData.username"
+						placeholder="Username"
+						:logo="logoProfile"
+					/>
+					<span
+						class="form-error"
+						v-if="v$.username.$error"
+					>
+						{{ v$.username.$errors[0].$message }}
+					</span>
+					<BaseInput
+						v-model="formData.email"
+						placeholder="Email"
+						type="email"
+						:logo="logoEmail"
+					/>
+					<span
+						class="form-error"
+						v-if="v$.email.$error"
+					>
+						{{ v$.email.$errors[0].$message }}
+					</span>
+					<BaseInput
+						v-model="formData.password"
+						placeholder="Choose password"
+						type="password"
+						:logo="logoLock"
+					/>
+					<span
+						class="form-error"
+						v-if="v$.password.$error"
+					>
+						{{ v$.password.$errors[0].$message }}
+					</span>
+					<BaseInput
+						v-model="formData.confirmPassword"
+						placeholder="Confirm password"
+						type="password"
+						:logo="logoLock"
+					/>
+					<span
+						class="form-error"
+						v-if="v$.confirmPassword.$error"
+					>
+						{{ v$.confirmPassword.$errors[0].$message }}
+					</span>
+				</div>
+				<button
+					class="Form-submitBtn"
+					type="submit"
+				>
+					Register
+				</button>
+			</form>
+		</div>
+	</main>
+
+</template>

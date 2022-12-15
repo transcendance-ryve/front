@@ -1,0 +1,13 @@
+.mainContent-profile {
+	display: flex;
+	flex-direction: column;
+	gap: 64rem;
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
+}
