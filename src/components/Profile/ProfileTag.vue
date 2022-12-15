@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 	import UserInfos from '../Utils/UserInfos.vue'
-	import { logoSettings, logoTrash, logoMsg } from '../../assets/logoSVG'
+	import { logoSettings, logoTrash, logoMsg, logoAdd } from '../../assets/logoSVG'
 
 	const props = defineProps({
 		type: {
@@ -21,7 +21,7 @@
 		<UserInfos
 			:userName="user.userName"
 			:level="user.level"
-			:levelPerCent="user.levelPerCent"
+			:levelPerCent="user.levelProgression"
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
@@ -39,6 +39,12 @@
 			<button class="Btn-type2">
 				<span class="Btn-logo" v-html="logoMsg"></span>
 				Message
+			</button>
+		</div>
+		<div class="ProfileTag-btnsWrap" v-if="type == 3">
+			<button class="Btn-type2">
+				<span class="Btn-logo" v-html="logoAdd"></span>
+				Add to friend
 			</button>
 		</div>
 	</div>

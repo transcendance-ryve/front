@@ -8,141 +8,10 @@
 	import { logoPerPage, logoSort } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 
+	import users from '../../Users.json'
+
 	const	nbStore = useNavBarStore()
 	nbStore.nbState = 2
-
-	const	data = reactive([
-		{
-			name: 'Karim',
-			rank: 1,
-			level: 200,
-			levelPerCent: 12,
-			rankedPoints: 21539,
-			playCount: 304,
-			wins: 290,
-			defeats: 14
-		},
-		{
-			name: 'Kylian',
-			rank: 2,
-			level: 197,
-			levelPerCent: 66,
-			rankedPoints: 16438,
-			playCount: 300,
-			wins: 270,
-			defeats: 30
-		},
-		{
-			name: 'Antoine',
-			rank: 3,
-			level: 158,
-			levelPerCent: 20,
-			rankedPoints: 13949,
-			playCount: 325,
-			wins: 232,
-			defeats: 93
-		},
-		{
-			name: 'Ousmane',
-			rank: 4,
-			level: 152,
-			levelPerCent: 95,
-			rankedPoints: 11203,
-			playCount: 257,
-			wins: 180,
-			defeats: 77
-		},
-		{
-			name: 'Kingsley',
-			rank: 5,
-			level: 140,
-			levelPerCent: 32,
-			rankedPoints: 6041,
-			playCount: 432,
-			wins: 234,
-			defeats: 148
-		},
-		{
-			name: 'Raphael',
-			rank: 6,
-			level: 134,
-			levelPerCent: 84,
-			rankedPoints: 5926,
-			playCount: 123,
-			wins: 120,
-			defeats: 144
-		},
-		{
-			name: 'Benjamin',
-			rank: 7,
-			level: 104,
-			levelPerCent: 8,
-			rankedPoints: 5720,
-			playCount: 231,
-			wins: 143,
-			defeats: 1345
-		},
-		{
-			name: 'Theo',
-			rank: 8,
-			level: 100,
-			levelPerCent: 71,
-			rankedPoints: 5477,
-			playCount: 154,
-			wins: 553,
-			defeats: 235
-		},
-		{
-			name: 'Lucas',
-			rank: 9,
-			level: 84,
-			levelPerCent: 60,
-			rankedPoints: 5476,
-			playCount: 5426,
-			wins: 234,
-			defeats: 3652
-		},
-		{
-			name: 'Adrien',
-			rank: 10,
-			level: 78,
-			levelPerCent: 89,
-			rankedPoints: 5093,
-			playCount: 1234,
-			wins: 3251,
-			defeats: 1245
-		},
-		{
-			name: 'Alphonse',
-			rank: 11,
-			level: 43,
-			levelPerCent: 37,
-			rankedPoints: 4201,
-			playCount: 1234,
-			wins: 23,
-			defeats: 1244
-		},
-		{
-			name: 'Steve',
-			rank: 12,
-			level: 21,
-			levelPerCent: 21,
-			rankedPoints: 3619,
-			playCount: 12,
-			wins: 12,
-			defeats: 0
-		},
-		{
-			name: 'Olivier',
-			rank: 13,
-			level: 1,
-			levelPerCent: 58,
-			rankedPoints: 305,
-			playCount: 3252,
-			wins: 0,
-			defeats: 3252
-		},
-	])
 
 	const		order = ref('des')
 	const		page = ref(1)
@@ -150,7 +19,7 @@
 	const		toFind = ref('')
 	const		perPage = ref(12)
 
-	const	dataSorted = computed(() => data.sort((a, b) => {
+	const	dataSorted = computed(() => users.sort((a, b) => {
 				if (order.value == 'des')
 					return a.rank - b.rank
 				else
@@ -160,10 +29,10 @@
 	)
 
 	const	inputRes = computed(() => {
-		return dataSorted.value.filter(user => user.name.toLowerCase().includes(toFind.value.toLowerCase()))
+		return dataSorted.value.filter(user => user.userName.toLowerCase().includes(toFind.value.toLowerCase()))
 	})
 
-	const	users = computed(() => {
+	const	usersToDisplay = computed(() => {
 		if (toFind.value)
 		{
 			const	len = dataIndex.value + perPage.value < inputRes.value.length ?
@@ -178,8 +47,8 @@
 	})
 
 	const	pagesSize = computed(() => {
-		let	res = Math.round(data.length / perPage.value)
-		if (data.length / perPage.value > res)
+		let	res = Math.round(users.length / perPage.value)
+		if (users.length / perPage.value > res)
 			res++
 		return res
 	})
@@ -224,7 +93,7 @@
 			:class="{'Leaderboard-content--maxSize': pagesSize == 1}"
 		>
 			<leaderboardTag
-				v-for="(user, index) in users"
+				v-for="(user, index) in usersToDisplay"
 				:key=index
 				:user="user"
 			/>

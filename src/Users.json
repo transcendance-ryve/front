@@ -1,0 +1,171 @@
+[
+	{
+		"userName": "Karim",
+		"rank": 1,
+		"level": 200,
+		"levelProgression": 12,
+		"stats": {
+			"rankingPoints": 21539,
+			"playCount": 304,
+			"ratio": 4.6,
+			"wins": 290,
+			"defeats": 14
+		}
+	},
+	{
+		"userName": "Kylian",
+		"rank": 2,
+		"level": 197,
+		"levelProgression": 61,
+		"stats": {
+			"rankingPoints": 16438,
+			"playCount": 300,
+			"ratio": 4.1,
+			"wins": 270,
+			"defeats": 30
+		}
+	},
+	{
+		"userName": "Antoine",
+		"rank": 3,
+		"level": 158,
+		"levelProgression": 20,
+		"stats": {
+			"rankingPoints": 13949,
+			"playCount": 325,
+			"ratio": 2.54,
+			"wins": 232,
+			"defeats": 93
+		}
+	},
+	{
+		"userName": "Ousmane",
+		"rank": 4,
+		"level": 152,
+		"levelProgression": 95,
+		"stats": {
+			"rankingPoints": 11203,
+			"playCount": 257,
+			"ratio": 4,
+			"wins": 180,
+			"defeats": 77
+		}
+	},
+	{
+		"userName": "Kingsley",
+		"rank": 5,
+		"level": 140,
+		"levelProgression": 32,
+		"stats": {
+			"rankingPoints": 6041,
+			"playCount": 432,
+			"ratio": 1.8,
+			"wins": 234,
+			"defeats": 148
+		}
+	},
+	{
+		"userName": "Raphael",
+		"rank": 6,
+		"level": 134,
+		"levelProgression": 84,
+		"stats": {
+			"rankingPoints": 5926,
+			"playCount": 123,
+			"ratio": 2.42,
+			"wins": 120,
+			"defeats": 144
+		}
+	},
+	{
+		"userName": "Benjamin",
+		"rank": 7,
+		"level": 104,
+		"levelProgression": 8,
+		"stats": {
+			"rankingPoints": 5720,
+			"playCount": 231,
+			"ratio": 2.11,
+			"wins": 143,
+			"defeats": 104
+		}
+	},
+	{
+		"userName": "Theo",
+		"rank": 8,
+		"level": 100,
+		"levelProgression": 71,
+		"stats": {
+			"rankingPoints": 5477,
+			"playCount": 154,
+			"ratio": 1.75,
+			"wins": 553,
+			"defeats": 235
+		}
+	},
+	{
+		"userName": "Lucas",
+		"rank": 9,
+		"level": 84,
+		"levelProgression": 60,
+		"stats": {
+			"rankingPoints": 5476,
+			"playCount": 547,
+			"ratio": 1.36,
+			"wins": 212,
+			"defeats": 335
+		}
+	},
+	{
+		"userName": "Adrien",
+		"rank": 10,
+		"level": 78,
+		"levelProgression": 89,
+		"stats": {
+			"rankingPoints": 5093,
+			"playCount": 1234,
+			"ratio": 1,
+			"wins": 140,
+			"defeats": 1094
+		}
+	},
+	{
+		"userName": "Alphonse",
+		"rank": 11,
+		"level": 43,
+		"levelProgression": 37,
+		"stats": {
+			"rankingPoints": 4201,
+			"playCount": 632,
+			"ratio": 1.2,
+			"wins": 83,
+			"defeats": 548
+		}
+	},
+	{
+		"userName": "Steve",
+		"rank": 12,
+		"level": 21,
+		"levelProgression": 50,
+		"stats": {
+			"rankingPoints": 3619,
+			"playCount": 12,
+			"ratio": 0.55,
+			"wins": 12,
+			"defeats": 0
+		}
+	},
+	{
+		"userName": "Olivier",
+		"rank": 13,
+		"level": 1,
+		"levelProgression": 68,
+		"stats": {
+			"rankingPoints": 305,
+			"playCount": 3252,
+			"ratio": 0.2,
+			"wins": 1,
+			"defeats": 3251
+		}
+	}
+]

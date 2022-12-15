@@ -10,4 +10,25 @@
 	}
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
+
+	h2 {
+		margin: 0;
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 24rem;
+		line-height: 100%;
+		color: #D3D6F2;
+	}
+
+	.Profile-section {
+		display: flex;
+		flex-direction: column;
+		gap: 16rem;
+	}
+
+	.StatisticsWrap {
+		display: flex;
+		gap: 16rem;
+	}
 }

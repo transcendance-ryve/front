@@ -6,9 +6,17 @@ export const useUserStore = defineStore('userStore', () => {
 
 	const	user = ref(
 		{
-			userName: 'Vintran',
-			level: 199,
-			levelPerCent: 70
+			"userName": "Vintran",
+			"rank": 1,
+			"level": 199,
+			"levelProgression": 70,
+			"stats": {
+				"rankingPoints": 21539,
+				"playCount": 304,
+				"ratio": 4.8,
+				"wins": 290,
+				"defeats": 14
+			}
 		}
 	)
 

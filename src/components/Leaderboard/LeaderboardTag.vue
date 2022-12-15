@@ -16,26 +16,26 @@
 	<div class="LeaderboardTag">
 		<span class="LeaderboardTag-rank">#{{ user.rank }}</span>
 		<UserInfos
-			:userName="user.name"
+			:userName="user.userName"
 			:level="user.level"
-			:levelPerCent="user.levelPerCent"
+			:levelPerCent="user.levelProgression"
 		/>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat
 				label="Ranked points"
-				:value="user.rankedPoints"
+				:value="user.stats.rankingPoints"
 			/>
 			<LeaderboardTagStat
 				label="Play count"
-				:value="user.playCount"
+				:value="user.stats.playCount"
 			/>
 			<LeaderboardTagStat
 				label="Wins"
-				:value="user.wins"
+				:value="user.stats.wins"
 			/>
 			<LeaderboardTagStat
 				label="Defeats"
-				:value="user.defeats"
+				:value="user.stats.defeats"
 			/>
 		</div>
 	</div>
