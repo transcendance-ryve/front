@@ -1,24 +1,36 @@
 .Conv {
 	width: 100%;
-	height: calc(100% - 72rem);
+	height: calc(100% - 72em);
 
 	.Conv-contentWrap {
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 32rem 16rem 16rem;
+		padding: 32em 16em 16em;
 		width: 100%;
-		height: calc(100% - 72rem);
-		gap: 32rem;
+		height: calc(100% - 72em);
+		gap: 32em;
 	}
 	.ContentWrap--List {
 		height: 100%;
 	}
 
-	.Cont-input {
+	.Conv-input {
 		input {
-			border-radius: 0 0 16rem 16rem;
+			width: calc(100% - calc(2 * 1em + 1.3333333333333333em + 0.4444444444444444em));
+			height: 4em;
+			padding: 0 1em 0
+				calc(1em + 1.3333333333333333em + 0.4444444444444444em);
+			font: 500 18em 'Poppins';
+			gap: 0.4444444444444444em;
+			border-radius: 0 0 0.8888888888888888em 0.8888888888888888em;
+		}
+		.inputLogo {
+			width: 24em;
+			height: 24em;
+			left: 18em;
+			top: calc((72em - 24em) / 2);
 		}
 	}
 }

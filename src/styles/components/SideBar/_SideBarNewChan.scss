@@ -1,19 +1,18 @@
 .SideBar-newChan {
 	box-sizing: border-box;
 	width: 100%;
-	height: calc(100% - 72rem);
-	padding: 32rem 16rem 16rem;
+	height: calc(100% - 72em);
+	padding: 32em 16em 16em;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 32rem;
-	border-radius: 8rem;
+	gap: 32em;
 
 	.newChan-infos {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 24rem;
+		gap: 24em;
 		width: 100%;
 
 		.Infos-inputFile {
@@ -30,19 +29,22 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			width: calc(96rem - 4px);
-			height: calc(96rem - 4px);
+			width: calc(96em - 4px);
+			height: calc(96em - 4px);
 			background: #1F1E2C;
 			border: 2px dashed #787B96;
 			border-radius: 50%;
 			color: #787B96;
-			font-weight: 600;
-			font-size: 12rem;
-			gap: 2rem;
+			gap: 6em;
 			cursor: pointer;
+			.Upload-value {
+				font-weight: 600;
+				font-size: 12em;
+				line-height: 100%;
+			}
 			.Upload-logo {
-				width: 24rem;
-				height: 24rem;
+				width: 24em;
+				height: 24em;
 				svg {
 					width: 100%;
 					height: 100%;
@@ -62,8 +64,8 @@
 		}
 
 		.Infos-img {
-			width: 96rem;
-			height: 96rem;
+			width: 96em;
+			height: 96em;
 			border-radius: 50%;
 			cursor: pointer;
 		}
@@ -72,21 +74,26 @@
 			display: flex;
 			flex-direction: column;
 			flex: 1;
-			gap: 8rem;
+			gap: 8em;
 
 			.Content-statusBtns {
 				display: flex;
-				gap: 8rem;
+				gap: 8em;
+
 				.StatusBtn {
+					font-size: 1em;
 					background: #1F1E2C;
 					border: none;
-					border-radius: 6rem;
-					font-family: 'Poppins';
-					font-weight: 600;
-					font-size: 12rem;
-					line-height: 100%;
-					letter-spacing: -0.01em;
-					padding: 12rem 16rem;
+					border-radius: 6em;
+					padding: 12em 16em;
+
+					.StatusBtn-value {
+						font-family: 'Poppins';
+						font-weight: 600;
+						font-size: 12em;
+						line-height: 100%;
+						letter-spacing: -0.01em;
+					}
 				}
 				.StatusBtn-public {
 					color: #24F182;
@@ -109,17 +116,17 @@
 				.StatusBtn-public--selected {
 					color: #24F182;
 					border: 2px solid #24F182;
-					padding: calc(12rem - 2px) calc(16rem - 2px);
+					padding: calc(12em - 2px) calc(16em - 2px);
 				}
 				.StatusBtn-protected--selected {
 					color: #FF8A00;
 					border: 2px solid #FF8A00;
-					padding: calc(12rem - 2px) calc(16rem - 2px);
+					padding: calc(12em - 2px) calc(16em - 2px);
 				}
 				.StatusBtn-private--selected {
 					color: #FF4646;
 					border: 2px solid #FF4646;
-					padding: calc(12rem - 2px) calc(16rem - 2px);
+					padding: calc(12em - 2px) calc(16em - 2px);
 				}
 			}
 		}
@@ -128,6 +135,6 @@
 	.newChan-btns {
 		width: 100%;
 		display: flex;
-		gap: 16rem;
+		gap: 16em;
 	}
 }

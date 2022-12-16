@@ -21,7 +21,7 @@
 				@click="sbStore.updateSection(1)"
 			>
 				<span class="SectionsBtns-Logo" v-html="logoFriends"></span>
-				Friends
+				<span class="SectionsBtns-value">Friends</span>
 			</button>
 			<button
 				class="SectionsBtns"
@@ -33,7 +33,7 @@
 				@click="sbStore.updateSection(2)"
 			>
 				<span class="SectionsBtns-Logo" v-html="logoChannels"></span>
-				Channels
+				<span class="SectionsBtns-value">Channels</span>
 			</button>
 			<button
 				class="SectionsBtns"

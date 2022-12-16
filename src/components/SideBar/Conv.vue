@@ -32,12 +32,13 @@
 			<ConvList v-if="userList" />
 		</div>
 		<BaseInput
-			class="Cont-input"
+			class="Conv-input"
 			v-if="!userList"
 			placeholder="Write your message"
 			:logo="logoSend"
 			inputHeight="72rem"
 			inputPadding="16rem"
+			inputFont="500 18em 'Poppins'"
 		/>
 	</div>
 

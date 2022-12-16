@@ -71,7 +71,6 @@
 			:value="btn1"
 			:selected="isSelected(1)"
 			:logo="getLogo(1)"
-			height="48rem"
 			@click="update2ndOption(1)"
 		/>
 
@@ -79,7 +78,6 @@
 			:value="btn2"
 			:selected="isSelected(2)"
 			:logo="getLogo(2)"
-			height="48rem"
 			@click="update2ndOption(2)"
 		/>
 
@@ -88,7 +86,6 @@
 			value="Channels"
 			:selected="isSelected(3)"
 			:logo="logoChannels"
-			height="48rem"
 			@click="update2ndOption(3)"
 		/>
 	</div>
@@ -98,7 +95,7 @@
 <style lang="scss">
 
 	.SideBar-switch {
-		width: 100%;
+		// width: 100%;
 		display: flex;
 	}
 

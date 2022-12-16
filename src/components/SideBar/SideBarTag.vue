@@ -77,16 +77,16 @@
 				class="SideBarTag-btn"
 				:type=1 value="Invite to party"
 				:logo="logoPlay"
-				width="185rem"
-				height="44rem"
+				width="185em"
+				height="44em"
 			/>
 			<Btn1
 				class="SideBarTag-btn"
 				:type=2
 				value="Send message"
 				:logo="logoSend"
-				width="185rem"
-				height="44rem"
+				width="185em"
+				height="44em"
 				@click="sbStore.openConv('Friend', name, status)"
 			/>
 		</div>
@@ -102,19 +102,17 @@
 				:type=1
 				value="Add"
 				:logo="logoAdd"
-				width="386rem"
-				height="44rem"
+				width="386em"
+				height="44em"
 			/>
 
 			<BaseInput
 				v-if="status == 'Protected'"
 				type="password"
 				placeholder="Password"
+				:inputType="1"
 				inputBackground="#272938"
-				inputHeight="40rem"
-				inputFont="500 14rem 'Poppins'"
 				:logo="logoLock"
-				logoSize="16rem"
 			/>
 
 			<Btn1
@@ -123,8 +121,8 @@
 				:type=1
 				value="Join"
 				:logo="logoJoin"
-				width="386rem"
-				height="40rem"
+				width="386em"
+				height="40em"
 			/>
 		</div>
 
@@ -133,8 +131,8 @@
 				class="SideBarTag-btn"
 				:type=1 value="Accept"
 				:logo="logoAccept"
-				width="185rem"
-				height="44rem"
+				width="185em"
+				height="44em"
 			/>
 			<Btn1
 				class="SideBarTag-btn"
@@ -142,8 +140,8 @@
 				value="Refuse"
 				:logo="logoRefuse"
 				:fillLogo="false"
-				width="185rem"
-				height="44rem"
+				width="185em"
+				height="44em"
 			/>
 		</div>
 	</div>

@@ -3,40 +3,44 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 24rem;
-	border-radius: 6rem;
-	font-size: 12rem;
-	font-weight: 600;
-	line-height: 100%;
+	padding: 4em;
+	border-radius: 6em;
+
+	.Status-value {
+		font-size: 12em;
+		font-weight: 600;
+		line-height: 100%;
+		letter-spacing: -0.01em;
+	}
 }
 
 .Status--Online {
-	width: 59rem;
+	width: 59em;
 	color: #24F182;
 	border: 2px solid #24F182;
 }
 .Status--Public {
-	width: 57rem;
+	width: 57em;
 	color: #24F182;
 	border: 2px solid #24F182;
 }
 .Status--Offline {
-	width: 59rem;
+	width: 59em;
 	color: #787B96;
 	border: 2px solid #787B96;
 }
 .Status--Protected {
-	width: 79rem;
+	width: 79em;
 	color: #FF8A00;
 	border: 2px solid #FF8A00;
 }
 .Status--inGame {
-	width: 71rem;
+	width: 71em;
 	color: #FF8A00;
 	border: 2px solid #FF8A00;
 }
 .Status--Private {
-	width: 63rem;
+	width: 63em;
 	color: #FF4646;
 	border: 2px solid #FF4646;
 }
@@ -44,11 +48,15 @@
 .Status--users {
 	display: flex;
 	align-items: center;
-	padding: 8rem 10rem;
-	border-radius: 6rem;
+	padding: 8em 10em;
+	border-radius: 6em;
 	background: #242635;
 	color: white;
-	font-size: 12rem;
-	font-weight: 600;
-	line-height: 100%;
+
+	.Status-value {
+		font-size: 12em;
+		font-weight: 600;
+		line-height: 100%;
+		letter-spacing: -0.01em;
+	}
 }

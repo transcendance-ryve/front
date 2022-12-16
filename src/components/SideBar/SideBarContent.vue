@@ -586,14 +586,17 @@
 	<div class="SideBar-content-wrap">
 		<SideBarSwitch/>
 
-		<SearchInput @search="(val) => sbStore.toFind = val"/>
+		<SearchInput
+			:inputType="3"
+			@search="(val) => sbStore.toFind = val"
+		/>
 
 		<button
 			v-if="sbStore.section == 2 && sbStore.channelsState == 1"
 			class="Content-newChanBtn"
 			@click="sbStore.newChan = true"
 		>
-			Create new channel
+			<span class="NewChanBtn-value">Create new channel</span>
 		</button>
 
 		<div class="SideBar-content" v-if="sbStore.section == 1">

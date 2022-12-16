@@ -45,17 +45,15 @@
 				for="image-input"
 			>
 				<span v-if="!chanImg" class="Upload-logo" v-html="logoPhoto"></span>
-				<span v-if="!chanImg">Upload</span>
+				<span v-if="!chanImg" class="Upload-value">Upload</span>
 				<img class="Infos-img" v-if="chanImg" :src="chanImg" alt="chanImg">
 			</label>
 			<div class="Infos-content">
 				<BaseInput
 					placeholder="Name"
 					v-model="name"
+					:inputType="2"
 					:logo="logoProfile"
-					logoSize="18rem"
-					inputHeight="42rem"
-					inputFont="500 14rem 'Poppins'"
 				/>
 				<div class="Content-statusBtns">
 					<button
@@ -66,7 +64,7 @@
 						}"
 						@click="status = 'public'"
 					>
-						Public
+						<span class="StatusBtn-value">Public</span>
 					</button>
 					<button
 						class="StatusBtn"
@@ -76,7 +74,7 @@
 						}"
 						@click="status = 'protected'"
 					>
-						Protected
+						<span class="StatusBtn-value">Protected</span>
 					</button>
 					<button
 						class="StatusBtn"
@@ -86,7 +84,7 @@
 						}"
 						@click="status = 'private'"
 					>
-						Private
+						<span class="StatusBtn-value">Private</span>
 					</button>
 				</div>
 			</div>
@@ -99,7 +97,7 @@
 			logoSize="18rem"
 			inputHeight="42rem"
 			inputGap="12rem"
-			inputFont="500 14rem 'Poppins'"
+			inputFont="500 14em 'Poppins'"
 		/>
 
 		<NewChanContent :protectedStatus="status == 'protected'"/>

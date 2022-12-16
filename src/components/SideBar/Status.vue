@@ -31,13 +31,13 @@
 		class="Status"
 		:class="statusClass"
 	>
-		{{ status }}
+		<span class="Status-value">{{ status }}</span>
 	</span>
 	<span
 		v-else-if="users"
 		class="Status--users"
 	>
-		{{ users }} users
+		<span class="Status-value">{{ users }} users</span>
 	</span>
 
 </template>

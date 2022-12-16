@@ -1,9 +1,9 @@
 .ConvList {
 	width: 100%;
-	height: calc(100% - calc(96rem + 32rem));
+	height: calc(100% - calc(96em + 32em));
 	display: flex;
 	flex-direction: column;
-	gap: 32rem;
+	gap: 32em;
 
 	.ConvList-switch {
 		display: flex;
@@ -12,17 +12,17 @@
 	.ConvList-contentWrap {
 		display: flex;
 		flex-direction: column;
-		gap: 16rem;
+		gap: 16em;
 		width: 100%;
-		height: calc(100% - calc(44rem + 32rem));
+		height: calc(100% - calc(44em + 32em));
 
 		.ConvList-content {
 			width: 100%;
-			height: calc(100% - calc(48rem + 16rem));
+			height: calc(100% - calc(48em + 16em));
 			display: flex;
 			flex-direction: column;
-			border-radius: 6rem;
-			gap: 24rem;
+			border-radius: 6em;
+			gap: 24em;
 			overflow: scroll;
 			&::-webkit-scrollbar {
 				display: none;
@@ -31,13 +31,13 @@
 			scrollbar-width: none;  /* Firefox */
 
 			.Content-noResult {
-				font-size: 18rem;
+				font-size: 18em;
 				color: white;
 				text-align: center;
 			}
 		}
 		.ConvList-content--add {
-			gap: 8rem;
+			gap: 8em;
 		}
 	}
 }

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 
-	import BaseInput from '../Utils/BaseInput.vue'
-	import Status from './Status.vue'
-
 	const props = defineProps({
 		logo: {
 			type: String,

@@ -121,12 +121,14 @@
 
 <template>
 
-	<div class="NewChanTag">
-		<div class="NewChanTag-infos">
-			<img class="NewChanTag-avatar" src="../../assets/user.png" alt="user-avatar">
-			<span class="NewChanTag-userName">{{ userName }}</span>
+	<div class="UserTag">
+		<div class="UserTag-infos">
+			<img class="UserTag-avatar" src="../../assets/user.png" alt="user-avatar">
+			<span class="UserTag-userNameWrap">
+				<span class="UserTag-userName">{{ userName }}</span>
+			</span>
 		</div>
-		<div class="NewChanTag-options">
+		<div class="UserTag-options">
 			<OptionBtn
 				v-for="(option, index) in options"
 				:key="index"

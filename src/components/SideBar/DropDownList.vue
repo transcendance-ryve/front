@@ -57,7 +57,7 @@
 			
 			@click="updateState"
 		>
-			{{ label }}
+			<span class="DropDownLabel-value">{{ label }}</span>
 			<span class="DropDownLabel-arrow" v-html="logoListArrow"></span>
 		</label>
 		<div class="DropDownList" v-if="open">

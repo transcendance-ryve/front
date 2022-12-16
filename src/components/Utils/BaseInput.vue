@@ -1,6 +1,10 @@
 <script setup lang="ts">
 
 	defineProps({
+		inputType: {
+			type: Number,
+			default: 0,
+		},
 		label: {
 			type: [String, Boolean],
 			default: false,
@@ -39,11 +43,20 @@
 		}
 	})
 
+
+
 </script>
 
 <template>
 
-	<div class="input-wrap">
+	<div
+		class="input-wrap"
+		:class="{
+			'input-wrap--S': inputType == 1,
+			'input-wrap--M': inputType == 2,
+			'input-wrap--L': inputType == 3,
+		}"
+	>
 		<label v-if="label">{{ label }}</label>
 		<input
 			type="text"

@@ -48,7 +48,7 @@
 			v-if="logo" v-html="logo"
 		>
 		</span>
-		{{ value }}
+		<span class="Btn1-value">{{ value }}</span>
 	</button>
 
 </template>

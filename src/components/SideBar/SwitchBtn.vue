@@ -14,7 +14,7 @@
 		},
 		height: {
 			type: String,
-			default: '48rem'
+			default: '48em'
 		}
 	})
 
@@ -33,7 +33,7 @@
 			v-html="logo"
 		>
 		</span>
-		{{ value }}
+		<span class="Swicth-btn-value">{{ value }}</span>
 	</button>
 
 </template>

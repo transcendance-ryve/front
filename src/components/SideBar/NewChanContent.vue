@@ -74,7 +74,7 @@
 				value="Invitees"
 				:selected="sectionSelected == 'Invitees'"
 				:logo="logoFriends"
-				height="44rem"
+				height="44em"
 				@click="sectionSelected = 'Invitees'"
 			/>
 
@@ -82,12 +82,15 @@
 				value="Add"
 				:selected="sectionSelected == 'Add'"
 				:logo="logoAdd"
-				height="44rem"
+				height="44em"
 				@click="sectionSelected = 'Add'"
 			/>
 		</div>
 
-		<SearchInput @search="(val) => toFind = val"/>
+		<SearchInput
+			:inputType="3"
+			@search="(val) => toFind = val"
+		/>
 
 		<div class="newChan-content">
 			<UserTag

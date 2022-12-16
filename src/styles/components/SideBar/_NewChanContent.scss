@@ -1,15 +1,15 @@
 .newChan-contentWrap {
 	width: 100%;
-	height: calc(100% - (96rem + 2 * 32rem + 48rem));
+	height: calc(100% - (96em + 2 * 32em + 48em));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 8rem;
+	gap: 8em;
 
 	.Content-btns {
 		width: 100%;
 		display: flex;
-		margin-bottom: 24rem;
+		margin-bottom: 24em;
 	}
 
 	.newChan-content {
@@ -17,8 +17,8 @@
 		flex-direction: column;
 		width: 100%;
 		flex: 1;
-		border-radius: 6rem;
-		gap: 8rem;
+		border-radius: 6em;
+		gap: 8em;
 		overflow: scroll;
 		&::-webkit-scrollbar {
 			display: none;
@@ -27,7 +27,7 @@
 		scrollbar-width: none;  /* Firefox */
 
 		.Content-noResult {
-			font-size: 18rem;
+			font-size: 18em;
 			color: white;
 			text-align: center;
 		}
@@ -35,5 +35,5 @@
 }
 
 .ContentWrap--protected {
-	height: calc(100% - (96rem + 42rem + 48rem + 3 * 32rem));
+	height: calc(100% - (96em + 42em + 48em + 3 * 32em));
 }

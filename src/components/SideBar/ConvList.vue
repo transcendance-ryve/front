@@ -135,19 +135,22 @@
 				value="Users"
 				:selected="sectionSelected == 'Users'"
 				:logo="logoFriends"
-				height="44rem"
+				height="44em"
 				@click="sectionSelected = 'Users'"
 			/>
 			<SwitchBtn
 				value="Add"
 				:selected="sectionSelected == 'Add'"
 				:logo="logoAdd"
-				height="44rem"
+				height="44em"
 				@click="sectionSelected = 'Add'"
 			/>
 		</div>
 		<div class="ConvList-contentWrap">
-			<SearchInput @search="(val) => toFind = val"/>
+			<SearchInput
+				:type="3"
+				@search="(val) => toFind = val"
+			/>
 			<div class="ConvList-content" v-if="sectionSelected == 'Users'">
 				<DropDownList
 					v-if="bannedList.length"
