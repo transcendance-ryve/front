@@ -1,23 +1,34 @@
 <script setup lang="ts">
 
 	import { reactive, ref, computed, watch } from 'vue'
-	import { useNavBarStore } from '../../stores/NavBarStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort } from '../../assets/logoSVG'
-	import VersusTag from './VersusTag.vue'
+	import VersusTag from '../Spectate/VersusTag.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
-
-	const	nbStore = useNavBarStore()
-	nbStore.nbState = 3
 
 	const	data = reactive([
 		{
 			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
 				name: 'Karim',
 				level: 200,
 				levelPerCent: 12,
-				score: 4
+				score: 3
+			},
+			begin: 16
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Kylian',
@@ -29,10 +40,10 @@
 		},
 		{
 			player1: {
-				name: 'Antoine',
-				level: 158,
-				levelPerCent: 20,
-				score: 2
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Ousmane',
@@ -44,10 +55,25 @@
 		},
 		{
 			player1: {
-				name: 'Kingsley',
-				level: 140,
-				levelPerCent: 32,
-				score: 4
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Antoine',
+				level: 158,
+				levelPerCent: 20,
+				score: 2
+			},
+			begin: 13
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Raphael',
@@ -59,10 +85,25 @@
 		},
 		{
 			player1: {
-				name: 'Benjamin',
-				level: 104,
-				levelPerCent: 8,
-				score: 1
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Kingsley',
+				level: 140,
+				levelPerCent: 32,
+				score: 4
+			},
+			begin: 12
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Theo',
@@ -74,25 +115,55 @@
 		},
 		{
 			player1: {
-				name: 'Lucas',
-				level: 84,
-				levelPerCent: 60,
-				score: 2
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Benjamin',
+				level: 104,
+				levelPerCent: 8,
+				score: 1
+			},
+			begin: 8
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Adrien',
 				level: 78,
 				levelPerCent: 89,
-				score: 1
+				score: 4
 			},
 			begin: 7
 		},
 		{
 			player1: {
-				name: 'Alphonse',
-				level: 43,
-				levelPerCent: 37,
-				score: 1
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Lucas',
+				level: 84,
+				levelPerCent: 60,
+				score: 2
+			},
+			begin: 7
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
 			},
 			player2: {
 				name: 'Steve',
@@ -101,6 +172,36 @@
 				score: 3
 			},
 			begin: 3
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Alphonse',
+				level: 43,
+				levelPerCent: 37,
+				score: 1
+			},
+			begin: 3
+		},
+		{
+			player1: {
+				name: 'Vintran',
+				level: 199,
+				levelPerCent: 70,
+				score: 5
+			},
+			player2: {
+				name: 'Olivier',
+				level: 43,
+				levelPerCent: 37,
+				score: 1
+			},
+			begin: 1
 		}
 	])
 
@@ -159,8 +260,8 @@
 
 <template>
 
-	<div class="mainContent-spectate">
-		<div class="Spectate-filters">
+	<div class="MatchHistory">
+		<div class="MatchHistory-filters">
 			<SearchInput
 				inputBackground="#242635"
 				inputHeight="56rem"
@@ -185,10 +286,7 @@
 				/>
 			</div>
 		</div>
-		<div
-			class="Spectate-content"
-			:class="{'Spectate-content--maxSize': pagesSize == 1}"
-		>
+		<div class="MatchHistory-content">
 			<div
 				class="Content-Versus"
 				v-for="(game, index) in games"

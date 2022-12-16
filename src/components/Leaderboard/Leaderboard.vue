@@ -58,6 +58,11 @@
 		dataIndex.value = (n - 1) * perPage.value
 	}
 
+	watch(pagesSize, newVal => {
+		if (page.value > newVal)
+			updatePage(newVal)
+	})
+
 </script>
 
 <template>
