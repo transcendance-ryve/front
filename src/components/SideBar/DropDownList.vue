@@ -12,6 +12,10 @@
 		list: {
 			type: Object,
 		},
+		owner: {
+			type: Boolean,
+			default: false,
+		},
 		admin: {
 			type: Boolean,
 			default: false
@@ -24,14 +28,14 @@
 	const	p = toRefs(props)
 
 	const	userTagType = () => {
-		if (p.label.value == 'Banned') {
-			return p.admin.value ? 'BannedA' : 'Banned'
-		}
-		else if (p.label.value == 'Pending')
-			return 'Pending'
-		else {
-			return p.admin.value ? 'ChanUserA' : 'ChanUser'
-		}
+		if (p.label.value == 'Banned' && (p.admin.value || p.owner.value))
+			return 'delete'
+		else if (p.label.value == 'Administrators' && p.owner.value)
+			return 'allPrivilegesA'
+		else if (p.label.value == 'Users' && (p.admin.value || p.owner.value))
+			return 'allPrivileges'
+		else
+			return 'onlySee'
 	}
 
 	const	updateState = () => {

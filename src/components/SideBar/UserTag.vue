@@ -8,6 +8,7 @@
 		logoAdd,
 		logoMute,
 		logoPromote,
+		logoDemote,
 		logoStop
 	} from '../../assets/logoSVG'
 
@@ -25,7 +26,15 @@
 	const	p = toRefs(props)
 
 	const	options = computed(() => {
-		if (p.section.value == 'Invitees' || p.section.value == 'BannedA')
+		if (p.section.value == 'onlySee')
+			return [
+				{
+					name: 'See',
+					logo: logoEye,
+					color: '#0177FB'
+				}
+			]
+		else if (p.section.value == 'Invitees' || p.section.value == 'delete')
 			return [
 				{
 					name: 'See',
@@ -51,28 +60,7 @@
 					color: '#168F41'
 				}
 			]
-		else if (p.section.value == 'Banned' || p.section.value == 'Pending')
-			return [
-				{
-					name: 'See',
-					logo: logoEye,
-					color: '#0177FB'
-				}
-			]
-		else if (p.section.value == 'ChanUser')
-			return [
-				{
-					name: 'See',
-					logo: logoEye,
-					color: '#0177FB'
-				},
-				{
-					name: 'Mute',
-					logo: logoMute,
-					color: '#FF8A00'
-				}
-			]
-		else if (p.section.value == 'ChanUserA')
+		else if (p.section.value == 'allPrivileges')
 			return [
 				{
 					name: 'See',
@@ -88,6 +76,29 @@
 					name: 'Promote',
 					logo: logoPromote,
 					color: '#168F41'
+				},
+				{
+					name: 'Ban',
+					logo: logoStop,
+					color: '#E32F2F'
+				},
+			]
+		else if (p.section.value == 'allPrivilegesA')
+			return [
+				{
+					name: 'See',
+					logo: logoEye,
+					color: '#0177FB'
+				},
+				{
+					name: 'Mute',
+					logo: logoMute,
+					color: '#FF8A00'
+				},
+				{
+					name: 'Demote',
+					logo: logoDemote,
+					color: '#E32F2F'
 				},
 				{
 					name: 'Ban',
