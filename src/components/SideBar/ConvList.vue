@@ -167,6 +167,7 @@
 					label="Administrators"
 					:list="adminList"
 					:admin="isAdmin"
+					:open="true"
 				/>
 
 				<DropDownList
@@ -174,6 +175,7 @@
 					label="Users"
 					:list="userList"
 					:admin="isAdmin"
+					:open="true"
 				/>
 
 				<span

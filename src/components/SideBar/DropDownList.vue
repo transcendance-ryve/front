@@ -19,13 +19,17 @@
 		admin: {
 			type: Boolean,
 			default: false
+		},
+		open: {
+			type: Boolean,
+			default: false
 		}
 	})
 
-	const	open = ref(false)
-	const	closed = ref(false)
-
 	const	p = toRefs(props)
+
+	const	open = ref(p.open.value)
+	const	closed = ref(false)
 
 	const	userTagType = () => {
 		if (p.label.value == 'Banned' && (p.admin.value || p.owner.value))
