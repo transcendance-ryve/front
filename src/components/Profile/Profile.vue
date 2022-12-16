@@ -29,7 +29,7 @@
 
 	<div class="mainContent-profile">
 		<ProfileTag
-			:type="profileStore.type.value"
+			:type="profileStore.type"
 			:user="profile"
 		/>
 		<div class="Profile-section">
