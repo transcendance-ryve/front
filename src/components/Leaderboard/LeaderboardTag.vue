@@ -2,12 +2,22 @@
 
 	import UserInfos from '../Utils/UserInfos.vue'
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
+	import { useProfileStore } from '../../stores/ProfileStore'
+	import { useContentStore } from '../../stores/ContentStore'
 
 	defineProps({
 		user: {
 			type: Object
 		}
 	})
+
+	const	profileStore = useProfileStore()
+	const	contentStore = useContentStore()
+
+	const	profileRedirect = (user: object) => {
+		profileStore.setProfile(user, 2)
+		contentStore.state = 5
+	}
 
 </script>
 
@@ -19,6 +29,7 @@
 			:userName="user.userName"
 			:level="user.level"
 			:levelPerCent="user.levelProgression"
+			@click="profileRedirect(user)"
 		/>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat

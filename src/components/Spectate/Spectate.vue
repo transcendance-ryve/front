@@ -1,15 +1,15 @@
 <script setup lang="ts">
 
 	import { reactive, ref, computed, watch } from 'vue'
-	import { useNavBarStore } from '../../stores/NavBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort } from '../../assets/logoSVG'
 	import VersusTag from './VersusTag.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 
-	const	nbStore = useNavBarStore()
-	nbStore.nbState = 3
+	const	contentStore = useContentStore()
+	contentStore.state = 3
 
 	const	data = reactive([
 		{

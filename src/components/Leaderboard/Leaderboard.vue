@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 	import { reactive, ref, computed, watch } from 'vue'
-	import { useNavBarStore } from '../../stores/NavBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
 	import LeaderboardTag from './LeaderboardTag.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
@@ -10,8 +10,8 @@
 
 	import users from '../../Users.json'
 
-	const	nbStore = useNavBarStore()
-	nbStore.nbState = 2
+	const	contentStore = useContentStore()
+	contentStore.state = 2
 
 	const		order = ref('des')
 	const		page = ref(1)

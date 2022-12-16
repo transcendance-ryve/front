@@ -1,25 +1,27 @@
 <script setup lang="ts">
 
-	import { useNavBarStore } from '../../stores/NavBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
 	import { useProfileStore } from '../../stores/ProfileStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
 
-	const	nbStore = useNavBarStore()
-	nbStore.nbState = 0
-
+	const	contentStore = useContentStore()
 	const	profileStore = useProfileStore()
-	const	userStore = useUserStore()
+	contentStore.state = profileStore.type == 1 ? 4 : 5
+
+	// const	userStore = useUserStore()
 
 	// if (profileStore.type == 1)
 	// 	profileStore.setProfile(userStore.user)
-	let	profile: Object
-	if (profileStore.type == 1)
-		profile = userStore.user
-	else
-		profile = profileStore.profile
+	// let	profile: Object
+	// if (profileStore.type == 1)
+	// 	profile = userStore.user
+	// else
+		// profile = profileStore.profile
+	
+	let profile = profileStore.profile
 
 </script>
 
@@ -27,6 +29,7 @@
 
 	<div class="mainContent-profile">
 		<ProfileTag
+			:type="profileStore.type.value"
 			:user="profile"
 		/>
 		<div class="Profile-section">

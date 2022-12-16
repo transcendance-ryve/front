@@ -34,7 +34,7 @@ const router = createRouter({
 					component: Spectate,
 				},
 				{
-					path: 'profile',
+					path: 'profile/:id',
 					name: 'profile',
 					component: Profile,
 				}

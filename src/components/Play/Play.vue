@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
-	import { useNavBarStore } from '../../stores/NavBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
 
-	const	nbStore = useNavBarStore()
-	nbStore.nbState = 1
+	const	contentStore = useContentStore()
+	contentStore.state = 1
 
 </script>
 

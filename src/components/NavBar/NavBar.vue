@@ -1,11 +1,22 @@
 <script setup lang="ts">
 
-	import { useNavBarStore } from '../../stores/NavBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
+	import { useUserStore } from '../../stores/UserStore'
+	import { useProfileStore } from '../../stores/ProfileStore'
 	import router from '../../router/index'
 	import { logoRyve, logoPlay, logoLeaderboard, logoSpectate } from '../../assets/logoSVG'
 	import UserInfos from '../Utils/UserInfos.vue'
 
-	const	nbStore = useNavBarStore()
+	const	contentStore = useContentStore()
+	const	userStore = useUserStore()
+	const	profileStore = useProfileStore()
+
+	const	profileRedirect = () => {
+		profileStore.setProfile(userStore.user, 1)
+		contentStore.state = 4
+	}
+
+	const	profilePath = '/profile/' + userStore.user.userName
 
 </script>
 
@@ -19,8 +30,8 @@
 				<RouterLink
 					to="/play"
 					class="Options-link"
-					:class="{'Link--selected': nbStore.nbState == 1}"
-					@click="nbStore.nbState = 1"
+					:class="{'Link--selected': contentStore.state == 1}"
+					@click="contentStore.state = 1"
 				>
 					<span class="Link-logo" v-html="logoPlay"></span>
 					Play
@@ -28,8 +39,8 @@
 				<RouterLink
 					to="/leaderboard"
 					class="Options-link"
-					:class="{'Link--selected': nbStore.nbState == 2}"
-					@click="nbStore.nbState = 2"
+					:class="{'Link--selected': contentStore.state == 2}"
+					@click="contentStore.state = 2"
 				>
 					<span class="Link-logo" v-html="logoLeaderboard"></span>
 					Leaderboard
@@ -37,8 +48,8 @@
 				<RouterLink
 					to="/spectate"
 					class="Options-link"
-					:class="{'Link--selected': nbStore.nbState == 3}"
-					@click="nbStore.nbState = 3"
+					:class="{'Link--selected': contentStore.state == 3}"
+					@click="contentStore.state = 3"
 				>
 					<span class="Link-logo" v-html="logoSpectate"></span>
 					Spectate
@@ -57,8 +68,8 @@
 					<!-- <button>Profile</button> -->
 					<RouterLink
 					class="User-options"
-						to="/profile"
-						@click="nbStore.nbState = 0"
+						:to="profilePath"
+						@click="profileRedirect()"
 					>
 						Profile
 					</RouterLink>
