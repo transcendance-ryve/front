@@ -37,7 +37,7 @@
 		border-radius: 6em;
 		flex-direction: column;
 		gap: 16em;
-		overflow: scroll;
+		overflow-y: scroll;
 		&::-webkit-scrollbar {
 			display: none;
 		}

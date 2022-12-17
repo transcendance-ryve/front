@@ -19,7 +19,7 @@
 		flex: 1;
 		border-radius: 6em;
 		gap: 8em;
-		overflow: scroll;
+		overflow-y: scroll;
 		&::-webkit-scrollbar {
 			display: none;
 		}

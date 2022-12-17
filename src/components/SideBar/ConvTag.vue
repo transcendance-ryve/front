@@ -31,17 +31,21 @@
 		{
 			name: 'See',
 			logo: logoEye,
-			color: '#0177FB'
+			color: '#0177FB',
+			toolTip: 'View profile'
+
 		},
 		{
 			name: 'Mute',
 			logo: logoMute,
-			color: '#FF8A00'
+			color: '#FF8A00',
+			toolTip: 'Mute'
 		},
 		{
 			name: 'Delete',
 			logo: logoTrash,
-			color: '#E32F2F'
+			color: '#E32F2F',
+			toolTip: 'Delete'
 		}
 	]
 
@@ -114,6 +118,7 @@
 							:key="index"
 							:logo="option.logo"
 							:hoverColor="option.color"
+							:toolTip="option.toolTip"
 						/>
 					</div>
 					<span class="Infos-CreateDate" v-else>Created 23 July 2015</span>

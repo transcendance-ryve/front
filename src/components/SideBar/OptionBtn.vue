@@ -1,10 +1,15 @@
 <script setup lang="ts">
 
+	import ToolTip from '../Utils/Tooltip.vue'
+
 	const props = defineProps({
 		logo: {
 			type: String,
 		},
 		hoverColor: {
+			type: String,
+		},
+		toolTip: {
 			type: String,
 		}
 	})
@@ -15,6 +20,14 @@
 
 	<button class="OptionBtn">
 		<span class="OptionBtn-logo" v-html="logo"></span>
+		<ToolTip
+			:value="toolTip"
+			toolTipHeight="30em"
+			toolTipPadding="8em"
+			borderRadius="6em"
+			toolTipFont="500 14em 'Poppins'"
+			dist="8em"
+		/>
 	</button>
 
 </template>

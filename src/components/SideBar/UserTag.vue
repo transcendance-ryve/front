@@ -31,7 +31,8 @@
 				{
 					name: 'See',
 					logo: logoEye,
-					color: '#0177FB'
+					color: '#0177FB',
+					toolTip: 'View profile'
 				}
 			]
 		else if (p.section.value == 'Invitees' || p.section.value == 'delete')
@@ -39,12 +40,14 @@
 				{
 					name: 'See',
 					logo: logoEye,
-					color: '#0177FB'
+					color: '#0177FB',
+					toolTip: 'View profile'
 				},
 				{
 					name: 'Delete',
 					logo: logoTrash,
-					color: '#E32F2F'
+					color: '#E32F2F',
+					toolTip: 'Delete'
 				}
 			]
 		else if (p.section.value == 'Add')
@@ -52,12 +55,14 @@
 				{
 					name: 'See',
 					logo: logoEye,
-					color: '#0177FB'
+					color: '#0177FB',
+					toolTip: 'View profile'
 				},
 				{
 					name: 'Add',
 					logo: logoAdd,
-					color: '#168F41'
+					color: '#168F41',
+					toolTip: 'Add user'
 				}
 			]
 		else if (p.section.value == 'allPrivileges')
@@ -65,22 +70,26 @@
 				{
 					name: 'See',
 					logo: logoEye,
-					color: '#0177FB'
+					color: '#0177FB',
+					toolTip: 'View profile'
 				},
 				{
 					name: 'Mute',
 					logo: logoMute,
-					color: '#FF8A00'
+					color: '#FF8A00',
+					toolTip: 'Mute'
 				},
 				{
 					name: 'Promote',
 					logo: logoPromote,
-					color: '#168F41'
+					color: '#168F41',
+					toolTip: 'Promote'
 				},
 				{
 					name: 'Ban',
 					logo: logoStop,
-					color: '#E32F2F'
+					color: '#E32F2F',
+					toolTip: 'Ban'
 				},
 			]
 		else if (p.section.value == 'allPrivilegesA')
@@ -88,22 +97,26 @@
 				{
 					name: 'See',
 					logo: logoEye,
-					color: '#0177FB'
+					color: '#0177FB',
+					toolTip: 'View profile'
 				},
 				{
 					name: 'Mute',
 					logo: logoMute,
-					color: '#FF8A00'
+					color: '#FF8A00',
+					toolTip: 'Mute'
 				},
 				{
 					name: 'Demote',
 					logo: logoDemote,
-					color: '#E32F2F'
+					color: '#E32F2F',
+					toolTip: 'Demote'
 				},
 				{
 					name: 'Ban',
 					logo: logoStop,
-					color: '#E32F2F'
+					color: '#E32F2F',
+					toolTip: 'Ban'
 				},
 			]
 	})
@@ -134,6 +147,7 @@
 				:key="index"
 				:logo="option.logo"
 				:hoverColor="option.color"
+				:toolTip="option.toolTip"
 				@click="manageOptions(option.name)"
 			/>
 		</div>

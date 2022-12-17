@@ -28,7 +28,7 @@
 		height: calc(100% - calc(56rem + 48rem + 2 * 32rem));
 		gap: 16rem;
 		border-radius: 8rem;
-		overflow: scroll;
+		overflow-y: scroll;
 		&::-webkit-scrollbar {
 			display: none;
 		}

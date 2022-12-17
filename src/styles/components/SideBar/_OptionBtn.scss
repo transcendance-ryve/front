@@ -8,6 +8,7 @@
 	background: #242635;
 	border: none;
 	border-radius: 50%;
+	position: relative;
 
 	.OptionBtn-logo {
 		width: 16em;
@@ -24,6 +25,9 @@
 		.OptionBtn-logo svg {
 			fill: white;
 			transition: fill 150ms ease-in-out;
+		}
+		.ToolTip {
+			visibility: visible;
 		}
 	}
 }

@@ -23,7 +23,7 @@
 			flex-direction: column;
 			border-radius: 6em;
 			gap: 24em;
-			overflow: scroll;
+			overflow-y: scroll;
 			&::-webkit-scrollbar {
 				display: none;
 			}
