@@ -15,22 +15,4 @@
 	.ContentWrap--List {
 		height: 100%;
 	}
-
-	.Conv-input {
-		input {
-			width: calc(100% - calc(2 * 1em + 1.3333333333333333em + 0.4444444444444444em));
-			height: 4em;
-			padding: 0 1em 0
-				calc(1em + 1.3333333333333333em + 0.4444444444444444em);
-			font: 500 18em 'Poppins';
-			gap: 0.4444444444444444em;
-			border-radius: 0 0 0.8888888888888888em 0.8888888888888888em;
-		}
-		.inputLogo {
-			width: 24em;
-			height: 24em;
-			left: 18em;
-			top: calc((72em - 24em) / 2);
-		}
-	}
 }

@@ -71,7 +71,8 @@
 	.SideBarTag-options--protected {
 		flex-direction: column;
 
-		.input-wrap input {
+		.input-wrap {
+			min-height: 0;
 			height: 0;
 			transition: height 500ms ease;
 		}
@@ -91,8 +92,9 @@
 			animation: 500ms ease slidein2;
 			height: calc(2 * 40em + 16em);
 			.input-wrap	{
+				height: 40em;
 				input {
-					height: 2.857142857142857em; // 40px
+					height: auto;
 				}
 				.inputLogo {
 					animation: 500ms ease slideininputLogo;

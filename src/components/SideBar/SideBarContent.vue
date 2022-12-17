@@ -587,7 +587,12 @@
 		<SideBarSwitch/>
 
 		<SearchInput
-			:inputType="3"
+			logoSize="24em"
+			inputHeight="48em"
+			inputPadding="12em"
+			inputGap="8em"
+			borderRadius="6em"
+			inputFont="500 18em 'Poppins'"
 			@search="(val) => sbStore.toFind = val"
 		/>
 

@@ -95,7 +95,6 @@
 <style lang="scss">
 
 	.SideBar-switch {
-		// width: 100%;
 		display: flex;
 	}
 

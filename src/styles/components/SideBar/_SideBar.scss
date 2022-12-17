@@ -60,60 +60,6 @@
 		margin-bottom: 16em;
 	}
 
-	.input-wrap--S {
-		input {
-			width: calc(100% - calc(2 * 0.6666666666666666em + 1.1428571428571428em + 0.6666666666666666em));
-			height: 2.857142857142857em;
-			padding: 0 0.6666666666666666em 0
-				calc(0.6666666666666666em + 1.1428571428571428em + 0.6666666666666666em);
-			font: 500 14em 'Poppins';
-			gap: 0.6666666666666666em;
-			border-radius: 0.3333333333333333em;
-		}
-		.inputLogo {
-			width: 16em;
-			height: 16em;
-			left: 12em;
-			top: calc((40em - 16em) / 2);
-		}
-	}
-
-	.input-wrap--M {
-		input {
-			width: calc(100% - calc(2 * 0.6666666666666666em + 1.2857142857142858em + 0.6666666666666666em));
-			height: 3em;
-			padding: 0 0.6666666666666666em 0
-				calc(0.6666666666666666em + 1.2857142857142858em + 0.6666666666666666em);
-			font: 500 14em 'Poppins';
-			gap: 0.6666666666666666em;
-			border-radius: 0.3333333333333333em;
-		}
-		.inputLogo {
-			width: 18em;
-			height: 18em;
-			left: 12em;
-			top: calc((42em - 18em) / 2);
-		}
-	}
-
-	.input-wrap--L {
-		input {
-			width: calc(100% - calc(2 * 0.6666666666666666em + 1.3333333333333333em + 0.4444444444444444em));
-			height: 2.6666666666666665em;
-			padding: 0 0.6666666666666666em 0
-				calc(0.6666666666666666em + 1.3333333333333333em + 0.4444444444444444em);
-			font: 500 18em 'Poppins';
-			gap: 0.4444444444444444em;
-			border-radius: 0.3333333333333333em;
-		}
-		.inputLogo {
-			width: 24em;
-			height: 24em;
-			left: 12em;
-			top: calc((48em - 24em) / 2);
-		}
-	}
-
 	@media (max-width:1200px) {
 		font-size: 0;
 		position: absolute;

@@ -7,7 +7,6 @@
 	import UserTag from './UserTag.vue'
 
 	const props = defineProps({
-		//	1 for Invitess, 2 for Add
 		protectedStatus: {
 			type: Boolean,
 			default: false,
@@ -88,7 +87,12 @@
 		</div>
 
 		<SearchInput
-			:inputType="3"
+			logoSize="24em"
+			inputHeight="48em"
+			inputPadding="12em"
+			inputGap="8em"
+			borderRadius="6em"
+			inputFont="500 18em 'Poppins'"
 			@search="(val) => toFind = val"
 		/>
 

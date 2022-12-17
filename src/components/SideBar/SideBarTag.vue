@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, toRefs, computed } from 'vue'
+	import { toRefs, computed } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
 	import Status from './Status.vue'
@@ -110,9 +110,14 @@
 				v-if="status == 'Protected'"
 				type="password"
 				placeholder="Password"
-				:inputType="1"
 				inputBackground="#272938"
 				:logo="logoLock"
+				logoSize="16em"
+				inputHeight="40em"
+				inputPadding="12em"
+				inputGap="8em"
+				borderRadius="6em"
+				inputFont="500 14em 'Poppins'"
 			/>
 
 			<Btn1

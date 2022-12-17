@@ -1,14 +1,6 @@
 <script setup lang="ts">
 
 	defineProps({
-		inputType: {
-			type: Number,
-			default: 0,
-		},
-		label: {
-			type: [String, Boolean],
-			default: false,
-		},
 		modelValue: {
 			type: [String, Number],
 			default: '',
@@ -25,6 +17,10 @@
 			type: String,
 			default: '24rem',
 		},
+		inputWidth: {
+			type: String,
+			default: '100%',
+		},
 		inputHeight: {
 			type: String,
 			default: '48rem',
@@ -36,6 +32,9 @@
 		inputGap: {
 			type: String,
 			default: '8rem',
+		},
+		borderRadius: {
+			default: '6rem'
 		},
 		inputFont: {
 			type: String,
@@ -49,15 +48,7 @@
 
 <template>
 
-	<div
-		class="input-wrap"
-		:class="{
-			'input-wrap--S': inputType == 1,
-			'input-wrap--M': inputType == 2,
-			'input-wrap--L': inputType == 3,
-		}"
-	>
-		<label v-if="label">{{ label }}</label>
+	<div class="input-wrap">
 		<input
 			type="text"
 			:value="modelValue"
@@ -73,11 +64,13 @@
 <style lang="scss" scoped>
 
 	.input-wrap {
-		input {
-			width: calc(100% - calc(2 * v-bind(inputPadding) + v-bind(logoSize) + v-bind(inputGap)));
-			height: v-bind(inputHeight);
+			width: v-bind(inputWidth);
+			min-height: v-bind(inputHeight);
 			padding: 0 v-bind(inputPadding) 0
 				calc(v-bind(inputPadding) + v-bind(logoSize) + v-bind(inputGap));
+			background: v-bind(inputBackground);
+			border-radius: v-bind(borderRadius);
+		input {
 			font: v-bind(inputFont);
 			gap: v-bind(inputGap);
 			background: v-bind(inputBackground);

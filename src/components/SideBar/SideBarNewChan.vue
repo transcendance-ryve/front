@@ -52,8 +52,13 @@
 				<BaseInput
 					placeholder="Name"
 					v-model="name"
-					:inputType="2"
 					:logo="logoProfile"
+					logoSize="18em"
+					inputHeight="42em"
+					inputPadding="12em"
+					inputGap="8em"
+					borderRadius="6em"
+					inputFont="500 14em 'Poppins'"
 				/>
 				<div class="Content-statusBtns">
 					<button
@@ -94,9 +99,9 @@
 			v-if="status == 'protected'"
 			placeholder="Password"
 			:logo="logoLock"
-			logoSize="18rem"
-			inputHeight="42rem"
-			inputGap="12rem"
+			logoSize="18em"
+			inputHeight="42em"
+			inputGap="12em"
 			inputFont="500 14em 'Poppins'"
 		/>
 
@@ -106,15 +111,15 @@
 			<Btn1
 				:type=3
 				value="Back"
-				width="201rem"
-				height="48rem"
+				width="201em"
+				height="48em"
 				@click="sbStore.newChan = false"
 			/>
 			<Btn1
 				:type=1
 				value="Create"
-				width="201rem"
-				height="48rem"
+				width="201em"
+				height="48em"
 			/>
 		</div>
 	</div>

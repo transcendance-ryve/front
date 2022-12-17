@@ -5,26 +5,37 @@
 	import { logoSearch } from '../../assets/logoSVG'
 
 	defineProps({
-		inputType: {
-			type: Number,
-			default: 0,
-		},
 		inputBackground: {
 			type: String,
 			default: '#1F1E2C',
-		},
-		inputHeight: {
-			type: String,
-			default: '48rem',
-		},
-		inputFont: {
-			type: String,
-			default: '500 18rem \'Poppins\''
 		},
 		logoSize: {
 			type: String,
 			default: '24rem'
 		},
+		inputWidth: {
+			type: String,
+			default: '100%',
+		},
+		inputHeight: {
+			type: String,
+			default: '48rem',
+		},
+		inputPadding: {
+			type: String,
+			default: '12rem',
+		},
+		inputGap: {
+			type: String,
+			default: '8rem',
+		},
+		borderRadius: {
+			default: '6rem'
+		},
+		inputFont: {
+			type: String,
+			default: '500 18rem \'Poppins\''
+		}
 	})
 
 	const	input = ref('')
@@ -48,16 +59,17 @@
 <template>
 
 	<BaseInput
-		class="SearchInput"
+		
 		v-model="input"
 		placeholder="Search"
-		:inputType="inputType"
 		:logo="logoSearch"
 		:logoSize="logoSize"
-		:logoSizeIn="logoSizeIn"
-		:inputBackground="inputBackground"
+		:inputWidth="inputWidth"
 		:inputHeight="inputHeight"
-		:inputHeightOut="inputHeightOut"
+		:inputBackground="inputBackground"
+		:inputPadding="inputPadding"
+		:inputGap="inputGap"
+		:borderRadius="borderRadius"
 		:inputFont="inputFont"
 	/>
 

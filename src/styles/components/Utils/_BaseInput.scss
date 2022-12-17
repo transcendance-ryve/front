@@ -1,14 +1,18 @@
 .input-wrap {
+	box-sizing: border-box;
+	justify-content: center;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 	position: relative;
 	width: 100%;
 
 	input {
+		width: 100%;
 		color: white;
 		border: none;
-		border-radius: 6rem;
+		padding: 0;
 
 		&::placeholder {
 			color: #787B96;
