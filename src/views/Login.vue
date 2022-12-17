@@ -32,7 +32,7 @@
 			v-if="formType == 'register'"
 			@success="registerSuccess"
 		/>
-		<span class="Register-redirect" v-if="formType == 'register'">
+		<span class="Login-redirect" v-if="formType == 'register'">
 			Already have an account ?
 			<button @click="formType = 'login'">Login here</button>
 		</span>
