@@ -44,6 +44,9 @@
 					fill: #787B96;
 				}
 			}
+			.Notif-active {
+				animation: notifWiggle 5s linear infinite;
+			}
 		}
 		.SectionBtns--selected {
 			background: #242635;
@@ -98,3 +101,27 @@
 		}
 	}
 }
+
+@keyframes notifWiggle {
+	0%, 2% {
+	  transform: rotateZ(0);
+	}
+	5% {
+	  transform: rotateZ(-40deg);
+	}
+	8% {
+	  transform: rotateZ(30deg);
+	}
+	11% {
+	  transform: rotateZ(-25deg);
+	}
+	13% {
+	  transform: rotateZ(20deg);
+	}
+	16% {
+	  transform: rotateZ(-15deg);
+	}
+	20%, 100% {
+	  transform: rotateZ(0);
+	}
+  }
