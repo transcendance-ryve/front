@@ -26,7 +26,7 @@
 			toolTipPadding="8em"
 			borderRadius="6em"
 			toolTipFont="500 14em 'Poppins'"
-			dist="8em"
+			dist="12em"
 		/>
 	</button>
 

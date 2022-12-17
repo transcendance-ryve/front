@@ -27,7 +27,7 @@
 		},
 		dist: {
 			type: String,
-			default: '8rem',
+			default: '12rem',
 		}
 	})
 
