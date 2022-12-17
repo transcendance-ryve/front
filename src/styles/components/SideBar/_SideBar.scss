@@ -104,22 +104,23 @@
 
 @keyframes notifWiggle {
 	0%, 2% {
-		transform: rotateZ(0);
+		transform: rotateZ(0) scale(1.1);
 	}
 	5% {
-		transform: rotateZ(40deg);
+		transform: rotateZ(40deg) scale(1.2);
 	}
 	8% {
-		transform: rotateZ(-30deg);
+		transform: rotateZ(-30deg) scale(1.35);
 	}
 	11% {
-		transform: rotateZ(25deg);
+		transform: rotateZ(25deg) scale(1.4);
 	}
 	13% {
-		transform: rotateZ(-20deg);
+		transform: rotateZ(-20deg) scale(1.4);
+
 	}
 	16% {
-		transform: rotateZ(15deg);
+		transform: rotateZ(15deg) scale(1.3);
 	}
 	16%, 100% {
 		transform: rotateZ(0);
