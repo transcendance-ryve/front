@@ -11,13 +11,14 @@
 
 	.NavBar-list {
 		width: 40px;
+		margin-right: 140px;
 		display: none;
 	}
 
 	.NavBar-logo svg {
-			width: 84px;
-			height: 66px;
-			fill: white;
+		width: 84px;
+		height: 66px;
+		fill: white;
 	}
 
 	.NavBar-content {
@@ -175,13 +176,18 @@
 		}
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 840px) {
+		padding: 24px 32px;
+		.NavBar-list {
+			display: block;
+		}
 		.NavBar-options {
 			display: none;
 		}
-		.User-options {
-			left: calc(100vw - (30px + 220px));
-		}
+
+		// .User-options {
+		// 	left: calc(100vw - (30px + 220px));
+		// }
 	}
 	@media (max-width: 320px) {
 		.User-options {
@@ -189,13 +195,13 @@
 		}
 	}
 
-	@media (max-width: 700px) {
-		width: calc(100% - 60px);
-		min-width: 260px;
-		padding: 16px 30px;
-		.NavBar-list {
-			display: block;
-		}
-	}
+	// @media (max-width: 700px) {
+	// 	width: calc(100% - 64px);
+	// 	min-width: 260px;
+	// 	padding: 24px 32px;
+	// 	.NavBar-list {
+	// 		display: block;
+	// 	}
+	// }
 
 }

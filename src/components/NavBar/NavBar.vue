@@ -20,6 +20,8 @@
 	const	profilePath = '/profile/' + userStore.user.userName
 
 	let		userInfoXS = ref(false)
+	if (window.innerWidth <= 1200)
+			userInfoXS.value = true
 	window.addEventListener('resize', () => {
 		if (window.innerWidth <= 1200)
 			userInfoXS.value = true
