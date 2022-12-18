@@ -74,7 +74,7 @@
 		.SideBar-sectionsBtns,
 		.SideBar-content-wrap,
 		.SideBar-newChan,
-		.SideBar-conv {
+		.SideBarConv {
 			visibility: hidden;
 		}
 		&:hover {
@@ -83,7 +83,7 @@
 			.SideBar-sectionsBtns,
 			.SideBar-content-wrap,
 			.SideBar-newChan,
-			.SideBar-conv {
+			.SideBarConv {
 				visibility: visible;
 			}
 		}

@@ -44,7 +44,7 @@
 			</button>
 		</div>
 
-		<SideBarConv v-if="sbStore.conv.open == 1" />
+		<SideBarConv v-if="sbStore.conv.open == true" />
 		<SideBarNewChan v-else-if="sbStore.newChan == true" />
 		<SideBarContent v-else />
 	</section>
