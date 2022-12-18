@@ -3,7 +3,7 @@
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import SideBarTag from './SideBarTag.vue'
 	import SideBarContent from './SideBarContent.vue'
-	import Conv from './Conv.vue'
+	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
 	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
 
@@ -44,7 +44,7 @@
 			</button>
 		</div>
 
-		<Conv v-if="sbStore.conv.open == 1" />
+		<SideBarConv v-if="sbStore.conv.open == 1" />
 		<SideBarNewChan v-else-if="sbStore.newChan == true" />
 		<SideBarContent v-else />
 	</section>

@@ -73,8 +73,8 @@
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
 		.SideBar-content-wrap,
-		.SideBar-newChan
-		{
+		.SideBar-newChan,
+		.SideBar-conv {
 			visibility: hidden;
 		}
 		&:hover {
@@ -82,7 +82,8 @@
 			font-size: 1px;
 			.SideBar-sectionsBtns,
 			.SideBar-content-wrap,
-			.SideBar-newChan {
+			.SideBar-newChan,
+			.SideBar-conv {
 				visibility: visible;
 			}
 		}

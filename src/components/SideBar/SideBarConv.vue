@@ -16,9 +16,9 @@
 
 <template>
 
-	<div class="Conv">
+	<div class="SideBarConv">
 		<div
-			class="Conv-contentWrap"
+			class="SideBarConv-contentWrap"
 			:class="{'ContentWrap--List': userList == true}"
 		>
 			<ConvTag
