@@ -5,7 +5,8 @@
 	import { useUserStore } from '../../stores/UserStore'
 	import { useProfileStore } from '../../stores/ProfileStore'
 	import router from '../../router/index'
-	import { logoRyve, logoPlay, logoLeaderboard, logoSpectate } from '../../assets/logoSVG'
+	import { logoRyve } from '../../assets/logoSVG'
+	import NavBarSectionSelector from './NavBarSectionSelector.vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 
 	const	contentStore = useContentStore()
@@ -33,51 +34,27 @@
 
 <template>
 
-	<div class="NavBar">
-		<img class="NavBar-list" src="../../assets/list.svg" alt="list">
-		<span class="NavBar-logo" v-html="logoRyve"></span>
-		<div class="NavBar-content">
-			<div class="NavBar-options">
-				<RouterLink
-					to="/play"
-					class="Options-link"
-					:class="{'Link--selected': contentStore.state == 1}"
-					@click="contentStore.state = 1"
-				>
-					<span class="Link-logo" v-html="logoPlay"></span>
-					Play
-				</RouterLink>
-				<RouterLink
-					to="/leaderboard"
-					class="Options-link"
-					:class="{'Link--selected': contentStore.state == 2}"
-					@click="contentStore.state = 2"
-				>
-					<span class="Link-logo" v-html="logoLeaderboard"></span>
-					Leaderboard
-				</RouterLink>
-				<RouterLink
-					to="/spectate"
-					class="Options-link"
-					:class="{'Link--selected': contentStore.state == 3}"
-					@click="contentStore.state = 3"
-				>
-					<span class="Link-logo" v-html="logoSpectate"></span>
-					Spectate
-				</RouterLink>
-			</div>
-
-			<UserInfos
-				userName="Vintran"
-				:level="199"
-				:levelPerCent="70"
-				perCentBackground="#242635"
-				:reverse="true"
-				:responsive="false"
-				:sizeXS="userInfoXS"
+	<div class="NavBar-wrapper">
+		<div class="NavBar">
+			<img
+				class="NavBarList-logo"
+				src="../../assets/list.svg"
+				alt="list"
+				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
 			>
+			<span class="NavBar-logo" v-html="logoRyve"></span>
+			<div class="NavBar-content">
+				<NavBarSectionSelector class="Content-options"/>
+				<UserInfos
+					userName="Vintran"
+					:level="199"
+					:levelPerCent="70"
+					perCentBackground="#242635"
+					:reverse="true"
+					:responsive="false"
+					:sizeXS="userInfoXS"
+				>
 				<div class="User-optionsWrap">
-					<!-- <button>Profile</button> -->
 					<RouterLink
 					class="User-options"
 						:to="profilePath"
@@ -88,7 +65,11 @@
 					<button class="User-options">Settings</button>
 					<button class="User-options" @click="$emit('disconnect')">Disconnect</button>
 				</div>
-			</UserInfos>
+				</UserInfos>
+			</div>
+		</div>
+		<div class="NavBarList-options" v-if="contentStore.navBarListOpen">
+			<NavBarSectionSelector/>
 		</div>
 	</div>
 

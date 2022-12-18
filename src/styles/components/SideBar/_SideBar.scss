@@ -66,10 +66,10 @@
 	@media (max-width:1200px) {
 		font-size: 0;
 		position: absolute;
-		top: calc(98px + 30px);
+		top: calc(100px + 32rem);
 		right: 0;
 		width: 50px;
-		height: calc(100vh - 98px - 64px);
+		height: calc(100vh - 100px - 64rem);
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
 		.SideBar-content-wrap,
@@ -126,4 +126,9 @@
 	16%, 100% {
 		transform: rotateZ(0);
 	}
+}
+
+.Sidebar--navBarListOpen {
+	top: calc(100px + 52px + 32rem);
+	height: calc(100vh - 100px - 52px - 64rem);
 }

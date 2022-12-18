@@ -19,7 +19,10 @@
 <template>
 
 	<NavBar @disconnect="userStore.disconnect()"/>
-	<main class="BodyLayout">
+	<main
+		class="BodyLayout"
+		:class="{'BodyLayout--NavBarListOpen': contentStore.navBarListOpen}"
+	>
 		<section class="BodyLayout-mainContent">
 			<Profile v-if="contentStore.state == 5" />
 			<RouterView v-else />

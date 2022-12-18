@@ -28,6 +28,10 @@
 	}
 }
 
+.BodyLayout--NavBarListOpen {
+	height: calc(100vh - (100px + 52px));
+}
+
 // .SiteFooter {
 // 	width: 100%;
 // 	min-height: 100px;

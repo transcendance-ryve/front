@@ -1,0 +1,52 @@
+<script setup lang="ts">
+
+	import { useContentStore } from '../../stores/ContentStore'
+	import router from '../../router/index'
+	import { logoPlay, logoLeaderboard, logoSpectate } from '../../assets/logoSVG'
+
+	const	contentStore = useContentStore()
+
+	const	updateState = (value: number) => {
+		contentStore.state = value
+		if (contentStore.navBarListOpen)
+			// setTimeout(() => {
+			// 	contentStore.navBarListOpen = false
+			// }, 100)
+			contentStore.navBarListOpen = false
+	}
+
+</script>
+
+<template>
+
+	<div class="NavBarSectionSelector">
+		<RouterLink
+			to="/play"
+			class="Options-link"
+			:class="{'Link--selected': contentStore.state == 1}"
+			@click="updateState(1)"
+		>
+			<span class="Link-logo" v-html="logoPlay"></span>
+			Play
+		</RouterLink>
+		<RouterLink
+			to="/leaderboard"
+			class="Options-link"
+			:class="{'Link--selected': contentStore.state == 2}"
+			@click="updateState(2)"
+		>
+			<span class="Link-logo" v-html="logoLeaderboard"></span>
+			Leaderboard
+		</RouterLink>
+		<RouterLink
+			to="/spectate"
+			class="Options-link"
+			:class="{'Link--selected': contentStore.state == 3}"
+			@click="updateState(3)"
+		>
+			<span class="Link-logo" v-html="logoSpectate"></span>
+			Spectate
+		</RouterLink>
+	</div>
+
+</template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useContentStore } from '../../stores/ContentStore'
 	import SideBarTag from './SideBarTag.vue'
 	import SideBarContent from './SideBarContent.vue'
 	import SideBarConv from './SideBarConv.vue'
@@ -8,12 +9,16 @@
 	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
 
 	const	sbStore = useSideBarStore()
+	const	contentStore = useContentStore()
 
 </script>
 
 <template>
 
-	<section class="BodyLayout-sidebar">
+	<section
+		class="BodyLayout-sidebar"
+		:class="{'Sidebar--navBarListOpen': contentStore.navBarListOpen}"
+	>
 		<div class="SideBar-sectionsBtns">
 			<button
 				class="SectionsBtns"
