@@ -1,7 +1,6 @@
 .NavBar {
 	box-sizing: border-box;
 	width: 100%;
-	height: 114px;
 	padding: 24px 64px;
 	display: flex;
 	align-items: center;
@@ -13,6 +12,7 @@
 		width: 40px;
 		margin-right: 140px;
 		display: none;
+		cursor: pointer;
 	}
 
 	.NavBar-logo svg {
@@ -141,7 +141,6 @@
 	}
 
 	@media (max-width: 1200px) {
-		height: 100px;
 		padding: 24px 42px;
 		.NavBar-logo svg {
 			width: 66px;
