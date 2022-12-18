@@ -5,13 +5,9 @@
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 	.NavBarList-options {
-		// display: flex;
-		// align-items: center;
-		// justify-content: center;
 		height: 52px;
 		padding: 0 200rem;
 
-		// background: red;
 		.NavBar-options {
 			display: flex;
 		}
@@ -24,12 +20,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	// background: #1F1E2C;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 	.NavBarList-logo {
-		width: 40px;
-		margin-right: 140px;
 		display: none;
 		cursor: pointer;
 	}
@@ -101,6 +94,8 @@
 		padding: 24px 32px;
 		.NavBarList-logo {
 			display: block;
+			width: 40px;
+			margin-right: 140px;
 		}
 		.Content-options {
 			display: none;
@@ -110,11 +105,24 @@
 		// 	left: calc(100vw - (30px + 220px));
 		// }
 	}
-	@media (max-width: 320px) {
-		.User-options {
-			left: calc(320px - (220px + 30px));
+	@media (max-width: 580px) {
+		.NavBarList-logo {
+			margin: 0;
+		}
+		.UserInfos {
+			width: 52px;
+			.UserInfos-content {
+				display: none;
+			}
 		}
 	}
+	// @media (max-width: 320px) {
+	// 	.User-options {
+	// 		left: calc(320px - (220px + 30px));
+	// 	}
+	// }
+
+
 
 	// @media (max-width: 700px) {
 	// 	width: calc(100% - 64px);

@@ -1,6 +1,4 @@
 .UserInfos {
-	width: 280rem;
-	height: 64rem;
 	display: flex;
 	align-items: center;
 	gap: 16rem;
@@ -72,8 +70,6 @@
 }
 
 .UserInfos--static {
-	width: 280px;
-	height: 64px;
 	gap: 16px;
 
 	.UserInfos-avatar {
