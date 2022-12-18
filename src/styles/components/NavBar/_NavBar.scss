@@ -33,7 +33,7 @@
 		gap: 32rem;
 
 		.Options-link {
-			height: 52px;
+			height: 100%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -56,12 +56,6 @@
 				}
 			}
 
-			span {
-				font-family: 'Poppins';
-				font-style: normal;
-				font-weight: 600;
-				font-size: 20px;
-			}
 			&:after {
 				content: '';
 				position: absolute;
@@ -141,6 +135,42 @@
 		&:hover {
 			.User-optionsWrap {
 				visibility: visible;
+			}
+		}
+	}
+
+	@media (max-width: 1200px) {
+		height: 100px;
+		padding: 24px 42px;
+		.NavBar-logo svg {
+			width: 66px;
+			height: 52px;
+		}
+		.NavBar-content {
+			gap: 112rem;
+		}
+		.NavBar-options {
+			height: 46px;
+			.Options-link {
+				padding: 0px 8px;
+				gap: 6px;
+				font-size: 16px;
+	
+				.Link-logo {
+					width: 20px;
+					height: 20px;
+				}
+	
+				&:after {
+					height: 2px;
+					bottom: 4px;
+				}
+			}
+			.Link--selected {
+				&:after {
+					height: 2px;
+					bottom: 4px;
+				}
 			}
 		}
 	}

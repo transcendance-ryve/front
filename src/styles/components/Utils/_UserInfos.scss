@@ -131,3 +131,35 @@
 		}
 	}
 }
+
+.UserInfos--XS {
+	width: 180px;
+	height: 52px;
+	gap: 12px;
+
+	.UserInfos-avatar {
+		width: 52px;
+		height: 52px;
+	}
+
+	.UserInfos-content {
+		gap: 6px;
+
+		.Content-name {
+			font-size: 18px;
+		}
+
+		.Content-level {
+			gap: 6px;
+
+			.Level-perCentWrap {
+				width: 140px;
+				height: 4px;
+			}
+
+			.Level {
+				font-size: 12px;
+			}
+		}
+	}
+}

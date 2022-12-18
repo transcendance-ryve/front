@@ -32,6 +32,10 @@
 			type: Boolean,
 			default: true
 		},
+		sizeXS: {
+			type: Boolean,
+			default: false
+		},
 		sizeXL: {
 			type: Boolean,
 			default: false
@@ -53,6 +57,7 @@
 		:class="{
 			'UserInfos--reverse': reverse,
 			'UserInfos--static': !responsive,
+			'UserInfos--XS': sizeXS,
 			'UserInfos--XL': sizeXL
 		}"
 	>

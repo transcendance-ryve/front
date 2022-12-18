@@ -1,5 +1,6 @@
 <script setup lang="ts">
 
+	import { ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import { useProfileStore } from '../../stores/ProfileStore'
@@ -17,6 +18,14 @@
 	}
 
 	const	profilePath = '/profile/' + userStore.user.userName
+
+	let		userInfoXS = ref(false)
+	window.addEventListener('resize', () => {
+		if (window.innerWidth <= 1200)
+			userInfoXS.value = true
+		else
+			userInfoXS.value = false	
+	})
 
 </script>
 
@@ -63,6 +72,7 @@
 				perCentBackground="#242635"
 				:reverse="true"
 				:responsive="false"
+				:sizeXS="userInfoXS"
 			>
 				<div class="User-optionsWrap">
 					<!-- <button>Profile</button> -->
