@@ -11,23 +11,23 @@
 		},
 		toolTipHeight: {
 			type: String,
-			default: '30rem',
+			default: '30em',
 		},
 		toolTipPadding: {
 			type: String,
-			default: '8rem',
+			default: '8em',
 		},
 		borderRadius: {
 			type: String,
-			default: '6rem',
+			default: '6em',
 		},
 		toolTipFont: {
 			type: String,
-			default: '500 14rem \'Poppins\'',
+			default: '500 14em \'Poppins\'',
 		},
 		dist: {
 			type: String,
-			default: '12rem',
+			default: '12em',
 		}
 	})
 

@@ -20,14 +20,7 @@
 
 	<button class="OptionBtn">
 		<span class="OptionBtn-logo" v-html="logo"></span>
-		<ToolTip
-			:value="toolTip"
-			toolTipHeight="30em"
-			toolTipPadding="8em"
-			borderRadius="6em"
-			toolTipFont="500 14em 'Poppins'"
-			dist="12em"
-		/>
+		<ToolTip :value="toolTip" />
 	</button>
 
 </template>

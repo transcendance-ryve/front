@@ -46,7 +46,7 @@
 
 	const	perCent = p.levelPerCent?.value?.toString() + '%'
 	const	borderAvatar = p.avatarBorder.value ?
-		'4rem solid' + p.mainColor.value : 'none'
+		'4em solid' + p.mainColor.value : 'none'
 
 </script>
 

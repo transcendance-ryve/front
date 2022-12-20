@@ -264,23 +264,23 @@
 		<div class="MatchHistory-filters">
 			<SearchInput
 				inputBackground="#242635"
-				inputHeight="56rem"
+				inputHeight="56em"
 				@search="(val) => toFind = val"
 			/>
 			<div class="Filters-menus">
 				<DropDownMenu
 					value="Per page:"
 					:options="['12', '24', '36', '48']"
-					width="165rem"
-					height="56rem"
+					width="165em"
+					height="56em"
 					:logo="logoPerPage"
 					@select="(val) => perPage = parseInt(val)"
 				/>
 				<DropDownMenu
 					value="Sort by:"
 					:options="['Recent', 'Ancient']"
-					width="205rem"
-					height="56rem"
+					width="205em"
+					height="56em"
 					:logo="logoSort"
 					@select="(val) => order = val == 'Recent' ? 'des' : 'asc'"
 				/>

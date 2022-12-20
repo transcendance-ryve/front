@@ -9,33 +9,13 @@
 			type: String,
 			default: '#1F1E2C',
 		},
-		logoSize: {
-			type: String,
-			default: '24rem'
-		},
-		inputWidth: {
-			type: String,
-			default: '100%',
-		},
 		inputHeight: {
 			type: String,
-			default: '48rem',
-		},
-		inputPadding: {
-			type: String,
-			default: '12rem',
-		},
-		inputGap: {
-			type: String,
-			default: '8rem',
+			default: '48em',
 		},
 		borderRadius: {
-			default: '6rem'
+			default: '6em'
 		},
-		inputFont: {
-			type: String,
-			default: '500 18rem \'Poppins\''
-		}
 	})
 
 	const	input = ref('')
@@ -63,14 +43,14 @@
 		v-model="input"
 		placeholder="Search"
 		:logo="logoSearch"
-		:logoSize="logoSize"
-		:inputWidth="inputWidth"
+		logoSize="24em"
+		inputWidth="100%"
 		:inputHeight="inputHeight"
 		:inputBackground="inputBackground"
-		:inputPadding="inputPadding"
-		:inputGap="inputGap"
-		:borderRadius="borderRadius"
-		:inputFont="inputFont"
+		inputPadding="12em"
+		inputGap="8em"
+		borderRadius="6em"
+		inputFont="500 18em 'Poppins'"
 	/>
 
 </template>

@@ -586,15 +586,7 @@
 	<div class="SideBar-content-wrap">
 		<SideBarSwitch/>
 
-		<SearchInput
-			logoSize="24em"
-			inputHeight="48em"
-			inputPadding="12em"
-			inputGap="8em"
-			borderRadius="6em"
-			inputFont="500 18em 'Poppins'"
-			@search="(val) => sbStore.toFind = val"
-		/>
+		<SearchInput @search="(val) => sbStore.toFind = val"/>
 
 		<button
 			v-if="sbStore.section == 2 && sbStore.channelsState == 1"

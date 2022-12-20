@@ -33,10 +33,11 @@
 		<button
 			v-for="n in pagesBtn"
 			:key=n
+			class="PagesSelector-Btn"
 			:class="{'Pages--selected': page == n}"
 			@click="$emit('update', n)"
 		>
-			{{ n }}
+			<span class="Btn-value">{{ n }}</span>
 		</button>
 		<button v-if="page < pagesSize -1 && pagesSize > 3" @click="$emit('update', pagesSize)">>></button>
 	</div>

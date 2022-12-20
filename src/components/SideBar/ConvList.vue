@@ -147,15 +147,7 @@
 			/>
 		</div>
 		<div class="ConvList-contentWrap">
-			<SearchInput
-				logoSize="24em"
-				inputHeight="48em"
-				inputPadding="12em"
-				inputGap="8em"
-				borderRadius="6em"
-				inputFont="500 18em 'Poppins'"
-				@search="(val) => toFind = val"
-			/>
+			<SearchInput @search="(val) => toFind = val"/>
 			<div class="ConvList-content" v-if="sectionSelected == 'Users'">
 				<DropDownList
 					v-if="bannedList.length"
