@@ -3,32 +3,36 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 24rem 40rem;
+	padding: 24em 40em;
 	background: #242635;
-	border-radius: 16rem;
+	border-radius: 16em;
 
 	.ProfileTag-btnsWrap {
 		display: flex;
-		gap: 16rem;
+		gap: 16em;
 
 		button {
+			font-size: 1rem;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			padding: 0 18rem;
-			gap: 10rem;
-			height: 56rem;
+			padding: 0 18em;
+			gap: 10em;
+			height: 56em;
 			border: none;
-			border-radius: 6rem;
-			font-family: 'Poppins';
-			font-weight: 600;
-			font-size: 16rem;
-			line-height: 100%;
-			color: white;
+			border-radius: 6em;
+
+			.Btn-value {
+				font-family: 'Poppins';
+				font-weight: 600;
+				font-size: 16em;
+				line-height: 100%;
+				color: white;
+			}
 
 			.Btn-logo {
-				width: 24rem;
-				height: 24rem;
+				width: 24em;
+				height: 24em;
 				svg {
 					fill: white;
 					width: 100%;
@@ -39,12 +43,12 @@
 
 		.Btn-2FA {
 			background: #FF4646;
-			box-shadow: 0 0 5rem #E32F2F;
+			box-shadow: 0 0 5em #E32F2F;
 		}
 
 		.Btn-settings, .Btn-type1 {
 			background: #1F1E2C;
-			box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.1);
+			box-shadow: 0 4em 4em rgba(0, 0, 0, 0.1);
 		}
 
 		.Btn-type1 {
@@ -56,7 +60,7 @@
 
 		.Btn-type2 {
 			background: #0177FB;
-			box-shadow: 0px 4rem 4rem rgba(0, 0, 0, 0.1);
+			box-shadow: 0px 4em 4em rgba(0, 0, 0, 0.1);
 		}
 	}
 

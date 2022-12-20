@@ -25,26 +25,26 @@
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
-			<button class="Btn-2FA">2FA</button>
+			<button class="Btn-2FA"><span class="Btn-value">2FA</span></button>
 			<button class="Btn-settings">
 				<span class="Btn-logo" v-html="logoSettings"></span>
-				Settings
+				<span class="Btn-value">Settings</span>
 			</button>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type == 2">
 			<button class="Btn-type1">
 				<span class="Btn-logo" v-html="logoTrash"></span>
-				Delete
+				<span class="Btn-value">Delete</span>
 			</button>
 			<button class="Btn-type2">
 				<span class="Btn-logo" v-html="logoMsg"></span>
-				Message
+				<span class="Btn-value">Message</span>
 			</button>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type == 3">
 			<button class="Btn-type2">
 				<span class="Btn-logo" v-html="logoAdd"></span>
-				Add to friend
+				<span class="Btn-value">Add to friend</span>
 			</button>
 		</div>
 	</div>

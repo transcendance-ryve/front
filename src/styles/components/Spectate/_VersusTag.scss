@@ -3,20 +3,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	border-radius: 16rem 0 0 16rem;
-	min-height: 136rem;
-	padding: 0 32rem;
-	// background: #242635;
-	gap: 32rem;
+	border-radius: 16em 0 0 16em;
+	min-height: 136em;
+	padding: 0 32em;
+	gap: 32em;
 
 	.VersusTag-score {
-		// gap: 6rem;
 		display: flex;
 		flex-direction: row-reverse;
 
 		.Score-logo {
-			width: 34.3rem;
-			height: 34.3rem;
+			width: 34.3em;
+			height: 34.3em;
 
 			svg {
 				width: 100%;
@@ -28,7 +26,7 @@
 
 .VersusTag--reverse {
 	flex-direction: row-reverse;
-	border-radius: 0 16rem 16rem 0;
+	border-radius: 0 16em 16em 0;
 
 	.VersusTag-score {
 		flex-direction: row;

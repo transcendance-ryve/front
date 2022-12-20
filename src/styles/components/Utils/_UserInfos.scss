@@ -1,24 +1,24 @@
 .UserInfos {
 	display: flex;
 	align-items: center;
-	gap: 16rem;
+	gap: 16em;
 
 	.UserInfos-avatar {
-		width: 64rem;
-		height: 64rem;
+		width: 64em;
+		height: 64em;
 		border-radius: 50%;
 	}
 
 	.UserInfos-content {
 		display: flex;
 		flex-direction: column;
-		gap: 8rem;
+		gap: 8em;
 
 		.Content-name {
 			font-family: 'Poppins';
 			font-style: normal;
 			font-weight: 600;
-			font-size: 22rem;
+			font-size: 22em;
 			line-height: 100%;
 			color: white;
 		}
@@ -26,26 +26,26 @@
 		.Content-level {
 			display: flex;
 			flex-direction: column;
-			gap: 6rem;
+			gap: 6em;
 
 			.Level-perCentWrap {
 				display: flex;
-				width: 200rem;
-				height: 6rem;
-				border-radius: 8rem;
+				width: 200em;
+				height: 6em;
+				border-radius: 8em;
 
 				.Level-perCent {
 					display: flex;
-					border-radius: 8rem;
+					border-radius: 8em;
 					height: 100%;
-					box-shadow: inset 0rem 4rem 4rem rgba(0, 0, 0, 0.1);
+					box-shadow: inset 0rem 4em 4em rgba(0, 0, 0, 0.1);
 				}
 			}
 
 			.Level {
 				font-family: 'Poppins';
 				font-weight: 600;
-				font-size: 14rem;
+				font-size: 14em;
 				line-height: 100%;
 				color: #D3D6F2;
 			}
@@ -106,24 +106,24 @@
 }
 
 .UserInfos--XL {
-	width: 320rem;
-	height: 96rem;
-	gap: 24rem;
+	width: 320em;
+	height: 96em;
+	gap: 24em;
 
 	.UserInfos-avatar {
-		width: 96rem;
-		height: 96rem;
+		width: 96em;
+		height: 96em;
 	}
 
 	.UserInfos-content {
-		gap: 12rem;
+		gap: 12em;
 
 		.Content-name {
-			font-size: 24rem;
+			font-size: 24em;
 		}
 
 		.Content-level {
-			gap: 10rem;
+			gap: 10em;
 		}
 	}
 }
