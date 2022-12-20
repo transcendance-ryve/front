@@ -49,10 +49,10 @@
 		<div class="form-wrap">
 
 			<button class="Form-42btn">
-				Sign up with
+				<span class="Btn-value">Sign up with</span>
 				<span class="Form-42btn-logo" v-html="logo42"></span>
 			</button>
-			<span>OR</span>
+			<span class="or">OR</span>
 			<h1>Welcome back!</h1>
 			<form @submit.prevent="submitForm">
 				<div class="Form-inputsWrap">
@@ -80,12 +80,14 @@
 						{{ v$.password.$errors[0].$message }}
 					</span>
 				</div>
-				<button class="Form-forgotBtn">Forgot your password?</button>
+				<button class="Form-forgotBtn">
+					<span class="ForgotBtn-value">Forgot your password?</span>
+				</button>
 				<button
 					class="Form-submitBtn"
 					type="submit"
 				>
-					Sign in
+					<span class="Btn-value">Sign in</span>
 				</button>
 			</form>
 		</div>

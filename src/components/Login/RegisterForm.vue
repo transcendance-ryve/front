@@ -60,10 +60,10 @@
 	<main>
 		<div class="form-wrap">
 			<button class="Form-42btn">
-				Sign up with
+				<span class="Btn-value">Sign up with</span>
 				<span class="Form-42btn-logo" v-html="logo42"></span>
 			</button>
-			<span>OR</span>
+			<span class="or">OR</span>
 			<h1>Create an account</h1>
 			<form @submit.prevent="submitForm">
 				<div class="Form-inputsWrap">
@@ -119,7 +119,7 @@
 					class="Form-submitBtn"
 					type="submit"
 				>
-					Register
+					<span class="Btn-value">Register</span>
 				</button>
 			</form>
 		</div>

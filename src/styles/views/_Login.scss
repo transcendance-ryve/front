@@ -1,4 +1,5 @@
 .Login {
+	font-size: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -6,20 +7,23 @@
 	width: 100vw;
 	height: 100vh;
 	background: #1B1A26;
-	gap: 48rem;
+	gap: 48em;
 
 	.Login-redirect {
 		display: flex;
 		text-align: center;
 		font-weight: 600;
-		font-size: 16rem;
 		color: #787B96;
-		gap: 6rem;
+		gap: 6em;
+
+		span {
+			font-size: 16em;
+		}
 
 		button {
 			font-family: 'Poppins';
 			font-weight: 700;
-			font-size: 16rem;
+			font-size: 16em;
 			border: none;
 			color: white;
 			background: none;

@@ -2,32 +2,35 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
-	width: 500rem;
+	width: 500em;
 	border: none;
 	background: #242635;
-	box-shadow: 4rem 4rem 6rem rgba(0, 0, 0, 0.3);
-	border-radius: 8rem;
-	padding: 32rem;
-	gap: 32rem;
+	box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
+	border-radius: 8em;
+	padding: 32em;
+	gap: 32em;
+
+	.Btn-value {
+		color: white;
+		font-family: 'Poppins';
+		font-weight: 600;
+		font-size: 18em;
+	}
 
 	.Form-42btn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		gap: 8rem;
+		gap: 8em;
 		width: 100%;
-		height: 64rem;
+		height: 64em;
 		border: none;
-		border-radius: 8rem;
+		border-radius: 8em;
 		background: #1F1E2C;
-		color: white;
-		font-family: 'Poppins';
-		font-weight: 600;
-		font-size: 18rem;
 
 		.Form-42btn-logo {
-			width: 32rem;
-			height: 32rem;
+			width: 32em;
+			height: 32em;
 			svg {
 				width: 100%;
 				height: 100%;
@@ -41,10 +44,10 @@
 		}
 	}
 
-	span {
+	.or {
 		font-family: 'Poppins';
 		font-weight: 600;
-		font-size: 18rem;
+		font-size: 18em;
 		line-height: 100%;
 		color: white;
 		text-align: center;
@@ -54,15 +57,18 @@
 		border: none;
 		background: none;
 		align-self: flex-end;
-		color: #787B96;
-		font-family: 'Poppins';
-		font-weight: 600;
-		font-size: 16rem;
-		line-height: 24px;
-		margin-top: 32rem;
-		&:hover {
-			text-decoration: underline;
-			color: white;
+		margin-top: 32em;
+
+		.ForgotBtn-value {
+			font-family: 'Poppins';
+			font-weight: 600;
+			font-size: 16em;
+			line-height: 24px;
+			color: #787B96;
+			&:hover {
+				text-decoration: underline;
+				color: white;
+			}
 		}
 	}
 
@@ -70,8 +76,8 @@
 		margin: 0;
 		color: white;
 		font-weight: 600;
-		font-size: 32rem;
-		line-height: 44rem;
+		font-size: 32em;
+		line-height: 1.375em;
 	}
 
 	form {
@@ -82,29 +88,25 @@
 		.Form-inputsWrap {
 			display: flex;
 			flex-direction: column;
-			gap: 16rem;
+			gap: 16em;
 
 			.form-error {
 				position: relative;
 				text-align: left;
-				bottom: 4rem;
+				bottom: 0.5em;
 				font-weight: 100;
 				color: #FF4646;
-				font-size: 14rem;
+				font-size: 14em;
 				text-decoration: none;
 			}
 		}
 
 		.Form-submitBtn {
-			margin-top: 32rem;
-			height: 48rem;
+			margin-top: 32em;
+			height: 48em;
 			border: none;
 			background: #0177FB;
-			border-radius: 8rem;
-			font-family: 'Poppins';
-			font-weight: 700;
-			font-size: 18rem;
-			color: white;
+			border-radius: 8em;
 			opacity: 0.9;
 			&:hover {
 				opacity: 1;
