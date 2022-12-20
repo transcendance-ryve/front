@@ -32,19 +32,11 @@
 				userInfoXS.value = true
 			else
 				userInfoXS.value = false
-			if (window.innerWidth > 840 && contentStore.navBarListOpen)
+			if (window.innerWidth > 768 && contentStore.navBarListOpen)
 				contentStore.navBarListOpen = false
 		})
 	}
 	manageResponsive()
-	// if (window.innerWidth <= 1200)
-	// 		userInfoXS.value = true
-	// window.addEventListener('resize', () => {
-	// 	if (window.innerWidth <= 1200)
-	// 		userInfoXS.value = true
-	// 	else
-	// 		userInfoXS.value = false	
-	// })
 
 </script>
 

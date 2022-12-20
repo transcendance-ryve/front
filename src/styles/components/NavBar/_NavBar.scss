@@ -90,12 +90,12 @@
 		}
 	}
 
-	@media (max-width: 840px) {
+	@media (max-width: $tablet) {
 		padding: 24px 32px;
 		.NavBarList-logo {
 			display: block;
-			width: 40px;
-			margin-right: 140px;
+			width: 30px;
+			margin-right: 150px;
 		}
 		.Content-options {
 			display: none;
@@ -107,7 +107,7 @@
 	}
 	@media (max-width: 580px) {
 		.NavBarList-logo {
-			margin: 0;
+			margin-right: 22px;
 		}
 		.UserInfos {
 			width: 52px;
