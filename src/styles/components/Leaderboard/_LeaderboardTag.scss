@@ -1,27 +1,30 @@
 .LeaderboardTag {
 	display: flex;
 	align-items: center;
-	border-radius: 16rem;
-	min-height: 130rem;
-	padding: 0 32rem;
+	border-radius: 16em;
+	min-height: 130em;
+	padding: 0 32em;
 	background: #242635;
-	gap: 32rem;
+	gap: 32em;
 
 
 	.LeaderboardTag-rank {
-		min-width: 56rem;
-		height: 56rem;
+		min-width: 56em;
+		height: 56em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		background: #1F1E2C;
-		border-radius: 8rem;
-		font-family: 'Poppins';
-		font-style: normal;
-		font-weight: 600;
-		font-size: 18rem;
-		line-height: 100%;
-		color: white;
+		border-radius: 8em;
+
+		.Rank-value {
+			font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 600;
+			font-size: 18em;
+			line-height: 100%;
+			color: white;
+		}
 	}
 
 	.UserInfos {

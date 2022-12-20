@@ -1,7 +1,7 @@
 .DropDownMenu {
 	display: flex;
 	text-align: center;
-	border-radius: 6rem;
+	border-radius: 6em;
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
@@ -29,17 +29,19 @@
 			text-decoration: none;
 			color: white;
 			display: flex;
-			font-size: 16rem;
 			cursor: default;
+		}
+		.Menu-text, .Menu-valSelected {
+			font-size: 16em;
 		}
 	}
 
 	.Menu > a {
-		gap: 8rem;
+		gap: 8em;
 
 		.Menu-logo {
-			width: 24rem;
-			height: 24rem;
+			width: 24em;
+			height: 24em;
 			svg {
 				width: 100%;
 				height: 100%;
@@ -55,7 +57,7 @@
 		flex-direction: column;
 		padding: 0;
 		text-align: center;
-		border-radius: 0 0 6rem 6rem;
+		border-radius: 0 0 6em 6em;
 		overflow: hidden;
 		max-height: 0;
 		
@@ -66,7 +68,7 @@
 			align-items: center;
 			justify-content: center;
 			width: 100%;
-			min-height: 40rem;
+			min-height: 40em;
 			a {
 				justify-content: center;
 				align-items: center;
@@ -76,7 +78,7 @@
 				left: 50%;
 				color: white;
 				cursor: pointer;
-				border-radius: 6rem;
+				border-radius: 6em;
 				opacity: 0.8;
 	
 				&:hover {
@@ -87,7 +89,7 @@
 	}
 
 	&:hover {
-		border-radius: 6rem 6rem 0 0;
+		border-radius: 6em 6em 0 0;
 		.Menu-options {
 			animation: dropDown 2.5s forwards;
 		}
@@ -103,7 +105,7 @@
 		box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
 	}
 	100% {
-		max-height: 50em;
+		max-height: 800em;
 		border-top: 3px solid #1F1E2C;
 		box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
 	}

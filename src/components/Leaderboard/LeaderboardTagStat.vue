@@ -11,17 +11,15 @@
 		},
 	})
 
-	// const	p = toRefs(props)
-
-	// const	perCent = p.levelPerCent?.value?.toString() + '%'
-
 </script>
 
 <template>
 
 	<div class="LeaderboardTag-Stat">
 		<label class="Stat-label">{{ label }}</label>
-		<span class="Stat-value">{{ value }}</span>
+		<div class="Stat-valueWrap">
+			<span class="Stat-value">{{ value }}</span>
+		</div>
 	</div>
 
 </template>

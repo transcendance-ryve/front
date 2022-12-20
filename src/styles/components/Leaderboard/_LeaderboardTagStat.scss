@@ -2,26 +2,29 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	gap: 8rem;
-	font-family: 'Poppins';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 18rem;
-	line-height: 100%;
-	letter-spacing: -0.01em;
+	gap: 8em;
 
 	.Stat-label {
 		color: #D3D6F2;
 	}
 
-	.Stat-value {
+	.Stat-label, .Stat-value {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 18em;
+		line-height: 100%;
+		letter-spacing: -0.01em;
+	}
+
+	.Stat-valueWrap {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 0 12rem;
-		height: 42rem;
+		padding: 0 12em;
+		height: 42em;
 		background: #3A3D53;
-		border-radius: 6rem;
+		border-radius: 6em;
 		color: white;
 	}
 }

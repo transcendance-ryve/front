@@ -24,7 +24,9 @@
 <template>
 
 	<div class="LeaderboardTag">
-		<span class="LeaderboardTag-rank">#{{ user.rank }}</span>
+		<div class="LeaderboardTag-rank">
+			<span class="Rank-value">#{{ user.rank }}</span>
+		</div>
 		<UserInfos
 			:userName="user.userName"
 			:level="user.level"

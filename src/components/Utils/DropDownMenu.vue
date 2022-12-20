@@ -49,13 +49,19 @@
 
 	<ul class="DropDownMenu">
 		<li class="Menu">
-			<a href="#"><span class="Menu-logo" v-html="logo"></span>{{ value }}<span class="Menu-valSelected">{{ valSelected }}</span> </a>
+			<a href="#">
+				<span class="Menu-logo" v-html="logo"></span>
+				<span class="Menu-text">{{ value }}</span>
+				<span class="Menu-valSelected">{{ valSelected }}</span>
+			</a>
 			<ul class="Menu-options">
 				<li
 					v-for="(option, index) in optionsToSelect"
 					:key="index"
 				>
-					<a href="#" @click="selectVal(index)">{{ option }}</a>
+					<a href="#" @click="selectVal(index)">
+						<span class="Menu-text">{{ option }}</span>
+					</a>
 				</li>
 			</ul>
 		</li>
