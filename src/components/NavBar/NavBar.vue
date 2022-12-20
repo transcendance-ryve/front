@@ -23,12 +23,12 @@
 	let		userInfoXS = ref(false)
 
 	const	manageResponsive = () => {
-		if (window.innerWidth <= 1200)
+		if (window.innerWidth <= 1440)
 			userInfoXS.value = true
 		else if (contentStore.navBarListOpen)
 			contentStore.navBarListOpen = false
 		window.addEventListener('resize', () => {
-			if (window.innerWidth <= 1200)
+			if (window.innerWidth <= 1440)
 				userInfoXS.value = true
 			else
 				userInfoXS.value = false

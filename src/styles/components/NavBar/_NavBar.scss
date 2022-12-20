@@ -1,6 +1,9 @@
 .NavBar-wrapper {
 	display: flex;
 	flex-direction: column;
+	// justify-content: center;
+	align-items: center;
+	padding: 24px 64px;
 	background: #1F1E2C;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -12,93 +15,100 @@
 			display: flex;
 		}
 	}
-}
 
-.NavBar {
-	box-sizing: border-box;
-	padding: 24px 64px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-	.NavBarList-logo {
-		display: none;
-		cursor: pointer;
-	}
-
-	.NavBar-logo svg {
-		width: 84px;
-		height: 66px;
-		fill: white;
-	}
-
-	.NavBar-content {
+	.NavBar {
+		box-sizing: border-box;
+		// padding: 24px 64px;
+		width: 100%;
+		max-width: 1792px;
 		display: flex;
-		gap: 96rem;
-	}
+		align-items: center;
+		justify-content: space-between;
+		// box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
-	.UserInfos{
-		.User-optionsWrap {
-			position: absolute;
-			right: 64px;
-			top: 76px;
-			z-index: 1;
-			width: 180px;
-			height: 110px;
-			padding: 10px 20px 0px 20px;
-			justify-content: center;
-			gap: 6px;
+		.NavBarList-logo {
+			display: none;
+			cursor: pointer;
+		}
+
+		.NavBar-logo svg {
+			width: 84px;
+			height: 66px;
+			fill: white;
+		}
+
+		.NavBar-content {
 			display: flex;
-			flex-direction: column;
-			background: no-repeat center/100% url(../assets/message.svg);
-			visibility: hidden;
+			gap: 96rem;
+		}
 
-			.User-options {
-				font-family: 'Poppins';
-				font-size: 12rem;
-				text-decoration: none;
-				color: #1F1E2C;
+		.UserInfos{
+			.User-optionsWrap {
+				position: absolute;
+				right: 64px;
+				top: 76px;
+				z-index: 1;
+				width: 180px;
+				height: 110px;
+				padding: 10px 20px 0px 20px;
+				justify-content: center;
+				gap: 6px;
+				display: flex;
+				flex-direction: column;
+				background: no-repeat center/100% url(../assets/message.svg);
+				visibility: hidden;
 
-				border: none;
-				text-align: left;
-				background-color: white;
-				font-weight: bold;
-				&:hover {
-					transition: 300ms;
-					-ms-transform: scale(1.1); /* IE 9 */
-					-webkit-transform: scale(1.1); /* Safari 3-8 */
-					transform: scale(1.025);
+				.User-options {
+					font-family: 'Poppins';
+					font-size: 12rem;
+					text-decoration: none;
+					color: #1F1E2C;
+
+					border: none;
+					text-align: left;
+					background-color: white;
+					font-weight: bold;
+					&:hover {
+						transition: 300ms;
+						-ms-transform: scale(1.1); /* IE 9 */
+						-webkit-transform: scale(1.1); /* Safari 3-8 */
+						transform: scale(1.025);
+					}
+				}
+			}
+			&:hover {
+				.User-optionsWrap {
+					visibility: visible;
 				}
 			}
 		}
-		&:hover {
-			.User-optionsWrap {
-				visibility: visible;
-			}
-		}
 	}
 
-	@media (max-width: 1200px) {
+	@media (max-width: $laptopL) {
 		padding: 24px 42px;
-		.NavBar-logo svg {
-			width: 66px;
-			height: 52px;
-		}
-		.NavBar-content {
-			gap: 112rem;
+		.NavBar {
+			.NavBar-logo svg {
+				width: 66px;
+				height: 52px;
+			}
+			.NavBar-content {
+				gap: 112rem;
+			}
 		}
 	}
 
 	@media (max-width: $tablet) {
 		padding: 24px 32px;
-		.NavBarList-logo {
-			display: block;
-			width: 30px;
-			margin-right: 150px;
-		}
-		.Content-options {
-			display: none;
+			.NavBar {
+			.NavBarList-logo {
+				display: block;
+				width: 30px;
+				margin-right: 150px;
+			}
+			.Content-options {
+				display: none;
+			}
 		}
 
 		// .User-options {
@@ -106,31 +116,16 @@
 		// }
 	}
 	@media (max-width: 580px) {
-		.NavBarList-logo {
-			margin-right: 22px;
-		}
-		.UserInfos {
-			width: 52px;
-			.UserInfos-content {
-				display: none;
+			.NavBar {
+			.NavBarList-logo {
+				margin-right: 22px;
+			}
+			.UserInfos {
+				width: 52px;
+				.UserInfos-content {
+					display: none;
+				}
 			}
 		}
 	}
-	// @media (max-width: 320px) {
-	// 	.User-options {
-	// 		left: calc(320px - (220px + 30px));
-	// 	}
-	// }
-
-
-
-	// @media (max-width: 700px) {
-	// 	width: calc(100% - 64px);
-	// 	min-width: 260px;
-	// 	padding: 24px 32px;
-	// 	.NavBar-list {
-	// 		display: block;
-	// 	}
-	// }
-
 }

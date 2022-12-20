@@ -62,12 +62,12 @@
 		margin-bottom: 16em;
 	}
 
-	@media (max-width:1200px) {
+	@media (max-width: $laptopL) {
 		font-size: 0;
 		position: absolute;
 		top: calc(100px + 32rem);
 		right: 0;
-		width: 50px;
+		width: 20px;
 		height: calc(100vh - 100px - 64rem);
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
@@ -86,6 +86,11 @@
 				visibility: visible;
 			}
 		}
+	}
+
+	@media (min-width: 1920px) {
+		width: 450px;
+		font-size: 1px;
 	}
 
 	@media (max-width: 400px) {
