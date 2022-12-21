@@ -43,6 +43,7 @@
 	const	perCent = p.levelPerCent?.value?.toString() + '%'
 	const	borderAvatar = p.avatarBorder.value ?
 		'4em solid' + p.mainColor.value : 'none'
+	const		avatarWidth = p.avatarBorder.value ? '72em' : '64em'
 
 </script>
 
@@ -56,7 +57,11 @@
 			'UserInfos--XL': sizeXL
 		}"
 	>
-		<img class="UserInfos-avatar" src="../../assets/user.png" alt="avatar">
+		<img
+			class="UserInfos-avatar"
+			src="../../assets/user.png"
+			alt="avatar"
+		>
 		<div class="UserInfos-content">
 			<span class="Content-name">{{ userName }}</span>
 			<div class="Content-level">
@@ -74,6 +79,7 @@
 <style lang="scss">
 
 	.UserInfos-avatar {
+		width: v-bind(avatarWidth);
 		border: v-bind(borderAvatar);
 	}
 

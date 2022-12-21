@@ -3,8 +3,6 @@
 	text-align: center;
 	border-radius: 6em;
 	list-style-type: none;
-	margin: 0;
-	padding: 0;
 	background-color: #242635;
 	font-family: 'Poppins';
 	font-weight: 600;
@@ -55,7 +53,6 @@
 	.Menu-options {
 		display: flex;
 		flex-direction: column;
-		padding: 0;
 		text-align: center;
 		border-radius: 0 0 6em 6em;
 		overflow: hidden;

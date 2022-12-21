@@ -1,6 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 html, body, #app {
 	display: block;
-	margin: 0;
 	font-size: 0.0520833333vw;	// 1px in 1920px resolution
 }
 
@@ -13,8 +20,6 @@ html, body, #app {
 	background: #1B1A26;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 span {
 	-moz-user-select: none; /* Firefox */
 	-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
@@ -25,7 +30,6 @@ span {
 button {
 	font-size: 1em;
 	cursor: pointer;
-	padding: 0;
 }
 
 $laptopL: 1440px;	// xl

@@ -1,5 +1,4 @@
 .SideBar-newChan {
-	box-sizing: border-box;
 	width: 100%;
 	height: calc(100% - 72em);
 	padding: 32em 16em 16em;
@@ -29,8 +28,8 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			width: calc(96em - 4px);
-			height: calc(96em - 4px);
+			width: 96em;
+			height: 96em;
 			background: #1F1E2C;
 			border: 2px dashed #787B96;
 			border-radius: 50%;

@@ -1,5 +1,4 @@
 .form-wrap {
-	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	width: 500em;
@@ -73,7 +72,6 @@
 	}
 
 	h1 {
-		margin: 0;
 		color: white;
 		font-weight: 600;
 		font-size: 32em;
