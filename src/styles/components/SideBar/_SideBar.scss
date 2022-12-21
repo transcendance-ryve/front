@@ -45,6 +45,9 @@
 			}
 			.Notif-active {
 				animation: notifWiggle 5s linear infinite;
+				svg {
+					fill: $red;
+				}
 			}
 		}
 		.SectionBtns--selected {
