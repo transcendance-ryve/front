@@ -41,4 +41,37 @@
 	.Spectate-content--maxSize {
 		height: calc(100% - calc(56em + 32em));
 	}
+
+	@media (max-width: $laptop) {
+		.Spectate-filters > .input-wrap {
+			width: 300em;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.Spectate-filters {
+			flex-direction: column;
+			gap: 16em;
+		}
+	}
+
+	@media (max-width: $phone) {
+		.Spectate-filters {
+			font-size: 0.86em;
+		}
+
+		.Content-Versus {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 375px) {
+		.Spectate-filters > .Filters-menus {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 320px) {
+		font-size: 4rem;
+	}
 }

@@ -22,6 +22,28 @@
 			}
 		}
 	}
+
+	@media (max-width: $laptop) {
+		padding: 0 12em 0 32em;
+		.UserInfos, .VersusTag-score {
+			font-size: 0.86em;
+		}
+		.Level-perCentWrap {
+			max-width: 150em;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		flex-direction: column;
+		min-height: auto;
+		padding: 32em 24em;
+	}
+
+	@media (max-width: 375px) {
+		.LeaderboardTag-user {
+			flex-direction: column;
+		}
+	}
 }
 
 .VersusTag--reverse {
@@ -30,5 +52,18 @@
 
 	.VersusTag-score {
 		flex-direction: row;
+	}
+
+	@media (max-width: $laptop) {
+		padding: 0 32em 0 12em;
+	}
+
+	@media (max-width: $tablet) {
+		flex-direction: column;
+		padding: 32em 24em;
+	}
+
+	@media (max-width: $phone) {
+		flex-direction: column-reverse;
 	}
 }

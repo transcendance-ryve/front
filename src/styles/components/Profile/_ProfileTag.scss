@@ -1,5 +1,4 @@
 .ProfileTag {
-	box-sizing: border-box;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -63,4 +62,12 @@
 		}
 	}
 
+	@media (max-width: $tablet) {
+		font-size: 0.8em;
+	}
+
+	@media (max-width: $phone) {
+		flex-direction: column;
+		gap: 32em;
+	}
 }

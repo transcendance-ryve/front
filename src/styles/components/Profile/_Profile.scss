@@ -12,24 +12,58 @@
 	-ms-overflow-style: none;  /* IE and Edge */
 	scrollbar-width: none;  /* Firefox */
 
-	h2 {
-		margin: 0;
-		font-family: 'Poppins';
-		font-style: normal;
-		font-weight: 600;
-		font-size: 24em;
-		line-height: 100%;
-		color: #D3D6F2;
-	}
-
 	.Profile-section {
 		display: flex;
 		flex-direction: column;
 		gap: 16em;
+
+		.Section-name {
+			margin: 0;
+			font-family: 'Poppins';
+			font-style: normal;
+			font-weight: 600;
+			font-size: 24em;
+			line-height: 100%;
+			color: #D3D6F2;
+		}
+
+		.StatisticsWrap {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 16em;
+		}
 	}
 
-	.StatisticsWrap {
-		display: flex;
-		gap: 16em;
+	@media (max-width: $laptop) {
+		gap: 52em;
+		.Section-name, .Profile-section {
+			font-size: 0.86em;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.Profile-section > .StatisticsWrap > .ProfileStat {
+			min-width: 132px;
+		}
+	}
+
+	// @media (max-width: $phone) {
+	// 	.MatchHistory-filters {
+	// 		font-size: 0.86em;
+	// 	}
+
+	// 	.Content-Versus {
+	// 		flex-direction: column;
+	// 	}
+	// }
+
+	// @media (max-width: 375px) {
+	// 	.MatchHistory-filters > .Filters-menus {
+	// 		flex-direction: column;
+	// 	}
+	// }
+
+	@media (max-width: 320px) {
+		font-size: 4rem;
 	}
 }

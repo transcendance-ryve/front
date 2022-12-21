@@ -10,16 +10,6 @@
 	const	contentStore = useContentStore()
 	const	profileStore = useProfileStore()
 	contentStore.state = profileStore.type == 1 ? 4 : 5
-
-	// const	userStore = useUserStore()
-
-	// if (profileStore.type == 1)
-	// 	profileStore.setProfile(userStore.user)
-	// let	profile: Object
-	// if (profileStore.type == 1)
-	// 	profile = userStore.user
-	// else
-		// profile = profileStore.profile
 	
 	let profile = profileStore.profile
 
@@ -33,7 +23,7 @@
 			:user="profile"
 		/>
 		<div class="Profile-section">
-			<h2>Statistics</h2>
+			<h2 class="Section-name">Statistics</h2>
 			<div class="StatisticsWrap">
 				<ProfileStat
 					v-for="(stat, name, index) in profile.stats"
@@ -44,7 +34,7 @@
 			</div>
 		</div>
 		<div class="Profile-section">
-			<h2>Match History</h2>
+			<h2 class="Section-name">Match History</h2>
 			<MatchHistory />
 		</div>
 	</div>
