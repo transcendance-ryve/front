@@ -21,9 +21,15 @@
 <template>
 
 	<div class="UserMenu">
-		<button class="User-options" @click="profileRedirect()">Profile</button>
-		<button class="User-options">Settings</button>
-		<button class="User-options" @click="userStore.disconnect()">Disconnect</button>
+		<button class="User-options" @click="profileRedirect()">
+			<span class="Options-value">Profile</span>
+		</button>
+		<button class="User-options">
+			<span class="Options-value">Settings</span>
+		</button>
+		<button class="User-options" @click="userStore.disconnect()">
+			<span class="Options-value">Disconnect</span>
+		</button>
 	</div>
 
 </template>
