@@ -92,19 +92,6 @@
 		width: 450px;
 		font-size: 1px;
 	}
-
-	@media (max-width: 400px) {
-		&:hover {
-			width: 75vw;
-			font-size: 5.5vw;
-		}
-	}
-	@media (max-width: 320px) {
-		left: calc(320px - 50px);
-		&:hover {
-			left: calc(320px - (75vw + 2em + 2px));
-		}
-	}
 }
 
 @keyframes notifWiggle {

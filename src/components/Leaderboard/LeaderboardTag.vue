@@ -24,15 +24,17 @@
 <template>
 
 	<div class="LeaderboardTag">
-		<div class="LeaderboardTag-rank">
-			<span class="Rank-value">#{{ user.rank }}</span>
+		<div class="LeaderboardTag-user">
+			<div class="LeaderboardTag-rank">
+				<span class="Rank-value">#{{ user.rank }}</span>
+			</div>
+			<UserInfos
+				:userName="user.userName"
+				:level="user.level"
+				:levelPerCent="user.levelProgression"
+				@click="profileRedirect(user)"
+			/>
 		</div>
-		<UserInfos
-			:userName="user.userName"
-			:level="user.level"
-			:levelPerCent="user.levelProgression"
-			@click="profileRedirect(user)"
-		/>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat
 				label="Ranked points"

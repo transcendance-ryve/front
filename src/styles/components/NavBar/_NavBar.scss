@@ -1,15 +1,16 @@
 .NavBar-wrapper {
+	font-size: 1px;
 	display: flex;
 	flex-direction: column;
 	// justify-content: center;
 	align-items: center;
-	padding: 24px 64px;
+	padding: 24em 64em;
 	background: #1F1E2C;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4em 6em rgba(0, 0, 0, 0.1);
 
 	.NavBarList-options {
-		height: 52px;
-		padding: 0 200rem;
+		height: 52em;
+		padding: 0 200em;
 
 		.NavBar-options {
 			display: flex;
@@ -19,7 +20,6 @@
 
 	.NavBar {
 		box-sizing: border-box;
-		// padding: 24px 64px;
 		width: 100%;
 		max-width: 1792px;
 		display: flex;
@@ -33,27 +33,27 @@
 		}
 
 		.NavBar-logo svg {
-			width: 84px;
-			height: 66px;
+			width: 84em;
+			height: 66em;
 			fill: white;
 		}
 
 		.NavBar-content {
 			display: flex;
-			gap: 96rem;
+			gap: 96em;
 		}
 
-		.UserInfos{
+		.UserInfos {
 			.User-optionsWrap {
 				position: absolute;
-				right: 64px;
-				top: 76px;
+				right: 64em;
+				top: 76em;
 				z-index: 1;
-				width: 180px;
-				height: 110px;
-				padding: 10px 20px 0px 20px;
+				width: 180em;
+				height: 110em;
+				padding: 10em 20em 0em 20em;
 				justify-content: center;
-				gap: 6px;
+				gap: 6em;
 				display: flex;
 				flex-direction: column;
 				background: no-repeat center/100% url(../assets/message.svg);
@@ -61,7 +61,7 @@
 
 				.User-options {
 					font-family: 'Poppins';
-					font-size: 12rem;
+					font-size: 12em;
 					text-decoration: none;
 					color: #1F1E2C;
 
@@ -86,46 +86,47 @@
 	}
 
 	@media (max-width: $laptopL) {
-		padding: 24px 42px;
+		padding: 24em 42em;
 		.NavBar {
 			.NavBar-logo svg {
-				width: 66px;
-				height: 52px;
+				width: 66em;
+				height: 52em;
 			}
 			.NavBar-content {
-				gap: 112rem;
+				gap: 50em;
 			}
 		}
 	}
 
 	@media (max-width: $tablet) {
-		padding: 24px 32px;
+		padding: 24em 32em;
 			.NavBar {
 			.NavBarList-logo {
 				display: block;
-				width: 30px;
-				margin-right: 150px;
+				width: 30em;
+				margin-right: 150em;
 			}
 			.Content-options {
 				display: none;
 			}
 		}
-
-		// .User-options {
-		// 	left: calc(100vw - (30px + 220px));
-		// }
 	}
+
 	@media (max-width: 580px) {
 			.NavBar {
 			.NavBarList-logo {
-				margin-right: 22px;
+				margin-right: 22em;
 			}
 			.UserInfos {
-				width: 52px;
+				width: 52em;
 				.UserInfos-content {
 					display: none;
 				}
 			}
 		}
+	}
+
+	@media (max-width: 320px) {
+		font-size: 5rem;
 	}
 }

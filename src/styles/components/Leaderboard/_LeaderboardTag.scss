@@ -7,33 +7,78 @@
 	background: #242635;
 	gap: 32em;
 
-
-	.LeaderboardTag-rank {
-		min-width: 56em;
-		height: 56em;
+	.LeaderboardTag-user {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		background: #1F1E2C;
-		border-radius: 8em;
+		gap: 32em;
 
-		.Rank-value {
-			font-family: 'Poppins';
-			font-style: normal;
-			font-weight: 600;
-			font-size: 18em;
-			line-height: 100%;
-			color: white;
+		.LeaderboardTag-rank {
+			min-width: 56em;
+			height: 56em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #1F1E2C;
+			border-radius: 8em;
+
+			.Rank-value {
+				font-family: 'Poppins';
+				font-style: normal;
+				font-weight: 600;
+				font-size: 18em;
+				line-height: 100%;
+				color: white;
+			}
 		}
-	}
 
-	.UserInfos {
-		cursor: pointer;
+		.UserInfos {
+			cursor: pointer;
+		}
 	}
 
 	.LeaderboardTag-StatWrap {
 		width: 100%;
 		display: grid;
 		grid-template: 100% / repeat(4, 1fr);
+	}
+
+	@media (max-width: 1200px) {
+		// .LeaderboardTag-rank, .UserInfos, .LeaderboardTag-StatWrap {
+		// 	font-size: 0.7px;
+		// }
+		// .Level-perCentWrap {
+		// 	max-width: 150em;
+		// }
+	}
+
+	@media (max-width: $laptop) {
+		.LeaderboardTag-rank, .UserInfos, .LeaderboardTag-StatWrap {
+			font-size: 0.86em;
+		}
+		.Level-perCentWrap {
+			max-width: 150em;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		flex-direction: column;
+		min-height: auto;
+		padding: 32em 32em;
+		// .LeaderboardTag-user {
+		// 	align-self: flex-start;
+		// }
+	}
+
+	@media (max-width: $phone) {
+		.LeaderboardTag-StatWrap {
+			grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+			gap: 32em 12em;
+		}
+	}
+
+	@media (max-width: 375px) {
+		.LeaderboardTag-user {
+			flex-direction: column;
+		}
 	}
 }

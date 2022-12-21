@@ -25,16 +25,20 @@
 			font-size: 0.8px;
 		}
 	}
+
+	@media (max-width: $tablet) {
+		.BodyLayout-mainContent {
+			width: calc(100% - 64px);
+		}
+	}
+
+	@media (max-width: 320px) {
+		.BodyLayout-mainContent {
+			width: calc(100% - 260rem);
+		}
+	}
 }
 
 .BodyLayout--NavBarListOpen {
 	height: calc(100vh - (100px + 52px));
 }
-
-// .SiteFooter {
-// 	width: 100%;
-// 	min-height: 100px;
-// 	text-align: center;
-// 	background-color: rgb(26, 32, 44);
-// 	color: white;
-// }

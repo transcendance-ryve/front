@@ -27,7 +27,7 @@
 			@click="updateState(1)"
 		>
 			<span class="Link-logo" v-html="logoPlay"></span>
-			Play
+			<span class="Link-value">Play</span>
 		</RouterLink>
 		<RouterLink
 			to="/leaderboard"
@@ -36,7 +36,7 @@
 			@click="updateState(2)"
 		>
 			<span class="Link-logo" v-html="logoLeaderboard"></span>
-			Leaderboard
+			<span class="Link-value">Leaderboard</span>
 		</RouterLink>
 		<RouterLink
 			to="/spectate"
@@ -45,7 +45,7 @@
 			@click="updateState(3)"
 		>
 			<span class="Link-logo" v-html="logoSpectate"></span>
-			Spectate
+			<span class="Link-value">Spectate</span>
 		</RouterLink>
 	</div>
 

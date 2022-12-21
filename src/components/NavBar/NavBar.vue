@@ -59,7 +59,6 @@
 					:levelPerCent="70"
 					perCentBackground="#242635"
 					:reverse="true"
-					:responsive="false"
 					:sizeXS="userInfoXS"
 				>
 				<div class="User-optionsWrap">

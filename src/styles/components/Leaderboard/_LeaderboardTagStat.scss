@@ -1,10 +1,14 @@
 .LeaderboardTag-Stat {
+
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 8em;
 
 	.Stat-label {
+		// text-align: end;
+		text-align: center;
 		color: #D3D6F2;
 	}
 
@@ -27,4 +31,11 @@
 		border-radius: 6em;
 		color: white;
 	}
+
+	// @media (max-width: 1200px) {
+	// 	// flex-direction: column;
+	// 	// .Stat-label {
+	// 	// 	text-align: center;
+	// 	// }
+	// }
 }

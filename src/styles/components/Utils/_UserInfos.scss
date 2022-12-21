@@ -69,42 +69,6 @@
 	}
 }
 
-.UserInfos--static {
-	gap: 16px;
-
-	.UserInfos-avatar {
-		width: 64px;
-		height: 64px;
-	}
-
-	.UserInfos-content {
-		gap: 8px;
-
-		.Content-name {
-			font-size: 22px;
-		}
-
-		.Content-level {
-			gap: 6px;
-
-			.Level-perCentWrap {
-				width: 200px;
-				height: 6px;
-				border-radius: 8px;
-
-				.Level-perCent {
-					border-radius: 8px;
-					box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
-				}
-			}
-
-			.Level {
-				font-size: 14px;
-			}
-		}
-	}
-}
-
 .UserInfos--XL {
 	width: 320em;
 	height: 96em;
@@ -129,32 +93,32 @@
 }
 
 .UserInfos--XS {
-	width: 180px;
-	height: 52px;
-	gap: 12px;
+	width: 180em;
+	height: 52em;
+	gap: 12em;
 
 	.UserInfos-avatar {
-		width: 52px;
-		height: 52px;
+		width: 52em;
+		height: 52em;
 	}
 
 	.UserInfos-content {
-		gap: 6px;
+		gap: 6em;
 
 		.Content-name {
-			font-size: 18px;
+			font-size: 18em;
 		}
 
 		.Content-level {
-			gap: 6px;
+			gap: 6em;
 
 			.Level-perCentWrap {
-				width: 116px;
-				height: 4px;
+				width: 116em;
+				height: 4em;
 			}
 
 			.Level {
-				font-size: 12px;
+				font-size: 12em;
 			}
 		}
 	}

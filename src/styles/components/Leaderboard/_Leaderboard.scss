@@ -35,4 +35,33 @@
 	.Leaderboard-content--maxSize {
 		height: calc(100% - calc(56em + 32em));
 	}
+
+	@media (max-width: $laptop) {
+		.Leaderboard-filters > .input-wrap {
+			width: 300em;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.Leaderboard-filters {
+			flex-direction: column;
+			gap: 16em;
+		}
+	}
+
+	@media (max-width: $phone) {
+		.Leaderboard-filters {
+			font-size: 0.86em;
+		}
+	}
+
+	@media (max-width: 375px) {
+		.Leaderboard-filters > .Filters-menus {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 320px) {
+		font-size: 4rem;
+	}
 }

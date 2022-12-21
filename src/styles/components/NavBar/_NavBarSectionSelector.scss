@@ -1,28 +1,35 @@
 .NavBarSectionSelector {
+	font-size: 1em;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 52px;
-	gap: 32rem;
+	height: 52em;
+	gap: 32em;
 
 	.Options-link {
 		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0px 8px;
-		gap: 8px;
+		padding: 0em 8em;
+		gap: 8em;
 		color: #787B96;
 		text-decoration: none;
 		position: relative;
-		font-family: 'Poppins';
-		font-weight: 600;
-		font-size: 20px;
+		// font-family: 'Poppins';
+		// font-weight: 600;
+		// font-size: 20px;
+
+		.Link-value {
+			font-family: 'Poppins';
+			font-weight: 600;
+			font-size: 20em;
+		}
 
 		.Link-logo {
 			fill: #787B96;
-			width: 24px;
-			height: 24px;
+			width: 24em;
+			height: 24em;
 			svg {
 				width: 100%;
 				height: 100%;
@@ -33,14 +40,14 @@
 			content: '';
 			position: absolute;
 			width: 100%;
-			height: 3px;
-			bottom: 3px;
+			height: 3em;
+			bottom: 3em;
 			left: 0;
 			transform: scaleX(0);
 			background: #787B96;
 			transform-origin: bottom right;
 			transition: transform 0.5s ease-out;
-			border-radius: 10rem;
+			border-radius: 10em;
 		}
 		&:hover:after {
 			color: rgb(45, 54, 72);
@@ -57,8 +64,8 @@
 			content: '';
 			position: absolute;
 			width: 100%;
-			height: 3px;
-			bottom: 3px;
+			height: 3em;
+			bottom: 3em;
 			left: 0;
 			transform: scaleX(0);
 			background: white;
@@ -66,32 +73,35 @@
 			transition: transform 0.5s ease-out;
 			transform: scaleX(1);
 			transform-origin: bottom left;
-			border-radius: 10rem;
+			border-radius: 10em;
 		}
 	}
 
 	@media (max-width: $laptopL) {
-		height: 46px;
+		height: 46em;
 
 		.Options-link {
-			padding: 0px 8px;
-			gap: 6px;
-			font-size: 16px;
+			padding: 0em 8em;
+			gap: 6em;
+		
+			.Link-value {
+				font-size: 16em;
+			}
 
 			.Link-logo {
-				width: 20px;
-				height: 20px;
+				width: 20em;
+				height: 20em;
 			}
 
 			&:after {
-				height: 2px;
-				bottom: 4px;
+				height: 2em;
+				bottom: 4em;
 			}
 		}
 		.Link--selected {
 			&:after {
-				height: 2px;
-				bottom: 4px;
+				height: 2em;
+				bottom: 4em;
 			}
 		}
 	}
