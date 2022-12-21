@@ -1,24 +1,19 @@
 <script setup lang="ts">
 
 	import { useSideBarStore } from '../../stores/SideBarStore'
-	import { useContentStore } from '../../stores/ContentStore'
 	import SideBarTag from './SideBarTag.vue'
 	import SideBarContent from './SideBarContent.vue'
 	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
-	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
+	import { logoFriends, logoChannels, logoNotifs, logoBubble } from '../../assets/logoSVG'
 
 	const	sbStore = useSideBarStore()
-	const	contentStore = useContentStore()
 
 </script>
 
 <template>
 
-	<section
-		class="BodyLayout-sidebar"
-		:class="{'Sidebar--navBarListOpen': contentStore.navBarListOpen}"
-	>
+	<section class="BodyLayout-sidebar">
 		<div class="SideBar-sectionsBtns">
 			<button
 				class="SectionsBtns"
@@ -52,6 +47,8 @@
 		<SideBarConv v-if="sbStore.conv.open == true" />
 		<SideBarNewChan v-else-if="sbStore.newChan == true" />
 		<SideBarContent v-else />
+
+		<span class="Sidebar-logoBubble" v-html="logoBubble"></span>
 	</section>
 
 </template>

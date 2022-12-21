@@ -62,13 +62,30 @@
 		margin-bottom: 16em;
 	}
 
+	.Sidebar-logoBubble {
+		display: none;
+		width: 30px;
+		height: 30px;
+		opacity: 0.3;
+		animation: bubbleSpawn 350ms linear;
+		// transform: scale(0.3);
+		// transform: translate(10px, 10px);
+
+		svg {
+			width: 100%;
+			height: 100%;
+			fill: #0177FB;
+		}
+	}
+
 	@media (max-width: $laptopL) {
 		font-size: 0;
 		position: absolute;
 		top: calc(100px + 32px);
 		right: 0;
-		width: 20px;
+		width: 30px;
 		height: calc(100vh - 100px - 64px);
+		background: none;
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
 		.SideBar-content-wrap,
@@ -76,14 +93,24 @@
 		.SideBarConv {
 			visibility: hidden;
 		}
+		.Sidebar-logoBubble {
+			position: absolute;
+			left: -4px;
+			// bottom: 50%;
+			display: block;
+		}
 		&:hover {
 			width: 450px;
 			font-size: 1px;
+			background: #242635;
 			.SideBar-sectionsBtns,
 			.SideBar-content-wrap,
 			.SideBar-newChan,
 			.SideBarConv {
 				visibility: visible;
+			}
+			.Sidebar-logoBubble {
+				display: none;
 			}
 		}
 	}
@@ -119,7 +146,49 @@
 	}
 }
 
-.Sidebar--navBarListOpen {
-	top: calc(100px + 52px + 32rem);
-	height: calc(100vh - 100px - 52px - 64rem);
+// @keyframes bubbleSpawn {
+// 	0% {
+// 		transform: scale(0) translate(30px, 30px);
+// 	}
+// 	30% {
+// 		transform: scale(0.4) translate(18px, 18px);
+// 	}
+// 	60% {
+// 		transform: scale(0.8) translate(6px, 6px);
+// 	}
+// 	90% {
+// 		transform: scale(1.2) translate(-6px, -6px);
+// 	}
+// 	100% {
+// 		transform: scale(1) translate(0);
+
+// 	}
+// }
+
+@keyframes bubbleSpawn {
+	0% {
+		transform: scale(0);
+		left: 15px;
+		top: 20px;
+	}
+	30% {
+		transform: scale(0.4);
+		left: 4px;
+		top: 12px;
+	}
+	60% {
+		transform: scale(0.8);
+		left: 0px;
+		top: 6px;
+	}
+	90% {
+		transform: scale(1.2);
+		left: -6px;
+		top: -2px;
+	}
+	100% {
+		transform: scale(1);
+		left: -4px;
+		top: 0px;
+	}
 }
