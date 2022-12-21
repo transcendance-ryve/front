@@ -65,10 +65,10 @@
 	@media (max-width: $laptopL) {
 		font-size: 0;
 		position: absolute;
-		top: calc(100px + 32rem);
+		top: calc(100px + 32px);
 		right: 0;
 		width: 20px;
-		height: calc(100vh - 100px - 64rem);
+		height: calc(100vh - 100px - 64px);
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
 		.SideBar-content-wrap,
