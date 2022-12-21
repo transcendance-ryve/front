@@ -24,8 +24,9 @@
 		:class="{'BodyLayout--NavBarListOpen': contentStore.navBarListOpen}"
 	>
 		<section class="BodyLayout-mainContent">
-			<Profile v-if="contentStore.state == 5" />
-			<RouterView v-else />
+			<!-- <Profile v-if="contentStore.state == 5" /> -->
+			<!-- <RouterView v-else /> -->
+			<RouterView/>
 		</section>
 		<SideBar />
 	</main>

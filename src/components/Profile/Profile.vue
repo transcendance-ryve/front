@@ -9,7 +9,7 @@
 
 	const	contentStore = useContentStore()
 	const	profileStore = useProfileStore()
-	contentStore.state = profileStore.type == 1 ? 4 : 5
+	contentStore.state = 4
 	
 	let profile = profileStore.profile
 

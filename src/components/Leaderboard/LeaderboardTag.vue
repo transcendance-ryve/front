@@ -14,9 +14,12 @@
 	const	profileStore = useProfileStore()
 	const	contentStore = useContentStore()
 
+	import router from '../../router/index'
 	const	profileRedirect = (user: object) => {
 		profileStore.setProfile(user, 2)
-		contentStore.state = 5
+		const	path :string = '/profile/' + user.userName
+		router.push({path:path})
+		contentStore.state = 4
 	}
 
 </script>

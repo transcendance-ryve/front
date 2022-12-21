@@ -16,9 +16,11 @@
 	const	profileRedirect = () => {
 		profileStore.setProfile(userStore.user, 1)
 		contentStore.state = 4
+		const	profilePath = '/profile/' + userStore.user.userName
+		router.push({path:profilePath})
 	}
 
-	const	profilePath = '/profile/' + userStore.user.userName
+	// const	profilePath = '/profile/' + userStore.user.userName
 
 	let		userInfoXS = ref(false)
 
@@ -62,13 +64,14 @@
 					:sizeXS="userInfoXS"
 				>
 				<div class="User-optionsWrap">
-					<RouterLink
+					<!-- <RouterLink
 					class="User-options"
 						:to="profilePath"
 						@click="profileRedirect()"
 					>
 						Profile
-					</RouterLink>
+					</RouterLink> -->
+					<button class="User-options" @click="profileRedirect()">Profile</button>
 					<button class="User-options">Settings</button>
 					<button class="User-options" @click="$emit('disconnect')">Disconnect</button>
 				</div>
