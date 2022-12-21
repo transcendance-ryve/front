@@ -35,8 +35,16 @@
 	<div class="NavBar-wrapper">
 		<div class="NavBar">
 			<img
+				v-if="!contentStore.navBarListOpen"
 				class="NavBarList-logo"
-				src="../../assets/list.svg"
+				src="../../assets/logoList.svg"
+				alt="list"
+				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
+			>
+			<img
+				v-else
+				class="NavBarList-logo"
+				src="../../assets/logoCross.svg"
 				alt="list"
 				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
 			>
