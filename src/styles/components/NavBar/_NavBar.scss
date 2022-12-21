@@ -2,21 +2,11 @@
 	font-size: 1px;
 	display: flex;
 	flex-direction: column;
-	// justify-content: center;
 	align-items: center;
 	padding: 24em 64em;
 	background: #1F1E2C;
-	box-shadow: 0 4em 6em rgba(0, 0, 0, 0.1);
-
-	.NavBarList-options {
-		height: 52em;
-		padding: 0 200em;
-
-		.NavBar-options {
-			display: flex;
-		}
-	}
-
+	box-shadow: 0 4em 6em rgba(0, 0, 0, 0.2);
+	position: relative;
 
 	.NavBar {
 		box-sizing: border-box;
@@ -47,6 +37,28 @@
 				.UserMenu {
 					visibility: visible;
 				}
+			}
+		}
+	}
+
+	.NavBarList-options {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		z-index: 2;
+		top: 100%;
+		width: 100%;
+		padding: 0 0 20em 0;
+		background: #1F1E2C;
+		box-shadow: 0 6em 6em rgba(0, 0, 0, 0.3);
+
+		.NavBarSectionSelector {
+			display: flex;
+			flex-direction: column;
+			height: auto;
+
+			.Options-link {
+				height: 42em;
 			}
 		}
 	}
