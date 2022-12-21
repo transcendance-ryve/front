@@ -44,41 +44,8 @@
 		}
 
 		.UserInfos {
-			.User-optionsWrap {
-				position: absolute;
-				right: 64em;
-				top: 76em;
-				z-index: 1;
-				width: 180em;
-				height: 110em;
-				padding: 10em 20em 0em 20em;
-				justify-content: center;
-				gap: 6em;
-				display: flex;
-				flex-direction: column;
-				background: no-repeat center/100% url(../assets/message.svg);
-				visibility: hidden;
-
-				.User-options {
-					font-family: 'Poppins';
-					font-size: 12em;
-					text-decoration: none;
-					color: #1F1E2C;
-
-					border: none;
-					text-align: left;
-					background-color: white;
-					font-weight: bold;
-					&:hover {
-						transition: 300ms;
-						-ms-transform: scale(1.1); /* IE 9 */
-						-webkit-transform: scale(1.1); /* Safari 3-8 */
-						transform: scale(1.025);
-					}
-				}
-			}
 			&:hover {
-				.User-optionsWrap {
+				.UserMenu {
 					visibility: visible;
 				}
 			}

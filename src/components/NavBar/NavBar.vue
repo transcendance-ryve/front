@@ -2,25 +2,13 @@
 
 	import { ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
-	import { useUserStore } from '../../stores/UserStore'
-	import { useProfileStore } from '../../stores/ProfileStore'
-	import router from '../../router/index'
+	import router from '../../router/index' //
 	import { logoRyve } from '../../assets/logoSVG'
 	import NavBarSectionSelector from './NavBarSectionSelector.vue'
 	import UserInfos from '../Utils/UserInfos.vue'
+	import UserMenu from './UserMenu.vue'
 
 	const	contentStore = useContentStore()
-	const	userStore = useUserStore()
-	const	profileStore = useProfileStore()
-
-	const	profileRedirect = () => {
-		profileStore.setProfile(userStore.user, 1)
-		contentStore.state = 4
-		const	profilePath = '/profile/' + userStore.user.userName
-		router.push({path:profilePath})
-	}
-
-	// const	profilePath = '/profile/' + userStore.user.userName
 
 	let		userInfoXS = ref(false)
 
@@ -63,18 +51,7 @@
 					:reverse="true"
 					:sizeXS="userInfoXS"
 				>
-				<div class="User-optionsWrap">
-					<!-- <RouterLink
-					class="User-options"
-						:to="profilePath"
-						@click="profileRedirect()"
-					>
-						Profile
-					</RouterLink> -->
-					<button class="User-options" @click="profileRedirect()">Profile</button>
-					<button class="User-options">Settings</button>
-					<button class="User-options" @click="$emit('disconnect')">Disconnect</button>
-				</div>
+				<UserMenu />
 				</UserInfos>
 			</div>
 		</div>

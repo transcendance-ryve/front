@@ -18,7 +18,8 @@
 
 <template>
 
-	<NavBar @disconnect="userStore.disconnect()"/>
+	<!-- <NavBar @disconnect="userStore.disconnect()"/> -->
+	<NavBar />
 	<main
 		class="BodyLayout"
 		:class="{'BodyLayout--NavBarListOpen': contentStore.navBarListOpen}"
