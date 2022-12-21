@@ -2,7 +2,6 @@
 	font-size: 1em;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 	height: 52em;
 	gap: 32em;
 
@@ -16,9 +15,6 @@
 		color: #787B96;
 		text-decoration: none;
 		position: relative;
-		// font-family: 'Poppins';
-		// font-weight: 600;
-		// font-size: 20px;
 
 		.Link-value {
 			font-family: 'Poppins';
@@ -79,6 +75,7 @@
 
 	@media (max-width: $laptopL) {
 		height: 46em;
+		gap: 16em;
 
 		.Options-link {
 			padding: 0em 8em;
