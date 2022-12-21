@@ -3,7 +3,7 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 24em 40em;
-	background: #242635;
+	background: $background-600;
 	border-radius: 16em;
 
 	.ProfileTag-btnsWrap {
@@ -40,24 +40,24 @@
 		}
 
 		.Btn-2FA {
-			background: #FF4646;
+			background: $red;
 			box-shadow: 0 0 5em #E32F2F;
 		}
 
 		.Btn-settings, .Btn-type1 {
-			background: #1F1E2C;
+			background: $background-700;
 			box-shadow: 0 4em 4em rgba(0, 0, 0, 0.1);
 		}
 
 		.Btn-type1 {
-			color: #3092FF;
+			color: $cheat-blue;
 			.Btn-logo > svg {
-				fill: #3092FF;
+				fill: $cheat-blue;
 			}
 		}
 
 		.Btn-type2 {
-			background: #0177FB;
+			background: $dark-blue;
 			box-shadow: 0px 4em 4em rgba(0, 0, 0, 0.1);
 		}
 	}

@@ -12,7 +12,7 @@
 		padding: 0 20em;
 		border: none;
 		border-radius: 6em;
-		background: #242635;
+		background: $background-600;
 
 		.Btn-value {
 			font-family: 'Poppins';
@@ -26,6 +26,6 @@
 	}
 
 	.Pages--selected {
-		background: #0177FB;
+		background: $dark-blue;
 	}
 }

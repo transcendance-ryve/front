@@ -11,10 +11,10 @@
 		justify-content: center;
 		align-items: center;
 		padding: 20em 18em;
-		background: #1F1E2C;
+		background: $background-700;
 		border: none;
 		border-radius: 6em;
-		color: #3092FF;
+		color: $cheat-blue;
 
 		.NewChanBtn-value {
 			font-family: 'Poppins';
@@ -23,7 +23,7 @@
 			line-height: 100%;
 		}
 		&:hover {
-			background: #0177FB;
+			background: $dark-blue;
 			color: white;
 			transition: 150ms ease-in-out;
 		}

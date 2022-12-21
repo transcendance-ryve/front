@@ -4,7 +4,7 @@
 	border-radius: 16em;
 	min-height: 130em;
 	padding: 0 32em;
-	background: #242635;
+	background: $background-600;
 	gap: 32em;
 
 	.LeaderboardTag-user {
@@ -18,7 +18,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			background: #1F1E2C;
+			background: $background-700;
 			border-radius: 8em;
 
 			.Rank-value {

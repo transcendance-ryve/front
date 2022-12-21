@@ -4,7 +4,7 @@
 	flex-direction: column;
 	align-items: center;
 	padding: 24em 64em;
-	background: #1F1E2C;
+	background: $background-700;
 	box-shadow: 0 4em 6em rgba(0, 0, 0, 0.2);
 	position: relative;
 
@@ -48,7 +48,7 @@
 		top: 100%;
 		width: 100%;
 		padding: 0 0 20em 0;
-		background: #1F1E2C;
+		background: $background-700;
 		box-shadow: 0 6em 6em rgba(0, 0, 0, 0.3);
 
 		.NavBarSectionSelector {

@@ -12,7 +12,7 @@
 		align-items: center;
 		padding: 0em 8em;
 		gap: 8em;
-		color: #787B96;
+		color: $white-200;
 		text-decoration: none;
 		position: relative;
 
@@ -23,7 +23,7 @@
 		}
 
 		.Link-logo {
-			fill: #787B96;
+			fill: $white-200;
 			width: 24em;
 			height: 24em;
 			svg {
@@ -40,7 +40,7 @@
 			bottom: 3em;
 			left: 0;
 			transform: scaleX(0);
-			background: #787B96;
+			background: $white-200;
 			transform-origin: bottom right;
 			transition: transform 0.5s ease-out;
 			border-radius: 10em;

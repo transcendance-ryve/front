@@ -3,7 +3,7 @@
 	align-items: center;
 	padding: 16em;
 	width: 100%;
-	background: #1F1E2C;
+	background: $background-700;
 	box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
 	border-radius: 6em;
 
@@ -68,7 +68,7 @@
 				justify-content: center;
 				width: 48em;
 				height: 48em;
-				background: #242635;
+				background: $background-600;
 				border-radius: 6em;
 				border: none;
 
@@ -83,7 +83,7 @@
 				}
 
 				&:hover {
-					background: #0177FB;
+					background: $dark-blue;
 					transition: background 150ms ease-in-out;
 				}
 			}

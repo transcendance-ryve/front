@@ -5,7 +5,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: #242635;
+	background: $background-600;
 	box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
 
 	.SideBar-sectionsBtns {
@@ -19,7 +19,7 @@
 			justify-content: center;
 			gap: 8em;
 			border-radius: 0;
-			background: #1F1E2C;
+			background: $background-700;
 			border: none;
 			&:first-child {
 				border-radius: 16em 0 0 0;
@@ -32,7 +32,7 @@
 				font-size: 18em;
 				font-weight: 600;
 				line-height: 100%;
-				color: #787B96;
+				color: $white-200;
 			}
 			.SectionsBtns-Logo {
 				width: 24em;
@@ -40,7 +40,7 @@
 				svg {
 					width: 100%;
 					height: 100%;
-					fill: #787B96;
+					fill: $white-200;
 				}
 			}
 			.Notif-active {
@@ -48,7 +48,7 @@
 			}
 		}
 		.SectionBtns--selected {
-			background: #242635;
+			background: $background-600;
 			.SectionsBtns-value {
 				color: white;
 			}
@@ -74,7 +74,7 @@
 		svg {
 			width: 100%;
 			height: 100%;
-			fill: #0177FB;
+			fill: $dark-blue;
 		}
 	}
 
@@ -102,7 +102,7 @@
 		&:hover {
 			width: 450px;
 			font-size: 1px;
-			background: #242635;
+			background: $background-600;
 			.SideBar-sectionsBtns,
 			.SideBar-content-wrap,
 			.SideBar-newChan,

@@ -26,7 +26,7 @@
 
 
 .Btn1--type1 {
-	background: #0177FB;
+	background: $dark-blue;
 	.Btn1-value {
 		color: white;
 	}
@@ -36,21 +36,21 @@
 }
 
 .Btn1--type2 {
-	background: #272938;
+	background: $background-500;
 	.Btn1-value {
-		color: #3092FF;
+		color: $cheat-blue;
 	}
 	.Logo--fill svg {
-		fill: #3092FF;
+		fill: $cheat-blue;
 	}
 }
 
 .Btn1--type3 {
-	background: #1F1E2C;
+	background: $background-700;
 	.Btn1-value {
-		color: #3092FF;
+		color: $cheat-blue;
 	}
 	.Logo--fill svg {
-		fill: #3092FF;
+		fill: $cheat-blue;
 	}
 }

@@ -6,7 +6,7 @@
 	height: 100em;
 	padding: 0 24em;
 	gap: 10em;
-	background: #242635;
+	background: $background-600;
 	border-radius: 16em;
 
 	.ProfileStat-label, .ProfileStat-value {
@@ -19,7 +19,7 @@
 
 	.ProfileStat-label {
 		font-size: 18em;
-		color: #787B96;
+		color: $white-200;
 	}
 
 	.ProfileStat-value {

@@ -1,5 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+$background-700: #1F1E2C;
+$background-600: #242635;
+$background-500: #272938;
+
+$white: #D3D6F2;
+$white-200: #787B96;
+
+$dark-blue: #0177FB;
+$cheat-blue: #3092FF;
+
+$green: #24F182;
+$orange: #FF8A00;
+$red: #FF4646;
+
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -7,7 +22,6 @@
 }
 
 html, body, #app {
-	display: block;
 	font-size: 0.0520833333vw;	// 1px in 1920px resolution
 }
 

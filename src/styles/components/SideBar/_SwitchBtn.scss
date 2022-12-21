@@ -2,8 +2,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background: #1F1E2C;
-	color: #787B96;
+	background: $background-700;
+	color: $white-200;
 	border: none;
 	gap: 8em;
 	width: 100%;
@@ -27,13 +27,13 @@
 		svg {
 			width: 100%;
 			height: 100%;
-			fill: #787B96;
+			fill: $white-200;
 		}
 	}
 }
 
 .Switch-btn--selected {
-	background: #0177FB;
+	background: $dark-blue;
 	.Swicth-btn-value {
 		color: white;
 	}

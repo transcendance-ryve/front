@@ -3,7 +3,7 @@
 	text-align: center;
 	border-radius: 6em;
 	list-style-type: none;
-	background-color: #242635;
+	background: $background-600;
 	font-family: 'Poppins';
 	font-weight: 600;
 	line-height: 100%;
@@ -46,7 +46,7 @@
 			}
 		}
 		.Menu-valSelected {
-			color: #3092FF;
+			color: $cheat-blue;
 		}
 	}
 
@@ -58,7 +58,7 @@
 		overflow: hidden;
 		max-height: 0;
 		
-		background-color: #242635;
+		background: $background-600;
 	
 		li {
 			display: flex;
@@ -96,14 +96,14 @@
 @keyframes dropDown {
 	0% {
 		box-shadow: 0px 3px 3px 1px rgba(0,0,0,0);
-		border-top: 3px solid #1F1E2C;
+		border-top: 3px solid $background-700;
 	}
 	30% {
 		box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
 	}
 	100% {
 		max-height: 800em;
-		border-top: 3px solid #1F1E2C;
+		border-top: 3px solid $background-700;
 		box-shadow: 0px 3px 3px 1px rgba(0,0,0,0.3);
 	}
 }

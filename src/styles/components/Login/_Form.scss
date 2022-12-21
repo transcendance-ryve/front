@@ -3,7 +3,7 @@
 	flex-direction: column;
 	width: 500em;
 	border: none;
-	background: #242635;
+	background: $background-600;
 	box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
 	border-radius: 8em;
 	padding: 32em;
@@ -25,7 +25,7 @@
 		height: 64em;
 		border: none;
 		border-radius: 8em;
-		background: #1F1E2C;
+		background: $background-700;
 
 		.Form-42btn-logo {
 			width: 32em;
@@ -38,7 +38,7 @@
 		}
 
 		&:hover {
-			background: #0177FB;
+			background: $dark-blue;
 			transition: 150ms ease-in-out;
 		}
 	}
@@ -63,7 +63,7 @@
 			font-weight: 600;
 			font-size: 16em;
 			line-height: 24px;
-			color: #787B96;
+			color: $white-200;
 			&:hover {
 				text-decoration: underline;
 				color: white;
@@ -93,7 +93,7 @@
 				text-align: left;
 				bottom: 0.5em;
 				font-weight: 100;
-				color: #FF4646;
+				color: $red;
 				font-size: 14em;
 				text-decoration: none;
 			}
@@ -103,7 +103,7 @@
 			margin-top: 32em;
 			height: 48em;
 			border: none;
-			background: #0177FB;
+			background: $dark-blue;
 			border-radius: 8em;
 			opacity: 0.9;
 			&:hover {

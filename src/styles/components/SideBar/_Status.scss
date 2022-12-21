@@ -15,33 +15,33 @@
 
 .Status--Online {
 	width: 59em;
-	color: #24F182;
-	border: 2px solid #24F182;
+	color: $green;
+	border: 2px solid $green;
 }
 .Status--Public {
 	width: 57em;
-	color: #24F182;
-	border: 2px solid #24F182;
+	color: $green;
+	border: 2px solid $green;
 }
 .Status--Offline {
 	width: 59em;
-	color: #787B96;
-	border: 2px solid #787B96;
+	color: $white-200;
+	border: 2px solid $white-200;
 }
 .Status--Protected {
 	width: 79em;
-	color: #FF8A00;
-	border: 2px solid #FF8A00;
+	color: $orange;
+	border: 2px solid $orange;
 }
 .Status--inGame {
 	width: 71em;
-	color: #FF8A00;
-	border: 2px solid #FF8A00;
+	color: $orange;
+	border: 2px solid $orange;
 }
 .Status--Private {
 	width: 63em;
-	color: #FF4646;
-	border: 2px solid #FF4646;
+	color: $red;
+	border: 2px solid $red;
 }
 
 .Status--users {
@@ -49,7 +49,7 @@
 	align-items: center;
 	padding: 8em 10em;
 	border-radius: 6em;
-	background: #242635;
+	background: $background-600;
 	color: white;
 
 	.Status-value {
