@@ -24,15 +24,17 @@ $red: #FF4646;
 
 html, body, #app {
 	font-size: 0.0520833333vw;	// 1px in 1920px resolution
+	width: 100%;
+	height: 100%;
+	background: $background-800;
 }
 
 #app {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	font-family: 'Poppins';
-	background: $background-800;
 }
 
 span {

@@ -85,7 +85,8 @@
 		top: calc(100px + 32px);
 		right: 0;
 		width: 30px;
-		height: calc(100vh - 100px - 64px);
+		height: calc(100% - 100px - 64px);
+		min-height: calc(540px - 64px);
 		background: none;
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
 		.SideBar-sectionsBtns,
@@ -104,6 +105,8 @@
 			width: 450px;
 			font-size: 1px;
 			background: $background-600;
+			transition: width 200ms ease;
+			overflow: hidden;
 			.SideBar-sectionsBtns,
 			.SideBar-content-wrap,
 			.SideBar-newChan,
@@ -112,6 +115,12 @@
 			}
 			.Sidebar-logoBubble {
 				display: none;
+			}
+		}
+		@media (max-height: 740px) {
+			&:hover {
+				width: 380px;
+				font-size: 0.83333px;
 			}
 		}
 	}
