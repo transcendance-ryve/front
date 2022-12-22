@@ -56,12 +56,12 @@
 	}
 
 	@media (max-width: 375px) {
-		.Leaderboard-filters > .Filters-menus {
-			flex-direction: column;
+		.Leaderboard-filters {
+			font-size: 0.75em;
 		}
 	}
 
 	@media (max-width: 320px) {
-		font-size: 4rem;
+		font-size: 4.8rem;
 	}
 }

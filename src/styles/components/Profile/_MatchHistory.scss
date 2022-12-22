@@ -55,8 +55,8 @@
 	}
 
 	@media (max-width: 375px) {
-		.MatchHistory-filters > .Filters-menus {
-			flex-direction: column;
+		.MatchHistory-filters {
+			font-size: 0.75em;
 		}
 	}
 
