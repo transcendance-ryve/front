@@ -42,7 +42,13 @@
 
 	@media (max-width: $tablet) {
 		.Profile-section > .StatisticsWrap > .ProfileStat {
-			min-width: 132px;
+			min-width: 30%;
+		}
+	}
+
+	@media (max-width: $phone) {
+		.Profile-section > .StatisticsWrap > .ProfileStat {
+			min-width: 100%;
 		}
 	}
 
