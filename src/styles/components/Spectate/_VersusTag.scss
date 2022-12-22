@@ -11,6 +11,7 @@
 	.VersusTag-score {
 		display: flex;
 		flex-direction: row-reverse;
+		width: 100%;
 
 		.Score-logo {
 			width: 34.3em;
@@ -35,20 +36,23 @@
 
 	@media (max-width: $tablet) {
 		flex-direction: column;
-		min-height: auto;
-		padding: 32em 24em;
+		// min-height: auto;
+		padding: 24em 12em 24em 32em;
+		align-items: flex-start;
+		justify-content: center;
 	}
 
-	@media (max-width: 375px) {
-		.LeaderboardTag-user {
-			flex-direction: column;
+	@media (max-width: $phone) {
+		padding: 24em 32em;
+		.VersusTag-score {
+			justify-content: center;
 		}
 	}
 }
 
 .VersusTag--reverse {
 	flex-direction: row-reverse;
-	border-radius: 0 16em 16em 0;
+	border-radius: 0 6em 6em 0;
 
 	.VersusTag-score {
 		flex-direction: row;
@@ -60,10 +64,13 @@
 
 	@media (max-width: $tablet) {
 		flex-direction: column;
-		padding: 32em 24em;
+		// padding: 32em 24em;
+		padding: 24em 32em 24em 12em;
+		align-items: flex-end;
 	}
 
 	@media (max-width: $phone) {
+		padding: 24em 32em;
 		flex-direction: column-reverse;
 	}
 }
