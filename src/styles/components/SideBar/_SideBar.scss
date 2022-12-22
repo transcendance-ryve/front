@@ -71,8 +71,6 @@
 		height: 30px;
 		opacity: 0.3;
 		animation: bubbleSpawn 350ms linear;
-		// transform: scale(0.3);
-		// transform: translate(10px, 10px);
 
 		svg {
 			width: 100%;
@@ -148,25 +146,6 @@
 		transform: rotateZ(0);
 	}
 }
-
-// @keyframes bubbleSpawn {
-// 	0% {
-// 		transform: scale(0) translate(30px, 30px);
-// 	}
-// 	30% {
-// 		transform: scale(0.4) translate(18px, 18px);
-// 	}
-// 	60% {
-// 		transform: scale(0.8) translate(6px, 6px);
-// 	}
-// 	90% {
-// 		transform: scale(1.2) translate(-6px, -6px);
-// 	}
-// 	100% {
-// 		transform: scale(1) translate(0);
-
-// 	}
-// }
 
 @keyframes bubbleSpawn {
 	0% {
