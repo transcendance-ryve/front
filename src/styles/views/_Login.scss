@@ -36,5 +36,17 @@
 	@media (min-width: 1920px) {
 		font-size: 1px;
 	}
+
+	@media (max-width: $laptopL) {
+		font-size: 0.75px;
+	}
+
+	@media (max-width: $tablet) {
+		font-size: 0.7px;
+	}
+
+	@media (max-width: $phone) {
+		font-size: 2.5rem;
+	}
 }
 
