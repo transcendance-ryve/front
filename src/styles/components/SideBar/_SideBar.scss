@@ -46,7 +46,7 @@
 			.Notif-active {
 				animation: notifWiggle 5s linear infinite;
 				svg {
-					fill: $red;
+					fill: $dark-blue;
 				}
 			}
 		}
@@ -98,7 +98,6 @@
 		.Sidebar-logoBubble {
 			position: absolute;
 			left: -4px;
-			// bottom: 50%;
 			display: block;
 		}
 		&:hover {
