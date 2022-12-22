@@ -3,6 +3,7 @@
 	import { toRefs, computed } from 'vue'
 	import BaseInput from './BaseInput.vue'
 	import LeaderboardTag from '../Leaderboard/LeaderboardTag.vue'
+	import { logoFirstPage, logoLastPage } from '../../assets/logoSVG'
 
 	const props = defineProps<{
 		page: number,
@@ -29,7 +30,13 @@
 <template>
 
 	<div class="PagesSelector" v-if="pagesSize > 1">
-		<button v-if="page > 2 && pagesSize > 3" @click="$emit('update', 1)">&lt&lt</button>
+		<button
+			v-if="page > 2 && pagesSize > 3"
+			class="PagesSelector-Btn"
+			@click="$emit('update', 1)"
+		>
+			<span class="Btn-logo" v-html="logoFirstPage"></span>
+		</button>
 		<button
 			v-for="n in pagesBtn"
 			:key=n
@@ -39,7 +46,13 @@
 		>
 			<span class="Btn-value">{{ n }}</span>
 		</button>
-		<button v-if="page < pagesSize -1 && pagesSize > 3" @click="$emit('update', pagesSize)">>></button>
+		<button
+			v-if="page < pagesSize -1 && pagesSize > 3"
+			class="PagesSelector-Btn"
+			@click="$emit('update', pagesSize)"
+		>
+			<span class="Btn-logo" v-html="logoLastPage"></span>
+		</button>
 	</div>
 
 </template>
