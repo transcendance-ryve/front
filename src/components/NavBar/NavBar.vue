@@ -59,7 +59,7 @@
 					:reverse="true"
 					:sizeXS="userInfoXS"
 				>
-				<UserMenu />
+					<UserMenu />
 				</UserInfos>
 			</div>
 		</div>

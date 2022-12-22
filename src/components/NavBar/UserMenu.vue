@@ -2,7 +2,7 @@
 
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
-	import { useProfileStore } from '../../stores/ProfileStore'
+	import { useProfileStore } from '../../stores/ProfileStore'	// a suppr
 	import router from '../../router/index'
 
 	const	contentStore = useContentStore()
@@ -20,16 +20,18 @@
 
 <template>
 
-	<div class="UserMenu">
-		<button class="User-options" @click="profileRedirect()">
-			<span class="Options-value">Profile</span>
-		</button>
-		<button class="User-options">
-			<span class="Options-value">Settings</span>
-		</button>
-		<button class="User-options" @click="userStore.disconnect()">
-			<span class="Options-value">Disconnect</span>
-		</button>
+	<div class="UserMenu-wrap">
+		<div class="UserMenu">
+			<button class="User-options" @click="profileRedirect()">
+				<span class="Options-value">Profile</span>
+			</button>
+			<button class="User-options">
+				<span class="Options-value">Settings</span>
+			</button>
+			<button class="User-options" @click="userStore.disconnect()">
+				<span class="Options-value">Disconnect</span>
+			</button>
+		</div>
 	</div>
 
 </template>

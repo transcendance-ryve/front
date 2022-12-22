@@ -32,8 +32,9 @@
 		}
 
 		.UserInfos {
+			position: relative;
 			&:hover {
-				.UserMenu {
+				.UserMenu-wrap {
 					visibility: visible;
 				}
 			}

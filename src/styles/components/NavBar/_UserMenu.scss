@@ -1,48 +1,41 @@
-.UserMenu {
+.UserMenu-wrap {
 	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	justify-content: center;
+	padding-top: 14em;
 	position: absolute;
-	right: 64em;
-	top: 88em;
+	right: 0;
+	top: 100%;
 	z-index: 3;
-	width: 120em;
-	height: 94em;
-	padding: 16em 20em;
-	border-radius: 6em;
-	gap: 16em;
-	background: $background-600;
 	visibility: hidden;
-	box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
 
-	.User-options {
-		border: none;
-		text-align: left;
-		background: none;
-		font-weight: bold;
+	.UserMenu {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		background: $background-600;
+		padding: 20em 24em;
+		border-radius: 6em;
+		gap: 16em;
+		box-shadow: 4em 4em 6em rgba(0, 0, 0, 0.3);
 
-		.Options-value {
-			color: white;
-			font-family: 'Poppins';
-			font-size: 12em;
-			line-height: 100%;
-		}
+		.User-options {
+			border: none;
+			text-align: left;
+			background: none;
+			font-weight: bold;
 
-		&:hover {
 			.Options-value {
-				transition: 150ms;
-				color: $dark-blue;
+				color: white;
+				font-family: 'Poppins';
+				font-size: 12em;
+				line-height: 100%;
+			}
+
+			&:hover {
+				.Options-value {
+					transition: 150ms;
+					color: $dark-blue;
+				}
 			}
 		}
-	}
-
-	@media (max-width: $laptopL) {
-		right: 42em;
-		top: 76em;
-	}
-
-	@media (max-width: $tablet) {
-		right: 32em;
 	}
 }
