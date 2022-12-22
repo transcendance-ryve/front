@@ -9,13 +9,13 @@
 	const	data1 = reactive([
 		{
 			name: 'Karim',
-			lastMsg: 'Wsh le couz',
+			lastMsg: 'riwoj dsoj aifs ewiha efv d yaveogahf sjdhfb',
 			time: 1,
 			status: 'In Game'
 		},
 		{
 			name: 'Kylian',
-			lastMsg: 'Dispo pour une game dans 5mi...',
+			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 2,
 			status: 'Online'
 		},
@@ -45,7 +45,7 @@
 		},
 		{
 			name: 'Benjamin',
-			lastMsg: 'Dispo pour une game dans 5mi...',
+			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 7,
 			status: 'Offline'
 		},
@@ -158,7 +158,7 @@
 	const	data3 = reactive([
 		{
 			name: 'RYVE',
-			lastMsg: 'Hedi: J\'ai fini Irc les freres',
+			lastMsg: 'Hedi: hdo pa fiaue ub pad fsiubfebusd wiuh',
 			time: 1,
 			status: 'Private',
 			users: 4

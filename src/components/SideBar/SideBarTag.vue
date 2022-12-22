@@ -66,9 +66,9 @@
 					</div>
 					<Status :users="users"/>
 				</div>
-				<span v-if="lastMsg" class="LastMsg">
-					{{lastMsg}}
-				</span>
+				<div v-if="lastMsg" class="LastMsgWrap">
+					<span class="LastMsg">{{lastMsg}}</span>
+				</div>
 			</div>
 		</div>
 

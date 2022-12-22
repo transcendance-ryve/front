@@ -22,13 +22,13 @@
 		.Content-infosWrap {
 			display: flex;
 			flex-direction: column;
-			gap: 8em;
+			gap: 6em;
+			width: 306em;
 
 			.Content-infos {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				width: 306em;
 
 				.Infos-nameWrap {
 					display: flex;
@@ -44,12 +44,21 @@
 				}
 			}
 
-			.LastMsg {
-				font-style: normal;
-				font-weight: 500;
-				font-size: 14em;
-				line-height: 100%;
-				color: rgba(255, 255, 255, 0.5);
+			.LastMsgWrap {
+				display: flex;
+				width: 240em;
+
+				.LastMsg {
+					font-style: normal;
+					font-weight: 500;
+					font-size: 14em;
+					line-height: 100%;
+					padding-bottom: 1px;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					color: rgba(255, 255, 255, 0.5);
+				}
 			}
 		}
 	}
