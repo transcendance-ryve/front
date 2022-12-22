@@ -15,30 +15,26 @@
 		},
 		logoSize: {
 			type: String,
-			default: '24rem',
-		},
-		inputWidth: {
-			type: String,
-			default: '100%',
+			default: '24em',
 		},
 		inputHeight: {
 			type: String,
-			default: '48rem',
+			default: '48em',
 		},
 		inputPadding: {
 			type: String,
-			default: '12rem',
+			default: '12em',
 		},
 		inputGap: {
 			type: String,
-			default: '8rem',
+			default: '8em',
 		},
 		borderRadius: {
-			default: '6rem'
+			default: '6em'
 		},
 		inputFont: {
 			type: String,
-			default: '500 18rem \'Poppins\'',
+			default: '500 18em \'Poppins\'',
 		}
 	})
 
@@ -64,7 +60,6 @@
 <style lang="scss" scoped>
 
 	.input-wrap {
-			width: v-bind(inputWidth);
 			min-height: v-bind(inputHeight);
 			padding: 0 v-bind(inputPadding) 0
 				calc(v-bind(inputPadding) + v-bind(logoSize) + v-bind(inputGap));

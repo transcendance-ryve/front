@@ -114,9 +114,6 @@
 				:logo="logoLock"
 				logoSize="16em"
 				inputHeight="40em"
-				inputPadding="12em"
-				inputGap="8em"
-				borderRadius="6em"
 				inputFont="500 14em 'Poppins'"
 			/>
 

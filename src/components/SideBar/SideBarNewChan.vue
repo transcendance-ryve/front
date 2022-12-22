@@ -55,9 +55,6 @@
 					:logo="logoProfile"
 					logoSize="18em"
 					inputHeight="42em"
-					inputPadding="12em"
-					inputGap="8em"
-					borderRadius="6em"
 					inputFont="500 14em 'Poppins'"
 				/>
 				<div class="Content-statusBtns">

@@ -39,18 +39,12 @@
 <template>
 
 	<BaseInput
-		
 		v-model="input"
 		placeholder="Search"
 		:logo="logoSearch"
-		logoSize="24em"
-		inputWidth="100%"
 		:inputHeight="inputHeight"
 		:inputBackground="inputBackground"
-		inputPadding="12em"
-		inputGap="8em"
 		borderRadius="6em"
-		inputFont="500 18em 'Poppins'"
 	/>
 
 </template>
