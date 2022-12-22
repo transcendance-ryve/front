@@ -28,6 +28,10 @@
 		dist: {
 			type: String,
 			default: '12em',
+		},
+		shift: {
+			type: Boolean,
+			default: false
 		}
 	})
 
@@ -37,7 +41,7 @@
 
 <template>
 
-	<div class="ToolTip">
+	<div class="ToolTip" :class="{'Tooltip--shift': shift}">
 		<span class="ToolTip-value">{{ value }}</span>
 	</div>
 

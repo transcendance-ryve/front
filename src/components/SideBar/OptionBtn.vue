@@ -11,6 +11,10 @@
 		},
 		toolTip: {
 			type: String,
+		},
+		shift: {
+			type: Boolean,
+			default: false
 		}
 	})
 
@@ -20,7 +24,7 @@
 
 	<button class="OptionBtn">
 		<span class="OptionBtn-logo" v-html="logo"></span>
-		<ToolTip :value="toolTip" />
+		<ToolTip :value="toolTip" :shift="shift"/>
 	</button>
 
 </template>

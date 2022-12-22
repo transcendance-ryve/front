@@ -148,9 +148,10 @@
 				:logo="option.logo"
 				:hoverColor="option.color"
 				:toolTip="option.toolTip"
+				:shift="index == options.length - 1 ? true : false"
 				@click="manageOptions(option.name)"
 			/>
 		</div>
 	</div>
-
+<!-- index == options.length ? true : false -->
 </template>

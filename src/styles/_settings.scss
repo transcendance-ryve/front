@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+$background-800: #1B1A26;
 $background-700: #1F1E2C;
 $background-600: #242635;
 $background-500: #272938;
@@ -31,7 +32,7 @@ html, body, #app {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Poppins';
-	background: #1B1A26;
+	background: $background-800;
 }
 
 span {
