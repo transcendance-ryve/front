@@ -24,7 +24,7 @@
 		flex-direction: column;
 		height: calc(100% - calc(56em + 48em + 2 * 32em));
 		gap: 16em;
-		border-radius: 8em;
+		border-radius: 6em;
 		overflow-y: scroll;
 		&::-webkit-scrollbar {
 			display: none;

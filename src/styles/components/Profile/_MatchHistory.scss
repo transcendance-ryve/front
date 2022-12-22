@@ -23,11 +23,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: 16em;
-		border-radius: 8em;
 
 		.Content-Versus {
 			display: flex;
-			border-radius: 16em;
+			border-radius: 6em;
 			background: $background-600;
 		}
 	}
