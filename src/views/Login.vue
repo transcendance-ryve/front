@@ -4,6 +4,7 @@
 	import RegisterForm from '@/components/Forms/RegisterForm.vue'
 	import LoginForm from '@/components/Forms/LoginForm.vue'
 	import ForgotForm from '@/components/Forms/ForgotForm.vue'
+	import ResetPassForm from '@/components/Forms/ResetPassForm.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
 
@@ -14,19 +15,23 @@
 	if (userStore.checkConnection())
 		router.push({path:'/'})
 
-	const registerSuccess = (userName: string, email: string, password: string) => {
+	const	registerSuccess = (userName: string, email: string, password: string) => {
 		console.log(userName, email, password)
 		userStore.connect()
 	}
 
-	const loginSuccess = (id: string, password: string) => {
+	const	loginSuccess = (id: string, password: string) => {
 		console.log(id, password)
 		userStore.connect()
 	}
 
-	const forgotSuccess = (email: string) => {
+	const	forgotSuccess = (email: string) => {
 		console.log(email)
 		userStore.connect() //
+	}
+
+	const	resetSuccess = (password: string) => {
+		console.log(password)
 	}
 
 </script>
@@ -51,6 +56,9 @@
 			v-if="formType == 'forgot'"
 			@success="forgotSuccess"
 		/>
+		<!-- <ResetPassForm
+			@success="resetSuccess"
+		/> -->
 	</div>
 		
 </template>

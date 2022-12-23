@@ -1,0 +1,85 @@
+<script setup lang="ts">
+	import { reactive, computed } from 'vue'
+	import BaseInput from '../Utils/BaseInput.vue'
+	import useVuelidate from '@vuelidate/core'
+	import {
+		required,
+		minLength,
+		sameAs,
+		helpers
+	} from '@vuelidate/validators'
+	import { logoLock } from '../../assets/logoSVG'
+
+	const	formData = reactive({
+		password: '',
+		confirmPassword: ''
+	})
+
+	const	rules = computed(() => {
+		return {
+			password: {
+				required: helpers.withMessage('Please enter a password', required),
+				minLength: helpers.withMessage('Password is too short (6 min)', minLength(6)),
+			},
+			confirmPassword: {
+				required: helpers.withMessage('Please confirm your password', required),
+				sameAs: helpers.withMessage('Incorrect password', sameAs(formData.password))
+			}
+		}
+	})
+
+	const	v$ = useVuelidate(rules, formData)
+
+	const emit = defineEmits(['success'])
+
+	const	submitForm = async () => {
+		const	result = await v$.value.$validate();
+		if (result)	{
+			emit('success', formData.password)
+		}
+		else
+			alert('error, form not submitted')
+	}
+
+</script>
+
+<template>
+	<main class="form-wrap">
+		<h1>Reset your password</h1>
+		<form @submit.prevent="submitForm">
+			<div class="Form-inputsWrap">
+				<BaseInput
+					v-model="formData.password"
+					placeholder="Choose password"
+					type="password"
+					:logo="logoLock"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.password.$error"
+				>
+					{{ v$.password.$errors[0].$message }}
+				</span>
+				<BaseInput
+					v-model="formData.confirmPassword"
+					placeholder="Confirm password"
+					type="password"
+					:logo="logoLock"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.confirmPassword.$error"
+				>
+					{{ v$.confirmPassword.$errors[0].$message }}
+				</span>
+			</div>
+			<button
+				class="Form-submitBtn"
+				type="submit"
+			>
+				<span class="Btn-value">Reset</span>
+			</button>
+		</form>
+	</main>
+
+</template>
