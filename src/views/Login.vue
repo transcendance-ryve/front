@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
 	import { ref } from 'vue'
-	import RegisterForm from '../components/Login/RegisterForm.vue'
-	import LoginForm from '../components/Login/LoginForm.vue'
+	import RegisterForm from '@/components/Login/RegisterForm.vue'
+	import LoginForm from '@/components/Login/LoginForm.vue'
 	import ForgotForm from '@/components/Login/ForgotForm.vue'
-	import { useUserStore } from '../stores/UserStore'
-	import router from '../router/index'
+	import { useUserStore } from '@/stores/UserStore'
+	import router from '@/router/index'
 
 	const	formType = ref('register')
 

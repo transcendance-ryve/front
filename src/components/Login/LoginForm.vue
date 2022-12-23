@@ -28,7 +28,7 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const	emit = defineEmits(['success'])
+	const	emit = defineEmits(['forgot', 'success'])
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
@@ -75,7 +75,7 @@
 					{{ v$.password.$errors[0].$message }}
 				</span>
 			</div>
-			<button class="Form-forgotBtn" @click="$emit('forgot')">
+			<button class="Form-forgotBtn" type="button" @click="$emit('forgot')">
 				<span class="ForgotBtn-value">Forgot your password?</span>
 			</button>
 			<button

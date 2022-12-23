@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import { reactive, computed } from 'vue'
-	import BaseInput from '../Utils/BaseInput.vue'
+	import BaseInput from '@/components/Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
 	import {
 		required,
