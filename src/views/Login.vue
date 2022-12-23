@@ -1,9 +1,9 @@
 <script setup lang="ts">
 
 	import { ref } from 'vue'
-	import RegisterForm from '@/components/Login/RegisterForm.vue'
-	import LoginForm from '@/components/Login/LoginForm.vue'
-	import ForgotForm from '@/components/Login/ForgotForm.vue'
+	import RegisterForm from '@/components/Forms/RegisterForm.vue'
+	import LoginForm from '@/components/Forms/LoginForm.vue'
+	import ForgotForm from '@/components/Forms/ForgotForm.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
 
