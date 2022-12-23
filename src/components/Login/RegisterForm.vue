@@ -57,72 +57,70 @@
 </script>
 
 <template>
-	<main>
-		<div class="form-wrap">
-			<button class="Form-42btn">
-				<span class="Btn-value">Sign up with</span>
-				<span class="Form-42btn-logo" v-html="logo42"></span>
-			</button>
-			<span class="or">OR</span>
-			<h1>Create an account</h1>
-			<form @submit.prevent="submitForm">
-				<div class="Form-inputsWrap">
-					<BaseInput
-						v-model="formData.username"
-						placeholder="Username"
-						:logo="logoProfile"
-					/>
-					<span
-						class="form-error"
-						v-if="v$.username.$error"
-					>
-						{{ v$.username.$errors[0].$message }}
-					</span>
-					<BaseInput
-						v-model="formData.email"
-						placeholder="Email"
-						type="email"
-						:logo="logoEmail"
-					/>
-					<span
-						class="form-error"
-						v-if="v$.email.$error"
-					>
-						{{ v$.email.$errors[0].$message }}
-					</span>
-					<BaseInput
-						v-model="formData.password"
-						placeholder="Choose password"
-						type="password"
-						:logo="logoLock"
-					/>
-					<span
-						class="form-error"
-						v-if="v$.password.$error"
-					>
-						{{ v$.password.$errors[0].$message }}
-					</span>
-					<BaseInput
-						v-model="formData.confirmPassword"
-						placeholder="Confirm password"
-						type="password"
-						:logo="logoLock"
-					/>
-					<span
-						class="form-error"
-						v-if="v$.confirmPassword.$error"
-					>
-						{{ v$.confirmPassword.$errors[0].$message }}
-					</span>
-				</div>
-				<button
-					class="Form-submitBtn"
-					type="submit"
+	<main class="form-wrap">
+		<button class="Form-42btn">
+			<span class="Btn-value">Sign up with</span>
+			<span class="Form-42btn-logo" v-html="logo42"></span>
+		</button>
+		<span class="or">OR</span>
+		<h1>Create an account</h1>
+		<form @submit.prevent="submitForm">
+			<div class="Form-inputsWrap">
+				<BaseInput
+					v-model="formData.username"
+					placeholder="Username"
+					:logo="logoProfile"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.username.$error"
 				>
-					<span class="Btn-value">Register</span>
-				</button>
-			</form>
-		</div>
+					{{ v$.username.$errors[0].$message }}
+				</span>
+				<BaseInput
+					v-model="formData.email"
+					placeholder="Email"
+					type="email"
+					:logo="logoEmail"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.email.$error"
+				>
+					{{ v$.email.$errors[0].$message }}
+				</span>
+				<BaseInput
+					v-model="formData.password"
+					placeholder="Choose password"
+					type="password"
+					:logo="logoLock"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.password.$error"
+				>
+					{{ v$.password.$errors[0].$message }}
+				</span>
+				<BaseInput
+					v-model="formData.confirmPassword"
+					placeholder="Confirm password"
+					type="password"
+					:logo="logoLock"
+				/>
+				<span
+					class="form-error"
+					v-if="v$.confirmPassword.$error"
+				>
+					{{ v$.confirmPassword.$errors[0].$message }}
+				</span>
+			</div>
+			<button
+				class="Form-submitBtn"
+				type="submit"
+			>
+				<span class="Btn-value">Register</span>
+			</button>
+		</form>
 	</main>
 
 </template>

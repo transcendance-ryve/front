@@ -3,6 +3,7 @@
 	import { ref } from 'vue'
 	import RegisterForm from '../components/Login/RegisterForm.vue'
 	import LoginForm from '../components/Login/LoginForm.vue'
+	import ForgotForm from '@/components/Login/ForgotForm.vue'
 	import { useUserStore } from '../stores/UserStore'
 	import router from '../router/index'
 
@@ -23,6 +24,11 @@
 		userStore.connect()
 	}
 
+	const forgotSuccess = (email: string) => {
+		console.log(email)
+		userStore.connect() //
+	}
+
 </script>
 
 <template>
@@ -38,7 +44,12 @@
 		</div>
 		<LoginForm
 			v-if="formType == 'login'"
+			@forgot="formType = 'forgot'"
 			@success="loginSuccess"
+		/>
+		<ForgotForm
+			v-if="formType == 'forgot'"
+			@success="forgotSuccess"
 		/>
 	</div>
 		
