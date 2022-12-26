@@ -1,39 +1,46 @@
-.BodyLayout {
-	display: flex;
-	justify-content: center;
+.Home-content {
+	width: 100%;
 	height: 100%;
-	min-height: 540px;
-	padding: 32px 0;
-	gap: 32rem;
+	display: flex;
+	flex-direction: column;
 
-	.BodyLayout-mainContent {
-		width: 1310rem;
-		font-size: 1rem;
-
-		@media (min-width: 1920px) {
-			width: 1310px;
-			font-size: 1px;
-		}
-	}
-
-	@media (max-width: $laptopL) {
+	.BodyLayout {
+		display: flex;
 		justify-content: center;
+		height: 100%;
+		min-height: 540px;
+		padding: 32px 0;
+		gap: 32rem;
 
 		.BodyLayout-mainContent {
-			width: calc(100% - 84px);
-			font-size: 0.8px;
+			width: 1310rem;
+			font-size: 1rem;
+
+			@media (min-width: 1920px) {
+				width: 1310px;
+				font-size: 1px;
+			}
 		}
-	}
 
-	@media (max-width: $tablet) {
-		.BodyLayout-mainContent {
-			width: calc(100% - 64px);
+		@media (max-width: $laptopL) {
+			justify-content: center;
+
+			.BodyLayout-mainContent {
+				width: calc(100% - 84px);
+				font-size: 0.8px;
+			}
 		}
-	}
 
-	@media (max-width: 320px) {
-		.BodyLayout-mainContent {
-			width: calc(100% - 400rem);
+		@media (max-width: $tablet) {
+			.BodyLayout-mainContent {
+				width: calc(100% - 64px);
+			}
+		}
+
+		@media (max-width: 320px) {
+			.BodyLayout-mainContent {
+				width: calc(100% - 400rem);
+			}
 		}
 	}
 }

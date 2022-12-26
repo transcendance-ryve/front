@@ -1,8 +1,12 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router/index'
+import axios, { type AxiosResponse } from 'axios'
+import useAxios from '@/request/axios'
 
 export const useUserStore = defineStore('userStore', () => {
+
+	const	loginApi = ref(false)
 
 	const	user = ref(
 		{
@@ -21,28 +25,60 @@ export const useUserStore = defineStore('userStore', () => {
 	)
 
 	// sessionStorage or localStorage ?
-	function    checkConnection() {
-		const login = localStorage.getItem('login') || false
-		if (login == 'false' || login == false) {
-			router.push({path:'/login'})
-			return false
+	async function    updateLoginApi() {
+		const	{ response, loading, error } = await useAxios(
+			'get',
+			'/users/me'
+		)
+		if (response.value) {
+			console.log(response.value)
+			loginApi.value = true
 		}
-		return true
+		if (error.value) {
+			// console.log('Error = ', error.value)
+			loginApi.value = false
+		}
 	}
 
-	function	connect() {
-		localStorage.setItem('login', 'true')
+	async function	register(username: string, email: string, password: string) {
+		const	{ response, loading, error } = await useAxios(
+			'post',
+			'/auth/register',
+			JSON.stringify({
+				username,
+				email,
+				password
+			})
+		)
+		updateLoginApi()
+	}
+
+	async function	connect(email: string, password: string) {
+		const	{ response, loading, error } = await useAxios(
+			'post',
+			'/auth/login',
+			JSON.stringify({
+				email,
+				password
+			})
+		)
+		updateLoginApi()
+	}
+
+	async function	disconnect() {
+		const	{ response, loading, error } = await useAxios(
+			'delete',
+			'/auth/disconnect'
+		)
+		updateLoginApi()
 		router.push({path:'/'})
 	}
 
-	function	disconnect() {
-		localStorage.setItem('login', 'false')
-		router.push({path:'/login'})
-	}
-
 	return {
+		loginApi,
 		user,
-		checkConnection,
+		updateLoginApi,
+		register,
 		connect,
 		disconnect
 	}

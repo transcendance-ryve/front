@@ -7,22 +7,29 @@
 	import ResetPassForm from '@/components/Forms/ResetPassForm.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
+	import axios from 'axios'
 
 	const	formType = ref('register')
 
 	const	userStore = useUserStore()
 
-	if (userStore.checkConnection())
-		router.push({path:'/'})
-
-	const	registerSuccess = (userName: string, email: string, password: string) => {
-		console.log(userName, email, password)
-		userStore.connect()
+	const	registerSuccess = async (username: string, email: string, password: string) => {
+		// console.log(userName, email, password)
+		// userStore.connect()
+		// const	res = await axios.post('http://localhost:3000/auth/register', {
+		// 	username,
+		// 	email,
+		// 	password
+		// }, { withCredentials: true })
+		// console.log(res)
+		// console.log('cookie = ', $cookies.get('jwtToken'))
+		// console.log($cookies.keys())
+		userStore.register(username, email, password)
 	}
 
 	const	loginSuccess = (id: string, password: string) => {
 		console.log(id, password)
-		userStore.connect()
+		userStore.connect(id, password)
 	}
 
 	const	forgotSuccess = (email: string) => {
