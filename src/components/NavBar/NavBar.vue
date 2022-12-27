@@ -30,6 +30,8 @@
 	}
 	manageResponsive()
 
+	console.log(userStore.me)
+
 </script>
 
 <template>

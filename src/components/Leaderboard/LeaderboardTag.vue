@@ -2,7 +2,6 @@
 
 	import UserInfos from '../Utils/UserInfos.vue'
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
-	import { useProfileStore } from '../../stores/ProfileStore'
 	import { useContentStore } from '../../stores/ContentStore'
 	import router from '../../router/index'
 
@@ -12,13 +11,11 @@
 		}
 	})
 
-	const	profileStore = useProfileStore()
 	const	contentStore = useContentStore()
 
-	const	profileRedirect = (user: object) => {
-		profileStore.setProfile(user, 2)
-		const	path :string = '/profile/' + user.username
-		router.push({path:path})
+	const	profileRedirect = (user: any) => {
+		const	profilePath :string = '/profile/' + user.id
+		router.push({ path:profilePath })
 		contentStore.state = 4
 	}
 

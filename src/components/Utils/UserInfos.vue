@@ -1,7 +1,9 @@
 <script setup lang="ts">
 
 	import { toRefs } from 'vue'
+	import { useUserStore } from '@/stores/UserStore';
 
+	const userStore = useUserStore()
 	const	props = defineProps({
 		username: {
 			type: String
@@ -59,7 +61,7 @@
 	>
 		<img
 			class="UserInfos-avatar"
-			src="../../assets/user.png"
+			:src="userStore.me.avatar"
 			alt="avatar"
 		>
 		<div class="UserInfos-content">
