@@ -8,22 +8,6 @@ export const useUserStore = defineStore('userStore', () => {
 
 	const	loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
 
-	// const	user: Ref = ref(
-	// 	{
-	// 		"userName": "Vintran",
-	// 		"rank": 1,
-	// 		"level": 199,
-	// 		"levelProgression": 70,
-	// 		"stats": {
-	// 			"rankingPoints": 21539,
-	// 			"playCount": 304,
-	// 			"ratio": 4.8,
-	// 			"wins": 290,
-	// 			"defeats": 14
-	// 		}
-	// 	}
-	// )
-
 	const	me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
 	// sessionStorage or localStorage ?
@@ -57,7 +41,7 @@ export const useUserStore = defineStore('userStore', () => {
 				password
 			})
 		)
-		updateLoginApi()
+		await updateLoginApi()
 		router.push({path: '/'})
 	}
 
@@ -79,7 +63,7 @@ export const useUserStore = defineStore('userStore', () => {
 			'delete',
 			'/auth/disconnect'
 		)
-		updateLoginApi()
+		await updateLoginApi()
 		router.push({path: '/accounts'})
 	}
 
@@ -95,7 +79,6 @@ export const useUserStore = defineStore('userStore', () => {
 
 	return {
 		loginApi,
-		// user,
 		me,
 		updateLoginApi,
 		register,

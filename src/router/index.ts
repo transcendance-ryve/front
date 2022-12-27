@@ -65,15 +65,6 @@ const router = createRouter({
 			]
 		}
 		// {
-		// 	path: '/',
-		// 	name: 'login',
-		// 	component: Login,
-			// beforeEnter: (to, from, next) => {
-			// 	console.log(to, from)
-			// 	next(!$cookies.isKey('jwtToken'))
-			// },
-		// }
-		// {
 		// 	path: '/about',
 		// 	name: 'about',
 		// 	// route level code-splitting
@@ -85,23 +76,10 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-	// console.log('1', from.fullPath, to.fullPath)
-	// if ((!from.fullPath.includes('/accounts') && to.fullPath.includes('/accounts'))
-	// || (from.fullPath.includes('/accounts') && !to.fullPath.includes('/accounts'))
-	// || (from.fullPath == '/' && to.fullPath == '/')) {
-	// 	console.log('2', from.fullPath, to.fullPath)
-	// 	const	userStore = useUserStore()
-	// 	userStore.updateLoginApi()
-	// }
 	const	userStore = useUserStore()
-	// if (from.fullPath.includes('/accounts') && !to.fullPath.includes('/accounts'))
-	// 	next(userStore.loginApi ? true : false)
-	// else if (!from.fullPath.includes('/accounts') && to.fullPath.includes('/accounts'))
-	// 	next(userStore.loginApi ? false : true)
-	// else
-	// 	next()
+
 	if (!userStore.loginApi && !to.fullPath.includes('/accounts'))
-		return { name: 'accounts' }
+		return { name: 'register' }
 	else if (userStore.loginApi && to.fullPath.includes('/accounts'))
 		return { name: 'home' }
 })

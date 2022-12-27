@@ -17,29 +17,16 @@
 	}
 
 	const	userStore = useUserStore()
-	// userStore.updateLoginApi()
 
 	const	register = async (username: string, email: string, password: string) => {
-		// console.log(userName, email, password)
-		// userStore.connect()
-		// const	res = await axios.post('http://localhost:3000/auth/register', {
-		// 	username,
-		// 	email,
-		// 	password
-		// }, { withCredentials: true })
-		// console.log(res)
-		// console.log('cookie = ', $cookies.get('jwtToken'))
-		// console.log($cookies.keys())
 		userStore.register(username, email, password)
 	}
 
 	const	login = (id: string, password: string) => {
-		console.log(id, password)
 		userStore.connect(id, password)
 	}
 
 	const	forgotPassword = (email: string) => {
-		console.log(email)
 		userStore.forgotPassword(email)
 	}
 
@@ -52,10 +39,6 @@
 <template>
 
 	<div class="Accounts">
-		<!-- <RegisterForm
-			v-if="formType == 'register'"
-			@success="registerSuccess"
-		/> -->
 		<RouterView
 			@register="register"
 			@login="login"
@@ -66,22 +49,6 @@
 			<span>Already have an account ?</span>
 			<button @click="loginRedirect()">Login here</button>
 		</div>
-		<!-- <div class="Login-redirect" v-if="formType == 'register'">
-			<span>Already have an account ?</span>
-			<button @click="formType = 'login'">Login here</button>
-		</div> -->
-		<!-- <LoginForm
-			v-if="formType == 'login'"
-			@forgot="formType = 'forgot'"
-			@success="loginSuccess"
-		/> -->
-		<!-- <ForgotForm
-			v-if="formType == 'forgot'"
-			@success="forgotSuccess"
-		/> -->
-		<!-- <ResetPassForm
-			@success="resetSuccess"
-		/> -->
 	</div>
 		
 </template>
