@@ -30,12 +30,12 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const emit = defineEmits(['success'])
+	const emit = defineEmits(['resetPassword'])
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
-			emit('success', formData.password)
+			emit('resetPassword', formData.password)
 		}
 		else
 			alert('error, form not submitted')
@@ -44,7 +44,7 @@
 </script>
 
 <template>
-	<main class="form-wrap">
+	<main class="Form-wrap">
 		<h1>Reset your password</h1>
 		<form @submit.prevent="submitForm">
 			<div class="Form-inputsWrap">

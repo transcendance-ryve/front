@@ -24,12 +24,12 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const	emit = defineEmits(['success'])
+	const	emit = defineEmits(['forgotPassword'])
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
-			emit('success', formData.email)
+			emit('forgotPassword', formData.email)
 		}
 		else
 			alert('error, form not submitted')
@@ -38,7 +38,7 @@
 </script>
 
 <template>
-	<main class="form-wrap">
+	<main class="Form-wrap">
 		<h1>Forgot password</h1>
 		<form @submit.prevent="submitForm">
 			<div class="Form-inputsWrap">

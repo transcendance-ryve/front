@@ -11,9 +11,15 @@
 
 	const	formType = ref('register')
 
-	const	userStore = useUserStore()
+	const	loginRedirect = () => {
+		formType.value = 'login'
+		router.push({path:'/accounts/login'})
+	}
 
-	const	registerSuccess = async (username: string, email: string, password: string) => {
+	const	userStore = useUserStore()
+	// userStore.updateLoginApi()
+
+	const	register = async (username: string, email: string, password: string) => {
 		// console.log(userName, email, password)
 		// userStore.connect()
 		// const	res = await axios.post('http://localhost:3000/auth/register', {
@@ -27,17 +33,17 @@
 		userStore.register(username, email, password)
 	}
 
-	const	loginSuccess = (id: string, password: string) => {
+	const	login = (id: string, password: string) => {
 		console.log(id, password)
 		userStore.connect(id, password)
 	}
 
-	const	forgotSuccess = (email: string) => {
+	const	forgotPassword = (email: string) => {
 		console.log(email)
-		userStore.connect() //
+		userStore.forgotPassword(email)
 	}
 
-	const	resetSuccess = (password: string) => {
+	const	resetPassword = (password: string) => {
 		console.log(password)
 	}
 
@@ -45,24 +51,34 @@
 
 <template>
 
-	<div class="Login">
-		<RegisterForm
+	<div class="Accounts">
+		<!-- <RegisterForm
 			v-if="formType == 'register'"
 			@success="registerSuccess"
+		/> -->
+		<RouterView
+			@register="register"
+			@login="login"
+			@forgotPassword="forgotPassword"
+			@resetPassword="resetPassword"
 		/>
 		<div class="Login-redirect" v-if="formType == 'register'">
 			<span>Already have an account ?</span>
-			<button @click="formType = 'login'">Login here</button>
+			<button @click="loginRedirect()">Login here</button>
 		</div>
-		<LoginForm
+		<!-- <div class="Login-redirect" v-if="formType == 'register'">
+			<span>Already have an account ?</span>
+			<button @click="formType = 'login'">Login here</button>
+		</div> -->
+		<!-- <LoginForm
 			v-if="formType == 'login'"
 			@forgot="formType = 'forgot'"
 			@success="loginSuccess"
-		/>
-		<ForgotForm
+		/> -->
+		<!-- <ForgotForm
 			v-if="formType == 'forgot'"
 			@success="forgotSuccess"
-		/>
+		/> -->
 		<!-- <ResetPassForm
 			@success="resetSuccess"
 		/> -->

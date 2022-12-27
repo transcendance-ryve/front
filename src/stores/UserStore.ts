@@ -1,4 +1,4 @@
-import { ref, watch, type Ref } from 'vue'
+import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router/index'
 import axios, { type AxiosResponse } from 'axios'
@@ -6,26 +6,25 @@ import useAxios from '@/request/axios'
 
 export const useUserStore = defineStore('userStore', () => {
 
-	const	loginApi: Ref = ref(false)
+	const	loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
 
-	const	user: Ref = ref(
-		{
-			"userName": "Vintran",
-			"rank": 1,
-			"level": 199,
-			"levelProgression": 70,
-			"stats": {
-				"rankingPoints": 21539,
-				"playCount": 304,
-				"ratio": 4.8,
-				"wins": 290,
-				"defeats": 14
-			}
-		}
-	)
+	// const	user: Ref = ref(
+	// 	{
+	// 		"userName": "Vintran",
+	// 		"rank": 1,
+	// 		"level": 199,
+	// 		"levelProgression": 70,
+	// 		"stats": {
+	// 			"rankingPoints": 21539,
+	// 			"playCount": 304,
+	// 			"ratio": 4.8,
+	// 			"wins": 290,
+	// 			"defeats": 14
+	// 		}
+	// 	}
+	// )
 
-	// const	me = ref(localStorage.getItem('me') || '')
-	const	me: Ref = ref('')
+	const	me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
 	// sessionStorage or localStorage ?
 	async function    updateLoginApi() {
@@ -34,14 +33,15 @@ export const useUserStore = defineStore('userStore', () => {
 			'/users/me'
 		)
 		if (response.value) {
-			console.log(response.value)
-			// localStorage.setItem('me', JSON.stringify(response.value))
+			console.log('me ok')
+			localStorage.setItem('me', JSON.stringify(response.value))
 			me.value = response.value
 			loginApi.value = true
 		}
 		if (error.value) {
 			// console.log('Error = ', error.value)
-			// localStorage.removeItem('me')
+			localStorage.removeItem('me')
+			console.log('me error')
 			me.value = ''
 			loginApi.value = false
 		}
@@ -58,6 +58,7 @@ export const useUserStore = defineStore('userStore', () => {
 			})
 		)
 		updateLoginApi()
+		router.push({path: '/'})
 	}
 
 	async function	connect(email: string, password: string) {
@@ -69,7 +70,8 @@ export const useUserStore = defineStore('userStore', () => {
 				password
 			})
 		)
-		updateLoginApi()
+		await updateLoginApi()
+		router.push({path: '/'})
 	}
 
 	async function	disconnect() {
@@ -78,16 +80,27 @@ export const useUserStore = defineStore('userStore', () => {
 			'/auth/disconnect'
 		)
 		updateLoginApi()
-		router.push({path:'/'})
+		router.push({path: '/accounts'})
+	}
+
+	async function	forgotPassword(email: string) {
+		const	{ response, loading, error } = await useAxios(
+			'post',
+			'/auth/forgot-password',
+			JSON.stringify({
+				email
+			})
+		)
 	}
 
 	return {
 		loginApi,
-		user,
+		// user,
 		me,
 		updateLoginApi,
 		register,
 		connect,
-		disconnect
+		disconnect,
+		forgotPassword
 	}
 })

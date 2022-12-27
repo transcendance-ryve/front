@@ -6,11 +6,11 @@
 	import NavBar from '../components/NavBar/NavBar.vue'
 	import SideBar from '../components/SideBar/SideBar.vue'
 	import Profile from '../components/Profile/Profile.vue'
-	import Login from './Login.vue'
+	import Accounts from './Accounts.vue'
 	import router from '../router/index'
 	
 	const	userStore = useUserStore()
-	userStore.updateLoginApi()
+	// userStore.updateLoginApi()
 
 	const	contentStore = useContentStore()
 	console.log('refresh')
@@ -18,17 +18,17 @@
 
 <template>
 
-	<div class="Home-content" v-if="userStore.loginApi">
+	<div class="Home" v-if="userStore.loginApi">
 		<NavBar />
 		<main class="BodyLayout">
 			<section class="BodyLayout-mainContent">
 				<!-- <Profile v-if="contentStore.state == 5" /> -->
 				<!-- <RouterView v-else /> -->
-				<RouterView/>
+				<RouterView />
 			</section>
 			<SideBar />
 		</main>
 	</div>
-	<Login v-else/>
+	<!-- <Accounts v-else/> -->
 
 </template>

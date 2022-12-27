@@ -43,12 +43,12 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const emit = defineEmits(['success'])
+	const emit = defineEmits(['register'])
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
-			emit('success', formData.username, formData.email, formData.password)
+			emit('register', formData.username, formData.email, formData.password)
 		}
 		else
 			alert('error, form not submitted')
@@ -57,7 +57,7 @@
 </script>
 
 <template>
-	<main class="form-wrap">
+	<div class="Form-wrap">
 		<button class="Form-42btn">
 			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
@@ -121,6 +121,6 @@
 				<span class="Btn-value">Register</span>
 			</button>
 		</form>
-	</main>
+	</div>
 
 </template>

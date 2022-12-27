@@ -1,5 +1,6 @@
 <script setup lang="ts">
 	import { reactive, computed } from 'vue'
+	import router from '../../router/index.ts'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
 	import {
@@ -28,12 +29,12 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const	emit = defineEmits(['forgot', 'success'])
+	const	emit = defineEmits(['login'])
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
-			emit('success', formData.id, formData.password)
+			emit('login', formData.id, formData.password)
 		}
 		else
 			alert('error, form not submitted')
@@ -42,7 +43,7 @@
 </script>
 
 <template>
-	<main class="form-wrap">
+	<main class="Form-wrap">
 		<button class="Form-42btn">
 			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
@@ -75,7 +76,7 @@
 					{{ v$.password.$errors[0].$message }}
 				</span>
 			</div>
-			<button class="Form-forgotBtn" type="button" @click="$emit('forgot')">
+			<button class="Form-forgotBtn" type="button" @click="router.push({path: '/accounts/forgot-password'})">
 				<span class="ForgotBtn-value">Forgot your password?</span>
 			</button>
 			<button
