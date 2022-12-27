@@ -4,6 +4,7 @@
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
 	import { useProfileStore } from '../../stores/ProfileStore'
 	import { useContentStore } from '../../stores/ContentStore'
+	import router from '../../router/index'
 
 	defineProps({
 		user: {
@@ -14,10 +15,9 @@
 	const	profileStore = useProfileStore()
 	const	contentStore = useContentStore()
 
-	import router from '../../router/index'
 	const	profileRedirect = (user: object) => {
 		profileStore.setProfile(user, 2)
-		const	path :string = '/profile/' + user.userName
+		const	path :string = '/profile/' + user.username
 		router.push({path:path})
 		contentStore.state = 4
 	}
@@ -32,28 +32,28 @@
 				<span class="Rank-value">#{{ user.rank }}</span>
 			</div>
 			<UserInfos
-				:userName="user.userName"
+				:username="user.username"
 				:level="user.level"
-				:levelPerCent="user.levelProgression"
+				:experience="user.experience"
 				@click="profileRedirect(user)"
 			/>
 		</div>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat
 				label="Ranked points"
-				:value="user.stats.rankingPoints"
+				:value="user.rankPoint"
 			/>
 			<LeaderboardTagStat
 				label="Play count"
-				:value="user.stats.playCount"
+				:value="user.played"
 			/>
 			<LeaderboardTagStat
 				label="Wins"
-				:value="user.stats.wins"
+				:value="user.wins"
 			/>
 			<LeaderboardTagStat
 				label="Defeats"
-				:value="user.stats.defeats"
+				:value="user.loses"
 			/>
 		</div>
 	</div>

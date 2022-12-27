@@ -5,7 +5,7 @@ import Play from '../components/Play/Play.vue'
 import Leaderboard from '../components/Leaderboard/Leaderboard.vue'
 import Spectate from '../components/Spectate/Spectate.vue'
 import Profile from '../components/Profile/Profile.vue'
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
 
 // const router = createRouter({
 // 	history: createWebHistory(import.meta.env.BASE_URL),

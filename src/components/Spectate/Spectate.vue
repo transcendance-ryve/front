@@ -14,90 +14,90 @@
 	const	data = reactive([
 		{
 			player1: {
-				name: 'Karim',
+				username: 'Karim',
 				level: 200,
-				levelPerCent: 12,
+				experience: 12,
 				score: 4
 			},
 			player2: {
-				name: 'Kylian',
+				username: 'Kylian',
 				level: 197,
-				levelPerCent: 66,
+				experience: 66,
 				score: 3
 			},
 			begin: 16
 		},
 		{
 			player1: {
-				name: 'Antoine',
+				username: 'Antoine',
 				level: 158,
-				levelPerCent: 20,
+				experience: 20,
 				score: 2
 			},
 			player2: {
-				name: 'Ousmane',
+				username: 'Ousmane',
 				level: 152,
-				levelPerCent: 95,
+				experience: 95,
 				score: 2
 			},
 			begin: 13
 		},
 		{
 			player1: {
-				name: 'Kingsley',
+				username: 'Kingsley',
 				level: 140,
-				levelPerCent: 32,
+				experience: 32,
 				score: 4
 			},
 			player2: {
-				name: 'Raphael',
+				username: 'Raphael',
 				level: 134,
-				levelPerCent: 84,
+				experience: 84,
 				score: 1
 			},
 			begin: 12
 		},
 		{
 			player1: {
-				name: 'Benjamin',
+				username: 'Benjamin',
 				level: 104,
-				levelPerCent: 8,
+				experience: 8,
 				score: 1
 			},
 			player2: {
-				name: 'Theo',
+				username: 'Theo',
 				level: 100,
-				levelPerCent: 71,
+				experience: 71,
 				score: 1
 			},
 			begin: 8
 		},
 		{
 			player1: {
-				name: 'Lucas',
+				username: 'Lucas',
 				level: 84,
-				levelPerCent: 60,
+				experience: 60,
 				score: 2
 			},
 			player2: {
-				name: 'Adrien',
+				username: 'Adrien',
 				level: 78,
-				levelPerCent: 89,
+				experience: 89,
 				score: 1
 			},
 			begin: 7
 		},
 		{
 			player1: {
-				name: 'Alphonse',
+				username: 'Alphonse',
 				level: 43,
-				levelPerCent: 37,
+				experience: 37,
 				score: 1
 			},
 			player2: {
-				name: 'Steve',
+				username: 'Steve',
 				level: 21,
-				levelPerCent: 21,
+				experience: 21,
 				score: 3
 			},
 			begin: 3

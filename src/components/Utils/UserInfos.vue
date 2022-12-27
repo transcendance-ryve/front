@@ -3,13 +3,13 @@
 	import { toRefs } from 'vue'
 
 	const	props = defineProps({
-		userName: {
+		username: {
 			type: String
 		},
 		level: {
 			type: Number
 		},
-		levelPerCent: {
+		experience: {
 			type: Number
 		},
 		mainColor: {
@@ -40,7 +40,7 @@
 
 	const	p = toRefs(props)
 
-	const	perCent = p.levelPerCent?.value?.toString() + '%'
+	const	perCent = p.experience?.value?.toString() + '%' //calcul du % sur nextLevel a rajouter
 	const	borderAvatar = p.avatarBorder.value ?
 		'4em solid' + p.mainColor.value : 'none'
 	const		avatarWidth = p.avatarBorder.value ? '72em' : '64em'
@@ -63,7 +63,7 @@
 			alt="avatar"
 		>
 		<div class="UserInfos-content">
-			<span class="Content-name">{{ userName }}</span>
+			<span class="Content-name">{{ username }}</span>
 			<div class="Content-level">
 				<span class="Level-perCentWrap">
 					<span class="Level-perCent"></span>

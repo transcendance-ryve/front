@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router/index'
 import axios, { type AxiosResponse } from 'axios'
@@ -6,9 +6,9 @@ import useAxios from '@/request/axios'
 
 export const useUserStore = defineStore('userStore', () => {
 
-	const	loginApi = ref(false)
+	const	loginApi: Ref = ref(false)
 
-	const	user = ref(
+	const	user: Ref = ref(
 		{
 			"userName": "Vintran",
 			"rank": 1,
@@ -24,6 +24,9 @@ export const useUserStore = defineStore('userStore', () => {
 		}
 	)
 
+	// const	me = ref(localStorage.getItem('me') || '')
+	const	me: Ref = ref('')
+
 	// sessionStorage or localStorage ?
 	async function    updateLoginApi() {
 		const	{ response, loading, error } = await useAxios(
@@ -32,10 +35,14 @@ export const useUserStore = defineStore('userStore', () => {
 		)
 		if (response.value) {
 			console.log(response.value)
+			// localStorage.setItem('me', JSON.stringify(response.value))
+			me.value = response.value
 			loginApi.value = true
 		}
 		if (error.value) {
 			// console.log('Error = ', error.value)
+			// localStorage.removeItem('me')
+			me.value = ''
 			loginApi.value = false
 		}
 	}
@@ -77,6 +84,7 @@ export const useUserStore = defineStore('userStore', () => {
 	return {
 		loginApi,
 		user,
+		me,
 		updateLoginApi,
 		register,
 		connect,

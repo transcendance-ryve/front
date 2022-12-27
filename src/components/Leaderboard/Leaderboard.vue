@@ -21,15 +21,15 @@
 
 	const	dataSorted = computed(() => users.sort((a, b) => {
 				if (order.value == 'des')
-					return a.rank - b.rank
+					return b.rankPoint - a.rankPoint
 				else
-					return b.rank - a.rank
+					return a.rankPoint - b.rankPoint
 			}
 		)
 	)
 
 	const	inputRes = computed(() => {
-		return dataSorted.value.filter(user => user.userName.toLowerCase().includes(toFind.value.toLowerCase()))
+		return dataSorted.value.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 	})
 
 	const	usersToDisplay = computed(() => {

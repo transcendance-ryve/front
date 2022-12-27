@@ -1,171 +1,132 @@
 [
 	{
-		"userName": "Karim",
+		"username": "Karim",
 		"rank": 1,
 		"level": 200,
-		"levelProgression": 12,
-		"stats": {
-			"rankingPoints": 21539,
-			"playCount": 304,
-			"ratio": 4.6,
-			"wins": 290,
-			"defeats": 14
-		}
+		"loses": 14,
+		"experience": 12,
+		"played": 304,
+		"rankPoint": 21539,
+		"wins": 290
 	},
 	{
-		"userName": "Kylian",
+		"username": "Kylian",
 		"rank": 2,
 		"level": 197,
-		"levelProgression": 61,
-		"stats": {
-			"rankingPoints": 16438,
-			"playCount": 300,
-			"ratio": 4.1,
-			"wins": 270,
-			"defeats": 30
-		}
+		"loses": 30,
+		"experience": 61,
+		"played": 300,
+		"rankPoint": 12300,
+		"wins": 270
 	},
 	{
-		"userName": "Antoine",
+		"username": "Antoine",
 		"rank": 3,
 		"level": 158,
-		"levelProgression": 20,
-		"stats": {
-			"rankingPoints": 13949,
-			"playCount": 325,
-			"ratio": 2.54,
-			"wins": 232,
-			"defeats": 93
-		}
+		"loses": 93,
+		"experience": 20,
+		"played": 325,
+		"rankPoint": 4640,
+		"wins": 232
 	},
 	{
-		"userName": "Ousmane",
+		"username": "Ousmane",
 		"rank": 4,
 		"level": 152,
-		"levelProgression": 95,
-		"stats": {
-			"rankingPoints": 11203,
-			"playCount": 257,
-			"ratio": 4,
-			"wins": 180,
-			"defeats": 77
-		}
+		"loses": 77,
+		"experience": 95,
+		"played": 257,
+		"rankPoint": 1250,
+		"wins": 180
 	},
 	{
-		"userName": "Kingsley",
+		"username": "Kingsley",
 		"rank": 5,
 		"level": 140,
-		"levelProgression": 32,
-		"stats": {
-			"rankingPoints": 6041,
-			"playCount": 432,
-			"ratio": 1.8,
-			"wins": 234,
-			"defeats": 148
-		}
+		"loses": 148,
+		"experience": 32,
+		"played": 432,
+		"rankPoint": 1020,
+		"wins": 234
 	},
 	{
-		"userName": "Raphael",
+		"username": "Raphael",
 		"rank": 6,
 		"level": 134,
-		"levelProgression": 84,
-		"stats": {
-			"rankingPoints": 5926,
-			"playCount": 123,
-			"ratio": 2.42,
-			"wins": 120,
-			"defeats": 144
-		}
+		"loses": 144,
+		"experience": 84,
+		"played": 123,
+		"rankPoint": 839,
+		"wins": 145
 	},
 	{
-		"userName": "Benjamin",
+		"username": "Benjamin",
 		"rank": 7,
 		"level": 104,
-		"levelProgression": 8,
-		"stats": {
-			"rankingPoints": 5720,
-			"playCount": 231,
-			"ratio": 2.11,
-			"wins": 143,
-			"defeats": 104
-		}
+		"loses": 104,
+		"experience": 8,
+		"played": 231,
+		"rankPoint": 530,
+		"wins": 143
 	},
 	{
-		"userName": "Theo",
+		"username": "Theo",
 		"rank": 8,
 		"level": 100,
-		"levelProgression": 71,
-		"stats": {
-			"rankingPoints": 5477,
-			"playCount": 154,
-			"ratio": 1.75,
-			"wins": 553,
-			"defeats": 235
-		}
+		"loses": 235,
+		"experience": 71,
+		"played": 154,
+		"rankPoint": 700,
+		"wins": 553
 	},
 	{
-		"userName": "Lucas",
+		"username": "Lucas",
 		"rank": 9,
 		"level": 84,
-		"levelProgression": 60,
-		"stats": {
-			"rankingPoints": 5476,
-			"playCount": 547,
-			"ratio": 1.36,
-			"wins": 212,
-			"defeats": 335
-		}
+		"loses": 335,
+		"experience": 60,
+		"played": 547,
+		"rankPoint": 583,
+		"wins": 212
 	},
 	{
-		"userName": "Adrien",
+		"username": "Adrien",
 		"rank": 10,
 		"level": 78,
-		"levelProgression": 89,
-		"stats": {
-			"rankingPoints": 5093,
-			"playCount": 1234,
-			"ratio": 1,
-			"wins": 140,
-			"defeats": 1094
-		}
+		"loses": 1094,
+		"experience": 89,
+		"played": 1234,
+		"rankPoint": 478,
+		"wins": 140
 	},
 	{
-		"userName": "Alphonse",
+		"username": "Alphonse",
 		"rank": 11,
 		"level": 43,
-		"levelProgression": 37,
-		"stats": {
-			"rankingPoints": 4201,
-			"playCount": 632,
-			"ratio": 1.2,
-			"wins": 83,
-			"defeats": 548
-		}
+		"loses": 548,
+		"experience": 37,
+		"played": 632,
+		"rankPoint": 420,
+		"wins": 83
 	},
 	{
-		"userName": "Steve",
+		"username": "Steve",
 		"rank": 12,
 		"level": 21,
-		"levelProgression": 50,
-		"stats": {
-			"rankingPoints": 3619,
-			"playCount": 12,
-			"ratio": 0.55,
-			"wins": 12,
-			"defeats": 0
-		}
+		"loses": 0,
+		"experience": 50,
+		"played": 3619,
+		"rankPoint": 3619,
+		"wins": 12
 	},
 	{
-		"userName": "Olivier",
+		"username": "Olivier",
 		"rank": 13,
 		"level": 1,
-		"levelProgression": 68,
-		"stats": {
-			"rankingPoints": 305,
-			"playCount": 3252,
-			"ratio": 0.2,
-			"wins": 1,
-			"defeats": 3251
-		}
+		"loses": 3251,
+		"experience": 68,
+		"played": 3252,
+		"rankPoint": 305,
+		"wins": 1
 	}
 ]

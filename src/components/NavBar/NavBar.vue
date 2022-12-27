@@ -2,6 +2,7 @@
 
 	import { ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
+	import { useUserStore } from '../../stores/UserStore'
 	import router from '../../router/index' //
 	import { logoRyve } from '../../assets/logoSVG'
 	import NavBarSectionSelector from './NavBarSectionSelector.vue'
@@ -9,6 +10,7 @@
 	import UserMenu from './UserMenu.vue'
 
 	const	contentStore = useContentStore()
+	const	userStore = useUserStore()
 
 	let		userInfoXS = ref(false)
 
@@ -52,9 +54,9 @@
 			<div class="NavBar-content">
 				<NavBarSectionSelector class="Content-options"/>
 				<UserInfos
-					userName="Vintran"
-					:level="199"
-					:levelPerCent="70"
+					:username="userStore.me.username"
+					:level="userStore.me.level"
+					:experience="userStore.me.experience"
 					perCentBackground="#242635"
 					:reverse="true"
 					:sizeXS="userInfoXS"
