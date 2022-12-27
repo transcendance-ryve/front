@@ -43,7 +43,6 @@ const router = createRouter({
 		},
 		{
 			path: '/accounts',
-			name: 'accounts',
 			component: Accounts,
 			children: [
 				{

@@ -18,7 +18,7 @@
 
 	const	userStore = useUserStore()
 
-	const	register = async (username: string, email: string, password: string) => {
+	const	register = (username: string, email: string, password: string) => {
 		userStore.register(username, email, password)
 	}
 
@@ -45,7 +45,7 @@
 			@forgotPassword="forgotPassword"
 			@resetPassword="resetPassword"
 		/>
-		<div class="Login-redirect" v-if="formType == 'register'">
+		<div class="Login-redirect" v-if="router.currentRoute.value.name == 'register'">
 			<span>Already have an account ?</span>
 			<button @click="loginRedirect()">Login here</button>
 		</div>

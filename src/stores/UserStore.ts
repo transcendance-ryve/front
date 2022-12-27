@@ -10,7 +10,6 @@ export const useUserStore = defineStore('userStore', () => {
 
 	const	me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
-	// sessionStorage or localStorage ?
 	async function    updateLoginApi() {
 		const	{ response, loading, error } = await useAxios(
 			'get',
