@@ -5,13 +5,13 @@
 	import NavBar from '../components/NavBar/NavBar.vue'
 	import SideBar from '../components/SideBar/SideBar.vue'
 	
-	const	userStore = useUserStore()
+	// const	userStore = useUserStore()
 
 </script>
 
 <template>
-
-	<div class="Home" v-if="userStore.loginApi">
+	<div class="Home">
+	<!-- <div class="Home" v-if="userStore.loginApi"> -->
 		<NavBar />
 		<main class="BodyLayout">
 			<section class="BodyLayout-mainContent">

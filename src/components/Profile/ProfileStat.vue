@@ -1,8 +1,9 @@
 <script setup lang="ts">
 
 	const props = defineProps({
-		ind: {
-			type: Number
+		index: {
+			type: Number,
+			default: 0
 		},
 		value: {
 			type: Number
@@ -22,7 +23,7 @@
 <template>
 
 	<div class="ProfileStat">
-		<label class="ProfileStat-label">{{ labels[ind] }}</label>
+		<label class="ProfileStat-label">{{ labels[index] }}</label>
 		<span class="ProfileStat-value">{{ value }}</span>
 	</div>
 

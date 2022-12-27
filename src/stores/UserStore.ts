@@ -23,7 +23,8 @@ export const useUserStore = defineStore('userStore', () => {
 		}
 		if (error.value) {
 			// console.log('Error = ', error.value)
-			localStorage.removeItem('me')
+			// localStorage.removeItem('me')
+			localStorage.clear()
 			console.log('me error')
 			me.value = ''
 			loginApi.value = false
