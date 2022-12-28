@@ -10,195 +10,247 @@
 	const	data = reactive([
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Karim',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Karim',
 				level: 200,
-				levelPerCent: 12,
+				experience: 12,
+				nextLevel: 100,
 				score: 3
 			},
 			begin: 16
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Kylian',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Kylian',
 				level: 197,
-				levelPerCent: 66,
+				experience: 66,
+				nextLevel: 100,
 				score: 3
 			},
 			begin: 16
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Ousmane',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Ousmane',
 				level: 152,
-				levelPerCent: 95,
+				experience: 95,
+				nextLevel: 100,
 				score: 2
 			},
 			begin: 13
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Antoine',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Antoine',
 				level: 158,
-				levelPerCent: 20,
+				experience: 20,
+				nextLevel: 100,
 				score: 2
 			},
 			begin: 13
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Raphael',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Raphael',
 				level: 134,
-				levelPerCent: 84,
+				experience: 84,
+				nextLevel: 100,
 				score: 1
 			},
 			begin: 12
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Kingsley',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Kingsley',
 				level: 140,
-				levelPerCent: 32,
+				experience: 32,
+				nextLevel: 100,
 				score: 4
 			},
 			begin: 12
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Theo',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Theo',
 				level: 100,
-				levelPerCent: 71,
+				experience: 71,
+				nextLevel: 100,
 				score: 1
 			},
 			begin: 8
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Benjamin',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Benjamin',
 				level: 104,
-				levelPerCent: 8,
+				experience: 8,
+				nextLevel: 100,
 				score: 1
 			},
 			begin: 8
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Adrien',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Adrien',
 				level: 78,
-				levelPerCent: 89,
+				experience: 89,
+				nextLevel: 100,
 				score: 4
 			},
 			begin: 7
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Lucas',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Lucas',
 				level: 84,
-				levelPerCent: 60,
+				experience: 60,
+				nextLevel: 100,
 				score: 2
 			},
 			begin: 7
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Steve',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Steve',
 				level: 21,
-				levelPerCent: 21,
+				experience: 21,
+				nextLevel: 100,
 				score: 3
 			},
 			begin: 3
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Alphonse',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Alphonse',
 				level: 43,
-				levelPerCent: 37,
+				experience: 37,
+				nextLevel: 100,
 				score: 1
 			},
 			begin: 3
 		},
 		{
 			player1: {
-				name: 'Vintran',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Vintran',
 				level: 199,
-				levelPerCent: 70,
+				experience: 70,
+				nextLevel: 100,
 				score: 5
 			},
 			player2: {
-				name: 'Olivier',
+				avatar: "http://localhost:3000/default.png",
+				username: 'Olivier',
 				level: 43,
-				levelPerCent: 37,
+				experience: 37,
+				nextLevel: 100,
 				score: 1
 			},
 			begin: 1
