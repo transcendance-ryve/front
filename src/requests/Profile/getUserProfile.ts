@@ -1,4 +1,4 @@
-import useAxios from '@/requests/axios'
+import useAxios from '@/requests/useAxios'
 import { useUserStore } from '../../stores/UserStore'
 
 export type userProfileData = { user: any, type: number, loadingData: boolean, err: null }

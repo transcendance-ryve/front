@@ -2,7 +2,7 @@ import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router/index'
 import axios, { type AxiosResponse } from 'axios'
-import useAxios from '@/requests/axios'
+import useAxios from '@/requests/useAxios'
 
 export const useUserStore = defineStore('userStore', () => {
 
