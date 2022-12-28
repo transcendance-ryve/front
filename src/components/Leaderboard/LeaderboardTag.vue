@@ -8,6 +8,10 @@
 	defineProps({
 		user: {
 			type: Object
+		},
+		rank: {
+			type: Number,
+			default: 0
 		}
 	})
 
@@ -26,7 +30,7 @@
 	<div class="LeaderboardTag">
 		<div class="LeaderboardTag-user">
 			<div class="LeaderboardTag-rank">
-				<span class="Rank-value">#{{ user.rank }}</span>
+				<span class="Rank-value">#{{ rank }}</span>
 			</div>
 			<UserInfos
 				:avatar="user.avatar"
