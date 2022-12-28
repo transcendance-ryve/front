@@ -17,6 +17,7 @@
 	const	type: Ref = ref(1)
 	let		user: Ref = ref(null)
 	let		loadingData: Ref = ref(false)
+	let		err: Ref = ref(null)
 
 	//	il faut gerer le cas ou l'id n'existe pas
 	const	getUser = async (id: string) => {
@@ -24,18 +25,19 @@
 		// if (false) {
 		if (id == userStore.me.id) {
 			console.log('fuck')
+			type.value = 1
 			user.value = userStore.me
 		}
 		else {
-			type.value = 2
 			loadingData.value = true
 			const	{ response, loading, error } = await useAxios(
 				'get',
-				'/users/' + id
+				'/users/profile/' + id
 			)
-			console.log('off')
-			user.value = response.value
+			type.value = response.value.isFriend ? 2 : 3
+			user.value = response.value.user
 			loadingData.value = loading.value
+			err.value = error.value
 		}
 	}
 
@@ -65,7 +67,7 @@
 
 <template>
 
-	<div class="mainContent-profile" v-if="!loadingData">
+	<div class="mainContent-profile" v-if="!err && !loadingData">
 		<ProfileTag
 			:type="type"
 			:user="user"

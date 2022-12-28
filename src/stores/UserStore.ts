@@ -22,12 +22,7 @@ export const useUserStore = defineStore('userStore', () => {
 			loginApi.value = true
 		}
 		if (error.value) {
-			// console.log('Error = ', error.value)
-			// localStorage.removeItem('me')
-			localStorage.clear()
 			console.log('me error')
-			me.value = ''
-			loginApi.value = false
 		}
 	}
 
@@ -58,13 +53,13 @@ export const useUserStore = defineStore('userStore', () => {
 		router.push({path: '/'})
 	}
 
-	async function	disconnect() {
-		const	{ response, loading, error } = await useAxios(
-			'delete',
-			'/auth/disconnect'
-		)
-		await updateLoginApi()
-		router.push({path: '/accounts'})
+	function	disconnect() {
+		console.log('diconnect')
+		localStorage.clear()
+		me.value = ''
+		loginApi.value = false
+		if (!router.currentRoute.value.fullPath.includes('/accounts'))
+			router.push({path: '/accounts'})
 	}
 
 	async function	forgotPassword(email: string) {

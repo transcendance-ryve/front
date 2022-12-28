@@ -1,5 +1,8 @@
 import axios, { type AxiosResponse } from 'axios'
 import { ref, type Ref } from 'vue'
+import router from '../router/index'
+import { useUserStore } from '../stores/UserStore'
+
 
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
@@ -16,6 +19,10 @@ const	useAxios = async (method: Methods, url: string, data: string | any = null)
 		response.value = res.data
 	}
 	catch (err: any) {
+		if (err.request.status == 401) {
+			const	userStore = useUserStore()
+			userStore.disconnect()
+		}
 		error.value = err
 	}
 	finally {
