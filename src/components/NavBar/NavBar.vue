@@ -56,10 +56,12 @@
 			<div class="NavBar-content">
 				<NavBarSectionSelector class="Content-options"/>
 				<UserInfos
+					:avatar="userStore.me.avatar"
 					:username="userStore.me.username"
 					:level="userStore.me.level"
 					:experience="userStore.me.experience"
-					perCentBackground="#242635"
+					:nextLevel="userStore.me.nextLevel"
+					xpBackground="#242635"
 					:reverse="true"
 					:sizeXS="userInfoXS"
 				>
