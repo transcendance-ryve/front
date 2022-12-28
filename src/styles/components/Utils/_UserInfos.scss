@@ -64,7 +64,7 @@
 		align-items: flex-end;
 	}
 
-	.Level-perCentWrap {
+	.Level-percentWrap {
 		flex-direction: row-reverse;
 	}
 }
@@ -112,7 +112,7 @@
 		.Content-level {
 			gap: 6em;
 
-			.Level-perCentWrap {
+			.Level-percentWrap {
 				width: 116em;
 				height: 4em;
 			}
