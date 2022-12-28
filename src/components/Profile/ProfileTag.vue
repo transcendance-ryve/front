@@ -3,7 +3,6 @@
 	import { type Ref } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd } from '../../assets/logoSVG'
-import { toRefs } from '@vue/reactivity'	//
 
 	const props = defineProps({
 		type: {
@@ -15,19 +14,17 @@ import { toRefs } from '@vue/reactivity'	//
 		}
 	})
 
-	const	p = toRefs(props)
-	console.log("type = ", p.type?.value)
-	console.log('user = ', p.user?.value)
-
 </script>
 
 <template>
 
 	<div class="ProfileTag">
 		<UserInfos
+			:avatar="user?.avatar"
 			:username="user?.username"
 			:level="user?.level"
 			:experience="user?.experience"
+			:nextLevel="user?.nextLevel"
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
