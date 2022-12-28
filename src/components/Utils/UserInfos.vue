@@ -1,59 +1,42 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
-	import { useUserStore } from '@/stores/UserStore';
+	import { toRefs, computed, withDefaults, defineProps } from 'vue'
 
-	const userStore = useUserStore()
-	const	props = defineProps({
-		avatar: {
-			type: String
-		},
-		username: {
-			type: String
-		},
-		level: {
-			type: Number
-		},
-		experience: {
-			type: Number,
-			default: 0
-		},
-		nextLevel: {
-			type: Number,
-			default: 0
-		},
-		mainColor: {
-			type: String,
-			default: '#0177FB'
-		},
-		xpBackground: {
-			type: String,
-			default: '#1F1E2C'
-		},
-		avatarBorder: {
-			type: Boolean,
-			default: false
-		},
-		reverse: {
-			type: Boolean,
-			default: false
-		},
-		sizeXS: {
-			type: Boolean,
-			default: false
-		},
-		sizeXL: {
-			type: Boolean,
-			default: false
-		}
+	export interface Props {
+		avatar?: string
+		username?: string
+		level?: number
+		experience?: number
+		nextLevel?: number
+		mainColor?: string
+		xpBackground?: string
+		avatarBorder?: boolean
+		reverse?: boolean
+		sizeXS?: boolean
+		sizeXL?: boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		avatar: '',
+		username: '',
+		level: 0,
+		experience: 0,
+		nextLevel: 0,
+		mainColor: '#0177FB',
+		xpBackground: '#1F1E2C',
+		avatarBorder: false,
+		reverse: false,
+		sizeXS: false,
+		sizeXL: false
 	})
 
 	const	p = toRefs(props)
 
-	const	percentXP = () => {
+	const	percentXP = computed(() => {
 		let	percent: number = p.experience.value * 100 / p.nextLevel.value
+		percent = Number.isInteger(percent) ? percent : parseFloat(percent.toFixed(2))
 		return percent.toString() + '%'
-	}
+	})
 	const	borderAvatar = p.avatarBorder.value ?
 		'4em solid' + p.mainColor.value : 'none'
 	const		avatarWidth = p.avatarBorder.value ? '72em' : '64em'
@@ -78,8 +61,8 @@
 		<div class="UserInfos-content">
 			<span class="Content-name">{{ username }}</span>
 			<div class="Content-level">
-				<span class="Level-percentXPWrap">
-					<span class="Level-percentXP"></span>
+				<span class="Level-percentWrap">
+					<span class="Level-percent"></span>
 				</span>
 				<span class="Level">LVL {{ level }} - {{ percentXP }}</span>
 			</div>
@@ -96,14 +79,11 @@
 		border: v-bind(borderAvatar);
 	}
 
-	.Level-percentXP {
-		width: v-bind(percentXP);
-	}
-
-	.Level-percentXPWrap {
+	.Level-percentWrap {
 		background: v-bind(xpBackground);
 
-		.Level-percentXP {
+		.Level-percent {
+			width: v-bind(percentXP);
 			background: v-bind(mainColor);
 		}
 	}

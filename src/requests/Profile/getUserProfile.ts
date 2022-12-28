@@ -7,7 +7,6 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 	const userStore = useUserStore()
 
 	if (id == userStore.me.id) {
-		console.log('fuck')
 		data.type = 1
 		data.user = userStore.me
 	}
