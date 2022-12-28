@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed, withDefaults, defineProps } from 'vue'
+	import { toRefs, computed, withDefaults } from 'vue'
 
 	export interface Props {
 		avatar?: string
