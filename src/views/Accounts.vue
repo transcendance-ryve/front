@@ -1,18 +1,11 @@
 <script setup lang="ts">
 
-	import { ref } from 'vue'
-	import RegisterForm from '@/components/Forms/RegisterForm.vue'
-	import LoginForm from '@/components/Forms/LoginForm.vue'
-	import ForgotForm from '@/components/Forms/ForgotForm.vue'
-	import ResetPassForm from '@/components/Forms/ResetPassForm.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
-	import axios from 'axios'
 
-	const	formType = ref('register')
+	console.log(router.currentRoute.value.fullPath)
 
 	const	loginRedirect = () => {
-		formType.value = 'login'
 		router.push({path:'/accounts/login'})
 	}
 

@@ -1,51 +1,30 @@
 <script setup lang="ts">
 
-	import { ref, type Ref } from 'vue'
+	import { reactive } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
-	import { useUserStore } from '../../stores/UserStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
-	import useAxios from '@/request/axios'
 	import router from '@/router'
 	import { onBeforeRouteUpdate } from 'vue-router'
+	import	getUserProfile, { type userProfileData } from '../../requests/Profile/getUserProfile'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 4
-	console.log('rere')
-	const	userStore = useUserStore()
-	const	type: Ref = ref(1)
-	let		user: Ref = ref(null)
-	let		loadingData: Ref = ref(false)
-	let		err: Ref = ref(null)
+
+	const	data: userProfileData = reactive({
+		user: null,
+		type: 1,
+		loadingData: false,
+		err: null
+	})
 
 	//	il faut gerer le cas ou l'id n'existe pas
-	const	getUser = async (id: string) => {
-
-		// if (false) {
-		if (id == userStore.me.id) {
-			console.log('fuck')
-			type.value = 1
-			user.value = userStore.me
-		}
-		else {
-			loadingData.value = true
-			const	{ response, loading, error } = await useAxios(
-				'get',
-				'/users/profile/' + id
-			)
-			type.value = response.value.isFriend ? 2 : 3
-			user.value = response.value.user
-			loadingData.value = loading.value
-			err.value = error.value
-		}
-	}
-
-	getUser(router.currentRoute.value.params.id as string)
+	getUserProfile(router.currentRoute.value.params.id as string, data)
 
 	const	getStat = (index: number) => {
 		if (index == 2) {
-			const	ratio = user.value.loses == 0 ? user.value.wins : user.value.wins / user.value.loses
+			const	ratio = data.user.loses == 0 ? data.user.wins : data.user.wins / data.user.loses
 			return isNaN(ratio) ? 0 : ratio
 		}
 		const	stats = [
@@ -55,22 +34,21 @@
 			'wins',
 			'loses',
 		]
-		return user.value[stats[index]]
+		return data.user[stats[index]]
 	}
 
 	onBeforeRouteUpdate((to, from) => {
-		console.log('delete2')
-		getUser(to.params.id as string)
+		getUserProfile(to.params.id as string, data)
 	})
 
 </script>
 
 <template>
 
-	<div class="mainContent-profile" v-if="!err && !loadingData">
+	<div class="mainContent-profile" v-if="!data.err && !data.loadingData">
 		<ProfileTag
-			:type="type"
-			:user="user"
+			:type="data.type"
+			:user="data.user"
 		/>
 		<div class="Profile-section">
 			<h2 class="Section-name">Statistics</h2>

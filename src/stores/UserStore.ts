@@ -2,16 +2,16 @@ import { ref, type Ref } from 'vue'
 import { defineStore } from 'pinia'
 import router from '../router/index'
 import axios, { type AxiosResponse } from 'axios'
-import useAxios from '@/request/axios'
+import useAxios from '@/requests/axios'
 
 export const useUserStore = defineStore('userStore', () => {
 
-	const	loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
+	const loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
 
-	const	me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
+	const me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
-	async function    updateLoginApi() {
-		const	{ response, loading, error } = await useAxios(
+	async function updateLoginApi() {
+		const { response, loading, error } = await useAxios(
 			'get',
 			'/users/me'
 		)
@@ -26,8 +26,8 @@ export const useUserStore = defineStore('userStore', () => {
 		}
 	}
 
-	async function	register(username: string, email: string, password: string) {
-		const	{ response, loading, error } = await useAxios(
+	async function register(username: string, email: string, password: string) {
+		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/register',
 			JSON.stringify({
@@ -37,11 +37,11 @@ export const useUserStore = defineStore('userStore', () => {
 			})
 		)
 		await updateLoginApi()
-		router.push({path: '/'})
+		router.push({ path: '/' })
 	}
 
-	async function	connect(email: string, password: string) {
-		const	{ response, loading, error } = await useAxios(
+	async function connect(email: string, password: string) {
+		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/login',
 			JSON.stringify({
@@ -50,20 +50,20 @@ export const useUserStore = defineStore('userStore', () => {
 			})
 		)
 		await updateLoginApi()
-		router.push({path: '/'})
+		router.push({ path: '/' })
 	}
 
-	function	disconnect() {
+	function disconnect() {
 		console.log('diconnect')
 		localStorage.clear()
 		me.value = ''
 		loginApi.value = false
 		if (!router.currentRoute.value.fullPath.includes('/accounts'))
-			router.push({path: '/accounts'})
+			router.push({ path: '/accounts' })
 	}
 
-	async function	forgotPassword(email: string) {
-		const	{ response, loading, error } = await useAxios(
+	async function forgotPassword(email: string) {
+		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/forgot-password',
 			JSON.stringify({
