@@ -34,9 +34,11 @@
 		:class="{'VersusTag--reverse': reverse}"
 	>
 		<UserInfos
+			:avatar="user.avatar"
 			:username="user.username"
 			:level="user.level"
 			:experience="user.experience"
+			:nextLevel="user.nextLevel"
 			:mainColor="userColor"
 			:avatarBorder="true"
 			:reverse="reverse"
