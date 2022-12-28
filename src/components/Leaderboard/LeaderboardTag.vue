@@ -29,9 +29,11 @@
 				<span class="Rank-value">#{{ user.rank }}</span>
 			</div>
 			<UserInfos
+				:avatar="user.avatar"
 				:username="user.username"
 				:level="user.level"
 				:experience="user.experience"
+				:nextLevel="user.nextLevel"
 				@click="profileRedirect(user)"
 			/>
 		</div>
