@@ -124,6 +124,7 @@
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import getLeaderboard, { type leaderboardData, type leaderboardQueries } from '@/requests/Leaderboard/getLeaderboard'
+	import router from '@/router/index'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 2
@@ -136,19 +137,30 @@
 	})
 
 	const	queries: leaderboardQueries = reactive({
-		active: false,
-		limit: 12,
 		page: 1,
-		sortBy: '',
-		order: 'des'
+		take: 1,
+		sort: '',
+		order: 'des',
 	})
+	console.log('refresh')
+
+	watch(queries, async newVal => {
+		await router.replace({ path: router.currentRoute.value.fullPath, query: queries})
+		getLeaderboard(data)
+	})
+	// router.replace({ path: router.currentRoute.value.fullPath, query: queries})
+	// const	updateQuery = (qry: query, val: number | string) => {
+	// 	qry.value = val
+	// 	router.replace({ path: router.currentRoute.value.fullPath, query: { igo: 'asdf' }})
+	// }
+
 	const		toFind = ref('')
 
-	getLeaderboard(queries, data)
+	getLeaderboard(data)
 
 	const	pagesCount = computed(() => {
-		let	res = Math.round(data.users.length / queries.limit)
-		if (data.users.length / queries.limit > res)
+		let	res: number = Math.round(data.usersCount / queries.take)
+		if (data.usersCount / queries.take > res)
 			res++
 		return res
 	})
@@ -166,7 +178,7 @@
 
 <template>
 
-	<div class="mainContent-leaderboard" v-if="!data.err && !data.loadingData">
+	<div class="mainContent-leaderboard">
 		<div class="Leaderboard-filters">
 			<SearchInput
 				inputBackground="#242635"
@@ -176,11 +188,11 @@
 			<div class="Filters">
 				<DropDownMenu
 					value="Per page:"
-					:options="['12', '24', '36', '48']"
+					:options="['1', '24', '36', '48']"
 					width="165em"
 					height="56em"
 					:logo="logoPerPage"
-					@select="(val) => queries.limit = parseInt(val)"
+					@select="(val) => queries.take = parseInt(val)"
 				/>
 				<DropDownMenu
 					value="Sort by:"
@@ -188,13 +200,13 @@
 					width="232em"
 					height="56em"
 					:logo="logoSort"
-					@select="(val) => queries.order = val == 'Best rank' ? 'des' : 'asc'"
+					@select="(val) => queries.sort = val"
 				/>
 				<div class="Filters-orderBtns">
 					<button
 						class="OrderBtn"
 						:class="{'OrderBtn--selected': queries.order == 'des'}"
-						@click="queries.order = 'des'"
+						@click="queries.order ='des'"
 					>
 						<span class="OrderBtn-logo" v-html="logoDesc"></span>
 					</button>
@@ -209,6 +221,7 @@
 			</div>
 		</div>
 		<div
+			v-if="!data.err && !data.loadingData"
 			class="Leaderboard-content"
 			:class="{'Leaderboard-content--maxSize': pagesCount == 1}"
 		>
@@ -219,11 +232,11 @@
 				:rank="queries.order == 'des' ? index + 1 : data.usersCount - index"
 			/>
 		</div>
-		<!-- <PagesSelector
-			:page="page"
+		<PagesSelector
+			:page="queries.page"
 			:pagesSize="pagesCount"
 			@update="updatePage"
-		/> -->
+		/>
 	</div>
 
 </template>
