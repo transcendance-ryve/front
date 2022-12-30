@@ -141,7 +141,7 @@
 
 	const	queries: leaderboardQueries = reactive({
 		page: '1',
-		take: '1',
+		take: '10',
 		sort: '',
 		order: 'des',
 		search: ''
@@ -277,6 +277,7 @@
 			/>
 		</div>
 		<PagesSelector
+			v-if="!data.err && !data.loadingData"
 			:page="parseInt(queries.page)"
 			:pagesSize="pagesCount"
 			@update="updatePage"
