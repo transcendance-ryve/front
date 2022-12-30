@@ -34,10 +34,6 @@
 		return p.options.value.filter(val => val != valSelected.value)
 	})
 
-	// const	val = computed(() => {
-	// 	return p.value.value + ': ' + valSelected.value
-	// })
-
 	const	selectVal = (index: number) => {
 		valSelected.value = optionsToSelect.value[index]
 		emit('select', valSelected.value)

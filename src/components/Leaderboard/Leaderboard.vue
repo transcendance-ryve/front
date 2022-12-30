@@ -123,11 +123,14 @@
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
-	import getLeaderboard, { type leaderboardData, type leaderboardQueries } from '@/requests/Leaderboard/getLeaderboard'
+	import getLeaderboard, {type leaderboardData, type leaderboardQueries, type queriesKeys } from '@/requests/Leaderboard/getLeaderboard'
 	import router from '@/router/index'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 2
+	const	toFind = ref('')
+	const	menuTake: string[] = ['10', '20', '50', '100']
+	const	menuSort: string[] = ['Ranked Point', 'Play count', 'Wins', 'Defeats']
 
 	const	data: leaderboardData = reactive({
 		users: [],
@@ -137,40 +140,81 @@
 	})
 
 	const	queries: leaderboardQueries = reactive({
-		page: 1,
-		take: 1,
+		page: '1',
+		take: '1',
 		sort: '',
 		order: 'des',
+		search: ''
 	})
-	console.log('refresh')
 
-	watch(queries, async newVal => {
-		await router.replace({ path: router.currentRoute.value.fullPath, query: queries})
-		getLeaderboard(data)
-	})
-	// router.replace({ path: router.currentRoute.value.fullPath, query: queries})
-	// const	updateQuery = (qry: query, val: number | string) => {
-	// 	qry.value = val
-	// 	router.replace({ path: router.currentRoute.value.fullPath, query: { igo: 'asdf' }})
-	// }
+	const	initQueries = () => {
+		const	queriesNames: queriesKeys[] = ['page', 'take', 'sort', 'order', 'search']
 
-	const		toFind = ref('')
+		for (let i: number = 0; i < queriesNames.length; i++) {
+			const	val = router.currentRoute.value.query[queriesNames[i]] as string
+			if (val)
+				queries[queriesNames[i]] = val
+		}
+	}
 
-	getLeaderboard(data)
+	const	getSortQuery = (value: string) => {
+		if (value === 'Ranked point')
+			queries.sort = 'rankPoint'
+		else if (value === 'Play count')
+			queries.sort = 'played'
+		else if (value === 'Wins')
+			queries.sort = 'wins'
+		else if (value === 'Defeats')
+			queries.sort = 'loses'
+	}
+
+	const	checkQueries = () => {
+		if (!menuTake.includes(queries.take)) {
+			const	takeVal: number = parseInt(queries.take)
+			if (takeVal < 0)
+				queries.take = '10'
+			else if (takeVal > 100)
+				queries.take = '100'
+			else
+				menuTake.unshift(queries.take)
+		}
+		if (menuTake.includes(queries.take)) {
+			menuTake.splice(menuTake.indexOf(queries.take), 1)
+			menuTake.unshift(queries.take)
+		}
+		if (!menuSort.includes(queries.sort))
+			queries.sort = 'rankPoint'
+		if (queries.order !== 'des' && queries.order !== 'asc')
+			queries.order = 'des'
+	}
+
+	initQueries()
+	checkQueries()
+
+	getLeaderboard(queries, data)
 
 	const	pagesCount = computed(() => {
-		let	res: number = Math.round(data.usersCount / queries.take)
-		if (data.usersCount / queries.take > res)
+		const	takeValue = parseInt(queries.take)
+		let	res: number = Math.round(data.usersCount / takeValue)
+		if (data.usersCount / takeValue > res)
 			res++
 		return res
 	})
 
 	const	updatePage = (n: number) => {
-		queries.page = n
+		queries.page = n.toString()
 	}
 
+	watch(toFind, () => {
+		queries.search = toFind.value
+	})
+
+	watch(queries, async () => {
+		getLeaderboard(queries, data)
+	})
+
 	watch(pagesCount, newVal => {
-		if (queries.page > newVal)
+		if (parseInt(queries.page) > newVal)
 			updatePage(newVal)
 	})
 
@@ -188,19 +232,19 @@
 			<div class="Filters">
 				<DropDownMenu
 					value="Per page:"
-					:options="['1', '24', '36', '48']"
+					:options="menuTake"
 					width="165em"
 					height="56em"
 					:logo="logoPerPage"
-					@select="(val) => queries.take = parseInt(val)"
+					@select="(value) => queries.take = value"
 				/>
 				<DropDownMenu
 					value="Sort by:"
-					:options="['Ranked Point', 'Play count', 'Wins', 'Defeats']"
+					:options="menuSort"
 					width="232em"
 					height="56em"
 					:logo="logoSort"
-					@select="(val) => queries.sort = val"
+					@select="getSortQuery"
 				/>
 				<div class="Filters-orderBtns">
 					<button
@@ -233,7 +277,7 @@
 			/>
 		</div>
 		<PagesSelector
-			:page="queries.page"
+			:page="parseInt(queries.page)"
 			:pagesSize="pagesCount"
 			@update="updatePage"
 		/>
