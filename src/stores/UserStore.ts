@@ -16,13 +16,12 @@ export const useUserStore = defineStore('userStore', () => {
 			'/users/me'
 		)
 		if (response.value) {
-			console.log('me ok')
 			localStorage.setItem('me', JSON.stringify(response.value))
 			me.value = response.value
 			loginApi.value = true
 		}
 		if (error.value) {
-			console.log('me error')
+			// console.log('me error')
 		}
 	}
 
@@ -54,7 +53,7 @@ export const useUserStore = defineStore('userStore', () => {
 	}
 
 	function disconnect() {
-		console.log('diconnect')
+		// console.log('diconnect')
 		localStorage.clear()
 		me.value = ''
 		loginApi.value = false

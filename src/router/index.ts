@@ -4,6 +4,7 @@ import Play from '../components/Play/Play.vue'
 import Leaderboard from '../components/Leaderboard/Leaderboard.vue'
 import Spectate from '../components/Spectate/Spectate.vue'
 import Profile from '../components/Profile/Profile.vue'
+import Settings from '../components/Settings/Settings.vue'
 import Accounts from '../views/Accounts.vue'
 import RegisterForm from '../components/Forms/RegisterForm.vue'
 import LoginForm from '../components/Forms/LoginForm.vue'
@@ -38,6 +39,11 @@ const router = createRouter({
 					path: 'profile/:id',
 					name: 'profile',
 					component: Profile,
+				},
+				{
+					path: 'settings',
+					name: 'settings',
+					component: Settings,
 				}
 			]
 		},

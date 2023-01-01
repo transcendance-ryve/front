@@ -1,0 +1,48 @@
+.mainContent-settings {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	.Settings-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 32em;
+
+		.Setting {
+			display: flex;
+			flex-direction: column;
+			padding: 32em;
+			gap: 32em;
+			background: $background-600;
+			border-radius: 6em;
+
+			.Setting-name {
+				color: $white;
+				font-weight: 600;
+				font-size: 20em;
+				line-height: 100%;
+			}
+
+			.input-wrap {
+				width: 250em;
+				input {
+					color: $white-200;
+
+					&:focus {
+						color: white;
+					}
+				}
+			}
+		}
+
+		.Setting--profile {
+			flex-direction: row;
+			align-items: center;
+		}
+
+		.Setting-password > .Passwords-wrapper {
+			display: flex;
+			gap: 16em;
+		}
+	}
+}

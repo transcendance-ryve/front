@@ -46,6 +46,9 @@
 @import './components/Profile/ProfileStat';
 @import './components/Profile/MatchHistory';
 
+//  Settings
+@import './components/Settings/Settings';
+
 //  Utils
 @import './components/Utils/BaseInput';
 @import './components/Utils/Btn1';
@@ -53,3 +56,4 @@
 @import './components/Utils/DropDownMenu';
 @import './components/Utils/UserInfos';
 @import './components/Utils/ToolTip';
+@import './components/Utils/UploadAvatar';

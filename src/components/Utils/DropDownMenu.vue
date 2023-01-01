@@ -11,6 +11,10 @@
 			type: Array,
 			default: [''],
 		},
+		defaultValue: {
+			type: [String, Boolean],
+			default: false
+		},
 		width: {
 			type: String,
 			default: '50rem',
@@ -28,7 +32,7 @@
 
 	const	p = toRefs(props)
 
-	const	valSelected = ref(p.options.value[0])
+	const	valSelected = p.defaultValue.value ?  ref(p.defaultValue.value) : ref(p.options.value[0])
 
 	const	optionsToSelect = computed(() => {
 		return p.options.value.filter(val => val != valSelected.value)

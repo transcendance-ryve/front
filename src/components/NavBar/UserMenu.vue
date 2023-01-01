@@ -22,7 +22,7 @@
 			<button class="User-options" @click="profileRedirect()">
 				<span class="Options-value">Profile</span>
 			</button>
-			<button class="User-options">
+			<button class="User-options" @click="router.push({ path:'/settings' })">
 				<span class="Options-value">Settings</span>
 			</button>
 			<button class="User-options" @click="userStore.disconnect()">

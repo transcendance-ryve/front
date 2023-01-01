@@ -2,12 +2,12 @@
 
 	import { ref } from 'vue'
 	import {
-		logoPhoto,
 		logoProfile,
 		logoLock,
 		logoBack,
 		logoCreate,
 	} from '../../assets/logoSVG'
+	import UploadAvatar from '../Utils/UploadAvatar.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import NewChanContent from './NewChanContent.vue'
 	import Btn1 from '../Utils/Btn1.vue'
@@ -16,14 +16,14 @@
 	const	sbStore = useSideBarStore()
 	const	name = ref('')
 	const	status = ref('')
-	let		chanImg = ref(null)
+	const		chanAvatar = ref(null)
 
-	const	uploadImg = (e:any) => {
+	const	uploadAvatar = (e:any) => {
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)
 		reader.onload = (e:any) => {
-			chanImg.value = e.target.result
+			chanAvatar.value = e.target.result
 		}
 	}
 
@@ -33,21 +33,7 @@
 
 	<div class="SideBar-newChan">
 		<div class="newChan-infos">
-			<input
-				class="Infos-inputFile"
-				type="file"
-				id="image-input"
-				accept="image/jpeg, image/png, image/jpg"
-				@change="uploadImg"
-			>
-			<label
-				:class="{'Infos-upload': !chanImg, 'Infos-img': chanImg}"
-				for="image-input"
-			>
-				<span v-if="!chanImg" class="Upload-logo" v-html="logoPhoto"></span>
-				<span v-if="!chanImg" class="Upload-value">Upload</span>
-				<img class="Infos-img" v-if="chanImg" :src="chanImg" alt="chanImg">
-			</label>
+			<UploadAvatar :avatar="chanAvatar" @change="uploadAvatar"/>
 			<div class="Infos-content">
 				<BaseInput
 					placeholder="Name"

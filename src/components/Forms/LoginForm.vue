@@ -9,6 +9,7 @@
 		helpers
 	} from '@vuelidate/validators'
 	import { logoProfile, logoLock, logo42 } from '../../assets/logoSVG'
+	import auth42 from '@/requests/Auth/auth42'
 
 	const	formData = reactive({
 		id: '',
@@ -44,7 +45,7 @@
 
 <template>
 	<main class="Form-wrap">
-		<button class="Form-42btn">
+		<button class="Form-42btn" @click="auth42">
 			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
 		</button>

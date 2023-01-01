@@ -11,7 +11,6 @@
 
 <template>
 	<div class="Home">
-	<!-- <div class="Home" v-if="userStore.loginApi"> -->
 		<NavBar />
 		<main class="BodyLayout">
 			<section class="BodyLayout-mainContent">

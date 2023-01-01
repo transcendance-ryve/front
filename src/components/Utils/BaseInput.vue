@@ -27,7 +27,7 @@
 		},
 		inputGap: {
 			type: String,
-			default: '8em',
+			default: '12em',
 		},
 		borderRadius: {
 			default: '6em'
