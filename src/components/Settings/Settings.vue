@@ -8,6 +8,7 @@
 	import { logoProfile, logoLock, logoPhone } from '../../assets/logoSVG'
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
+import type { conditionalExpression } from '@babel/types';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -15,7 +16,12 @@
 	const	userStore = useUserStore()
 
 	const	avatar = ref(null)
-	const	username = ref('')
+	const	username = ref(userStore.me.username)
+	const	currentPassword = ref('')
+	const	newPassword = ref('')
+	const	confirmPassword = ref('')
+	const	phoneNumber = ref('07 81 33 44 30')
+	const	phoneInputValue = ref('07 81 33 44 30')
 
 	const	uploadAvatar = (e:any) => {
 		const	img = e.target.files[0]
@@ -26,6 +32,16 @@
 		}
 	}
 
+	const	test = () => {
+		const	length = phoneNumber.value.length
+		if (isNaN(parseInt(phoneNumber.value[length - 1])))
+			phoneNumber.value = phoneNumber.value.slice(0, length - 1)
+		else if (length > 2 && !isNaN(parseInt(phoneNumber.value[length - 2])) && !isNaN(parseInt(phoneNumber.value[length - 3]))) {
+			const	value = phoneNumber.value[length - 1]
+			phoneNumber.value = phoneNumber.value.slice(0, length - 1) + ' ' + value
+		}
+		phoneInputValue.value = phoneNumber.value
+	}
 
 </script>
 
@@ -36,29 +52,29 @@
 			<div class="Setting Setting--profile">
 				<UploadAvatar :avatar="avatar" @change="uploadAvatar"/>
 				<BaseInput
-					:v-model="username"
-					:value="userStore.me.username"
+					v-model="username"
+					:value="username"
 					placeholder="Username"
 					:logo="logoProfile"
 				/>
 			</div>
 			<div class="Setting Setting-password">
-				<h2 class="Setting-name">Change password</h2>
+				<h2 class="Setting-label">Change password</h2>
 				<div class="Passwords-wrapper">
 					<BaseInput
-						:v-model="username"
+						v-model="currentPassword"
 						placeholder="Current password"
 						:logo="logoLock"
 						type="password"
 					/>
 					<BaseInput
-						:v-model="username"
+						v-model="newPassword"
 						placeholder="New password"
 						:logo="logoLock"
 						type="password"
 					/>
 					<BaseInput
-						:v-model="username"
+						v-model="confirmPassword"
 						placeholder="Confirm password"
 						:logo="logoLock"
 						type="password"
@@ -66,12 +82,15 @@
 				</div>
 			</div>
 			<div class="Setting Setting-password">
-				<h2 class="Setting-name">Actived / Disabled 2FA</h2>
+				<h2 class="Setting-label">Actived / Disabled 2FA</h2>
 				<div class="Passwords-wrapper">
 					<BaseInput
-						:v-model="username"
+						v-model="phoneNumber"
+						:value="phoneInputValue"
 						placeholder="Phone number"
 						:logo="logoPhone"
+						maxlength="14"
+						@keyup="test()"
 					/>
 				</div>
 			</div>
