@@ -14,7 +14,7 @@
 	contentStore.state = 2
 	const	toFind = ref('')
 	const	menuTake: string[] = ['10', '20', '50', '100']
-	const	menuSort: string[] = ['Ranked Point', 'Play count', 'Wins', 'Defeats']
+	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
 
 	const	data: leaderboardData = reactive({
 		users: [],
@@ -26,7 +26,7 @@
 	const	queries: leaderboardQueries = reactive({
 		page: '1',
 		take: '10',
-		sort: '',
+		sort: 'rankPoint',
 		order: 'des',
 		search: ''
 	})
@@ -42,7 +42,7 @@
 	}
 
 	const	getSortQuery = (value: string) => {
-		if (value === 'Ranked point')
+		if (value === 'Rank points')
 			queries.sort = 'rankPoint'
 		else if (value === 'Play count')
 			queries.sort = 'played'
@@ -59,13 +59,7 @@
 				queries.take = '10'
 			else if (takeVal > 100)
 				queries.take = '100'
-			// else
-			// 	menuTake.unshift(queries.take)
 		}
-		// if (menuTake.includes(queries.take)) {
-		// 	menuTake.splice(menuTake.indexOf(queries.take), 1)
-		// 	menuTake.unshift(queries.take)
-		// }
 		if (!menuSort.includes(queries.sort))
 			queries.sort = 'rankPoint'
 		if (queries.order !== 'des' && queries.order !== 'asc')
