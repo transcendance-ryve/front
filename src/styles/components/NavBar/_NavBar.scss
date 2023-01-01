@@ -20,10 +20,15 @@
 			cursor: pointer;
 		}
 
-		.NavBar-logo svg {
+		.NavBar-logo {
+			cursor: pointer;
 			width: 84em;
 			height: 66em;
-			fill: white;
+			svg {
+				width: 100%;
+				height: 100%;
+				fill: white;
+			}
 		}
 
 		.NavBar-content {
@@ -66,7 +71,7 @@
 	@media (max-width: $laptopL) {
 		padding: 24em 42em;
 		.NavBar {
-			.NavBar-logo svg {
+			.NavBar-logo {
 				width: 66em;
 				height: 52em;
 			}

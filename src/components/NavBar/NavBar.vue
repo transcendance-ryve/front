@@ -50,7 +50,7 @@
 				alt="list"
 				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
 			>
-			<span class="NavBar-logo" v-html="logoRyve"></span>
+			<span class="NavBar-logo" v-html="logoRyve" @click="router.push({ path:'/' })"></span>
 			<div class="NavBar-content">
 				<NavBarSectionSelector class="Content-options"/>
 				<UserInfos
