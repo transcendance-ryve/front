@@ -133,11 +133,10 @@
 		min-height: calc(540px - 64px);
 		font-size: 1px;
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);
-
 		transition: right 250ms ease-in-out;
+
 		.Sidebar-logoBubble {
 			position: absolute;
-			left: -4px;
 			display: block;
 		}
 		&:hover {
@@ -222,35 +221,30 @@
 @keyframes bubbleSpawn {
 	0% {
 		transform: scale(0);
-		// left: 15px;
 		left: -15px;
 		top: 20px;
 		opacity: 0.3;
 	}
 	20% {
 		transform: scale(0.4);
-		// left: 4px;
 		left: -26px;
 		top: 12px;
 		opacity: 0.6;
 	}
 	40% {
 		transform: scale(0.8);
-		// left: 0px;
 		left: -34px;
 		top: 6px;
 		opacity: 1;
 	}
 	60% {
 		transform: scale(1.2);
-		// left: -6px;
 		left: -40px;
 		top: -2px;
 		opacity: 1;
 	}
 	70% {
 		transform: scale(1);
-		// left: -4px;
 		left: -38px;
 		top: 0px;
 		opacity: 0.8;
