@@ -52,8 +52,12 @@ export const useUserStore = defineStore('userStore', () => {
 		router.push({ path: '/' })
 	}
 
-	function disconnect() {
+	async function disconnect() {
 		// console.log('diconnect')
+		await useAxios(
+			'delete',
+			'/auth/disconnect'
+		)
 		localStorage.clear()
 		me.value = ''
 		loginApi.value = false
