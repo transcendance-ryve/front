@@ -6,6 +6,8 @@
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
 	import BaseInput from '../Utils/BaseInput.vue';
 	import { logoProfile, logoLock, logoPhone } from '../../assets/logoSVG'
+	import Btn1 from '../Utils/Btn1.vue';
+	import router from '@/router';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -23,6 +25,7 @@
 			avatar.value = e.target.result
 		}
 	}
+
 
 </script>
 
@@ -72,6 +75,24 @@
 					/>
 				</div>
 			</div>
+		</div>
+
+		<div class="Settings-btns">
+			<Btn1
+				:type=4
+				value="Back"
+				width="200em"
+				height="52em"
+				fontSize="16em"
+				@click="router.back()"
+			/>
+			<Btn1
+				:type=1
+				value="Update"
+				width="200em"
+				height="52em"
+				fontSize="16em"
+			/>
 		</div>
 	</div>
 

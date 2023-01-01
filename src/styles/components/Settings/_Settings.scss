@@ -1,4 +1,5 @@
 .mainContent-settings {
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -44,5 +45,12 @@
 			display: flex;
 			gap: 16em;
 		}
+	}
+
+	.Settings-btns {
+		display: flex;
+		gap: 16em;
+		justify-content: flex-end;
+		// height: 48em;
 	}
 }

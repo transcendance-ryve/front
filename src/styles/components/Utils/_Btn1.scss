@@ -9,7 +9,6 @@
 	.Btn1-value {
 		font-family: 'Poppins';
 		font-weight: 600;
-		font-size: 14em;
 		line-height: 100%;
 	}
 
@@ -47,6 +46,16 @@
 
 .Btn1--type3 {
 	background: $background-700;
+	.Btn1-value {
+		color: $cheat-blue;
+	}
+	.Logo--fill svg {
+		fill: $cheat-blue;
+	}
+}
+
+.Btn1--type4 {
+	background: $background-600;
 	.Btn1-value {
 		color: $cheat-blue;
 	}

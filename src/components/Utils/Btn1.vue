@@ -1,4 +1,6 @@
 <script setup lang="ts">
+	import { toRefs } from 'vue'
+
 
 	const props = defineProps({
 		type: {
@@ -17,6 +19,10 @@
 			type: [Boolean],
 			default: true,
 		},
+		fontSize: {
+			type: String,
+			default: '14em',
+		},
 		width: {
 			type: [String, Boolean],
 			default: false,
@@ -27,7 +33,9 @@
 		}
 	})
 
-	
+	const p = toRefs(props)
+
+	const	classType: string = 'Btn1--type' + p.type.value
 
 </script>
 
@@ -35,12 +43,7 @@
 
 	<button
 		class="Btn1"
-		:class="{
-			'Btn1--type1': type == 1,
-			'Btn1--type2': type == 2,
-			'Btn1--type3': type == 3,
-		}"
-		@click="$emit('click')"
+		:class=classType
 	>
 		<span
 			class="Btn1-logo"
@@ -58,6 +61,10 @@
 	.Btn1 {
 		width: v-bind(width);
 		height: v-bind(height);
+
+		.Btn1-value {
+			font-size: v-bind(fontSize)
+		}
 	}
 
 </style>
