@@ -16,6 +16,25 @@
 			gap: 32em;
 			background: $background-600;
 			border-radius: 6em;
+			position: relative;
+
+			.Setting-tag {
+				display: flex;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 16em 24em;
+				background: $background-700;
+				border-radius: 0 6em 0 6em;
+
+				.Tag-value {
+					color: $white;
+					font-style: normal;
+					font-weight: 500;
+					font-size: 18em;
+					line-height: 100%;
+				}
+			}
 
 			.Label-wrapper {
 				display: flex;
