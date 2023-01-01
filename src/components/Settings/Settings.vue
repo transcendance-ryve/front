@@ -6,9 +6,9 @@
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
 	import BaseInput from '../Utils/BaseInput.vue';
 	import { logoProfile, logoLock, logoPhone } from '../../assets/logoSVG'
+	import ToggleSwitch from './ToggleSwitch.vue';
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
-import type { conditionalExpression } from '@babel/types';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -22,6 +22,7 @@ import type { conditionalExpression } from '@babel/types';
 	const	confirmPassword = ref('')
 	const	phoneNumber = ref('07 81 33 44 30')
 	const	phoneInputValue = ref('07 81 33 44 30')
+	const	active2FA = ref(false)
 
 	const	uploadAvatar = (e:any) => {
 		const	img = e.target.files[0]
@@ -82,7 +83,10 @@ import type { conditionalExpression } from '@babel/types';
 				</div>
 			</div>
 			<div class="Setting Setting-password">
-				<h2 class="Setting-label">Actived / Disabled 2FA</h2>
+				<div class="Label-wrapper">
+					<h2 class="Setting-label">Actived / Disabled 2FA</h2>
+					<ToggleSwitch :active="active2FA" @click="active2FA = !active2FA"/>
+				</div>
 				<div class="Passwords-wrapper">
 					<BaseInput
 						v-model="phoneNumber"

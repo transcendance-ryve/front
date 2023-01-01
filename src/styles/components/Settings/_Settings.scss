@@ -17,6 +17,12 @@
 			background: $background-600;
 			border-radius: 6em;
 
+			.Label-wrapper {
+				display: flex;
+				align-items: center;
+				gap: 24em;
+			}
+
 			.Setting-label {
 				color: $white;
 				font-weight: 600;

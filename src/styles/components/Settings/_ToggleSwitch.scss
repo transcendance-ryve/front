@@ -1,0 +1,40 @@
+.ToggleSwitch {
+	position: relative;
+	display: flex;
+	width: 50em;
+	height: 22em;
+
+	.Slider {
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: $background-700;
+		border-radius: 34em;
+		transition: background .4s;
+
+		&::before {
+			position: absolute;
+			content: "";
+			height: 16em;
+			width: 16em;
+			left: 4em;
+			bottom: 3em;
+			background: $background-600;
+			border-radius: 50%;
+			transition: background .4s;
+			transition: left .4s;
+		}
+	}
+
+	.Slider--active {
+		background: $cheat-blue;
+
+		&::before {
+			left: 30em;
+			background: white;
+		}
+	}
+}
