@@ -53,26 +53,23 @@
 
 	@media (max-width: $tablet) {
 		min-height: auto;
+		flex-direction: column;
+		align-items: flex-start;
 		padding: 24em 24em;
-		gap: 18em;
+		gap: 32em;
+
+		.LeaderboardTag-StatWrap {
+			font-size: 0.8em;
+		}
+	}
+
+	@media (max-width: $phone) {
 		.LeaderboardTag-user {
 			gap: 16em;
 		}
 		.LeaderboardTag-StatWrap {
 			grid-template: repeat(2, 1fr) / repeat(2, 1fr);
 			gap: 32em 12em;
-			font-size: 0.7em;
-		}
-	}
-
-	@media (max-width: $phone) {
-		flex-direction: column;
-		gap: 32em;
-	}
-
-	@media (max-width: 375px) {
-		.LeaderboardTag-user {
-			flex-direction: column;
 		}
 	}
 }

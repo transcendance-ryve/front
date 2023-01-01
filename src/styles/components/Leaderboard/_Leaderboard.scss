@@ -26,6 +26,7 @@
 					align-items: center;
 					justify-content: center;
 					width: 48em;
+					height: 56em;
 					background: $background-600;
 					border-radius: 6em;
 
@@ -67,20 +68,29 @@
 
 	@media (max-width: $laptop) {
 		.Leaderboard-filters > .input-wrap {
-			width: 300em;
+			width: 250em;
 		}
 	}
 
 	@media (max-width: $tablet) {
+		position: relative;
+
 		.Leaderboard-filters {
+			font-size: 0.9em;
 			flex-direction: column;
 			gap: 16em;
+
+			.Filters-orderBtns {
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
 		}
 	}
 
 	@media (max-width: $phone) {
-		.Leaderboard-filters {
-			font-size: 0.86em;
+		.Level-percentWrap {
+			max-width: 150em;
 		}
 	}
 
