@@ -3,6 +3,7 @@
 	import { type Ref } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd } from '../../assets/logoSVG'
+	import router from '@/router'
 
 	const props = defineProps({
 		type: {
@@ -29,7 +30,7 @@
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
 			<button class="Btn-2FA"><span class="Btn-value">2FA</span></button>
-			<button class="Btn-settings">
+			<button class="Btn-settings" @click="router.push({ path: '/settings' })">
 				<span class="Btn-logo" v-html="logoSettings"></span>
 				<span class="Btn-value">Settings</span>
 			</button>
