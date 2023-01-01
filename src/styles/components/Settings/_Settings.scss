@@ -29,7 +29,7 @@
 				input {
 					color: $white-200;
 
-					&:focus {
+					&:focus, &:hover {
 						color: white;
 					}
 				}
