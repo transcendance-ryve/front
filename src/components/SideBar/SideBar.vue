@@ -47,8 +47,6 @@
 		<SideBarConv v-if="sbStore.conv.open == true" />
 		<SideBarNewChan v-else-if="sbStore.newChan == true" />
 		<SideBarContent v-else />
-
-		<span class="Sidebar-logoBubble" v-html="logoBubble"></span>
 	</section>
 
 </template>
