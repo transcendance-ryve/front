@@ -7,12 +7,13 @@
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
-	import getLeaderboard, {type leaderboardData, type leaderboardQueries, type queriesKeys } from '@/requests/Leaderboard/getLeaderboard'
+	import { getQueriesInUrl, replaceUrl, getLeaderboard, type leaderboardData, type leaderboardQueries, type queriesKeys } from '@/requests/Leaderboard/getLeaderboard'
 	import router from '@/router/index'
+	import {type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 2
-	const	toFind = ref('')
+	const	toFind: Ref<string> = ref('')
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
 
@@ -31,11 +32,11 @@
 		search: ''
 	})
 
-	const	initQueries = () => {
+	const	getQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['page', 'take', 'sort', 'order', 'search']
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
-			const	val = router.currentRoute.value.query[queriesNames[i]] as string
+			const	val = urlQueries[queriesNames[i]] as string
 			if (val)
 				queries[queriesNames[i]] = val
 		}
@@ -52,18 +53,30 @@
 			queries.sort = 'loses'
 	}
 
+	const	getSortName = (value: string) => {
+		if (value === 'rankPoint')
+			return 'Rank points'
+		else if (value === 'played')
+			return 'Play count'
+		else if (value === 'wins')
+			return 'Wins'
+		else if (value === 'loses')
+			return 'Defeats'
+	}
+
 	const	checkQueries = () => {
 		const	page: number = parseInt(queries.page)
+		const	sortQueries = ['rankPoint', 'played', 'wins', 'loses']
 		if (isNaN(page) || page < 1)
 			queries.page = '1'
 		if (!menuTake.includes(queries.take)) {
 			const	takeVal: number = parseInt(queries.take)
 			if (isNaN(takeVal) || takeVal < 1)
-				queries.take = '10'
+			queries.take = '10'
 			else if (takeVal > 100)
-				queries.take = '100'
+			queries.take = '100'
 		}
-		if (!menuSort.includes(queries.sort))
+		if (!sortQueries.includes(queries.sort))
 			queries.sort = 'rankPoint'
 		if (queries.order !== 'des' && queries.order !== 'asc')
 			queries.order = 'des'
@@ -93,8 +106,11 @@
 		queries.search = toFind.value
 	})
 
+	let	block = false
 	watch(queries, async () => {
-		getLeaderboard(queries, data)
+		console.log('watch', queries)
+		if (!block)
+			await replaceUrl(JSON.parse(JSON.stringify(queries)))
 	})
 
 	watch(pagesCount, newVal => {
@@ -102,9 +118,23 @@
 			updatePage(newVal)
 	})
 
-	initQueries()
+	onBeforeRouteUpdate(async (to, from) => {
+			console.log('queries in bedpre', router.currentRoute.value.query)
+			block = true
+			if (to.query !== from.query) {
+				console.log('query update in before')
+				getQueries(to.query)
+				checkQueries() // ?
+			}
+			// block = false
+			// to query
+			await getLeaderboard(getQueriesInUrl(to.fullPath), data)
+			block = false
+	})
+
+	getQueries(router.currentRoute.value.query)
 	checkQueries()
-	getLeaderboard(queries, data)
+	getLeaderboard(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 
 </script>
 
@@ -119,17 +149,18 @@
 			/>
 			<div class="Filters">
 				<DropDownMenu
-					value="Per page:"
+					label="Per page:"
 					:options="menuTake"
-					:defaultValue="menuTake.includes(queries.take) ? false : queries.take"
+					:selectValue="queries.take"
 					width="165em"
 					height="56em"
 					:logo="logoPerPage"
 					@select="(value) => queries.take = value"
 				/>
 				<DropDownMenu
-					value="Sort by:"
+					label="Sort by:"
 					:options="menuSort"
+					:selectValue="getSortName(queries.sort)"
 					width="232em"
 					height="56em"
 					:logo="logoSort"

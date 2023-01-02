@@ -13,7 +13,7 @@
 		height: 100%;
 		flex: 1;
 
-		a {
+		.Menu-section {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -34,7 +34,7 @@
 		}
 	}
 
-	.Menu > a {
+	.Menu > .Menu-section {
 		gap: 8em;
 
 		.Menu-logo {
@@ -66,7 +66,7 @@
 			justify-content: center;
 			width: 100%;
 			min-height: 40em;
-			a {
+			.Menu-section {
 				justify-content: center;
 				align-items: center;
 				display: flex;

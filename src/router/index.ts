@@ -80,13 +80,17 @@ const router = createRouter({
 	]
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach((to, from) => {
 	const	userStore = useUserStore()
 
 	if (!userStore.loginApi && !to.fullPath.includes('/accounts'))
 		return { name: 'register' }
 	else if (userStore.loginApi && to.fullPath.includes('/accounts'))
 		return { name: 'home' }
+	else if (to.fullPath === '/leaderboard') {
+		console.log('lolilol')
+		return { path: '/leaderboard', query: { page: 1, take: 10, sort: 'rankPoint', order: 'des' } }
+	}
 })
 
 export default router

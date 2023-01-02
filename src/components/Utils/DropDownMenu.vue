@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 
 	import { toRefs, ref, computed } from 'vue'
 
@@ -49,19 +49,101 @@
 
 	<ul class="DropDownMenu">
 		<li class="Menu">
-			<a href="#">
+			<span class="Menu-section">
 				<span class="Menu-logo" v-html="logo"></span>
 				<span class="Menu-text">{{ value }}</span>
 				<span class="Menu-valSelected">{{ valSelected }}</span>
-			</a>
+			</span>
 			<ul class="Menu-options">
 				<li
 					v-for="(option, index) in optionsToSelect"
 					:key="index"
 				>
-					<a href="#" @click="selectVal(index)">
+					<span class="Menu-section" @click="selectVal(index)">
 						<span class="Menu-text">{{ option }}</span>
-					</a>
+					</span>
+				</li>
+			</ul>
+		</li>
+	</ul>
+
+</template>
+
+<style lang="scss" scoped>
+
+	.DropDownMenu {
+		width: v-bind(width);
+		height: v-bind(height);
+
+		.Menu-options {
+			width: v-bind(width);
+			margin-top: v-bind(height);
+		}
+	}
+
+</style> -->
+
+<script setup lang="ts">
+
+	import { toRefs, computed } from 'vue'
+
+	const props = defineProps({
+		label: {
+			type: String,
+			default: '',
+		},
+		options: {
+			type: Array,
+			default: [''],
+		},
+		selectValue: {
+			type: [String, Boolean],
+			default: false
+		},
+		width: {
+			type: String,
+			default: '50rem',
+		},
+		height: {
+			type: String,
+			default: '30rem',
+		},
+		logo: {
+			type: String
+		}
+	})
+
+	const	emit = defineEmits(['select'])
+
+	const	p = toRefs(props)
+
+	const	optionsToSelect = computed(() => {
+		return p.options.value.filter(val => val != p.selectValue.value)
+	})
+
+	const	selectVal = (value: any) => {
+		emit('select', value as string)
+	}
+
+</script>
+
+<template>
+
+	<ul class="DropDownMenu">
+		<li class="Menu">
+			<span class="Menu-section">
+				<span class="Menu-logo" v-html="logo"></span>
+				<span class="Menu-text">{{ label }}</span>
+				<span class="Menu-valSelected">{{ selectValue }}</span>
+			</span>
+			<ul class="Menu-options">
+				<li
+					v-for="(option, index) in optionsToSelect"
+					:key="index"
+				>
+					<span class="Menu-section" @click="selectVal(option)">
+						<span class="Menu-text">{{ option }}</span>
+					</span>
 				</li>
 			</ul>
 		</li>

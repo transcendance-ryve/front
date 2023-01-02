@@ -5,19 +5,28 @@ export type leaderboardData = { users: [], count: number, loadingData: boolean, 
 export type leaderboardQueries = { page: string, take: string, sort: string, order: string, search: string }
 export type queriesKeys = 'page' | 'take' | 'sort' | 'order' | 'search'
 
-const getLeaderboard = async (queries: Partial<leaderboardQueries>, data: leaderboardData) => {
 
+const	getQueriesInUrl = (path: string) => {
+	return (path.substring(path.indexOf('?')))
+}
+
+const	replaceUrl = async (queries: Partial<leaderboardQueries>) => {
 	if (!queries.search)
 		delete queries.search
-	await router.replace({ path: router.currentRoute.value.fullPath, query: queries})
+	await router.push({ query: queries})
+}
 
-	const	path = router.currentRoute.value.fullPath
-	let	queriesToUrl: string = path.substring(path.indexOf('?'), path.length)
+const getLeaderboard = async (urlQueries: string, data: leaderboardData) => {
+
+	// const	path = router.currentRoute.value.fullPath
+	// console.log('path in get', path)
+	// const	urlqueries: string = path.substring(path.indexOf('?'), path.length)
+
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/users'
-		+ queriesToUrl
+		+ urlQueries
 		+ '&select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
 	)
 	data.loadingData = loading.value
@@ -28,4 +37,4 @@ const getLeaderboard = async (queries: Partial<leaderboardQueries>, data: leader
 	}
 }
 
-export default getLeaderboard
+export { getQueriesInUrl, replaceUrl, getLeaderboard }
