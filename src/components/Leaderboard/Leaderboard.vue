@@ -119,15 +119,11 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-			console.log('queries in bedpre', router.currentRoute.value.query)
 			block = true
 			if (to.query !== from.query) {
-				console.log('query update in before')
 				getQueries(to.query)
 				checkQueries() // ?
 			}
-			// block = false
-			// to query
 			await getLeaderboard(getQueriesInUrl(to.fullPath), data)
 			block = false
 	})
