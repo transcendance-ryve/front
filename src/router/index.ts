@@ -87,10 +87,8 @@ router.beforeEach((to, from) => {
 		return { name: 'register' }
 	else if (userStore.loginApi && to.fullPath.includes('/accounts'))
 		return { name: 'home' }
-	else if (to.fullPath === '/leaderboard') {
-		console.log('lolilol')
+	else if (to.fullPath === '/leaderboard')
 		return { path: '/leaderboard', query: { page: 1, take: 10, sort: 'rankPoint', order: 'des' } }
-	}
 })
 
 export default router

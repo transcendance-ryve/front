@@ -13,9 +13,11 @@
 
 	const	contentStore = useContentStore()
 	contentStore.state = 2
+
 	const	toFind: Ref<string> = ref('')
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
+	let		routeUpdating = false
 
 	const	data: leaderboardData = reactive({
 		users: [],
@@ -32,7 +34,7 @@
 		search: ''
 	})
 
-	const	getQueries = (urlQueries: LocationQuery) => {
+	const	getUrlQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['page', 'take', 'sort', 'order', 'search']
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
@@ -106,10 +108,8 @@
 		queries.search = toFind.value
 	})
 
-	let	block = false
 	watch(queries, async () => {
-		console.log('watch', queries)
-		if (!block)
+		if (!routeUpdating)
 			await replaceUrl(JSON.parse(JSON.stringify(queries)))
 	})
 
@@ -119,16 +119,14 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-			block = true
-			if (to.query !== from.query) {
-				getQueries(to.query)
-				checkQueries() // ?
-			}
+			routeUpdating = true
+			if (to.query !== from.query)
+				getUrlQueries(to.query)
 			await getLeaderboard(getQueriesInUrl(to.fullPath), data)
-			block = false
+			routeUpdating = false
 	})
 
-	getQueries(router.currentRoute.value.query)
+	getUrlQueries(router.currentRoute.value.query)
 	checkQueries()
 	getLeaderboard(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 
