@@ -16,7 +16,8 @@
 		font-size: 18em;
 	}
 
-	.Form-42btn {
+	.Form-42btn, a {
+		text-decoration: none;
 		display: flex;
 		align-items: center;
 		justify-content: center;

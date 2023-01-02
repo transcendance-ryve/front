@@ -1,6 +1,5 @@
 <script setup lang="ts">
 	import { reactive, computed } from 'vue'
-	import router from '../../router/index.ts'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
 	import {
@@ -45,10 +44,10 @@
 
 <template>
 	<main class="Form-wrap">
-		<button class="Form-42btn" @click="auth42">
+		<a href="http://localhost:3000/auth/42">
 			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
-		</button>
+		</a>
 		<span class="or">OR</span>
 		<h1>Welcome back!</h1>
 		<form @submit.prevent="submitForm">
