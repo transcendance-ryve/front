@@ -53,9 +53,12 @@
 	}
 
 	const	checkQueries = () => {
+		const	page: number = parseInt(queries.page)
+		if (isNaN(page) || page < 1)
+			queries.page = '1'
 		if (!menuTake.includes(queries.take)) {
 			const	takeVal: number = parseInt(queries.take)
-			if (takeVal < 0)
+			if (isNaN(takeVal) || takeVal < 1)
 				queries.take = '10'
 			else if (takeVal > 100)
 				queries.take = '100'
