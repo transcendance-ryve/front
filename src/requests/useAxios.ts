@@ -21,7 +21,11 @@ const	useAxios = async (method: Methods, url: string, data: string | any = null)
 	catch (err: any) {
 		if (err.request.status == 401) {
 			const	userStore = useUserStore()
-			userStore.disconnect()
+			localStorage.clear()
+			userStore.me = ''
+			userStore.loginApi = false
+			if (!router.currentRoute.value.fullPath.includes('/accounts'))
+				router.push({ path: '/accounts' })
 		}
 		error.value = err
 	}
