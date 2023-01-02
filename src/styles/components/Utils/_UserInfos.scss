@@ -70,13 +70,11 @@
 }
 
 .UserInfos--XL {
-	width: 320em;
-	height: 96em;
 	gap: 24em;
 
 	.UserInfos-avatar {
-		width: 96em;
-		height: 96em;
+		width: 128em;
+		height: 128em;
 	}
 
 	.UserInfos-content {
@@ -93,8 +91,6 @@
 }
 
 .UserInfos--XS {
-	width: 180em;
-	height: 52em;
 	gap: 12em;
 
 	.UserInfos-avatar {
