@@ -97,7 +97,7 @@
 			default: [''],
 		},
 		selectValue: {
-			type: [String, Boolean],
+			type: String,
 			default: false
 		},
 		width: {

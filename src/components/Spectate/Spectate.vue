@@ -192,7 +192,8 @@
 			/>
 			<div class="Filters-menus">
 				<DropDownMenu
-					value="Per page:"
+					label="Per page:"
+					:selectValue="perPage.toString()"
 					:options="['12', '24', '36', '48']"
 					width="165em"
 					height="56em"
@@ -200,7 +201,8 @@
 					@select="(val) => perPage = parseInt(val)"
 				/>
 				<DropDownMenu
-					value="Sort by:"
+					label="Sort by:"
+					:selectValue="order"
 					:options="['Recent', 'Ancient']"
 					width="205em"
 					height="56em"
