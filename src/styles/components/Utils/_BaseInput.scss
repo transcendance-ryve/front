@@ -32,6 +32,9 @@
 			-webkit-text-fill-color: white !important;
 		}
 	}
+	input:focus + .inputLogo > svg {
+		fill: white;
+	}
 	.inputLogo {
 		position: absolute;
 		svg {
