@@ -17,7 +17,7 @@
 
 	const	avatar = ref(null)
 	const	username = ref(userStore.me.username)
-	const	currentPassword = ref('')
+	const	oldPassword = ref('')
 	const	newPassword = ref('')
 	const	confirmPassword = ref('')
 	const	phoneNumber = ref('07 81 33 44 30')
@@ -65,8 +65,8 @@
 				<h2 class="Setting-label">Change password</h2>
 				<div class="Passwords-wrapper">
 					<BaseInput
-						v-model="currentPassword"
-						placeholder="Current password"
+						v-model="oldPassword"
+						placeholder="Old password"
 						:logo="logoLock"
 						type="password"
 					/>
