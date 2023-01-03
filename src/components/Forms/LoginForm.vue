@@ -50,7 +50,7 @@
 <template>
 	<main class="Form-wrap">
 		<a class="Form-42btn" @click="setOauthState()" href="http://localhost:3000/auth/42">
-			<span class="Btn-value">Sign up with</span>
+			<span class="Btn-value">Sign in with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
 		</a>
 		<span class="or">OR</span>

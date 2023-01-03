@@ -50,7 +50,9 @@
 		}
 
 		.Btn-type1 {
-			color: $cheat-blue;
+			.Btn-value {
+				color: $cheat-blue;
+			}
 			.Btn-logo > svg {
 				fill: $cheat-blue;
 			}
