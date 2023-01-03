@@ -7,12 +7,13 @@ import { useUserStore } from '../stores/UserStore'
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
 
-type Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get";
+type	Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get"
+type	useAxiosRes = { reponse: Ref<any>, error: Ref<any>, loading: Ref<boolean> }
 
 const	useAxios = async (method: Methods, url: string, data: string | any = null) => {
-	const	response: Ref = ref(null)
-	const	error: Ref = ref(null)
-	const	loading: Ref = ref(true)
+	const	response: Ref<any> = ref(null)
+	const	error: Ref<any> = ref(null)
+	const	loading: Ref<boolean> = ref(true)
 
 	try {
 		const	res:AxiosResponse = await axios[method](url, data ? JSON.parse(data) : '')

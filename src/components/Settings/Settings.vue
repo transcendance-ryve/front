@@ -9,6 +9,7 @@
 	import ToggleSwitch from './ToggleSwitch.vue';
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
+	import putUsername from '@/requests/Settings/PutUsername'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -33,7 +34,7 @@
 		}
 	}
 
-	const	test = () => {
+	const	updatePhoneNumber = () => {
 		const	length = phoneNumber.value.length
 		if (isNaN(parseInt(phoneNumber.value[length - 1])))
 			phoneNumber.value = phoneNumber.value.slice(0, length - 1)
@@ -42,6 +43,37 @@
 			phoneNumber.value = phoneNumber.value.slice(0, length - 1) + ' ' + value
 		}
 		phoneInputValue.value = phoneNumber.value
+	}
+
+	const	checkSettings = () => {
+		let	error: string = ''
+
+		if (!username.value) {
+			error = 'Empty username'
+		}
+		if (oldPassword.value) {
+			if (!newPassword.value)
+				error = error ? error + '\nEmpty new password' : 'Empty new password'
+			else {
+				if (oldPassword.value === newPassword.value)
+					error = error ? error + '\nCannot change with same password' : 'Cannot change with same password'
+				if (newPassword.value !== confirmPassword.value)
+					error = error ? error + '\nConfirm password different' : 'Confirm password different'
+			}
+		}
+
+		if (error) {
+			alert(error)
+			return false
+		}
+		return true
+	}
+
+	const	updateSettings = () => {
+		checkSettings()
+		if (username.value !== userStore.me.username)
+			putUsername(username.value)
+
 	}
 
 </script>
@@ -97,7 +129,7 @@
 						placeholder="Phone number"
 						:logo="logoPhone"
 						maxlength="14"
-						@keyup="test()"
+						@keyup="updatePhoneNumber()"
 					/>
 				</div>
 			</div>
@@ -118,6 +150,7 @@
 				width="200em"
 				height="52em"
 				fontSize="16em"
+				@click="updateSettings()"
 			/>
 		</div>
 	</div>

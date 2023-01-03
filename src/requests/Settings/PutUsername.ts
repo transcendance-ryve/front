@@ -1,0 +1,21 @@
+import useAxios from '@/requests/useAxios'
+import { useUserStore } from '../../stores/UserStore'
+
+const putUsername = async (username: string) => {
+	const userStore = useUserStore()
+
+		const { response, loading, error } = await useAxios(
+			'put',
+			'/users/username/',
+			JSON.stringify({
+				username
+			})
+		)
+		if (error.value) {
+			//	erreurs a gerer
+		}
+		else if (response.value)
+			userStore.updateMe(response.value)
+}
+
+export default putUsername

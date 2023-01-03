@@ -12,14 +12,20 @@ export const useUserStore = defineStore('userStore', () => {
 
 	const me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
+	function	updateMe(data: any) {
+		localStorage.setItem('me', JSON.stringify(data))
+		me.value = data
+	}
+
 	async function updateLoginApi() {
 		const { response, loading, error } = await useAxios(
 			'get',
 			'/users/me'
 		)
 		if (response.value) {
-			localStorage.setItem('me', JSON.stringify(response.value))
-			me.value = response.value
+			// localStorage.setItem('me', JSON.stringify(response.value))
+			// me.value = response.value
+			updateMe(response.value)
 			loginApi.value = true
 		}
 		if (error.value) {
@@ -80,6 +86,7 @@ export const useUserStore = defineStore('userStore', () => {
 		oauth42,
 		loginApi,
 		me,
+		updateMe,
 		updateLoginApi,
 		register,
 		connect,
