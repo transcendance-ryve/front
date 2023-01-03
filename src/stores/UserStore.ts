@@ -35,11 +35,7 @@ export const useUserStore = defineStore('userStore', () => {
 		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/register',
-			JSON.stringify({
-				username,
-				email,
-				password
-			})
+			{ username, email, password }
 		)
 		await updateLoginApi()
 		router.push({ path: '/' })
@@ -49,10 +45,7 @@ export const useUserStore = defineStore('userStore', () => {
 		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/login',
-			JSON.stringify({
-				email,
-				password
-			})
+			{ email, password }
 		)
 		await updateLoginApi()
 		router.push({ path: '/' })
@@ -74,9 +67,7 @@ export const useUserStore = defineStore('userStore', () => {
 		const { response, loading, error } = await useAxios(
 			'post',
 			'/auth/forgot-password',
-			JSON.stringify({
-				email
-			})
+			{ email }
 		)
 	}
 

@@ -22,7 +22,7 @@
 			class="Infos-inputFile"
 			type="file"
 			:id="id"
-			accept="image/jpeg, image/png, image/jpg"
+			accept="image/jpeg, image/png, image/jpg, image/gif"
 		>
 		<label
 			:class="{'Infos-upload': !avatar, 'Infos-img': avatar}"

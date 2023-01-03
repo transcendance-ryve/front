@@ -10,17 +10,18 @@ axios.defaults.withCredentials = true
 type	Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get"
 type	useAxiosRes = { reponse: Ref<any>, error: Ref<any>, loading: Ref<boolean> }
 
-const	useAxios = async (method: Methods, url: string, data: string | any = null) => {
+const	useAxios = async (method: Methods, url: string, body: object | any = null, header: object | any = null) => {
 	const	response: Ref<any> = ref(null)
 	const	error: Ref<any> = ref(null)
 	const	loading: Ref<boolean> = ref(true)
 
 	try {
-		const	res:AxiosResponse = await axios[method](url, data ? JSON.parse(data) : '')
+		const	res:AxiosResponse = await axios[method](url, body ? body : '', header ? header : '')
 		response.value = res.data
 	}
 	catch (err: any) {
-		if (err.request.status == 401) {
+		console.log('error', err)
+		if (err.response?.status === 401) {
 			const	userStore = useUserStore()
 			localStorage.clear()
 			userStore.me = ''

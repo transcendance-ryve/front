@@ -10,6 +10,7 @@
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
 	import setUsername from '@/requests/Settings/SetUsername'
+	import setAvatar from '@/requests/Settings/SetAvatar'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -18,6 +19,7 @@
 
 	type	data = {
 		avatar: null,
+		avatarFile: File | null,
 		username: string,
 		oldPassword: string,
 		newPassword: string,
@@ -27,8 +29,9 @@
 		active2FA: boolean
 	}
 
-	const	formData: data = reactive({
+	const	settingsData: data = reactive({
 		avatar: null,
+		avatarFile: null,
 		username: userStore.me.username,
 		oldPassword: '',
 		newPassword: '',
@@ -39,40 +42,38 @@
 	})
 
 	const	uploadAvatar = (e:any) => {
-		const	img: File = e.target.files[0]
-		console.log('img', img)
+		settingsData.avatarFile = e.target.files[0]
 		const	reader: FileReader = new FileReader()
-		reader.readAsDataURL(img)
+		reader.readAsDataURL(settingsData.avatarFile as File)
 		reader.onload = (e:any) => {
-			formData.avatar = e.target.result
-			console.log('avatar', formData.avatar)
+			settingsData.avatar = e.target.result
 		}
 	}
 
 	const	updatePhoneNumber = () => {
-		const	length = formData.phoneNumber.length
-		if (isNaN(parseInt(formData.phoneNumber[length - 1])))
-			formData.phoneNumber = formData.phoneNumber.slice(0, length - 1)
-		else if (length > 2 && !isNaN(parseInt(formData.phoneNumber[length - 2])) && !isNaN(parseInt(formData.phoneNumber[length - 3]))) {
-			const	value = formData.phoneNumber[length - 1]
-			formData.phoneNumber = formData.phoneNumber.slice(0, length - 1) + ' ' + value
+		const	length = settingsData.phoneNumber.length
+		if (isNaN(parseInt(settingsData.phoneNumber[length - 1])))
+		settingsData.phoneNumber = settingsData.phoneNumber.slice(0, length - 1)
+		else if (length > 2 && !isNaN(parseInt(settingsData.phoneNumber[length - 2])) && !isNaN(parseInt(settingsData.phoneNumber[length - 3]))) {
+			const	value = settingsData.phoneNumber[length - 1]
+			settingsData.phoneNumber = settingsData.phoneNumber.slice(0, length - 1) + ' ' + value
 		}
-		formData.phoneInputValue = formData.phoneNumber
+		settingsData.phoneInputValue = settingsData.phoneNumber
 	}
 
 	const	checkSettings = () => {
 		let	error: string = ''
 
-		if (!formData.username) {
+		if (!settingsData.username) {
 			error = 'Empty username'
 		}
-		if (formData.oldPassword) {
-			if (!formData.newPassword)
+		if (settingsData.oldPassword) {
+			if (!settingsData.newPassword)
 				error = error ? error + '\nEmpty new password' : 'Empty new password'
 			else {
-				if (formData.oldPassword === formData.newPassword)
+				if (settingsData.oldPassword === settingsData.newPassword)
 					error = error ? error + '\nCannot change with same password' : 'Cannot change with same password'
-				if (formData.newPassword !== formData.confirmPassword)
+				if (settingsData.newPassword !== settingsData.confirmPassword)
 					error = error ? error + '\nConfirm password is different' : 'Confirm password is different'
 			}
 		}
@@ -86,9 +87,10 @@
 
 	const	updateSettings = () => {
 		checkSettings()
-		if (formData.username !== userStore.me.username)
-			setUsername(formData.username)
-
+		if (settingsData.username !== userStore.me.username)
+			setUsername(settingsData.username)
+		if (settingsData.avatarFile)
+			setAvatar(settingsData.avatarFile)
 	}
 
 </script>
@@ -99,10 +101,10 @@
 		<div class="Settings-wrapper">
 			<div class="Setting Setting--profile">
 				<div class="Setting-tag"><span class="Tag-value">Profile</span></div>
-				<UploadAvatar :avatar="formData.avatar" id="userAvatar-input" @change="uploadAvatar"/>
+				<UploadAvatar :avatar="settingsData.avatar" id="userAvatar-input" @change="uploadAvatar"/>
 				<BaseInput
-					v-model="formData.username"
-					:value="formData.username"
+					v-model="settingsData.username"
+					:value="settingsData.username"
 					placeholder="Username"
 					:logo="logoProfile"
 				/>
@@ -112,19 +114,19 @@
 				<h2 class="Setting-label">Change password</h2>
 				<div class="Passwords-wrapper">
 					<BaseInput
-						v-model="formData.oldPassword"
+						v-model="settingsData.oldPassword"
 						placeholder="Old password"
 						:logo="logoLock"
 						type="password"
 					/>
 					<BaseInput
-						v-model="formData.newPassword"
+						v-model="settingsData.newPassword"
 						placeholder="New password"
 						:logo="logoLock"
 						type="password"
 					/>
 					<BaseInput
-						v-model="formData.confirmPassword"
+						v-model="settingsData.confirmPassword"
 						placeholder="Confirm password"
 						:logo="logoLock"
 						type="password"
@@ -135,12 +137,12 @@
 				<div class="Setting-tag"><span class="Tag-value">2FA</span></div>
 				<div class="Label-wrapper">
 					<h2 class="Setting-label">Actived / Disabled 2FA</h2>
-					<ToggleSwitch :active="formData.active2FA" @click="formData.active2FA = !formData.active2FA"/>
+					<ToggleSwitch :active="settingsData.active2FA" @click="settingsData.active2FA = !settingsData.active2FA"/>
 				</div>
 				<div class="Passwords-wrapper">
 					<BaseInput
-						v-model="formData.phoneNumber"
-						:value="formData.phoneInputValue"
+						v-model="settingsData.phoneNumber"
+						:value="settingsData.phoneInputValue"
 						placeholder="Phone number"
 						:logo="logoPhone"
 						maxlength="14"
