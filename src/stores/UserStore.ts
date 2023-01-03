@@ -6,7 +6,9 @@ import useAxios from '@/requests/useAxios'
 
 export const useUserStore = defineStore('userStore', () => {
 
-	const loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
+	const	loginApi: Ref = ref(localStorage.getItem('me') ? true : false)
+
+	const	oauth42 = ref(localStorage.getItem('oauth42') ? true : false)
 
 	const me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
@@ -76,6 +78,7 @@ export const useUserStore = defineStore('userStore', () => {
 	}
 
 	return {
+		oauth42,
 		loginApi,
 		me,
 		updateLoginApi,

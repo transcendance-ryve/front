@@ -3,8 +3,6 @@
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
 
-	// console.log(router.currentRoute.value.fullPath)
-
 	const	loginRedirect = () => {
 		router.push({path:'/accounts/login'})
 	}

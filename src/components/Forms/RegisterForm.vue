@@ -54,14 +54,18 @@
 			alert('error, form not submitted')
 	}
 
+	const	setOauthState = () => {
+		localStorage.setItem('oauth42', 'true')
+	}
+
 </script>
 
 <template>
 	<div class="Form-wrap">
-		<button class="Form-42btn">
+		<a class="Form-42btn" @click="setOauthState()" href="http://localhost:3000/auth/42">
 			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
-		</button>
+		</a>
 		<span class="or">OR</span>
 		<h1>Create an account</h1>
 		<form @submit.prevent="submitForm">
