@@ -7,14 +7,20 @@
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
-	import { getQueriesInUrl, replaceUrl, getLeaderboard, type leaderboardData, type leaderboardQueries, type queriesKeys } from '@/requests/Leaderboard/getLeaderboard'
+	import {
+		getQueriesInUrl,
+		replaceUrl,
+		getLeaderboard,
+		type leaderboardData,
+		type leaderboardQueries,
+		type queriesKeys
+	} from '@/requests/Leaderboard/getLeaderboard'
 	import router from '@/router/index'
 	import {type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 2
 
-	const	toFind: Ref<string> = ref('')
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
 	let		routeUpdating = false
@@ -41,6 +47,8 @@
 			const	val = urlQueries[queriesNames[i]] as string
 			if (val)
 				queries[queriesNames[i]] = val
+			else
+				queries[queriesNames[i]] = ''
 		}
 	}
 
@@ -104,10 +112,6 @@
 		queries.page = n.toString()
 	}
 
-	watch(toFind, () => {
-		queries.search = toFind.value
-	})
-
 	watch(queries, async () => {
 		if (!routeUpdating)
 			await replaceUrl(JSON.parse(JSON.stringify(queries)))
@@ -137,9 +141,10 @@
 	<div class="mainContent-leaderboard">
 		<div class="Leaderboard-filters">
 			<SearchInput
+				:defaultValue="queries.search"
 				inputBackground="#242635"
 				inputHeight="56em"
-				@search="(val) => toFind = val"
+				@search="(val) => queries.search = val"
 			/>
 			<div class="Filters">
 				<DropDownMenu

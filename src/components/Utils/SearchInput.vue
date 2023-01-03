@@ -1,10 +1,14 @@
 <script setup lang="ts">
 
-	import { ref, watch } from 'vue'
+	import { ref, toRefs, watch } from 'vue'
 	import BaseInput from './BaseInput.vue'
 	import { logoSearch } from '../../assets/logoSVG'
 
-	defineProps({
+	const	props = defineProps({
+		defaultValue: {
+			type: String,
+			default: '',
+		},
 		inputBackground: {
 			type: String,
 			default: '#1F1E2C',
@@ -18,18 +22,29 @@
 		},
 	})
 
-	const	input = ref('')
-	const	isWriting = ref(false)
+	const	p = toRefs(props)
+
+	const	input = ref(p.defaultValue.value.substring(0))
+	let		isWriting = false
 	let		timer: number
 	const	emit = defineEmits(['search'])
+	let		updateInput: boolean = false
 
-	watch(input, newVal => {
-		if (isWriting.value)
+	watch(p.defaultValue, () => {
+		updateInput = true
+		input.value = p.defaultValue.value
+		updateInput = false
+	})
+
+	watch(input, () => {
+		if (updateInput)
+			return
+		if (isWriting)
 			clearTimeout(timer)
 		else
-			isWriting.value = true
+			isWriting = true
 		timer = setTimeout(() => {
-			isWriting.value = false
+			isWriting = false
 			emit('search', input.value)
 		}, 600)
 	})
