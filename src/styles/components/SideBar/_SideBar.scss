@@ -67,6 +67,7 @@
 
 	@media (max-width: $laptopL) {
 		position: absolute;
+		z-index: 3;
 		top: calc(100px + 32px);
 		right: -420px;
 		width: 450px;
