@@ -58,7 +58,7 @@
 				if (oldPassword.value === newPassword.value)
 					error = error ? error + '\nCannot change with same password' : 'Cannot change with same password'
 				if (newPassword.value !== confirmPassword.value)
-					error = error ? error + '\nConfirm password different' : 'Confirm password different'
+					error = error ? error + '\nConfirm password is different' : 'Confirm password is different'
 			}
 		}
 

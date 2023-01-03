@@ -12,7 +12,7 @@ const putUsername = async (username: string) => {
 			})
 		)
 		if (error.value) {
-			//	erreurs a gerer
+			//	handle errors
 		}
 		else if (response.value)
 			userStore.updateMe(response.value)

@@ -23,8 +23,6 @@ export const useUserStore = defineStore('userStore', () => {
 			'/users/me'
 		)
 		if (response.value) {
-			// localStorage.setItem('me', JSON.stringify(response.value))
-			// me.value = response.value
 			updateMe(response.value)
 			loginApi.value = true
 		}

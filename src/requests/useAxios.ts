@@ -34,7 +34,7 @@ const	useAxios = async (method: Methods, url: string, data: string | any = null)
 		loading.value = false
 	}
 
-	return { response, error, loading };
+	return { response, error, loading }
 }
 
 export default useAxios
