@@ -1,8 +1,9 @@
 import useAxios from '@/requests/useAxios'
-import axios from 'axios';
+import { useUserStore } from '@/stores/UserStore'
 
 
 const setAvatar = async (avatarFile: File) => {
+
 	let	image: FormDataEntryValue | null
 	let	formData = new FormData()
 	formData.set('image', avatarFile);
@@ -15,6 +16,10 @@ const setAvatar = async (avatarFile: File) => {
 	)
 	if (error.value) {
 		//	handle errors
+	}
+	else {
+		const	userStore = useUserStore()
+		await userStore.updateLoginApi()
 	}
 }
 
