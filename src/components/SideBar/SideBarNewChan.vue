@@ -19,7 +19,6 @@
 	const	chanAvatar = ref(null)
 
 	const	uploadAvatar = (e:any) => {
-		console.log('upload in newChan')
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)

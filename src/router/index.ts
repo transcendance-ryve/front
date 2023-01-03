@@ -82,10 +82,8 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
 	const	userStore = useUserStore()
-	console.log('from', from.fullPath, 'to', to.fullPath, userStore.loginApi)
 
 	if (userStore.oauth42) {
-		console.log('oauth in beforeEach')
 		localStorage.removeItem('oauth42')
 		userStore.oauth42 = false
 		await userStore.updateLoginApi()

@@ -25,7 +25,6 @@
 	const	active2FA = ref(false)
 
 	const	uploadAvatar = (e:any) => {
-		console.log('upload in Settings')
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)

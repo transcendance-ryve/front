@@ -55,7 +55,6 @@ export const useUserStore = defineStore('userStore', () => {
 	}
 
 	async function disconnect() {
-		// console.log('diconnect')
 		await useAxios(
 			'delete',
 			'/auth/disconnect'
