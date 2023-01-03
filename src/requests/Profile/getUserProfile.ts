@@ -14,7 +14,9 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 		data.loadingData = true
 		const { response, loading, error } = await useAxios(
 			'get',
-			'/users/profile/' + id
+			'/users/friends/'
+			+ id
+			+ '&select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
 		)
 		data.loadingData = loading.value
 		data.err = error.value

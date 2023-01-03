@@ -19,7 +19,7 @@
 		err: null
 	})
 
-	//	il faut gerer le cas ou l'id n'existe pas
+	//	404 for unknown id
 	getUserProfile(router.currentRoute.value.params.id as string, data)
 
 	const	getStat = (index: number) => {
