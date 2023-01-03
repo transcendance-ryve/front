@@ -3,6 +3,10 @@
 	import { logoPhoto } from '../../assets/logoSVG'
 
 	const props = defineProps({
+		id: {
+			type: String,
+			default: 'image-input'
+		},
 		avatar: {
 			type: null,
 			default: null
@@ -17,12 +21,12 @@
 		<input
 			class="Infos-inputFile"
 			type="file"
-			id="image-input"
+			:id="id"
 			accept="image/jpeg, image/png, image/jpg"
 		>
 		<label
 			:class="{'Infos-upload': !avatar, 'Infos-img': avatar}"
-			for="image-input"
+			:for="id"
 		>
 			<span v-if="!avatar" class="Upload-logo" v-html="logoPhoto"></span>
 			<span v-if="!avatar" class="Upload-value">Upload</span>

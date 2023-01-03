@@ -25,6 +25,7 @@
 	const	active2FA = ref(false)
 
 	const	uploadAvatar = (e:any) => {
+		console.log('upload in Settings')
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)
@@ -52,7 +53,7 @@
 		<div class="Settings-wrapper">
 			<div class="Setting Setting--profile">
 				<div class="Setting-tag"><span class="Tag-value">Profile</span></div>
-				<UploadAvatar :avatar="avatar" @change="uploadAvatar"/>
+				<UploadAvatar :avatar="avatar" id="userAvatar-input" @change="uploadAvatar"/>
 				<BaseInput
 					v-model="username"
 					:value="username"

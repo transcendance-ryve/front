@@ -16,9 +16,10 @@
 	const	sbStore = useSideBarStore()
 	const	name = ref('')
 	const	status = ref('')
-	const		chanAvatar = ref(null)
+	const	chanAvatar = ref(null)
 
 	const	uploadAvatar = (e:any) => {
+		console.log('upload in newChan')
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)
@@ -33,7 +34,7 @@
 
 	<div class="SideBar-newChan">
 		<div class="newChan-infos">
-			<UploadAvatar :avatar="chanAvatar" @change="uploadAvatar"/>
+			<UploadAvatar :avatar="chanAvatar" id="channelAvatar-input" @change="uploadAvatar"/>
 			<div class="Infos-content">
 				<BaseInput
 					placeholder="Name"
