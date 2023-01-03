@@ -32,7 +32,8 @@
 	const	settingsData: data = reactive({
 		avatar: null,
 		avatarFile: null,
-		username: userStore.me.username,
+		// username: userStore.me.username,
+		username: '',
 		oldPassword: '',
 		newPassword: '',
 		confirmPassword: '',
@@ -67,6 +68,8 @@
 		if (!settingsData.username) {
 			error = 'Empty username'
 		}
+		else if (settingsData.username === userStore.me.username)
+			error = 'Cannot change with same username'
 		if (settingsData.oldPassword) {
 			if (!settingsData.newPassword)
 				error = error ? error + '\nEmpty new password' : 'Empty new password'
@@ -86,7 +89,8 @@
 	}
 
 	const	updateSettings = () => {
-		checkSettings()
+		if (!checkSettings())
+			return
 		if (settingsData.username !== userStore.me.username)
 			setUsername(settingsData.username)
 		if (settingsData.avatarFile)
@@ -102,10 +106,15 @@
 			<div class="Setting Setting--profile">
 				<div class="Setting-tag"><span class="Tag-value">Profile</span></div>
 				<UploadAvatar :avatar="settingsData.avatar" id="userAvatar-input" @change="uploadAvatar"/>
-				<BaseInput
+				<!-- <BaseInput
 					v-model="settingsData.username"
 					:value="settingsData.username"
 					placeholder="Username"
+					:logo="logoProfile"
+				/> -->
+				<BaseInput
+					v-model="settingsData.username"
+					:placeholder="userStore.me.username"
 					:logo="logoProfile"
 				/>
 			</div>
