@@ -6,7 +6,7 @@ const setUsername = async (username: string) => {
 
 		const { response, loading, error } = await useAxios(
 			'put',
-			'/users/username/',
+			'/users/username',
 			JSON.stringify({
 				username
 			})

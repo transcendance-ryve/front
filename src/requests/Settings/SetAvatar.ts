@@ -1,10 +1,10 @@
 import useAxios from '@/requests/useAxios'
 
-const putAvatar = async (username: string) => {
+const setAvatar = async (username: string) => {
 
 		const { response, loading, error } = await useAxios(
 			'put',
-			'/users/username/',
+			'/users/avatar',
 			JSON.stringify({
 				username
 			})
@@ -17,4 +17,4 @@ const putAvatar = async (username: string) => {
 		}
 }
 
-export default putAvatar
+export default setAvatar
