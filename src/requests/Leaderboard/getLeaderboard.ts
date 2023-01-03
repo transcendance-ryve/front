@@ -18,10 +18,6 @@ const	replaceUrl = async (queries: Partial<leaderboardQueries>) => {
 
 const getLeaderboard = async (urlQueries: string, data: leaderboardData) => {
 
-	// const	path = router.currentRoute.value.fullPath
-	// console.log('path in get', path)
-	// const	urlqueries: string = path.substring(path.indexOf('?'), path.length)
-
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(
 		'get',
