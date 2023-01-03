@@ -1,13 +1,12 @@
 .LeaderboardTag-Stat {
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-end;
 	gap: 8em;
+	opacity: 0.5;
 
 	.Stat-label {
-		// text-align: end;
 		text-align: center;
 		color: $white;
 	}

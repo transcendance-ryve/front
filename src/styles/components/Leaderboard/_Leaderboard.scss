@@ -88,12 +88,6 @@
 		}
 	}
 
-	@media (max-width: $phone) {
-		.Level-percentWrap {
-			max-width: 150em;
-		}
-	}
-
 	@media (max-width: 375px) {
 		.Leaderboard-filters {
 			font-size: 0.75em;

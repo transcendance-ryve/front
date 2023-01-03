@@ -12,6 +12,10 @@
 		rank: {
 			type: Number,
 			default: 0
+		},
+		selectValue: {
+			type: [String, Boolean],
+			default: false
 		}
 	})
 
@@ -42,18 +46,22 @@
 		</div>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat
-				label="Ranked points"
+				:class="{'Stat--selected': selectValue === 'Rank points'}"
+				label="Rank points"
 				:value="user.rankPoint"
 			/>
 			<LeaderboardTagStat
+				:class="{'Stat--selected': selectValue === 'Play count'}"
 				label="Play count"
 				:value="user.played"
 			/>
 			<LeaderboardTagStat
+				:class="{'Stat--selected': selectValue === 'Wins'}"
 				label="Wins"
 				:value="user.wins"
 			/>
 			<LeaderboardTagStat
+				:class="{'Stat--selected': selectValue === 'Defeats'}"
 				label="Defeats"
 				:value="user.loses"
 			/>

@@ -193,6 +193,7 @@
 				:key=index
 				:user="user"
 				:rank="getRank(index)"
+				:selectValue="getSortName(queries.sort)"
 			/>
 		</div>
 		<PagesSelector
