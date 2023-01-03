@@ -60,38 +60,34 @@
 	}
 
 	@media (max-width: $tablet) {
-		flex-direction: column;
-		align-items: flex-start;
 		padding: 24em 24em;
 		gap: 32em;
-		position: relative;
-		z-index: 0;
+
 
 		.LeaderboardTag-user {
 			gap: 18em;
 		}
 		.LeaderboardTag-StatWrap {
 			font-size: 0.8em;
-			grid-template: 100% / repeat(3, 1fr);
+			grid-template: 1fr 1fr / 1fr 1fr;
+			gap: 28em 0;
 
 			.LeaderboardTag-Stat {
 				flex-direction: row;
-				justify-content: center;
-			}
-
-			.Stat--selected {
-				position: absolute;
-				top: 30em;
-				right: 24em;
-				width: calc((100% - 48em) / 3);
+				justify-content: flex-end;
 			}
 		}
 	}
 
-	@media (max-width: 520px) {
+	@media (max-width: 660px) {
+		flex-direction: column;
 		.LeaderboardTag-StatWrap {
 			grid-template: 1fr 1fr / repeat(2, 1fr);
 			gap: 32em 0;
+
+			.LeaderboardTag-Stat {
+				justify-content: center;
+			}
 
 			.Stat--selected {
 				position: static;
