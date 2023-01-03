@@ -16,7 +16,7 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 			'get',
 			'/users/friends/'
 			+ id
-			+ '&select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
+			+ '?select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
 		)
 		data.loadingData = loading.value
 		data.err = error.value
