@@ -1,7 +1,7 @@
 import useAxios from '@/requests/useAxios'
 import { useUserStore } from '../../stores/UserStore'
 
-const putUsername = async (username: string) => {
+const setUsername = async (username: string) => {
 	const userStore = useUserStore()
 
 		const { response, loading, error } = await useAxios(
@@ -18,4 +18,4 @@ const putUsername = async (username: string) => {
 			userStore.updateMe(response.value)
 }
 
-export default putUsername
+export default setUsername

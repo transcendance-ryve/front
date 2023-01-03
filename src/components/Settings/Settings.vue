@@ -9,7 +9,7 @@
 	import ToggleSwitch from './ToggleSwitch.vue';
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
-	import putUsername from '@/requests/Settings/PutUsername'
+	import setUsername from '@/requests/Settings/SetUsername'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -87,7 +87,7 @@
 	const	updateSettings = () => {
 		checkSettings()
 		if (formData.username !== userStore.me.username)
-			putUsername(formData.username)
+			setUsername(formData.username)
 
 	}
 
