@@ -34,11 +34,11 @@
 	&:hover {
 		input::placeholder {
 			color: white;
-			transition: 150ms ease-in-out;
+			transition: color 150ms ease-in-out;
 		}
 		.inputLogo svg {
 			fill: white;
-			transition: 150ms ease-in-out;
+			transition: fill 150ms ease-in-out;
 		}
 	}
 }
