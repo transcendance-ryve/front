@@ -6,6 +6,8 @@
 	padding: 0 32em;
 	background: $background-600;
 	gap: 32em;
+	cursor: pointer;
+	transition: background 100ms;
 
 	.LeaderboardTag-user {
 		display: flex;
@@ -30,16 +32,16 @@
 				color: white;
 			}
 		}
-
-		.UserInfos {
-			cursor: pointer;
-		}
 	}
 
 	.LeaderboardTag-StatWrap {
 		width: 100%;
 		display: grid;
 		grid-template: 100% / repeat(4, 1fr);
+	}
+
+	&:hover {
+		background: #2e3042;
 	}
 
 	@media (max-width: $laptop) {

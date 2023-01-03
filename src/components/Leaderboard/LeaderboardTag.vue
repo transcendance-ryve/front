@@ -17,8 +17,8 @@
 
 	const	contentStore = useContentStore()
 
-	const	profileRedirect = (user: any) => {
-		const	profilePath :string = '/profile/' + user.id
+	const	profileRedirect = (id: number) => {
+		const	profilePath :string = '/profile/' + id
 		router.push({ path:profilePath })
 		contentStore.state = 4
 	}
@@ -27,7 +27,7 @@
 
 <template>
 
-	<div class="LeaderboardTag">
+	<div class="LeaderboardTag" @click="profileRedirect(user.id)">
 		<div class="LeaderboardTag-user">
 			<div class="LeaderboardTag-rank">
 				<span class="Rank-value">#{{ rank }}</span>
@@ -38,7 +38,6 @@
 				:level="user.level"
 				:experience="user.experience"
 				:nextLevel="user.nextLevel"
-				@click="profileRedirect(user)"
 			/>
 		</div>
 		<div class="LeaderboardTag-StatWrap">
