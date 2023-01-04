@@ -8,7 +8,7 @@ export const	auth42 = async () => {
    		window.location.href = res.response.value;
 }
 
-export async function	callBack(code: number) {
+export async function	callBack(code: string) {
 	console.log('oui')
 	const	res = await useAxios('get', 'auth/42/callback?code=' + code)
 	if (res.response.value) {

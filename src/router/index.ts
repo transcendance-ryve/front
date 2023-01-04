@@ -66,9 +66,7 @@ const router = createRouter({
 						console.log('peoijfw')
 						if (to.query.code) {
 							console.log('in if')
-							// const	userStore = useUserStore()
-							await callBack(to.query.code)
-							// await callBack(23)
+							await callBack(to.query.code as string)
 						}
 					},
 				},
