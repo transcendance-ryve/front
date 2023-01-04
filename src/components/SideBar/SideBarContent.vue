@@ -9,6 +9,7 @@
 	import type { axiosState } from '@/requests/useAxios'
 	import getFriends from '@/requests/Friends/getFriends'
 	import getUsers from '@/requests/SideBar/getUsers'
+	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 
 	export interface	contentData {
 		id: number,			//	user			id
@@ -638,7 +639,7 @@
 			if (sbStore.state.notifsState == 1)
 				fetchData = data5
 			else if (sbStore.state.notifsState == 2)
-				fetchData = data6
+				fetchData = await getFriendsRequests(dataState)
 			else
 				fetchData = data7
 		}

@@ -9,6 +9,7 @@
 	import type { contentData } from '@/components/SideBar/SideBarContent.vue'
 	import router from '@/router'
 	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
+	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
 
 	export interface Props {
 		type: number
@@ -27,6 +28,12 @@
 	})
 
 	const	sbStore = useSideBarStore()
+
+	const	notifAccept = async () => {
+		if (p.type.value === 2) {
+			await acceptFriendRequest(p.data.value.id?.toString() || '')
+		}
+	}
 
 </script>
 
@@ -87,7 +94,7 @@
 				:logo="logoAdd"
 				width="386em"
 				height="44em"
-				@click="sendFriendRequest(data.id)"
+				@click="sendFriendRequest(data.id?.toString() || '')"
 			/>
 
 			<BaseInput
@@ -119,6 +126,7 @@
 				:logo="logoAccept"
 				width="185em"
 				height="44em"
+				@click="notifAccept()"
 			/>
 			<Btn1
 				class="SideBarTag-btn"
