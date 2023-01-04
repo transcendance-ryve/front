@@ -3,7 +3,6 @@
 	import UserInfos from '../Utils/UserInfos.vue'
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
 	import { useContentStore } from '../../stores/ContentStore'
-	import { profileRedirect } from '../../router/index'
 
 	defineProps({
 		user: {
