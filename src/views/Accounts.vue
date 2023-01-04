@@ -13,8 +13,8 @@
 		userStore.register(username, email, password)
 	}
 
-	const	login = (id: string, password: string) => {
-		userStore.connect(id, password)
+	const	login = (email: string, password: string) => {
+		userStore.connect(email, password)
 	}
 
 	const	forgotPassword = (email: string) => {
