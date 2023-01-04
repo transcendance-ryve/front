@@ -10,6 +10,7 @@ import RegisterForm from '../components/Forms/RegisterForm.vue'
 import LoginForm from '../components/Forms/LoginForm.vue'
 import ForgotForm from '../components/Forms/ForgotForm.vue'
 import { useUserStore } from '../stores/UserStore'
+import { callBack } from '@/requests/Auth/auth42'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +62,15 @@ const router = createRouter({
 					path: 'login',
 					name: 'login',
 					component: LoginForm,
+					beforeEnter: async (to) => {
+						console.log('peoijfw')
+						if (to.query.code) {
+							console.log('in if')
+							// const	userStore = useUserStore()
+							await callBack(to.query.code)
+							// await callBack(23)
+						}
+					},
 				},
 				{
 					path: 'forgot-password',
@@ -83,11 +93,6 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
 	const	userStore = useUserStore()
 
-	if (userStore.oauth42) {
-		localStorage.removeItem('oauth42')
-		userStore.oauth42 = false
-		await userStore.updateLoginApi()
-	}
 	if (!userStore.loginApi && !to.fullPath.includes('/accounts'))
 		return { name: 'register' }
 	else if (userStore.loginApi && to.fullPath.includes('/accounts'))
