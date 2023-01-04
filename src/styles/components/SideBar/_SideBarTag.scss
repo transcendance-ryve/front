@@ -46,9 +46,12 @@
 
 			.LastMsgWrap {
 				display: flex;
+				flex-direction: column;
 				width: 240em;
 
 				.LastMsg {
+					width: 100%;
+					align-self: flex-start;
 					font-style: normal;
 					font-weight: 500;
 					font-size: 14em;

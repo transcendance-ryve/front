@@ -29,7 +29,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.section = newVal
 	}
 
-	function	openConv(type: string, name: string, status: string) {
+	function	openConv(type: string, name: string = '', status: string = '') {
 		conv.open = true
 		conv.type = type
 		conv.name = name

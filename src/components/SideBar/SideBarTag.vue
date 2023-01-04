@@ -6,43 +6,22 @@
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn1 from '../Utils/Btn1.vue'
+	import type { contentData } from '@/components/SideBar/SideBarContent.vue'
 
-	const props = defineProps({
-		//	1 for Friends, 2 for Channels
-		type: {
-			type: Number,
-			default: 1,
-		},
-		//	1 for My friends / My channels, 2 for Add friends / Join channels
-		option: {
-			type: Number,
-			default: 1,
-		},
-		name: {
-			type: String,
-			default: '',
-		},
-		lastMsg: {
-			type: [String, Boolean],
-			default: false,
-		},
-		status: {
-			type: String,
-			default: ''
-		},
-		users: {
-			type: [Number, Boolean],
-			default: false
-		}
-	})
+	export interface Props {
+		type: number
+		data: Partial<contentData>
+	}
+
+	const props = defineProps<Props>()
 
 	const p = toRefs(props);
 
 	const	statusClass = computed(() => {
-		if (p.status?.value == 'In Game')
+		if (p.data.value.status == 'In Game')
 			return 'Status--inGame'
 		else
-			return 'Status--' + p.status.value
+			return 'Status--' + p.data.value.status
 	})
 
 	const	sbStore = useSideBarStore()
@@ -55,24 +34,26 @@
 		<div class="SideBarTag-content">
 			<img
 				class="Content-avatar"
-				src="../../assets/user.png"
+				:src="data.avatar"
 				alt="user-avatar"
 			>
 			<div class="Content-infosWrap">
 				<div class="Content-infos">
 					<div class="Infos-nameWrap">
-						<span class="Infos-name">{{name}}</span>
-						<Status :status="status"/>
+						<span class="Infos-name">{{data.name || data.username}}</span>
+						<Status :status="data.status"/>
 					</div>
-					<Status :users="users"/>
+					<Status v-if="data.users" :users="data.users"/>
 				</div>
-				<div v-if="lastMsg" class="LastMsgWrap">
-					<span class="LastMsg">{{lastMsg}}</span>
+				<!-- <div v-if="data.lastMsg" class="LastMsgWrap"> -->
+					<div v-if="data.lastMsg || sbStore.state.section === 1" class="LastMsgWrap">	//	a suppr
+					<!-- <span class="LastMsg">{{data.lastMsg}}</span> -->
+					<span class="LastMsg">{{data.lastMsg || 'sds cndoew lopa cbwqed adod eai'}}</span>	//	a suppr
 				</div>
 			</div>
 		</div>
 
-		<div class="SideBarTag-options" v-if="(type == 1 && option == 1)">
+		<div class="SideBarTag-options" v-if="(sbStore.state.section == 1 && type == 1)">
 			<Btn1
 				class="SideBarTag-btn"
 				:type=1 value="Invite to party"
@@ -87,17 +68,17 @@
 				:logo="logoSend"
 				width="185em"
 				height="44em"
-				@click="sbStore.openConv('Friend', name, status)"
+				@click="sbStore.openConv('Friend', data.name, data.status)"
 			/>
 		</div>
 
 		<div
 			class="SideBarTag-options"
-			:class="{'SideBarTag-options--protected': status == 'Protected'}"
-			v-if="option == 2 && type != 3"
+			:class="{'SideBarTag-options--protected': data.status == 'Protected'}"
+			v-if="type == 2 && sbStore.state.section != 3"
 		>
 			<Btn1
-				v-if="type == 1"
+				v-if="sbStore.state.section == 1"
 				class="SideBarTag-btn"
 				:type=1
 				value="Add"
@@ -107,7 +88,7 @@
 			/>
 
 			<BaseInput
-				v-if="status == 'Protected'"
+				v-if="data.status == 'Protected'"
 				type="password"
 				placeholder="Password"
 				inputBackground="#272938"
@@ -118,7 +99,7 @@
 			/>
 
 			<Btn1
-				v-if="type == 2"
+				v-if="sbStore.state.section == 2"
 				class="SideBarTag-btn"
 				:type=1
 				value="Join"
@@ -128,7 +109,7 @@
 			/>
 		</div>
 
-		<div v-if="type == 3" class="SideBarTag-options">
+		<div v-if="sbStore.state.section == 3" class="SideBarTag-options">
 			<Btn1
 				class="SideBarTag-btn"
 				:type=1 value="Accept"

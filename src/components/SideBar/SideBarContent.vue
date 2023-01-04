@@ -8,7 +8,7 @@
 	import type { axiosState } from '@/requests/useAxios'
 	import getFriends from '@/requests/SideBar/getFriends'
 
-	interface	contentData {
+	export interface	contentData {
 		id: number,			//	user			id
 		avatar: string,		//	user / chan		avatar
 		username: string,	//	user 			name
@@ -21,78 +21,91 @@
 
 	const	data1: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Karim',
 			lastMsg: 'riwoj dsoj aifs ewiha efv d yaveogahf sjdhfb',
 			time: 1,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Kylian',
 			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 2,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Antoine',
 			lastMsg: 'Salut',
 			time: 3,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Ousmane',
 			lastMsg: '',
 			time: 4,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Kingsley',
 			lastMsg: 'Salut',
 			time: 5,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Raphael',
 			lastMsg: 'Salut ca va',
 			time: 6,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Benjamin',
 			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 7,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Theo',
 			lastMsg: '',
 			time: 8,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Lucas',
 			lastMsg: '',
 			time: 9,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Adrien',
 			lastMsg: 'Wsh le couz',
 			time: 10,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Alphonse',
 			lastMsg: 'Dispo pour une game dans 5mi...',
 			time: 11,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Steve',
 			lastMsg: 'Salut',
 			time: 12,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			username: 'Olivier',
 			lastMsg: '',
 			time: 13,
@@ -102,66 +115,79 @@
 
 	const	data2: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Karim',
 			time: 5,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Kylian',
 			time: 23,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Antoine',
 			time: 4,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Ousmane',
 			time: 8,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Kingsley',
 			time: 2,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Raphael',
 			time: 17,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Benjamin',
 			time: 6,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Theo',
 			time: 1,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Lucas',
 			time: 63,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Adrien',
 			time: 55,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Alphonse',
 			time: 13,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Steve',
 			time: 16,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Olivier',
 			time: 51,
 			status: 'IN GAME'
@@ -170,6 +196,7 @@
 
 	const	data3: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'RYVE',
 			lastMsg: 'Hedi: hdo pa fiaue ub pad fsiubfebusd wiuh',
 			time: 2,
@@ -177,6 +204,7 @@
 			users: 4
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN1',
 			lastMsg: 'User: Salut',
 			time: 1,
@@ -184,6 +212,7 @@
 			users: 31
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN2',
 			lastMsg: 'User: Salut',
 			time: 3,
@@ -191,6 +220,7 @@
 			users: 64
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN3',
 			lastMsg: 'User: Salut',
 			time: 4,
@@ -198,6 +228,7 @@
 			users: 6
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN4',
 			lastMsg: 'User: Salut',
 			time: 5,
@@ -205,6 +236,7 @@
 			users: 11
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN5',
 			lastMsg: 'User: Salut',
 			time: 6,
@@ -212,6 +244,7 @@
 			users: 5
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN6',
 			lastMsg: 'User: Salut',
 			time: 7,
@@ -219,6 +252,7 @@
 			users: 2
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN7',
 			lastMsg: 'User: Salut',
 			time: 8,
@@ -226,6 +260,7 @@
 			users: 106
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN8',
 			lastMsg: 'User: Salut',
 			time: 9,
@@ -233,6 +268,7 @@
 			users: 20
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN9',
 			lastMsg: 'User: Salut',
 			time: 10,
@@ -240,6 +276,7 @@
 			users: 34
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN10',
 			lastMsg: 'User: Salut',
 			time: 11,
@@ -247,6 +284,7 @@
 			users: 7
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN11',
 			lastMsg: 'User: Salut',
 			time: 12,
@@ -254,6 +292,7 @@
 			users: 3
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN12',
 			lastMsg: 'User: Salut',
 			time: 13,
@@ -264,78 +303,91 @@
 
 	const	data4: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'RYVE',
 			time: 1,
 			status: 'PUBLIC',
 			users: 4
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN1',
 			time: 2,
 			status: 'PROTECTED',
 			users: 42
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN2',
 			time: 3,
 			status: 'PUBLIC',
 			users: 14
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN3',
 			time: 4,
 			status: 'PUBLIC',
 			users: 106
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN4',
 			time: 5,
 			status: 'PUBLIC',
 			users: 8
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN5',
 			time: 6,
 			status: 'PROTECTED',
 			users: 4000
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN6',
 			time: 7,
 			status: 'PUBLIC',
 			users: 2
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN7',
 			time: 8,
 			status: 'PROTECTED',
 			users: 7
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN8',
 			time: 9,
 			status: 'PUBLIC',
 			users: 4
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN9',
 			time: 10,
 			status: 'PROTECTED',
 			users: 21
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN10',
 			time: 11,
 			status: 'PUBLIC',
 			users: 10
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN11',
 			time: 12,
 			status: 'PUBLIC',
 			users: 18
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN12',
 			time: 13,
 			status: 'PUBLIC',
@@ -345,66 +397,79 @@
 
 	const	data5: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Karim',
 			time: 5,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Kylian',
 			time: 23,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Antoine',
 			time: 4,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Ousmane',
 			time: 8,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Kingsley',
 			time: 2,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Raphael',
 			time: 17,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Benjamin',
 			time: 6,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Theo',
 			time: 1,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Lucas',
 			time: 63,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Adrien',
 			time: 55,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Alphonse',
 			time: 13,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Steve',
 			time: 16,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Olivier',
 			time: 51,
 			status: 'ONLINE'
@@ -413,31 +478,37 @@
 
 	const	data6: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Benjamin',
 			time: 6,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Lucas',
 			time: 63,
 			status: 'ONLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Adrien',
 			time: 55,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Alphonse',
 			time: 13,
 			status: 'IN GAME'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Steve',
 			time: 16,
 			status: 'OFFLINE'
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'Olivier',
 			time: 51,
 			status: 'ONLINE'
@@ -446,78 +517,91 @@
 
 	const	data7: Partial<contentData>[] = reactive([
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'RYVE',
 			time: 1,
 			status: 'PRIVATE',
 			users: 4
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN1',
 			time: 2,
 			status: 'PROTECTED',
 			users: 42
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN2',
 			time: 3,
 			status: 'PUBLIC',
 			users: 14
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN3',
 			time: 4,
 			status: 'PRIVATE',
 			users: 106
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN4',
 			time: 5,
 			status: 'PUBLIC',
 			users: 8
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN5',
 			time: 6,
 			status: 'PROTECTED',
 			users: 4000
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN6',
 			time: 7,
 			status: 'PUBLIC',
 			users: 2
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN7',
 			time: 8,
 			status: 'PROTECTED',
 			users: 7
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN8',
 			time: 9,
 			status: 'PRIVATE',
 			users: 4
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN9',
 			time: 10,
 			status: 'PROTECTED',
 			users: 21
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN10',
 			time: 11,
 			status: 'PUBLIC',
 			users: 10
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN11',
 			time: 12,
 			status: 'PUBLIC',
 			users: 18
 		},
 		{
+			avatar: 'http://localhost:3000/default.png',
 			name: 'CHAN12',
 			time: 13,
 			status: 'PUBLIC',
@@ -531,7 +615,7 @@
 	})
 	const	sbStore = useSideBarStore()
 
-	const		contentData: Ref<Partial<contentData>[]> = ref([])
+	const	contentData: Ref<Partial<contentData>[]> = ref([])
 
 	const	getRawData = async () => {
 		let	fetchData: Partial<contentData>[]
@@ -619,25 +703,11 @@
 		</button>
 
 		<div class="SideBar-content" v-if="sbStore.state.section == 1 && !dataState.loading && !dataState.error">
-			<!-- <SideBarTag
-				v-for="(item, index) in data"
-				:key="index"
-				:type="sbStore.state.section"
-				:option="sbStore.state.friendsState"
-				:name="item.username"
-				:lastMsg="item.lastMsg"
-				:status="item.status"
-				@click="openConv(item.username, item.status)"
-			/> -->
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.state.section"
-				:option="sbStore.state.friendsState"
-				:name="item.username"
-				lastMsg="iweh sodf wfoin soda eo asofneo asodf"
-				:status="item.status"
-				@click="openConv(item.username, item.status)"
+				:type="sbStore.state.friendsState"
+				:data="item"
 			/>
 		</div>
 
@@ -645,12 +715,8 @@
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.state.section"
-				:option="sbStore.state.channelsState"
-				:name="item.name"
-				:lastMsg="item.lastMsg"
-				:status="item.status"
-				:users="item.users"
+				:type="sbStore.state.channelsState"
+				:data="item"
 				@click="openConv(item.name, item.status)"
 			/>
 		</div>
@@ -659,11 +725,8 @@
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.state.section"
-				:option="sbStore.state.notifsState"
-				:name="item.name"
-				:status="item.status"
-				:users="item.users"
+				:type="sbStore.state.notifsState"
+				:data="item"
 			/>
 		</div>
 	</div>
