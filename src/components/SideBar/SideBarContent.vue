@@ -718,7 +718,7 @@
 				:key="index"
 				:type="sbStore.state.friendsState"
 				:data="item"
-				@click="profileRedirect(item.id || 0)"
+				@click.self="profileRedirect(item.id || 0)"
 			/>
 		</div>
 
