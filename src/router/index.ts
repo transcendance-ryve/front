@@ -102,4 +102,6 @@ router.beforeEach(async (to, from) => {
 		return { name: 'home' }
 })
 
+export const profileRedirect = (id: number) => router.push({ name: 'profile', params: { id }})
+
 export default router
