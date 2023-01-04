@@ -8,6 +8,7 @@
 	import Btn1 from '../Utils/Btn1.vue'
 	import type { contentData } from '@/components/SideBar/SideBarContent.vue'
 	import router from '@/router'
+	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
 
 	export interface Props {
 		type: number
@@ -86,6 +87,7 @@
 				:logo="logoAdd"
 				width="386em"
 				height="44em"
+				@click="sendFriendRequest(data.id)"
 			/>
 
 			<BaseInput
