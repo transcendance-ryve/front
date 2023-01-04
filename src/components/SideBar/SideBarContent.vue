@@ -7,7 +7,7 @@
 	import SideBarTag from './SideBarTag.vue'
 	import { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
-	import getFriends from '@/requests/SideBar/getFriends'
+	import getFriends from '@/requests/Friends/getFriends'
 	import getUsers from '@/requests/SideBar/getUsers'
 
 	export interface	contentData {
