@@ -74,7 +74,7 @@
 
 		<div
 			class="SideBarTag-options"
-			:class="{'SideBarTag-options--protected': data.status == 'Protected'}"
+			:class="{'SideBarTag-options--protected': data.status == 'PROTECTED'}"
 			v-if="type == 2 && sbStore.state.section != 3"
 		>
 			<Btn1
@@ -88,7 +88,7 @@
 			/>
 
 			<BaseInput
-				v-if="data.status == 'Protected'"
+				v-if="data.status == 'PROTECTED'"
 				type="password"
 				placeholder="Password"
 				inputBackground="#272938"

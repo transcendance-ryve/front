@@ -1,7 +1,6 @@
 .SideBarTag {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	border-radius: 6em;
 	background: $background-700;
 	padding: 16em;
@@ -17,7 +16,6 @@
 			width: 64em;
 			height: 64em;
 			border-radius: 50%;
-			align-self: center;
 		}
 
 		.Content-infosWrap {
