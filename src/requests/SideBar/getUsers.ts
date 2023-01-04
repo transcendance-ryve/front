@@ -1,12 +1,13 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
 
-const getFriends = async (dataState: axiosState) => {
+const getUsers = async (toFind: string, dataState: axiosState) => {
 
-	dataState.loading = true
+    dataState.loading = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/users/friends/'
+		'/users?select=id,username,avatar'
+        + '&search=' + toFind
 	)
 	if (error.value) {
 		//	handle errors
@@ -14,8 +15,8 @@ const getFriends = async (dataState: axiosState) => {
 	}
 	else if (response.value) {
 		dataState.loading = loading.value
-		return response.value
+		return response.value.users
 	}
 }
 
-export default getFriends
+export default getUsers

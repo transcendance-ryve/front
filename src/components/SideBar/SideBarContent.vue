@@ -7,6 +7,7 @@
 	import SideBarTag from './SideBarTag.vue'
 	import type { axiosState } from '@/requests/useAxios'
 	import getFriends from '@/requests/SideBar/getFriends'
+	import getUsers from '@/requests/SideBar/getUsers'
 
 	export interface	contentData {
 		id: number,			//	user			id
@@ -618,14 +619,13 @@
 	const	contentData: Ref<Partial<contentData>[]> = ref([])
 
 	const	getRawData = async () => {
-		let	fetchData: Partial<contentData>[]
-		dataState.loading = true
+		let	fetchData: Partial<contentData>[] = []
 
 		if (sbStore.state.section == 1) {
 			if (sbStore.state.friendsState == 1)
 				fetchData = await getFriends(dataState)
-			else
-				fetchData = data2
+			else if (toFind.value)
+				fetchData = await getUsers(toFind.value, dataState)
 		}
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1)
@@ -642,36 +642,45 @@
 				fetchData = data7
 		}
 		contentData.value = fetchData
-		dataState.loading = false
 	}
 
-	//	a modif
-	const	sortData = () => {
+	// const	sortData = () => {
 		// contentData.sort((a, b) => {
 		// 	return a.time! - b.time!
 		// })
-		return contentData
-	}
+	// }
 
 	watch(sbStore.state, async () => {
 		await getRawData()
 		// sortData()
 	})
 
-	const	inputRes = computed(() => {
+	const	toFind: Ref<string> = ref('')
+
+	const	filterDataBySearch = () => {
 		return contentData.value.filter(item => {
-			return item.name?.toLowerCase().includes(sbStore.toFind.toLowerCase())
-			|| item.username?.toLowerCase().includes(sbStore.toFind.toLowerCase())
+			return item.name?.toLowerCase().includes(toFind.value.toLowerCase())
+			|| item.username?.toLowerCase().includes(toFind.value.toLowerCase())
 		})
+	}
+
+	watch(toFind, async () => {
+		if (toFind.value && (sbStore.state.section === 1 && sbStore.state.friendsState === 2))
+			contentData.value = await getUsers(toFind.value, dataState)
 	})
 
 	const	data = computed(() => {
-		if (sbStore.toFind)
-			return inputRes.value
-		else if (!((sbStore.state.section == 1 && sbStore.state.friendsState == 2) ||
-				(sbStore.state.section == 2 && sbStore.state.channelsState == 2)))
-			if (!dataState.error && !dataState.loading)
+		if (dataState.error || dataState.loading)
+			return
+		if (toFind.value) {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
 				return contentData.value
+			else
+				return filterDataBySearch()
+		}
+		else if (!((sbStore.state.section === 1 && sbStore.state.friendsState === 2) ||
+				(sbStore.state.section === 2 && sbStore.state.channelsState === 2)))
+			return contentData.value
 	})
 
 	const	openConv = (name: string = '', status: string = '') => {
@@ -692,7 +701,7 @@
 	<div class="SideBar-content-wrap">
 		<SideBarSwitch/>
 
-		<SearchInput @search="(val) => sbStore.toFind = val"/>
+		<SearchInput @search="(val) => toFind = val"/>
 
 		<button
 			v-if="sbStore.state.section == 2 && sbStore.state.channelsState == 1"
@@ -702,7 +711,7 @@
 			<span class="NewChanBtn-value">Create new channel</span>
 		</button>
 
-		<div class="SideBar-content" v-if="sbStore.state.section == 1 && !dataState.loading && !dataState.error">
+		<div class="SideBar-content" v-if="sbStore.state.section == 1">
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
