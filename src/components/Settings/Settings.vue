@@ -11,6 +11,7 @@
 	import router from '@/router';
 	import setUsername from '@/requests/Settings/SetUsername'
 	import setAvatar from '@/requests/Settings/SetAvatar'
+	import setPassword from '@/requests/Settings/setPassword'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
@@ -65,10 +66,7 @@
 	const	checkSettings = () => {
 		let	error: string = ''
 
-		if (!settingsData.username) {
-			error = 'Empty username'
-		}
-		else if (settingsData.username === userStore.me.username)
+		if (settingsData.username === userStore.me.username)
 			error = 'Cannot change with same username'
 		if (settingsData.oldPassword) {
 			if (!settingsData.newPassword)
@@ -88,13 +86,15 @@
 		return true
 	}
 
-	const	updateSettings = () => {
+	const	updateSettings = async() => {
 		if (!checkSettings())
 			return
-		if (settingsData.username !== userStore.me.username)
+		if (settingsData.username && settingsData.username !== userStore.me.username)
 			setUsername(settingsData.username)
 		if (settingsData.avatarFile)
 			setAvatar(settingsData.avatarFile)
+		if (settingsData.newPassword && !await setPassword(settingsData.oldPassword, settingsData.newPassword))
+			alert('wrong passord')
 	}
 
 </script>
