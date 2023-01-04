@@ -30,6 +30,13 @@ const router = createRouter({
 					path: 'leaderboard',
 					name: 'leaderboard',
 					component: Leaderboard,
+					beforeEnter: (to) => {
+						if (to.fullPath === '/leaderboard')
+							return {
+								path: '/leaderboard',
+								query: { page: 1, take: 10, sort: 'rankPoint', order: 'des' }
+							}
+					}
 				},
 				{
 					path: 'spectate',
@@ -64,10 +71,8 @@ const router = createRouter({
 					component: LoginForm,
 					beforeEnter: async (to) => {
 						console.log('peoijfw')
-						if (to.query.code) {
-							console.log('in if')
+						if (to.query.code)
 							await callBack(to.query.code as string)
-						}
 					},
 				},
 				{
@@ -91,12 +96,10 @@ const router = createRouter({
 router.beforeEach(async (to, from) => {
 	const	userStore = useUserStore()
 
-	if (!userStore.loginApi && !to.fullPath.includes('/accounts'))
+	if (!to.fullPath.includes('/accounts') && !userStore.loginApi)
 		return { name: 'register' }
-	else if (userStore.loginApi && to.fullPath.includes('/accounts'))
+	else if (to.fullPath.includes('/accounts') && userStore.loginApi)
 		return { name: 'home' }
-	else if (to.fullPath === '/leaderboard')
-		return { path: '/leaderboard', query: { page: 1, take: 10, sort: 'rankPoint', order: 'des' } }
 })
 
 export default router
