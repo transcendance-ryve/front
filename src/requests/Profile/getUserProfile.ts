@@ -18,12 +18,15 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 			+ id
 			+ '?select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
 		)
-		data.loadingData = loading.value
-		data.err = error.value
-		if (!data.err) {
+		if (error.value) {
+			//	handle errors
+		}
+		else if (response.value) {
 			data.type = response.value.isFriend ? 2 : 3
 			data.user = response.value.user
 		}
+		data.loadingData = loading.value
+		data.err = error.value
 	}
 }
 
