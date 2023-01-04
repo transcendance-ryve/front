@@ -10,7 +10,7 @@
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
 	import setUsername from '@/requests/Settings/SetUsername'
-	import setAvatar from '@/requests/Settings/SetAvatar'
+	import setAvatar from '@/requests/Settings/setAvatar'
 	import setPassword from '@/requests/Settings/setPassword'
 
 	const	contentStore = useContentStore()
