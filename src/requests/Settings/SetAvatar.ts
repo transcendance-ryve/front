@@ -17,9 +17,9 @@ const setAvatar = async (avatarFile: File) => {
 	if (error.value) {
 		//	handle errors
 	}
-	else {
+	else if (response.value) {
 		const	userStore = useUserStore()
-		await userStore.updateLoginApi()
+		userStore.updateMe(response.value)
 	}
 }
 
