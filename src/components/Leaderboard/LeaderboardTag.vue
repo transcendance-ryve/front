@@ -3,7 +3,7 @@
 	import UserInfos from '../Utils/UserInfos.vue'
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
 	import { useContentStore } from '../../stores/ContentStore'
-	import router from '../../router/index'
+	import { profileRedirect } from '../../router/index'
 
 	defineProps({
 		user: {
@@ -20,12 +20,6 @@
 	})
 
 	const	contentStore = useContentStore()
-
-	const	profileRedirect = (id: number) => {
-		const	profilePath :string = '/profile/' + id
-		router.push({ path:profilePath })
-		contentStore.state = 4
-	}
 
 </script>
 

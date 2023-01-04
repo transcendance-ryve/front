@@ -9,9 +9,6 @@
 	const	updateState = (value: number) => {
 		contentStore.state = value
 		if (contentStore.navBarListOpen)
-			// setTimeout(() => {
-			// 	contentStore.navBarListOpen = false
-			// }, 100)
 			contentStore.navBarListOpen = false
 	}
 

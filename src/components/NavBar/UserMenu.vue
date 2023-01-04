@@ -2,16 +2,9 @@
 
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
-	import router from '../../router/index'
+	import router, { profileRedirect } from '../../router/index'
 
-	const	contentStore = useContentStore()
 	const	userStore = useUserStore()
-
-	const	profileRedirect = () => {
-		contentStore.state = 4
-		const	profilePath = '/profile/' + userStore.me.id
-		router.push({ path:profilePath })
-	}
 
 </script>
 
@@ -19,7 +12,7 @@
 
 	<div class="UserMenu-wrap">
 		<div class="UserMenu">
-			<button class="User-options" @click="profileRedirect()">
+			<button class="User-options" @click="profileRedirect(userStore.me.id)">
 				<span class="Options-value">Profile</span>
 			</button>
 			<button class="User-options" @click="router.push({ path:'/settings' })">

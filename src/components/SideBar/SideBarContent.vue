@@ -5,6 +5,7 @@
 	import SideBarSwitch from './SideBarSwitch.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import SideBarTag from './SideBarTag.vue'
+	import { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
 	import getFriends from '@/requests/SideBar/getFriends'
 	import getUsers from '@/requests/SideBar/getUsers'
@@ -717,6 +718,7 @@
 				:key="index"
 				:type="sbStore.state.friendsState"
 				:data="item"
+				@click="profileRedirect(item.id || 0)"
 			/>
 		</div>
 

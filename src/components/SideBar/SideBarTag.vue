@@ -7,6 +7,7 @@
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn1 from '../Utils/Btn1.vue'
 	import type { contentData } from '@/components/SideBar/SideBarContent.vue'
+	import router from '@/router'
 
 	export interface Props {
 		type: number
