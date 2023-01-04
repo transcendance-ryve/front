@@ -15,7 +15,7 @@
 		type leaderboardQueries,
 		type queriesKeys
 	} from '@/requests/Leaderboard/getLeaderboard'
-	import router from '@/router/index'
+	import router, { profileRedirect } from '@/router/index'
 	import {type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 
 	const	contentStore = useContentStore()
@@ -194,6 +194,7 @@
 				:user="user"
 				:rank="getRank(index)"
 				:selectValue="getSortName(queries.sort)"
+				@click="profileRedirect(user.id)"
 			/>
 		</div>
 		<PagesSelector

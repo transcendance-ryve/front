@@ -25,7 +25,7 @@
 
 <template>
 
-	<div class="LeaderboardTag" @click="profileRedirect(user.id)">
+	<div class="LeaderboardTag">
 		<div class="LeaderboardTag-user">
 			<div class="LeaderboardTag-rank">
 				<span class="Rank-value">#{{ rank }}</span>
