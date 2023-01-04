@@ -1,583 +1,605 @@
 <script setup lang="ts">
 
-	import { reactive, ref, watch, computed } from 'vue'
+	import { reactive, ref, watch, computed, type Ref } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import SideBarSwitch from './SideBarSwitch.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import SideBarTag from './SideBarTag.vue'
+	import type { axiosState } from '@/requests/useAxios'
+	import getFriends from '@/requests/SideBar/getFriends'
 
-	const	data1 = reactive([
+	interface	contentData {
+		id: number,			//	user			id
+		avatar: string,		//	user / chan		avatar
+		username: string,	//	user 			name
+		name: string,		//	chan 			name
+		status: string,		//	user / chan		status
+		time: number,		//	user / chan		timer
+		lastMsg: string,	//	user / chan		last message
+		users: number,		//	chan			users count
+	}
+
+	const	data1: Partial<contentData>[] = reactive([
 		{
-			name: 'Karim',
+			username: 'Karim',
 			lastMsg: 'riwoj dsoj aifs ewiha efv d yaveogahf sjdhfb',
 			time: 1,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
-			name: 'Kylian',
+			username: 'Kylian',
 			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 2,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
-			name: 'Antoine',
+			username: 'Antoine',
 			lastMsg: 'Salut',
 			time: 3,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
-			name: 'Ousmane',
+			username: 'Ousmane',
 			lastMsg: '',
 			time: 4,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
-			name: 'Kingsley',
+			username: 'Kingsley',
 			lastMsg: 'Salut',
 			time: 5,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
-			name: 'Raphael',
+			username: 'Raphael',
 			lastMsg: 'Salut ca va',
 			time: 6,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
-			name: 'Benjamin',
+			username: 'Benjamin',
 			lastMsg: 'Dispo pour une game dans 5min ?',
 			time: 7,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
-			name: 'Theo',
+			username: 'Theo',
 			lastMsg: '',
 			time: 8,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
-			name: 'Lucas',
+			username: 'Lucas',
 			lastMsg: '',
 			time: 9,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
-			name: 'Adrien',
+			username: 'Adrien',
 			lastMsg: 'Wsh le couz',
 			time: 10,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
-			name: 'Alphonse',
+			username: 'Alphonse',
 			lastMsg: 'Dispo pour une game dans 5mi...',
 			time: 11,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
-			name: 'Steve',
+			username: 'Steve',
 			lastMsg: 'Salut',
 			time: 12,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
-			name: 'Olivier',
+			username: 'Olivier',
 			lastMsg: '',
 			time: 13,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 	])
 
-	const	data2 = reactive([
+	const	data2: Partial<contentData>[] = reactive([
 		{
 			name: 'Karim',
 			time: 5,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Kylian',
 			time: 23,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Antoine',
 			time: 4,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Ousmane',
 			time: 8,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Kingsley',
 			time: 2,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Raphael',
 			time: 17,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Benjamin',
 			time: 6,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Theo',
 			time: 1,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Lucas',
 			time: 63,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Adrien',
 			time: 55,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Alphonse',
 			time: 13,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Steve',
 			time: 16,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Olivier',
 			time: 51,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 	])
 
-	const	data3 = reactive([
+	const	data3: Partial<contentData>[] = reactive([
 		{
 			name: 'RYVE',
 			lastMsg: 'Hedi: hdo pa fiaue ub pad fsiubfebusd wiuh',
-			time: 1,
-			status: 'Private',
+			time: 2,
+			status: 'PRIVATE',
 			users: 4
 		},
 		{
 			name: 'CHAN1',
 			lastMsg: 'User: Salut',
-			time: 2,
-			status: 'Protected',
+			time: 1,
+			status: 'PROTECTED',
 			users: 31
 		},
 		{
 			name: 'CHAN2',
 			lastMsg: 'User: Salut',
 			time: 3,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 64
 		},
 		{
 			name: 'CHAN3',
 			lastMsg: 'User: Salut',
 			time: 4,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 6
 		},
 		{
 			name: 'CHAN4',
 			lastMsg: 'User: Salut',
 			time: 5,
-			status: 'Private',
+			status: 'PRIVATE',
 			users: 11
 		},
 		{
 			name: 'CHAN5',
 			lastMsg: 'User: Salut',
 			time: 6,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 5
 		},
 		{
 			name: 'CHAN6',
 			lastMsg: 'User: Salut',
 			time: 7,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 2
 		},
 		{
 			name: 'CHAN7',
 			lastMsg: 'User: Salut',
 			time: 8,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 106
 		},
 		{
 			name: 'CHAN8',
 			lastMsg: 'User: Salut',
 			time: 9,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 20
 		},
 		{
 			name: 'CHAN9',
 			lastMsg: 'User: Salut',
 			time: 10,
-			status: 'Private',
+			status: 'PRIVATE',
 			users: 34
 		},
 		{
 			name: 'CHAN10',
 			lastMsg: 'User: Salut',
 			time: 11,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 7
 		},
 		{
 			name: 'CHAN11',
 			lastMsg: 'User: Salut',
 			time: 12,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 3
 		},
 		{
 			name: 'CHAN12',
 			lastMsg: 'User: Salut',
 			time: 13,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 12
 		},
 	])
 
-	const	data4 = reactive([
+	const	data4: Partial<contentData>[] = reactive([
 		{
 			name: 'RYVE',
 			time: 1,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 4
 		},
 		{
 			name: 'CHAN1',
 			time: 2,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 42
 		},
 		{
 			name: 'CHAN2',
 			time: 3,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 14
 		},
 		{
 			name: 'CHAN3',
 			time: 4,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 106
 		},
 		{
 			name: 'CHAN4',
 			time: 5,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 8
 		},
 		{
 			name: 'CHAN5',
 			time: 6,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 4000
 		},
 		{
 			name: 'CHAN6',
 			time: 7,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 2
 		},
 		{
 			name: 'CHAN7',
 			time: 8,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 7
 		},
 		{
 			name: 'CHAN8',
 			time: 9,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 4
 		},
 		{
 			name: 'CHAN9',
 			time: 10,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 21
 		},
 		{
 			name: 'CHAN10',
 			time: 11,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 10
 		},
 		{
 			name: 'CHAN11',
 			time: 12,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 18
 		},
 		{
 			name: 'CHAN12',
 			time: 13,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 1
 		},
 	])
 
-	const	data5 = reactive([
+	const	data5: Partial<contentData>[] = reactive([
 		{
 			name: 'Karim',
 			time: 5,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Kylian',
 			time: 23,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Antoine',
 			time: 4,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Ousmane',
 			time: 8,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Kingsley',
 			time: 2,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Raphael',
 			time: 17,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Benjamin',
 			time: 6,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Theo',
 			time: 1,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Lucas',
 			time: 63,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Adrien',
 			time: 55,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Alphonse',
 			time: 13,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Steve',
 			time: 16,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Olivier',
 			time: 51,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 	])
 
-	const	data6 = reactive([
+	const	data6: Partial<contentData>[] = reactive([
 		{
 			name: 'Benjamin',
 			time: 6,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Lucas',
 			time: 63,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 		{
 			name: 'Adrien',
 			time: 55,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Alphonse',
 			time: 13,
-			status: 'In Game'
+			status: 'IN GAME'
 		},
 		{
 			name: 'Steve',
 			time: 16,
-			status: 'Offline'
+			status: 'OFFLINE'
 		},
 		{
 			name: 'Olivier',
 			time: 51,
-			status: 'Online'
+			status: 'ONLINE'
 		},
 	])
 
-	const	data7 = reactive([
+	const	data7: Partial<contentData>[] = reactive([
 		{
 			name: 'RYVE',
 			time: 1,
-			status: 'Private',
+			status: 'PRIVATE',
 			users: 4
 		},
 		{
 			name: 'CHAN1',
 			time: 2,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 42
 		},
 		{
 			name: 'CHAN2',
 			time: 3,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 14
 		},
 		{
 			name: 'CHAN3',
 			time: 4,
-			status: 'Private',
+			status: 'PRIVATE',
 			users: 106
 		},
 		{
 			name: 'CHAN4',
 			time: 5,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 8
 		},
 		{
 			name: 'CHAN5',
 			time: 6,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 4000
 		},
 		{
 			name: 'CHAN6',
 			time: 7,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 2
 		},
 		{
 			name: 'CHAN7',
 			time: 8,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 7
 		},
 		{
 			name: 'CHAN8',
 			time: 9,
-			status: 'Private',
+			status: 'PRIVATE',
 			users: 4
 		},
 		{
 			name: 'CHAN9',
 			time: 10,
-			status: 'Protected',
+			status: 'PROTECTED',
 			users: 21
 		},
 		{
 			name: 'CHAN10',
 			time: 11,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 10
 		},
 		{
 			name: 'CHAN11',
 			time: 12,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 18
 		},
 		{
 			name: 'CHAN12',
 			time: 13,
-			status: 'Public',
+			status: 'PUBLIC',
 			users: 1
 		},
 	])
 
+	const	dataState: axiosState = reactive({
+		error: null,
+		loading: false
+	})
 	const	sbStore = useSideBarStore()
 
-	const	dataSorted = computed(() => {
-		if (sbStore.section == 1) {
-			if (sbStore.friendsState == 1) {
-				return data1.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
-			else {
-				return data2.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
+	const		contentData: Ref<Partial<contentData>[]> = ref([])
+
+	const	getRawData = async () => {
+		let	fetchData: Partial<contentData>[]
+		dataState.loading = true
+
+		if (sbStore.state.section == 1) {
+			if (sbStore.state.friendsState == 1)
+				fetchData = await getFriends(dataState)
+			else
+				fetchData = data2
 		}
-		else if (sbStore.section == 2) {
-			if (sbStore.channelsState == 1) {
-				return data3.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
-			else {
-				return data4.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
+		else if (sbStore.state.section == 2) {
+			if (sbStore.state.channelsState == 1)
+				fetchData = data3
+			else
+				fetchData = data4
 		}
 		else {
-			if (sbStore.notifsState == 1) {
-				return data5.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
-			else if (sbStore.notifsState == 2) {
-				return data6.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
-			else {
-				return data7.sort((a, b) => {
-					return a.time - b.time
-				})
-			}
+			if (sbStore.state.notifsState == 1)
+				fetchData = data5
+			else if (sbStore.state.notifsState == 2)
+				fetchData = data6
+			else
+				fetchData = data7
 		}
+		contentData.value = fetchData
+		dataState.loading = false
+	}
+
+	//	a modif
+	const	sortData = () => {
+		// contentData.sort((a, b) => {
+		// 	return a.time! - b.time!
+		// })
+		return contentData
+	}
+
+	watch(sbStore.state, async () => {
+		await getRawData()
+		// sortData()
 	})
 
 	const	inputRes = computed(() => {
-		return dataSorted.value.filter(user => user.name.toLowerCase().includes(sbStore.toFind.toLowerCase()))
+		return contentData.value.filter(item => {
+			return item.name?.toLowerCase().includes(sbStore.toFind.toLowerCase())
+			|| item.username?.toLowerCase().includes(sbStore.toFind.toLowerCase())
+		})
 	})
 
-	const	users = computed(() => {
+	const	data = computed(() => {
 		if (sbStore.toFind)
 			return inputRes.value
-		else if (!((sbStore.section == 1 && sbStore.friendsState == 2) ||
-				(sbStore.section == 2 && sbStore.channelsState == 2)))
-			return dataSorted.value
+		else if (!((sbStore.state.section == 1 && sbStore.state.friendsState == 2) ||
+				(sbStore.state.section == 2 && sbStore.state.channelsState == 2)))
+			if (!dataState.error && !dataState.loading)
+				return contentData.value
 	})
 
-	const	openConv = (name: string, status: string) => {
-		if (sbStore.section == 1 && sbStore.friendsState == 1) {
+	const	openConv = (name: string = '', status: string = '') => {
+		if (sbStore.state.section == 1 && sbStore.state.friendsState == 1) {
 			sbStore.openConv('Friend', name, status)
 		}
-		else if (sbStore.section == 2 && sbStore.channelsState == 1) {
+		else if (sbStore.state.section == 2 && sbStore.state.channelsState == 1) {
 			sbStore.openConv('Channel', name, status)
 		}
 	}
+
+	getRawData()
 
 </script>
 
@@ -589,49 +611,59 @@
 		<SearchInput @search="(val) => sbStore.toFind = val"/>
 
 		<button
-			v-if="sbStore.section == 2 && sbStore.channelsState == 1"
+			v-if="sbStore.state.section == 2 && sbStore.state.channelsState == 1"
 			class="Content-newChanBtn"
 			@click="sbStore.newChan = true"
 		>
 			<span class="NewChanBtn-value">Create new channel</span>
 		</button>
 
-		<div class="SideBar-content" v-if="sbStore.section == 1">
-			<SideBarTag
-				v-for="(user, index) in users"
+		<div class="SideBar-content" v-if="sbStore.state.section == 1 && !dataState.loading && !dataState.error">
+			<!-- <SideBarTag
+				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.section"
-				:option="sbStore.friendsState"
-				:name="user.name"
-				:lastMsg="user.lastMsg"
-				:status="user.status"
-				@click="openConv(user.name, user.status)"
+				:type="sbStore.state.section"
+				:option="sbStore.state.friendsState"
+				:name="item.username"
+				:lastMsg="item.lastMsg"
+				:status="item.status"
+				@click="openConv(item.username, item.status)"
+			/> -->
+			<SideBarTag
+				v-for="(item, index) in data"
+				:key="index"
+				:type="sbStore.state.section"
+				:option="sbStore.state.friendsState"
+				:name="item.username"
+				lastMsg="iweh sodf wfoin soda eo asofneo asodf"
+				:status="item.status"
+				@click="openConv(item.username, item.status)"
 			/>
 		</div>
 
-		<div class="SideBar-content" v-if="sbStore.section == 2">
+		<div class="SideBar-content" v-if="sbStore.state.section == 2">
 			<SideBarTag
-				v-for="(user, index) in users"
+				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.section"
-				:option="sbStore.channelsState"
-				:name="user.name"
-				:lastMsg="user.lastMsg"
-				:status="user.status"
-				:users="user.users"
-				@click="openConv(user.name, user.status)"
+				:type="sbStore.state.section"
+				:option="sbStore.state.channelsState"
+				:name="item.name"
+				:lastMsg="item.lastMsg"
+				:status="item.status"
+				:users="item.users"
+				@click="openConv(item.name, item.status)"
 			/>
 		</div>
 
-		<div class="SideBar-content" v-if="sbStore.section == 3">
+		<div class="SideBar-content" v-if="sbStore.state.section == 3">
 			<SideBarTag
-				v-for="(user, index) in users"
+				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.section"
-				:option="sbStore.notifsState"
-				:name="user.name"
-				:status="user.status"
-				:users="user.users"
+				:type="sbStore.state.section"
+				:option="sbStore.state.notifsState"
+				:name="item.name"
+				:status="item.status"
+				:users="item.users"
 			/>
 		</div>
 	</div>

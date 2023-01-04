@@ -13,45 +13,45 @@
 
 	const	sbStore = useSideBarStore()
 
-	const	update2ndOption = (newVal: number) => {
-		if (sbStore.section == 1)
-			sbStore.friendsState = newVal
-		else if (sbStore.section == 2)
-			sbStore.channelsState = newVal
+	const	updateState = (newVal: number) => {
+		if (sbStore.state.section == 1)
+			sbStore.state.friendsState = newVal
+		else if (sbStore.state.section == 2)
+			sbStore.state.channelsState = newVal
 		else
-			sbStore.notifsState = newVal
+			sbStore.state.notifsState = newVal
 	}
 
 	const	btn1 = computed(() => {
-		if (sbStore.section == 1)
+		if (sbStore.state.section == 1)
 			return 'Friends list'
-		else if (sbStore.section == 2)
+		else if (sbStore.state.section == 2)
 			return 'Channels list'
 		else
 			return 'Game'
 	})
 
 	const	btn2 = computed(() => {
-		if (sbStore.section == 1)
+		if (sbStore.state.section == 1)
 			return 'Add friends'
-		else if (sbStore.section == 2)
+		else if (sbStore.state.section == 2)
 			return 'Join'
 		else
 			return 'Friends'
 	})
 
 	const	isSelected = (btn: number) => {
-		if ((sbStore.section == 1 && sbStore.friendsState == btn) ||
-				(sbStore.section == 2 && sbStore.channelsState == btn) ||
-				(sbStore.section == 3 && sbStore.notifsState == btn))
+		if ((sbStore.state.section == 1 && sbStore.state.friendsState == btn) ||
+				(sbStore.state.section == 2 && sbStore.state.channelsState == btn) ||
+				(sbStore.state.section == 3 && sbStore.state.notifsState == btn))
 			return true
 		return false
 	}
 
 	const	getLogo = (btn: number) => {
-		if ((sbStore.section == 1 || sbStore.section == 2) && btn == 1)
+		if ((sbStore.state.section == 1 || sbStore.state.section == 2) && btn == 1)
 			return logoList
-		else if ((sbStore.section == 1 || sbStore.section == 2) && btn == 2)
+		else if ((sbStore.state.section == 1 || sbStore.state.section == 2) && btn == 2)
 			return logoAdd
 		else {
 			if (btn == 1)
@@ -71,22 +71,22 @@
 			:value="btn1"
 			:selected="isSelected(1)"
 			:logo="getLogo(1)"
-			@click="update2ndOption(1)"
+			@click="updateState(1)"
 		/>
 
 		<SwitchBtn
 			:value="btn2"
 			:selected="isSelected(2)"
 			:logo="getLogo(2)"
-			@click="update2ndOption(2)"
+			@click="updateState(2)"
 		/>
 
 		<SwitchBtn
-			v-if="sbStore.section == 3"
+			v-if="sbStore.state.section == 3"
 			value="Channels"
 			:selected="isSelected(3)"
 			:logo="logoChannels"
-			@click="update2ndOption(3)"
+			@click="updateState(3)"
 		/>
 	</div>
 

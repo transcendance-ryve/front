@@ -17,7 +17,7 @@
 		<div class="SideBar-sectionsBtns">
 			<button
 				class="SectionsBtns"
-				:class="{ 'SectionBtns--selected': sbStore.section == 1 && sbStore.conv.open != true }"
+				:class="{ 'SectionBtns--selected': sbStore.state.section == 1 && sbStore.conv.open != true }"
 				@click="sbStore.updateSection(1)"
 			>
 				<span class="SectionsBtns-Logo" v-html="logoFriends"></span>
@@ -26,7 +26,7 @@
 			<button
 				class="SectionsBtns"
 				:class="{ 'SectionBtns--selected':
-					sbStore.section == 2 &&
+					sbStore.state.section == 2 &&
 					sbStore.newChan == false &&
 					sbStore.conv.open != true
 				}"
@@ -37,7 +37,7 @@
 			</button>
 			<button
 				class="SectionsBtns"
-				:class="{ 'SectionBtns--selected': sbStore.section == 3 }"
+				:class="{ 'SectionBtns--selected': sbStore.state.section == 3 }"
 				@click="sbStore.updateSection(3)"
 			>
 				<span class="SectionsBtns-Logo" :class="{'Notif-active': true}" v-html="logoNotifs"></span>

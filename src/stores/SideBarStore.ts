@@ -1,42 +1,43 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useSideBarStore = defineStore('sbStore', () => {
-	const	section = ref(1)
-	const	friendsState = ref(1)
-	const	channelsState = ref(1)
-	const	notifsState = ref(1)
+
+	const	state = reactive({
+		section: 1,
+		friendsState: 1,
+		channelsState: 1,
+		notifsState: 1
+	})
+
+	const	toFind = ref('')
 
 	const	newChan = ref(false)
-	const	conv = ref({
+
+	const	conv = reactive({
 		open: false,
 		type: '',
 		name: '',
 		status: ''
 	})
 
-	const	toFind = ref('')
-
 	function	updateSection(newVal: number) {
 		if (newChan.value)
 			newChan.value = false
-		else if (conv.value)
-			conv.value.open = false
-		section.value = newVal
+		else if (conv.open)
+			conv.open = false
+		state.section = newVal
 	}
 
 	function	openConv(type: string, name: string, status: string) {
-		conv.value.open = true
-		conv.value.type = type
-		conv.value.name = name
-		conv.value.status = status
+		conv.open = true
+		conv.type = type
+		conv.name = name
+		conv.status = status
 	}
 
 	return {
-		section,
-		friendsState,
-		channelsState,
-		notifsState,
+		state,
 		newChan,
 		conv,
 		toFind,

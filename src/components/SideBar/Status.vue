@@ -16,8 +16,8 @@
 	const p = toRefs(props);
 
 	const	statusClass = computed(() => {
-		if (p.status?.value == 'In Game')
-			return 'Status--inGame'
+		if (p.status?.value == 'IN GAME')
+			return 'Status--INGAME'
 		else
 		 return 'Status--' + p.status?.value
 	})
@@ -31,11 +31,11 @@
 		class="Status"
 		:class="statusClass"
 	>
-		<span class="Status-value">{{ status }}</span>
+		<span class="Status-value">{{ status.toString().toLowerCase() }}</span>
 	</span>
 	<span
 		v-else-if="users"
-		class="Status--users"
+		class="Status--USERS"
 	>
 		<span class="Status-value">{{ users }} users</span>
 	</span>

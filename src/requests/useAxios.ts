@@ -7,8 +7,9 @@ import { useUserStore } from '../stores/UserStore'
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
 
-type	Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get"
-type	useAxiosRes = { reponse: Ref<any>, error: Ref<any>, loading: Ref<boolean> }
+type		Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get"
+// type	useAxiosRes = { reponse: Ref<any>, error: Ref<any>, loading: Ref<boolean> }
+export type	axiosState = { error: any, loading: boolean }
 
 const	useAxios = async (method: Methods, url: string, body: object | any = null, header: object | any = null) => {
 	const	response: Ref<any> = ref(null)
