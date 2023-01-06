@@ -14,6 +14,7 @@
 	import setPassword from '@/requests/Settings/setPassword'
 	import type { axiosState } from '@/requests/useAxios'
 	import getQRCode from '@/requests/Settings/getQRCode'
+	import toggle2FA from '@/requests/Settings/toggle2FA'
 	import generateNewQRCode from '@/requests/Settings/generateNewQRCode'
 
 	const	contentStore = useContentStore()
@@ -36,7 +37,7 @@
 		newPassword: string,
 		confirmPassword: string,
 		code2FA: string,
-		active2FA: boolean
+		state2FA: boolean
 	}
 
 	const	settingsData: data = reactive({
@@ -47,7 +48,7 @@
 		newPassword: '',
 		confirmPassword: '',
 		code2FA: '',
-		active2FA: userStore.me.tfa_enabled
+		state2FA: userStore.me.tfa_enabled
 	})
 
 	const	uploadAvatar = (e:any) => {
@@ -83,6 +84,9 @@
 					error = error ? error + '\nConfirm password is different' : 'Confirm password is different'
 			}
 		}
+		if (settingsData.state2FA !== userStore.me.tfa_enabled && settingsData.code2FA.length < 6)
+			error = error ? error + '\nInvalid 2FA code' : 'Invalid 2FA code'
+
 
 		if (error) {
 			alert(error)
@@ -100,16 +104,13 @@
 			setAvatar(settingsData.avatarFile)
 		if (settingsData.newPassword && !await setPassword(settingsData.oldPassword, settingsData.newPassword))
 			alert('wrong passord')
+		if (settingsData.state2FA !== userStore.me.tfa_enabled)
+			toggle2FA(settingsData.code2FA)
 	}
 
 	onMounted(async () => {
 		QRCode.value = await getQRCode(dataState)
 	})
-
-	// const	updateCode2FA = () => {
-	// 	if (settingsData.code2FAInput.length <= 6)
-	// 		settingsData.code2FA = settingsData.code2FAInput
-	// }
 
 </script>
 
@@ -158,7 +159,7 @@
 					<div class="Code-2fa">
 						<div class="Toggle-wrapper">
 							<h3 class="Toggle-label">Active / Disable</h3>
-							<ToggleSwitch :active="settingsData.active2FA" @click="settingsData.active2FA = !settingsData.active2FA"/>
+							<ToggleSwitch :active="settingsData.state2FA" @click="settingsData.state2FA = !settingsData.state2FA"/>
 						</div>
 						<BaseInput
 							v-model="settingsData.code2FA"

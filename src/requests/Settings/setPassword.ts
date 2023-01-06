@@ -1,5 +1,4 @@
 import useAxios from '@/requests/useAxios'
-import { useUserStore } from '@/stores/UserStore'
 
 
 const setAvatar = async (old_password: string, password: string) => {
@@ -15,8 +14,7 @@ const setAvatar = async (old_password: string, password: string) => {
 		}
 	}
 	else if (response.value) {
-		const	userStore = useUserStore()
-		userStore.updateMe(response.value)
+		//	handle success
 	}
 	return true
 }
