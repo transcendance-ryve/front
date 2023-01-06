@@ -36,12 +36,6 @@
 				}
 			}
 
-			.Label-wrapper {
-				display: flex;
-				align-items: center;
-				gap: 24em;
-			}
-
 			.Setting-label {
 				color: $white;
 				font-weight: 600;
@@ -69,6 +63,52 @@
 		.Setting-password > .Passwords-wrapper {
 			display: flex;
 			gap: 16em;
+		}
+
+		.Setting-2fa {
+			.Setting-2fa-content {
+				display: flex;
+				gap: 48em;
+				.QrCode-2fa {
+					width: 200em;
+					height: 200em;
+					border-radius: 6em;
+					background: white;
+				}
+				.Code-2fa {
+					display: flex;
+					flex-direction: column;
+					gap: 16em;
+					.Toggle-wrapper {
+						display: flex;
+						align-items: center;
+						gap: 16em;
+
+						.Toggle-label {
+							color: $white;
+							font-weight: 600;
+							font-size: 18em;
+							line-height: 100%;
+						}
+					}
+					.input-wrap {
+						width: 206em;
+					}
+				}
+			}
+
+			.GenerateBtn-wrapper {
+				display: flex;
+				flex-direction: column;
+				gap: 16em;
+			}
+
+			.Setting-moreInfos {
+				font-weight: 500;
+				font-size: 12em;
+				line-height: 100%;
+				color: $white-200;
+			}
 		}
 	}
 

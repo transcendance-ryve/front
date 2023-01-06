@@ -29,7 +29,7 @@
 			return Number.isInteger(ratio) ? ratio : parseFloat(ratio.toFixed(2))
 		}
 		const	stats = [
-			'rankPoint',
+			'rank_point',
 			'played',
 			'ratio',
 			'wins',

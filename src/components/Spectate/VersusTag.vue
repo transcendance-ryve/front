@@ -38,7 +38,7 @@
 			:username="user.username"
 			:level="user.level"
 			:experience="user.experience"
-			:nextLevel="user.nextLevel"
+			:nextLevel="user.next_level"
 			:mainColor="userColor"
 			:avatarBorder="true"
 			:reverse="reverse"

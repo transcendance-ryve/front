@@ -35,7 +35,7 @@ const router = createRouter({
 						if (to.fullPath === '/leaderboard')
 							return {
 								path: '/leaderboard',
-								query: { page: 1, take: 10, sort: 'rankPoint', order: 'des' }
+								query: { page: 1, take: 10, sort: 'rank_point', order: 'des' }
 							}
 					}
 				},

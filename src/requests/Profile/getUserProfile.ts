@@ -16,7 +16,7 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 			'get',
 			'/users/friends/'
 			+ id
-			+ '?select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
+			+ '?select=id,username,avatar,level,experience,next_level,rank_point,wins,loses,played'
 		)
 		if (error.value) {
 			//	handle errors

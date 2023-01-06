@@ -18,7 +18,7 @@
 				username: 'Karim',
 				level: 200,
 				experience: 12,
-				nextLevel: 100,
+				next_level: 100,
 				score: 4
 			},
 			player2: {
@@ -26,7 +26,7 @@
 				username: 'Kylian',
 				level: 197,
 				experience: 66,
-				nextLevel: 100,
+				next_level: 100,
 				score: 3
 			},
 			begin: 16
@@ -37,7 +37,7 @@
 				username: 'Antoine',
 				level: 158,
 				experience: 20,
-				nextLevel: 100,
+				next_level: 100,
 				score: 2
 			},
 			player2: {
@@ -45,7 +45,7 @@
 				username: 'Ousmane',
 				level: 152,
 				experience: 95,
-				nextLevel: 100,
+				next_level: 100,
 				score: 2
 			},
 			begin: 13
@@ -56,7 +56,7 @@
 				username: 'Kingsley',
 				level: 140,
 				experience: 32,
-				nextLevel: 100,
+				next_level: 100,
 				score: 4
 			},
 			player2: {
@@ -64,7 +64,7 @@
 				username: 'Raphael',
 				level: 134,
 				experience: 84,
-				nextLevel: 100,
+				next_level: 100,
 				score: 1
 			},
 			begin: 12
@@ -75,7 +75,7 @@
 				username: 'Benjamin',
 				level: 104,
 				experience: 8,
-				nextLevel: 100,
+				next_level: 100,
 				score: 1
 			},
 			player2: {
@@ -83,7 +83,7 @@
 				username: 'Theo',
 				level: 100,
 				experience: 71,
-				nextLevel: 100,
+				next_level: 100,
 				score: 1
 			},
 			begin: 8
@@ -94,7 +94,7 @@
 				username: 'Lucas',
 				level: 84,
 				experience: 60,
-				nextLevel: 100,
+				next_level: 100,
 				score: 2
 			},
 			player2: {
@@ -102,7 +102,7 @@
 				username: 'Adrien',
 				level: 78,
 				experience: 89,
-				nextLevel: 100,
+				next_level: 100,
 				score: 1
 			},
 			begin: 7
@@ -113,7 +113,7 @@
 				username: 'Alphonse',
 				level: 43,
 				experience: 37,
-				nextLevel: 100,
+				next_level: 100,
 				score: 1
 			},
 			player2: {
@@ -121,7 +121,7 @@
 				username: 'Steve',
 				level: 21,
 				experience: 21,
-				nextLevel: 100,
+				next_level: 100,
 				score: 3
 			},
 			begin: 3

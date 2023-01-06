@@ -35,7 +35,7 @@
 	const	queries: leaderboardQueries = reactive({
 		page: '1',
 		take: '10',
-		sort: 'rankPoint',
+		sort: 'rank_point',
 		order: 'des',
 		search: ''
 	})
@@ -54,7 +54,7 @@
 
 	const	getSortQuery = (value: string) => {
 		if (value === 'Rank points')
-			queries.sort = 'rankPoint'
+			queries.sort = 'rank_point'
 		else if (value === 'Play count')
 			queries.sort = 'played'
 		else if (value === 'Wins')
@@ -64,7 +64,7 @@
 	}
 
 	const	getSortName = (value: string) => {
-		if (value === 'rankPoint')
+		if (value === 'rank_point')
 			return 'Rank points'
 		else if (value === 'played')
 			return 'Play count'
@@ -76,7 +76,7 @@
 
 	const	checkQueries = () => {
 		const	page: number = parseInt(queries.page)
-		const	sortQueries = ['rankPoint', 'played', 'wins', 'loses']
+		const	sortQueries = ['rank_point', 'played', 'wins', 'loses']
 		if (isNaN(page) || page < 1)
 			queries.page = '1'
 		if (!menuTake.includes(queries.take)) {
@@ -87,7 +87,7 @@
 			queries.take = '100'
 		}
 		if (!sortQueries.includes(queries.sort))
-			queries.sort = 'rankPoint'
+			queries.sort = 'rank_point'
 		if (queries.order !== 'des' && queries.order !== 'asc')
 			queries.order = 'des'
 	}

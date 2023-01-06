@@ -26,7 +26,7 @@
 			:username="user?.username"
 			:level="user?.level"
 			:experience="user?.experience"
-			:nextLevel="user?.nextLevel"
+			:nextLevel="user?.next_level"
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">

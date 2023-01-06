@@ -23,7 +23,7 @@ const getLeaderboard = async (urlQueries: string, data: leaderboardData) => {
 		'get',
 		'/users'
 		+ urlQueries
-		+ '&select=id,username,avatar,level,experience,nextLevel,rankPoint,wins,loses,played'
+		+ '&select=id,username,avatar,level,experience,next_level,rank_point,wins,loses,played'
 	)
 	data.loadingData = loading.value
 	data.err = error.value

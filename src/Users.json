@@ -6,9 +6,9 @@
 		"level": 200,
 		"loses": 14,
 		"experience": 12,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 304,
-		"rankPoint": 21539,
+		"rank_point": 21539,
 		"wins": 290
 	},
 	{
@@ -18,9 +18,9 @@
 		"level": 197,
 		"loses": 30,
 		"experience": 61,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 300,
-		"rankPoint": 12300,
+		"rank_point": 12300,
 		"wins": 270
 	},
 	{
@@ -30,9 +30,9 @@
 		"level": 158,
 		"loses": 93,
 		"experience": 20,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 325,
-		"rankPoint": 4640,
+		"rank_point": 4640,
 		"wins": 232
 	},
 	{
@@ -42,9 +42,9 @@
 		"level": 152,
 		"loses": 77,
 		"experience": 95,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 257,
-		"rankPoint": 1250,
+		"rank_point": 1250,
 		"wins": 180
 	},
 	{
@@ -54,9 +54,9 @@
 		"level": 140,
 		"loses": 148,
 		"experience": 32,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 432,
-		"rankPoint": 1020,
+		"rank_point": 1020,
 		"wins": 234
 	},
 	{
@@ -66,9 +66,9 @@
 		"level": 134,
 		"loses": 144,
 		"experience": 84,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 123,
-		"rankPoint": 839,
+		"rank_point": 839,
 		"wins": 145
 	},
 	{
@@ -78,9 +78,9 @@
 		"level": 104,
 		"loses": 104,
 		"experience": 8,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 231,
-		"rankPoint": 530,
+		"rank_point": 530,
 		"wins": 143
 	},
 	{
@@ -90,9 +90,9 @@
 		"level": 100,
 		"loses": 235,
 		"experience": 71,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 154,
-		"rankPoint": 700,
+		"rank_point": 700,
 		"wins": 553
 	},
 	{
@@ -102,9 +102,9 @@
 		"level": 84,
 		"loses": 335,
 		"experience": 60,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 547,
-		"rankPoint": 583,
+		"rank_point": 583,
 		"wins": 212
 	},
 	{
@@ -114,9 +114,9 @@
 		"level": 78,
 		"loses": 1094,
 		"experience": 89,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 1234,
-		"rankPoint": 478,
+		"rank_point": 478,
 		"wins": 140
 	},
 	{
@@ -126,9 +126,9 @@
 		"level": 43,
 		"loses": 548,
 		"experience": 37,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 632,
-		"rankPoint": 420,
+		"rank_point": 420,
 		"wins": 83
 	},
 	{
@@ -138,9 +138,9 @@
 		"level": 21,
 		"loses": 0,
 		"experience": 50,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 3619,
-		"rankPoint": 3619,
+		"rank_point": 3619,
 		"wins": 12
 	},
 	{
@@ -150,9 +150,9 @@
 		"level": 1,
 		"loses": 3251,
 		"experience": 68,
-		"nextLevel": 100,
+		"next_level": 100,
 		"played": 3252,
-		"rankPoint": 305,
+		"rank_point": 305,
 		"wins": 1
 	}
 ]

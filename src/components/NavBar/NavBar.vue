@@ -58,7 +58,7 @@
 					:username="userStore.me.username"
 					:level="userStore.me.level"
 					:experience="userStore.me.experience"
-					:nextLevel="userStore.me.nextLevel"
+					:nextLevel="userStore.me.next_level"
 					xpBackground="#242635"
 					:reverse="true"
 					:sizeXS="userInfoXS"

@@ -34,14 +34,14 @@
 				:username="user.username"
 				:level="user.level"
 				:experience="user.experience"
-				:nextLevel="user.nextLevel"
+				:nextLevel="user.next_level"
 			/>
 		</div>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat
 				:class="{'Stat--selected': selectValue === 'Rank points'}"
 				label="Rank points"
-				:value="user.rankPoint"
+				:value="user.rank_point"
 			/>
 			<LeaderboardTagStat
 				:class="{'Stat--selected': selectValue === 'Play count'}"

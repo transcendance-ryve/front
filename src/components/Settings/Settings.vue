@@ -5,7 +5,7 @@
 	import { useUserStore } from '../../stores/UserStore'
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
 	import BaseInput from '../Utils/BaseInput.vue';
-	import { logoProfile, logoLock, logoPhone } from '../../assets/logoSVG'
+	import { logoProfile, logoLock, logoQrCode } from '../../assets/logoSVG'
 	import ToggleSwitch from './ToggleSwitch.vue';
 	import Btn1 from '../Utils/Btn1.vue';
 	import router from '@/router';
@@ -25,21 +25,18 @@
 		oldPassword: string,
 		newPassword: string,
 		confirmPassword: string,
-		phoneNumber: string,
-		phoneInputValue: string,
+		code2FA: string
 		active2FA: boolean
 	}
 
 	const	settingsData: data = reactive({
 		avatar: null,
 		avatarFile: null,
-		// username: userStore.me.username,
 		username: '',
 		oldPassword: '',
 		newPassword: '',
 		confirmPassword: '',
-		phoneNumber: '07 81 33 44 30',
-		phoneInputValue: '07 81 33 44 30',
+		code2FA: '',
 		active2FA: false
 	})
 
@@ -50,17 +47,6 @@
 		reader.onload = (e:any) => {
 			settingsData.avatar = e.target.result
 		}
-	}
-
-	const	updatePhoneNumber = () => {
-		const	length = settingsData.phoneNumber.length
-		if (isNaN(parseInt(settingsData.phoneNumber[length - 1])))
-		settingsData.phoneNumber = settingsData.phoneNumber.slice(0, length - 1)
-		else if (length > 2 && !isNaN(parseInt(settingsData.phoneNumber[length - 2])) && !isNaN(parseInt(settingsData.phoneNumber[length - 3]))) {
-			const	value = settingsData.phoneNumber[length - 1]
-			settingsData.phoneNumber = settingsData.phoneNumber.slice(0, length - 1) + ' ' + value
-		}
-		settingsData.phoneInputValue = settingsData.phoneNumber
 	}
 
 	const	checkSettings = () => {
@@ -106,12 +92,6 @@
 			<div class="Setting Setting--profile">
 				<div class="Setting-tag"><span class="Tag-value">Profile</span></div>
 				<UploadAvatar :avatar="settingsData.avatar" id="userAvatar-input" @change="uploadAvatar"/>
-				<!-- <BaseInput
-					v-model="settingsData.username"
-					:value="settingsData.username"
-					placeholder="Username"
-					:logo="logoProfile"
-				/> -->
 				<BaseInput
 					v-model="settingsData.username"
 					:placeholder="userStore.me.username"
@@ -142,21 +122,34 @@
 					/>
 				</div>
 			</div>
-			<div class="Setting Setting-password">
+			<div class="Setting Setting-2fa">
 				<div class="Setting-tag"><span class="Tag-value">2FA</span></div>
-				<div class="Label-wrapper">
-					<h2 class="Setting-label">Actived / Disabled 2FA</h2>
-					<ToggleSwitch :active="settingsData.active2FA" @click="settingsData.active2FA = !settingsData.active2FA"/>
+				<h2 class="Setting-label">Update 2FA</h2>
+				<div class="Setting-2fa-content">
+					<span class="QrCode-2fa"></span>
+					<div class="Code-2fa">
+						<div class="Toggle-wrapper">
+							<h3 class="Toggle-label">Active / Disable</h3>
+							<ToggleSwitch :active="settingsData.active2FA" @click="settingsData.active2FA = !settingsData.active2FA"/>
+						</div>
+						<BaseInput
+							v-model="settingsData.code2FA"
+							placeholder="Code"
+							:logo="logoQrCode"
+							maxlength="6"
+						/>
+						<span class="Setting-moreInfos">Enter the code to activate or desactivate the 2FA</span>
+					</div>
 				</div>
-				<div class="Passwords-wrapper">
-					<BaseInput
-						v-model="settingsData.phoneNumber"
-						:value="settingsData.phoneInputValue"
-						placeholder="Phone number"
-						:logo="logoPhone"
-						maxlength="14"
-						@keyup="updatePhoneNumber()"
+				<div class="GenerateBtn-wrapper">
+					<Btn1
+						:type=3
+						value="Generate new QRCode"
+						width="206em"
+						height="42em"
+						fontSize="14em"
 					/>
+					<span class="Setting-moreInfos">If you generate new QRCode 2FA is disabled</span>
 				</div>
 			</div>
 		</div>
