@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, onMounted, reactive, ref } from 'vue'
+	import { onMounted, reactive, ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
@@ -91,15 +91,10 @@
 	}
 
 	const	QRCode = ref('')
-	const	getQR = async () => {
-		QRCode.value = await getQRCode(dataState)
-	}
-	getQR()
 
-	// onMounted(async () => {
-	// 	QRCode = await getQRCode(dataState)
-	// 	console.log(QRCode)
-	// })
+	onMounted(async () => {
+		QRCode.value = await getQRCode(dataState)
+	})
 
 </script>
 
