@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, ref } from 'vue'
+	import { computed, onMounted, reactive, ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
@@ -12,11 +12,18 @@
 	import setUsername from '@/requests/Settings/SetUsername'
 	import setAvatar from '@/requests/Settings/setAvatar'
 	import setPassword from '@/requests/Settings/setPassword'
+	import type { axiosState } from '@/requests/useAxios'
+	import getQRCode from '@/requests/Settings/getQRCode';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
 
 	const	userStore = useUserStore()
+
+	const	dataState: axiosState = reactive({
+		error: null,
+		loading: false
+	})
 
 	type	data = {
 		avatar: null,
@@ -83,6 +90,17 @@
 			alert('wrong passord')
 	}
 
+	const	QRCode = ref('')
+	const	getQR = async () => {
+		QRCode.value = await getQRCode(dataState)
+	}
+	getQR()
+
+	// onMounted(async () => {
+	// 	QRCode = await getQRCode(dataState)
+	// 	console.log(QRCode)
+	// })
+
 </script>
 
 <template>
@@ -126,7 +144,8 @@
 				<div class="Setting-tag"><span class="Tag-value">2FA</span></div>
 				<h2 class="Setting-label">Update 2FA</h2>
 				<div class="Setting-2fa-content">
-					<span class="QrCode-2fa"></span>
+					<!-- <span class="QrCode-2fa"></span> -->
+					<img class="QrCode-2fa" :src="QRCode" alt="">
 					<div class="Code-2fa">
 						<div class="Toggle-wrapper">
 							<h3 class="Toggle-label">Active / Disable</h3>
