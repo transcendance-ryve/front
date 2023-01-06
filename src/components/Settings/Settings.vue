@@ -13,12 +13,15 @@
 	import setAvatar from '@/requests/Settings/setAvatar'
 	import setPassword from '@/requests/Settings/setPassword'
 	import type { axiosState } from '@/requests/useAxios'
-	import getQRCode from '@/requests/Settings/getQRCode';
+	import getQRCode from '@/requests/Settings/getQRCode'
+	import generateNewQRCode from '@/requests/Settings/generateNewQRCode'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
 
 	const	userStore = useUserStore()
+
+	const	QRCode = ref('')
 
 	const	dataState: axiosState = reactive({
 		error: null,
@@ -56,6 +59,10 @@
 		}
 	}
 
+	const	newQRCode = async () => {
+		QRCode.value = await generateNewQRCode(dataState)
+	}
+
 	const	checkSettings = () => {
 		let	error: string = ''
 
@@ -89,8 +96,6 @@
 		if (settingsData.newPassword && !await setPassword(settingsData.oldPassword, settingsData.newPassword))
 			alert('wrong passord')
 	}
-
-	const	QRCode = ref('')
 
 	onMounted(async () => {
 		QRCode.value = await getQRCode(dataState)
@@ -139,7 +144,6 @@
 				<div class="Setting-tag"><span class="Tag-value">2FA</span></div>
 				<h2 class="Setting-label">Update 2FA</h2>
 				<div class="Setting-2fa-content">
-					<!-- <span class="QrCode-2fa"></span> -->
 					<img class="QrCode-2fa" :src="QRCode" alt="">
 					<div class="Code-2fa">
 						<div class="Toggle-wrapper">
@@ -162,6 +166,7 @@
 						width="206em"
 						height="42em"
 						fontSize="14em"
+						@click="newQRCode()"
 					/>
 					<span class="Setting-moreInfos">If you generate new QRCode 2FA is disabled</span>
 				</div>

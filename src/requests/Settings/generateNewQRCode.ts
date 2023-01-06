@@ -1,12 +1,12 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
 
-const getQRCode = async (dataState: axiosState) => {
+const generateNewQRCode = async (dataState: axiosState) => {
 
 	dataState.loading = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/auth/tfa/qrcode'
+		'/auth/tfa/generate'
 	)
 	if (error.value) {
 		//	handle errors
@@ -18,4 +18,4 @@ const getQRCode = async (dataState: axiosState) => {
 	}
 }
 
-export default getQRCode
+export default generateNewQRCode
