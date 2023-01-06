@@ -35,7 +35,7 @@
 		oldPassword: string,
 		newPassword: string,
 		confirmPassword: string,
-		code2FA: string
+		code2FA: string,
 		active2FA: boolean
 	}
 
@@ -47,7 +47,7 @@
 		newPassword: '',
 		confirmPassword: '',
 		code2FA: '',
-		active2FA: false
+		active2FA: userStore.me.tfa_enabled
 	})
 
 	const	uploadAvatar = (e:any) => {
@@ -57,6 +57,11 @@
 		reader.onload = (e:any) => {
 			settingsData.avatar = e.target.result
 		}
+	}
+
+	const	updateCode2FA = (e:any) => {
+		if (e.target.value.length >= 6)
+			e.target.value = e.target.value.slice(0, 6)
 	}
 
 	const	newQRCode = async () => {
@@ -100,6 +105,11 @@
 	onMounted(async () => {
 		QRCode.value = await getQRCode(dataState)
 	})
+
+	// const	updateCode2FA = () => {
+	// 	if (settingsData.code2FAInput.length <= 6)
+	// 		settingsData.code2FA = settingsData.code2FAInput
+	// }
 
 </script>
 
@@ -154,7 +164,8 @@
 							v-model="settingsData.code2FA"
 							placeholder="Code"
 							:logo="logoQrCode"
-							maxlength="6"
+							type="number"
+							@input="updateCode2FA"
 						/>
 						<span class="Setting-moreInfos">Enter the code to activate or desactivate the 2FA</span>
 					</div>
