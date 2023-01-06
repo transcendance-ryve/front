@@ -9,6 +9,7 @@ import Accounts from '../views/Accounts.vue'
 import RegisterForm from '../components/Forms/RegisterForm.vue'
 import LoginForm from '../components/Forms/LoginForm.vue'
 import ForgotForm from '../components/Forms/ForgotForm.vue'
+import TfaForm from '../components/Forms/TfaForm.vue'
 import { useUserStore } from '../stores/UserStore'
 import { callBack } from '@/requests/Auth/auth42'
 
@@ -70,10 +71,14 @@ const router = createRouter({
 					name: 'login',
 					component: LoginForm,
 					beforeEnter: async (to) => {
-						console.log('peoijfw')
 						if (to.query.code)
 							await callBack(to.query.code as string)
 					},
+				},
+				{
+					path: 'login/tfa',
+					name: 'tfa',
+					component: TfaForm,
 				},
 				{
 					path: 'forgot-password',
