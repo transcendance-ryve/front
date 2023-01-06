@@ -3,6 +3,7 @@
 	import { type Ref } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd } from '../../assets/logoSVG'
+	import Btn1 from '../Utils/Btn1.vue'
 	import router from '@/router'
 
 	const props = defineProps({
@@ -30,26 +31,38 @@
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
 			<button class="Btn-2FA"><span class="Btn-value">2FA</span></button>
-			<button class="Btn-settings" @click="router.push({ path: '/settings' })">
-				<span class="Btn-logo" v-html="logoSettings"></span>
-				<span class="Btn-value">Settings</span>
-			</button>
+			<Btn1
+				:type=5
+				:logo="logoSettings"
+				value="Settings"
+				width="136em"
+				fontSize="16em"
+			/>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type == 2">
-			<button class="Btn-type1">
-				<span class="Btn-logo" v-html="logoTrash"></span>
-				<span class="Btn-value">Delete</span>
-			</button>
-			<button class="Btn-type2">
-				<span class="Btn-logo" v-html="logoMsg"></span>
-				<span class="Btn-value">Message</span>
-			</button>
+			<Btn1
+				:type=3
+				:logo="logoTrash"
+				value="Delete"
+				width="121em"
+				fontSize="16em"
+			/>
+			<Btn1
+				:type=1
+				:logo="logoMsg"
+				value="Message"
+				width="143em"
+				fontSize="16em"
+			/>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type == 3">
-			<button class="Btn-type2">
-				<span class="Btn-logo" v-html="logoAdd"></span>
-				<span class="Btn-value">Add to friend</span>
-			</button>
+			<Btn1
+				:type=1
+				:logo="logoAdd"
+				value="Add to friend"
+				width="173em"
+				fontSize="16em"
+			/>
 		</div>
 	</div>
 
