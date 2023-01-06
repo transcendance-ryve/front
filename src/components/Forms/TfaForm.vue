@@ -22,6 +22,11 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
+	const	updateCode2FA = (e:any) => {
+		if (e.target.value.length >= 6)
+			e.target.value = e.target.value.slice(0, 6)
+	}
+
 	const emit = defineEmits(['tfaCode'])
 
 	const	submitForm = async () => {
@@ -45,6 +50,7 @@
 					placeholder="Code"
 					type="number"
 					:logo="logoQrCode"
+					@input="updateCode2FA"
 				/>
 				<span
 					class="form-error"
