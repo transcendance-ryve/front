@@ -40,7 +40,9 @@
 				:class="{ 'SectionBtns--selected': sbStore.state.section == 3 }"
 				@click="sbStore.updateSection(3)"
 			>
-				<span class="SectionsBtns-Logo" :class="{'Notif-active': true}" v-html="logoNotifs"></span>
+				<div class="NotifLogo-wrapper" :class="{'Notif-active': sbStore.state.section !== 3}">
+					<span class="SectionsBtns-Logo" v-html="logoNotifs"></span>
+				</div>
 			</button>
 		</div>
 
