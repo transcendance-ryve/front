@@ -11,14 +11,15 @@ const toggle2FA = async (code: string) => {
 	)
 	if (error.value) {
 		//	handle errors
-		// if (error.value.response?.status === 401) {
-		// 	return false
-		// }
+		if (error.value.response?.status === 409) {
+			return false
+		}
 	}
 	else if (response.value) {
 		const	userStore = useUserStore()
 		userStore.updateMe(response.value)
 	}
+	return true
 }
 
 export default toggle2FA

@@ -104,8 +104,10 @@
 			setAvatar(settingsData.avatarFile)
 		if (settingsData.newPassword && !await setPassword(settingsData.oldPassword, settingsData.newPassword))
 			alert('wrong passord')
-		if (settingsData.state2FA !== userStore.me.tfa_enabled)
-			toggle2FA(settingsData.code2FA)
+		if (settingsData.state2FA !== userStore.me.tfa_enabled && !await toggle2FA(settingsData.code2FA)) {
+			settingsData.state2FA = !settingsData.state2FA
+			alert('wrong 2FA code')
+		}
 	}
 
 	onMounted(async () => {
