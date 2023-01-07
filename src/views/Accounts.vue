@@ -2,23 +2,13 @@
 
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router/index'
+	import register from '@/requests/Auth/register'
+	import login from '@/requests/Auth/login'
+	import forgotPassword from '@/requests/Auth/forgotPassword'
+	import tfaCallback from '@/requests/Auth/tfaCallback'
 
 	const	loginRedirect = () => {
 		router.push({path:'/accounts/login'})
-	}
-
-	const	userStore = useUserStore()
-
-	const	register = (username: string, email: string, password: string) => {
-		userStore.register(username, email, password)
-	}
-
-	const	login = (email: string, password: string) => {
-		userStore.connect(email, password)
-	}
-
-	const	forgotPassword = (email: string) => {
-		userStore.forgotPassword(email)
 	}
 
 	const	resetPassword = (password: string) => {
@@ -35,6 +25,7 @@
 			@login="login"
 			@forgotPassword="forgotPassword"
 			@resetPassword="resetPassword"
+			@tfaCode="tfaCallback"
 		/>
 		<div class="Login-redirect" v-if="router.currentRoute.value.name == 'register'">
 			<span>Already have an account ?</span>

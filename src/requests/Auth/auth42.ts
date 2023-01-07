@@ -22,7 +22,8 @@ export async function	callBack(code: string) {
 			})
 
 		const userStore = useUserStore()
-		await userStore.updateLoginApi()
+		userStore.updateMe(res.response.value)
+		userStore.loginApi = true
 		router.push({ path: '/' })
 	}
 }

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import router, { profileRedirect } from '../../router/index'
+	import disconnect from '@/requests/Auth/disconnect'
 
 	const	userStore = useUserStore()
 
@@ -18,7 +18,7 @@
 			<button class="User-options" @click="router.push({ path:'/settings' })">
 				<span class="Options-value">Settings</span>
 			</button>
-			<button class="User-options" @click="userStore.disconnect()">
+			<button class="User-options" @click="disconnect()">
 				<span class="Options-value">Disconnect</span>
 			</button>
 		</div>

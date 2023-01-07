@@ -100,9 +100,13 @@ const router = createRouter({
 
 router.beforeEach(async (to, from) => {
 	const	userStore = useUserStore()
+	console.log('from', from.fullPath, 'to', to.fullPath)
 
-	if (!to.fullPath.includes('/accounts') && !userStore.loginApi)
+	if (!to.fullPath.includes('/accounts') && !userStore.loginApi
+		&& !to.fullPath.includes('/accounts/login/tfa')) {
+		console.log('passage in beforeEach')
 		return { name: 'register' }
+	}
 	else if (to.fullPath.includes('/accounts') && userStore.loginApi)
 		return { name: 'home' }
 })
