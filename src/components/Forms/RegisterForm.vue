@@ -11,6 +11,7 @@
 		helpers
 	} from '@vuelidate/validators'
 	import { logoProfile, logoEmail, logoLock, logo42 } from '../../assets/logoSVG'
+	import { auth42 } from '@/requests/Auth/auth42'
 
 	const	formData = reactive({
 		username: '',
@@ -54,18 +55,14 @@
 			alert('error, form not submitted')
 	}
 
-	const	setOauthState = () => {
-		localStorage.setItem('oauth42', 'true')
-	}
-
 </script>
 
 <template>
 	<div class="Form-wrap">
-		<a class="Form-42btn" @click="setOauthState()" href="http://localhost:3000/auth/42">
-			<span class="Btn-value">Sign up with</span>
+		<button class="Form-42btn" @click.prevent="auth42">
+			<span class="Btn-value">Sign in with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
-		</a>
+		</button>
 		<span class="or">OR</span>
 		<h1>Create an account</h1>
 		<form @submit.prevent="submitForm">

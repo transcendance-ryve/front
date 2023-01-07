@@ -10,9 +10,6 @@
 	import { logoProfile, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
 	import router from '@/router'
-	import useAxios from '@/requests/useAxios'
-	import { useRoute } from 'vue-router'
-	import { useUserStore } from '@/stores/UserStore'
 
 
 	const	formData = reactive({
