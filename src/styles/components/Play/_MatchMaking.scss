@@ -1,0 +1,154 @@
+.Play-matchMaking {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	gap: 16em;
+	position: relative;
+
+	.MatchMaking-versus {
+		display: flex;
+		width: 100%;
+		height: 136em;
+		border-radius: 6em;
+		background: $background-600;
+	}
+
+	.MatchMaking-game {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, $dark-blue 0%, $red 100%);
+		border-radius: 6em;
+		padding: 10em;
+		gap: 10em;
+
+		.Game-side {
+			width: 50%;
+			height: 100%;
+			background: $background-600;
+			position: relative;
+		}
+		.Game-leftSide {
+			border-radius: 4em 0 0 4em;
+
+			&::before {
+				position: absolute;
+				content: "";
+				height: 200px;
+				width: 10em;
+				left: 38em;
+				top: calc(50% - 100px);
+				background: $dark-blue;
+				border-radius: 16em;
+			}
+			&::after {
+				position: absolute;
+				content: "";
+				height: 18em;
+				width: 18em;
+				left: 69em;
+				top: calc(50% - 50px);
+				background: $dark-blue;
+				border-radius: 50%;
+			}
+		}
+		.Game-rightSide {
+			border-radius: 0 4em 4em 0;
+			&::before {
+				position: absolute;
+				content: "";
+				height: 200px;
+				width: 10em;
+				right: 38em;
+				top: calc(50% - 100px);
+				background: $red;
+				border-radius: 16em;
+			}
+		}
+	}
+
+	.MatchMaking-modal {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: 6em;
+		background: rgba(31, 30, 44, 0.75);
+		backdrop-filter: blur(2.8px);
+		gap: 50em;
+
+		.Modal-label {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 18em;
+			.Label {
+				font-weight: 600;
+				font-size: 40em;
+				line-height: 100%;
+				color: white;
+			}
+			.Label-children {
+				font-weight: 500;
+				font-size: 24em;
+				line-height: 100%;
+				color: white;
+			}
+			.Label-estimation::before {
+				content: "Your estimated matchmaking time is: ";
+				color: $white-200;
+			}
+			.Label-time::before {
+				content: "In queue since: ";
+				color: $white-200;
+			}
+			.Label-ready::before {
+				content: "Are you ready?";
+				color: $white-200;
+			}
+			.Modal-loader {
+				display: inline-block;
+				position: relative;
+				width: 31em;
+				height: 40em;
+
+				.Loader-bar {
+					display: inline-block;
+					position: absolute;
+					width: 7em;
+					animation: loader-animation cubic-bezier(0, 0.5, 0.5, 1) 1s infinite;
+					&:nth-child(1) {
+						left: 0;
+						animation-delay: 0;
+					}
+					&:nth-child(2) {
+						left: 12em;
+						animation-delay: 0.14s;
+					}
+					&:nth-child(3) {
+						left: 24em;
+						animation-delay: 0.28s;
+					}
+				}
+				@keyframes loader-animation {
+					0% {
+						top: 0em;
+						height: 40em;
+						background: white;
+					}
+					50%, 100% {
+						top: 5em;
+						height: 30em;
+						background: rgba(255, 255, 255, 0.5);
+					}
+				}
+			}
+		}
+	}
+}

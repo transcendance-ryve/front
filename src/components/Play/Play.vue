@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 	import { useContentStore } from '../../stores/ContentStore'
+	import MatchMaking from '@/components/Play/MatchMaking.vue'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 1
@@ -10,7 +11,7 @@
 <template>
 
 	<div class="mainContent-play">
-		PONG
+		<MatchMaking />
 	</div>
 
 </template>
