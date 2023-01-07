@@ -63,6 +63,10 @@
 		.Setting-password > .Passwords-wrapper {
 			display: flex;
 			gap: 16em;
+			.New-password {
+				display: flex;
+				gap: 16em;
+			}
 		}
 
 		.Setting-2fa {
@@ -73,7 +77,6 @@
 					width: 200em;
 					height: 200em;
 					border-radius: 6em;
-					// background: white;
 				}
 				.Code-2fa {
 					display: flex;
@@ -117,5 +120,52 @@
 		gap: 16em;
 		justify-content: flex-end;
 		// height: 48em;
+	}
+
+	@media (max-width: $tablet) {
+		font-size: 0.94em;
+
+		.Setting-password > .Passwords-wrapper {
+			flex-direction: column;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.Setting-password > .Passwords-wrapper > .New-password {
+			flex-direction: column;
+		}
+
+		.Setting-2fa {
+			.Setting-2fa-content {
+				flex-direction: column-reverse;
+			}
+		}
+	}
+
+	@media (max-width: 425px) {
+		.Settings-wrapper {
+			.Setting {
+				.Setting-tag {
+					font-size: 0.8em;
+				}
+				align-items: center;
+				padding: 64em 32em 32em 32em;
+			}
+			.Setting--profile {
+				flex-direction: column;
+			}
+			.Setting-2fa {
+				.Setting-2fa-content, .Code-2fa {
+					align-items: center;
+				}
+				.GenerateBtn-wrapper {
+					align-items: center;
+				}
+			}
+		}
+	}
+
+	@media (max-width: 320px) {
+		font-size: 4.52rem;
 	}
 }

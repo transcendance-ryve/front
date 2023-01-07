@@ -139,18 +139,20 @@
 						:logo="logoLock"
 						type="password"
 					/>
-					<BaseInput
-						v-model="settingsData.newPassword"
-						placeholder="New password"
-						:logo="logoLock"
-						type="password"
-					/>
-					<BaseInput
-						v-model="settingsData.confirmPassword"
-						placeholder="Confirm password"
-						:logo="logoLock"
-						type="password"
-					/>
+					<div class="New-password">
+						<BaseInput
+							v-model="settingsData.newPassword"
+							placeholder="New password"
+							:logo="logoLock"
+							type="password"
+						/>
+						<BaseInput
+							v-model="settingsData.confirmPassword"
+							placeholder="Confirm password"
+							:logo="logoLock"
+							type="password"
+						/>
+					</div>
 				</div>
 			</div>
 			<div class="Setting Setting-2fa">
