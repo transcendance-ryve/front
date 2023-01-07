@@ -50,6 +50,7 @@
 	}
 
 	const	cancelMatchMaking = () => {
+		mm.label = 'Matchmaking'
 		mm.start = false
 		mm.startTimer = null
 		mm.time = ''
