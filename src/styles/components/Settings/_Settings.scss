@@ -3,6 +3,13 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	gap: 32em;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	-ms-overflow-style: none;  /* IE and Edge */
+	scrollbar-width: none;  /* Firefox */
 
 	.Settings-wrapper {
 		display: flex;
