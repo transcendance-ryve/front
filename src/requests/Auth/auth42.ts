@@ -9,9 +9,18 @@ export const	auth42 = async () => {
 }
 
 export async function	callBack(code: string) {
-	console.log('oui')
 	const	res = await useAxios('get', 'auth/42/callback?code=' + code)
 	if (res.response.value) {
+		const { tfa, token, id } = res.response.value
+
+		if (tfa)
+			return router.push({ path: '/accounts/login/tfa',
+				query: {
+					token: token,
+					id: id
+				}
+			})
+
 		const userStore = useUserStore()
 		await userStore.updateLoginApi()
 		router.push({ path: '/' })
