@@ -36,7 +36,7 @@
 		page: '1',
 		take: '10',
 		sort: 'rank_point',
-		order: 'des',
+		order: 'desc',
 		search: ''
 	})
 
@@ -88,13 +88,13 @@
 		}
 		if (!sortQueries.includes(queries.sort))
 			queries.sort = 'rank_point'
-		if (queries.order !== 'des' && queries.order !== 'asc')
-			queries.order = 'des'
+		if (queries.order !== 'desc' && queries.order !== 'asc')
+			queries.order = 'desc'
 	}
 
 	const	getRank = (index: number) => {
 		const	skipUsersCount: number = (parseInt(queries.take) * (parseInt(queries.page) - 1))
-		if (queries.order === 'des')
+		if (queries.order === 'desc')
 			return index + 1 + skipUsersCount
 		else
 			return data.count - index - skipUsersCount
@@ -168,8 +168,8 @@
 				<div class="Filters-orderBtns">
 					<button
 						class="OrderBtn"
-						:class="{'OrderBtn--selected': queries.order == 'des'}"
-						@click="queries.order ='des'"
+						:class="{'OrderBtn--selected': queries.order === 'desc'}"
+						@click="queries.order ='desc'"
 					>
 						<span class="OrderBtn-logo" v-html="logoDesc"></span>
 					</button>
