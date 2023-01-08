@@ -55,7 +55,7 @@
 					<Status v-if="data.users" :users="data.users"/>
 				</div>
 				<!-- <div v-if="data.lastMsg" class="LastMsgWrap"> -->
-					<div v-if="data.lastMsg || sbStore.state.section === 1" class="LastMsgWrap">	//	a suppr
+					<div v-if="data.lastMsg || (sbStore.state.section === 1 && sbStore.state.friendsState === 1)" class="LastMsgWrap">	//	a suppr
 					<!-- <span class="LastMsg">{{data.lastMsg}}</span> -->
 					<span class="LastMsg">{{data.lastMsg || 'sds cndoew lopa cbwqed adod eai'}}</span>	//	a suppr
 				</div>
