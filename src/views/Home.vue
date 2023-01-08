@@ -4,6 +4,7 @@
 	import { RouterView } from 'vue-router'
 	import NavBar from '../components/NavBar/NavBar.vue'
 	import SideBar from '../components/SideBar/SideBar.vue'
+	import Notifications from '@/components/Notifications/Notifications.vue'
 	
 	// const	userStore = useUserStore()
 
@@ -17,6 +18,7 @@
 				<RouterView />
 			</section>
 			<SideBar />
+			<Notifications />
 		</main>
 	</div>
 

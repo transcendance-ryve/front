@@ -11,22 +11,30 @@
 		min-height: 540px;
 		padding: 32px 0;
 		gap: 32rem;
+		position: relative;
 
 		.BodyLayout-mainContent {
 			width: 1310rem;
 
-			@media (min-width: 1920px) {
+			// @media (min-width: 1920px) {
+			// 	width: 1310px;
+			// 	font-size: 1px;
+			// }
+		}
+
+		@media (min-width: 1920px) {
+			font-size: 1px;
+			.BodyLayout-mainContent {
 				width: 1310px;
-				font-size: 1px;
 			}
 		}
 
 		@media (max-width: $laptopL) {
 			justify-content: center;
+			font-size: 0.8px;
 
 			.BodyLayout-mainContent {
 				width: calc(100% - 84px);
-				font-size: 0.8px;
 			}
 		}
 
