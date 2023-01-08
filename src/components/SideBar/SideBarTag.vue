@@ -128,7 +128,8 @@
 		<div v-if="sbStore.state.section == 3" class="SideBarTag-options">
 			<Btn1
 				class="SideBarTag-btn"
-				:type=1 value="Accept"
+				:type=1
+				value="Accept"
 				:logo="logoAccept"
 				width="185em"
 				height="44em"
