@@ -36,12 +36,20 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		conv.status = status
 	}
 
+	function	resetState() {
+		state.section = 1
+		state.friendsState = 1
+		state.channelsState = 1
+		state.notifsState = 1
+	}
+
 	return {
 		state,
 		newChan,
 		conv,
 		toFind,
 		updateSection,
-		openConv
+		openConv,
+		resetState
 	}
 })
