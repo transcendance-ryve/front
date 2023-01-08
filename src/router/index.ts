@@ -108,7 +108,7 @@ router.beforeEach(async (to, from) => {
 		return { name: 'home' }
 })
 
-export const profileRedirect = (id: number) => {
+export const profileRedirect = (id: string) => {
 	if (id)
 		router.push({ name: 'profile', params: { id }})
 }

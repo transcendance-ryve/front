@@ -29,9 +29,15 @@
 
 	const	sbStore = useSideBarStore()
 
-	const	notifAccept = async () => {
+	const	addToFriend = (id: string) => {
+		sbStore.hiddenTags.push(id)
+		sendFriendRequest(id.toString())
+	}
+
+	const	notifAccept = (id: string) => {
 		if (p.type.value === 2) {
-			await acceptFriendRequest(p.data.value.id?.toString() || '')
+			acceptFriendRequest(id)
+			sbStore.hiddenTags.push(id)
 		}
 	}
 
@@ -39,7 +45,7 @@
 
 <template>
 
-	<div class="SideBarTag">
+	<div class="SideBarTag" v-if="!sbStore.hiddenTags.includes(data.id || '')" >
 		<div class="SideBarTag-content">
 			<img
 				class="Content-avatar"
@@ -77,7 +83,7 @@
 				:logo="logoSend"
 				width="185em"
 				height="44em"
-				@click="sbStore.openConv('Friend', data.name, data.status)"
+				@click.stop="sbStore.openConv('Friend', data.name, data.status)"
 			/>
 		</div>
 
@@ -94,7 +100,7 @@
 				:logo="logoAdd"
 				width="386em"
 				height="44em"
-				@click="sendFriendRequest(data.id?.toString() || '')"
+				@click.stop="addToFriend(data.id || '')"
 			/>
 
 			<BaseInput
@@ -126,7 +132,7 @@
 				:logo="logoAccept"
 				width="185em"
 				height="44em"
-				@click="notifAccept()"
+				@click.stop="notifAccept(data.id || '')"
 			/>
 			<Btn1
 				class="SideBarTag-btn"

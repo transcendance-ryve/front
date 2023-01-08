@@ -12,7 +12,7 @@
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 
 	export interface	contentData {
-		id: number,			//	user			id
+		id: string,			//	user			id
 		avatar: string,		//	user / chan		avatar
 		username: string,	//	user 			name
 		name: string,		//	chan 			name
@@ -653,6 +653,7 @@
 	// }
 
 	watch(sbStore.state, async () => {
+		sbStore.clearHiddenTags()
 		await getRawData()
 		// sortData()
 	})
@@ -719,7 +720,7 @@
 				:key="index"
 				:type="sbStore.state.friendsState"
 				:data="item"
-				@click.self="profileRedirect(item.id || 0)"
+				@click="profileRedirect(item.id || '')"
 			/>
 		</div>
 
@@ -739,6 +740,7 @@
 				:key="index"
 				:type="sbStore.state.notifsState"
 				:data="item"
+				@click="profileRedirect(item.id || '')"
 			/>
 		</div>
 	</div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 
-	import { reactive } from 'vue'
+	import { reactive, watch } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
+	import { useSideBarStore } from '@/stores/SideBarStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
@@ -11,6 +12,8 @@
 
 	const	contentStore = useContentStore()
 	contentStore.state = 4
+
+	const	sbStore = useSideBarStore()
 
 	const	data: userProfileData = reactive({
 		user: null,
@@ -37,6 +40,11 @@
 		]
 		return data.user[stats[index]]
 	}
+
+	watch(sbStore.hiddenTags, () => {
+		if (sbStore.state.section === 3 && sbStore.state.notifsState === 2 && sbStore.hiddenTags.includes(data.user.id))
+			data.type = 2
+	}) 
 
 	onBeforeRouteUpdate((to, from) => {
 		getUserProfile(to.params.id as string, data)
