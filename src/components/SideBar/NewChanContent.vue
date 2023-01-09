@@ -37,7 +37,6 @@
 	}
 
 	watch(toFind, async () => {
-		console.log(toFind.value)
 		if (toFind.value && sectionSelected.value === 'Add') {
 			addList.value = await getUsers(toFind.value, dataState)
 			addList.value = addList.value.filter(user => {
@@ -53,7 +52,6 @@
 	}
 
 	const	list = computed(() => {
-		console.log('in computed', addList.value)
 		if (sectionSelected.value === 'Add' && (dataState.error || dataState.loading))
 			return
 		if (toFind.value) {
