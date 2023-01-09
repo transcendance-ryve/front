@@ -40,11 +40,9 @@
 		console.log(toFind.value)
 		if (toFind.value && sectionSelected.value === 'Add') {
 			addList.value = await getUsers(toFind.value, dataState)
-			console.log('before', addList.value)
 			addList.value = addList.value.filter(user => {
 				return !isInvited(user)
 			})
-			console.log('after', addList.value)
 		}
 	})
 
@@ -61,10 +59,8 @@
 		if (toFind.value) {
 			if (sectionSelected.value === 'Invitees')
 				return filterInviteesList()
-			else {
-				console.log('return addlist', addList.value)
+			else
 				return addList.value
-			}
 		}
 		else if (sectionSelected.value === 'Invitees')
 			return inviteesList.value
