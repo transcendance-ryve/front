@@ -17,8 +17,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 	const	conv = reactive({
 		open: false,
 		type: '',
-		name: '',
-		status: ''
+		id: '',
 	})
 
 	const	hiddenTags: string[] = reactive([])
@@ -35,11 +34,10 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.section = newVal
 	}
 
-	function	openConv(type: string, name: string = '', status: string = '') {
+	function	openConv(type: string, id: string = '') {
 		conv.open = true
 		conv.type = type
-		conv.name = name
-		conv.status = status
+		conv.id = id
 	}
 
 	function	resetState() {

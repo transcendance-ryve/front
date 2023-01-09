@@ -1,13 +1,26 @@
 <script setup lang="ts">
 
+	import { ref, reactive, onMounted, toRefs } from 'vue'
 
+
+	export interface Props {
+		messages: any[]
+	}
+
+	const	props = defineProps<Props>()
+
+	const	p = toRefs(props)
 
 </script>
 
 <template>
 
 	<div class="Conv-content">
-
+		<div class="Content-msg" v-for="(msg, index) in messages" :key="index">
+		<!-- <div class="Content-msg"> -->
+			<span class="Msg-value">{{ msg.content }}</span>
+			<!-- <span class="Msg-value">{{ target }}</span> -->
+		</div>
 	</div>
 
 </template>

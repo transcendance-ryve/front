@@ -688,12 +688,12 @@
 			return contentData.value
 	})
 
-	const	openConv = (name: string = '', status: string = '') => {
+	const	openConv = (id: string = '') => {
 		if (sbStore.state.section == 1 && sbStore.state.friendsState == 1) {
-			sbStore.openConv('Friend', name, status)
+			sbStore.openConv('Friend', id)
 		}
 		else if (sbStore.state.section == 2 && sbStore.state.channelsState == 1) {
-			sbStore.openConv('Channel', name, status)
+			sbStore.openConv('Channel', id)
 		}
 	}
 
@@ -732,7 +732,7 @@
 				:key="index"
 				:type="sbStore.state.channelsState"
 				:data="item"
-				@click="openConv(item.name, item.status)"
+				@click="openConv(item.id)"
 			/>
 		</div>
 

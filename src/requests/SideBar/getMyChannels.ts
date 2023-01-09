@@ -6,7 +6,7 @@ const getMyChannels = async (dataState: axiosState) => {
 	dataState.loading = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/channels/of/User'
+		'/channels/ofUser'
 	)
 	if (error.value) {
 		//	handle errors

@@ -83,7 +83,7 @@
 				:logo="logoSend"
 				width="185em"
 				height="44em"
-				@click.stop="sbStore.openConv('Friend', data.name, data.status)"
+				@click.stop="sbStore.openConv('Friend', data.id)"
 			/>
 		</div>
 
