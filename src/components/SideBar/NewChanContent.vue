@@ -1,10 +1,17 @@
 <script setup lang="ts">
 
-	import { ref, reactive, computed, watch } from 'vue'
+	import { ref, reactive, computed, watch, type Ref } from 'vue'
 	import { logoFriends, logoAdd, logoSearch } from '../../assets/logoSVG'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
+	import getUsers from '@/requests/SideBar/getUsers'
+	import type { axiosState } from '@/requests/useAxios'
+	export interface user {
+		id: string,
+		username: string,
+		avatar: string
+	}
 
 	const props = defineProps({
 		protectedStatus: {
@@ -13,51 +20,63 @@
 		},
 	})
 
-	const	allUsers = reactive([
-		'Karim',
-		'Kylian',
-		'Antoine',
-		'Ousmane',
-		'Kingsley',
-		'Raphael',
-		'Benjamin',
-		'Theo',
-		'Lucas',
-		'Adrien',
-		'Alphonse',
-		'Steve',
-		'Olivier'
-	])
-
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
-	const	inviteesList:string[] = reactive([])
-	const	addList = computed(() => allUsers.sort())
-
-	const	inputRes = computed(() => {
-		if (sectionSelected.value == 'Invitees')
-			return inviteesList.filter(userName => userName.toLowerCase().includes(toFind.value.toLowerCase()))
-		else
-			return addList.value.filter(userName => userName.toLowerCase().includes(toFind.value.toLowerCase()))
+	let		inviteesList: Ref<user[]> = ref([])
+	let		addList: Ref<user[]> = ref([])
+	const	dataState: axiosState = reactive({
+		error: null,
+		loading: false
 	})
+
+	const	isInvited = (user: user) => {
+		for (let i = 0; i < inviteesList.value.length; i++)
+			if (inviteesList.value[i].id === user.id)
+				return true
+		return false
+	}
+
+	watch(toFind, async () => {
+		console.log(toFind.value)
+		if (toFind.value && sectionSelected.value === 'Add') {
+			addList.value = await getUsers(toFind.value, dataState)
+			console.log('before', addList.value)
+			addList.value = addList.value.filter(user => {
+				return !isInvited(user)
+			})
+			console.log('after', addList.value)
+		}
+	})
+
+	const	filterInviteesList = () => {
+		return inviteesList.value.filter(user => {
+			return (user.username.toLowerCase().includes(toFind.value.toLowerCase()))
+		})
+	}
 
 	const	list = computed(() => {
-		if (toFind.value)
-			return inputRes.value
-		else if (sectionSelected.value == 'Invitees')
-			return inviteesList
-		else
-			return addList.value
+		console.log('in computed', addList.value)
+		if (sectionSelected.value === 'Add' && (dataState.error || dataState.loading))
+			return
+		if (toFind.value) {
+			if (sectionSelected.value === 'Invitees')
+				return filterInviteesList()
+			else {
+				console.log('return addlist', addList.value)
+				return addList.value
+			}
+		}
+		else if (sectionSelected.value === 'Invitees')
+			return inviteesList.value
 	})
 
-	const	addUser = (userName: string) => {
-		inviteesList.unshift(userName)
-		allUsers.splice(allUsers.findIndex(value => value == userName), 1)
+	const	addUser = (user: user) => {
+		inviteesList.value.unshift(user)
+		addList.value.splice(addList.value.indexOf(user), 1)
 	}
 
 	const	deleteUser = (index: number) => {
-		allUsers.push(inviteesList[index])
-		inviteesList.splice(index, 1)
+		inviteesList.value.splice(index, 1)
 	}
 
 </script>
@@ -90,16 +109,16 @@
 
 		<div class="newChan-content">
 			<UserTag
-				v-for="(userName, index) in list"
+				v-for="(user, index) in list"
 				:key="index"
 				:section="sectionSelected"
-				:userName="userName"
+				:user="user"
 				@add="addUser"
 				@delete="deleteUser(index)"
 			/>
 			<span
 				class="Content-noResult"
-				v-if="toFind && !list.length"
+				v-if="toFind && !dataState.loading && !list?.length"
 			>
 				No results.
 			</span>

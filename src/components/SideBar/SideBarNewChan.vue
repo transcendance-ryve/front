@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref } from 'vue'
+	import { reactive } from 'vue'
 	import {
 		logoProfile,
 		logoLock,
@@ -12,19 +12,48 @@
 	import NewChanContent from './NewChanContent.vue'
 	import Btn1 from '../Utils/Btn1.vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSocketIO } from '@/socket/socket.io'
 
 	const	sbStore = useSideBarStore()
-	const	name = ref('')
-	const	status = ref('')
-	const	chanAvatar = ref(null)
+
+	interface formData {
+		name: string
+		status: string,
+		chanAvatar: string
+		password: string
+	}
+
+	const	form = reactive({
+		name: '',
+		status: 'PUBLIC',
+		chanAvatar: '',
+		password: ''
+	})
 
 	const	uploadAvatar = (e:any) => {
 		const	img = e.target.files[0]
 		const	reader = new FileReader()
 		reader.readAsDataURL(img)
 		reader.onload = (e:any) => {
-			chanAvatar.value = e.target.result
+			form.chanAvatar = e.target.result
 		}
+	}
+
+	const	{ socket } = useSocketIO()
+
+	const	createChannel = () => {
+		//	handle errors
+		let	error = false
+		if (!form.name) {
+			alert('Empty name')
+			error = true
+		}
+		if (form.status === 'PROTECTED' && !form.password) {
+			alert('Empty password')
+			error = true
+		}
+		if (!error)
+			socket.emit('createRoom', { createInfo: { name: form.name, status: form.status, password: form.password } })
 	}
 
 </script>
@@ -33,11 +62,11 @@
 
 	<div class="SideBar-newChan">
 		<div class="newChan-infos">
-			<UploadAvatar :avatar="chanAvatar" id="channelAvatar-input" @change="uploadAvatar"/>
+			<UploadAvatar :avatar="form.chanAvatar" id="channelAvatar-input" @change="uploadAvatar"/>
 			<div class="Infos-content">
 				<BaseInput
 					placeholder="Name"
-					v-model="name"
+					v-model="form.name"
 					:logo="logoProfile"
 					logoSize="18em"
 					inputHeight="42em"
@@ -47,30 +76,30 @@
 					<button
 						class="StatusBtn"
 						:class="{
-							'StatusBtn-public': status != 'public',
-							'StatusBtn-public--selected': status == 'public'
+							'StatusBtn-public': form.status !== 'PUBLIC',
+							'StatusBtn-public--selected': form.status === 'PUBLIC'
 						}"
-						@click="status = 'public'"
+						@click="form.status = 'PUBLIC'"
 					>
 						<span class="StatusBtn-value">Public</span>
 					</button>
 					<button
 						class="StatusBtn"
 						:class="{
-							'StatusBtn-protected': status != 'protected',
-							'StatusBtn-protected--selected': status == 'protected'
+							'StatusBtn-protected': form.status !== 'PROTECTED',
+							'StatusBtn-protected--selected': form.status === 'PROTECTED'
 						}"
-						@click="status = 'protected'"
+						@click="form.status = 'PROTECTED'"
 					>
 						<span class="StatusBtn-value">Protected</span>
 					</button>
 					<button
 						class="StatusBtn"
 						:class="{
-							'StatusBtn-private': status != 'private',
-							'StatusBtn-private--selected': status == 'private'
+							'StatusBtn-private': form.status !== 'PRIVATE',
+							'StatusBtn-private--selected': form.status === 'PRIVATE'
 						}"
-						@click="status = 'private'"
+						@click="form.status = 'PRIVATE'"
 					>
 						<span class="StatusBtn-value">Private</span>
 					</button>
@@ -79,7 +108,8 @@
 		</div>
 
 		<BaseInput
-			v-if="status == 'protected'"
+			v-if="form.status === 'PROTECTED'"
+			v-model="form.password"
 			placeholder="Password"
 			:logo="logoLock"
 			logoSize="18em"
@@ -88,7 +118,7 @@
 			inputFont="500 14em 'Poppins'"
 		/>
 
-		<NewChanContent :protectedStatus="status == 'protected'"/>
+		<NewChanContent :protectedStatus="form.status === 'PROTECTED'"/>
 
 		<div class="newChan-btns">
 			<Btn1
@@ -103,6 +133,7 @@
 				value="Create"
 				width="201em"
 				height="48em"
+				@click="createChannel()"
 			/>
 		</div>
 	</div>

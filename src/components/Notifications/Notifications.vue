@@ -7,7 +7,7 @@
 <template>
 
 	<div class="Notifications">
-		<NotifTag
+		<!-- <NotifTag
 			avatar="http://localhost:3000/default.png"
 			label="vintran"
 			text="New friend invitation"
@@ -17,7 +17,7 @@
 		/>
 		<NotifTag
 			avatar="http://localhost:3000/default.png"
-		/>
+		/> -->
 	</div>
 
 </template>

@@ -16,7 +16,9 @@
     "form-data": "^4.0.0",
     "pinia": "^2.0.26",
     "sass": "^1.56.1",
+    "socket.io-client": "^4.5.4",
     "vue": "^3.2.41",
+    "vue-3-socket.io": "^1.0.5",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
