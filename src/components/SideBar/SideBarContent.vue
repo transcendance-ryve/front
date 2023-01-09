@@ -10,6 +10,7 @@
 	import getFriends from '@/requests/Friends/getFriends'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
+	import getMyChannels from '@/requests/SideBar/getMyChannels'
 
 	export interface	contentData {
 		id: string,			//	user			id
@@ -631,7 +632,8 @@
 		}
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1)
-				fetchData = data3
+				fetchData = await getMyChannels(dataState)
+				// fetchData = data3
 			else
 				fetchData = data4
 		}
