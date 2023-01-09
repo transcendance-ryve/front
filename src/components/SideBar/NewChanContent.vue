@@ -22,8 +22,8 @@
 
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
-	let		inviteesList: Ref<user[]> = ref([])
-	let		addList: Ref<user[]> = ref([])
+	const	inviteesList: Ref<user[]> = ref([])
+	const	addList: Ref<user[]> = ref([])
 	const	dataState: axiosState = reactive({
 		error: null,
 		loading: false
