@@ -1,12 +1,12 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
 
-const getUsers = async (toFind: string, dataState: axiosState) => {
+const getChannels = async (toFind: string, dataState: axiosState) => {
 
 	dataState.loading = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/users?select=id,username,avatar'
+		'/channels'
 		+ '&search=' + toFind
 	)
 	if (error.value) {
@@ -19,4 +19,4 @@ const getUsers = async (toFind: string, dataState: axiosState) => {
 	}
 }
 
-export default getUsers
+export default getChannels
