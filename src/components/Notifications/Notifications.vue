@@ -12,6 +12,7 @@
 	socket.on('chanInvitationReceived', () => { alert('invitation received') })
 	socket.on('inviteToRoomFailed', () => { alert('Invite to room failed') })
 	socket.on('createRoomFailed', () => { alert('Error cannot create this channel') })
+	socket.on('acceptInvitationFailed', () => { alert('Accept invitation failed') })
 
 </script>
 

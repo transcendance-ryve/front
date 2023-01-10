@@ -2,6 +2,7 @@
 
 	import { toRefs, computed } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
@@ -28,6 +29,8 @@
 	})
 
 	const	sbStore = useSideBarStore()
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
 
 	const	addToFriend = (id: string) => {
 		sbStore.hiddenTags.push(id)
@@ -39,6 +42,13 @@
 			acceptFriendRequest(id)
 			sbStore.hiddenTags.push(id)
 		}
+		else if (p.type.value === 3)
+			socket.emit('acceptInvitation', { invitationInfo: { channelId: p.data.value.id } })
+	}
+
+	const	notifRefuse = (id: string) => {
+		if (p.type.value === 3)
+			socket.emit('declineInvitation', { invitationInfo: { channelId: p.data.value.id } })
 	}
 
 </script>
@@ -143,6 +153,7 @@
 				:fillLogo="false"
 				width="185em"
 				height="44em"
+				@click.stop="notifRefuse(data.id || '')"
 			/>
 		</div>
 	</div>

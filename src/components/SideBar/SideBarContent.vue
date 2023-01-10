@@ -2,6 +2,7 @@
 
 	import { reactive, ref, watch, computed, type Ref } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useUserStore } from '@/stores/UserStore'
 	import SideBarSwitch from './SideBarSwitch.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import SideBarTag from './SideBarTag.vue'
@@ -204,6 +205,8 @@
 		loading: false
 	})
 	const	sbStore = useSideBarStore()
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
 
 	const	contentData: Ref<Partial<contentData>[]> = ref([])
 
@@ -284,6 +287,18 @@
 	}
 
 	getRawData()
+	socket.on('invitationAccepted', (id: string) => {
+		if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+			contentData.value = contentData.value.filter(item => {
+				return item.id !== id
+			})
+	})
+	socket.on('invitationDeclined', (id: string) => {
+		if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+			contentData.value = contentData.value.filter(item => {
+				return item.id !== id
+			})
+	})
 
 </script>
 
