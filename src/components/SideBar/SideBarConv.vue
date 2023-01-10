@@ -50,8 +50,6 @@
 		else
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 		dataState.value = await getMessages(target.value.id, messages)
-		socket.on('incomingMessage', () => { console.log('incoming message') })
-		socket.on('messageRoomFailed', () => { console.log('message room failed') })
 		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 

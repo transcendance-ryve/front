@@ -9,13 +9,15 @@
 	socket.on('pong', () => { console.log('pong') })
 	socket.emit('ping', () => { console.log('ping emit') })
 
+	socket.on('incomingMessage', () => { console.log('incoming message') })
+	socket.on('messageRoomFailed', () => { console.log('message room failed') })
 	socket.on('chanInvitationReceived', () => { alert('invitation received') })
 	socket.on('inviteToRoomFailed', () => { alert('Invite to room failed') })
 	socket.on('createRoomFailed', () => { alert('Error cannot create this channel') })
 	socket.on('acceptInvitationFailed', () => { alert('Accept invitation failed') })
-	socket.on('friend_request', (id: string) => { alert('Friend request'); console.log('friend request', id) })
-	socket.on('friend_accepted', (id: string) => { alert('Friend accepted'); console.log('friend accepted', id) })
-	socket.on('friend_declined', (id: string) => { alert('Friend declined'); console.log('friend declined', id) })
+	socket.on('friend_request', (res: any) => { alert('Friend request'); console.log('friend request', res) })
+	socket.on('friend_accepted', (res: any) => { alert('Friend accepted'); console.log('friend accepted', res) })
+	socket.on('friend_declined', (res: any) => { alert('Friend declined'); console.log('friend declined', res) })
 
 </script>
 
