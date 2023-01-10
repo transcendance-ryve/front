@@ -1,11 +1,19 @@
 import useAxios from '@/requests/useAxios'
 import type { DataForm } from '@/components/SideBar/SideBarNewChan.vue'
 
+export interface Form {
+	name: string
+	status: string,
+	avatar: null,
+	avatarFile: File | null,
+	password: string
+	invitees: string[]
+}
 
-const createRoom = async (data: DataForm) => {
+const createRoom = async (data: Form) => {
 
 	let	formData = new FormData()
-	formData.set('image', data.avatarFile);
+	formData.set('image', data.avatarFile as File);
 
 	const { response, loading, error } = await useAxios(
 		'post',
@@ -25,7 +33,8 @@ const createRoom = async (data: DataForm) => {
 		//	handle errors
 	}
 	else if (response.value) {
-		console.log(response.value)
+		//	handle succes
+		// console.log(response.value)
 	}
 }
 

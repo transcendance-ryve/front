@@ -40,7 +40,6 @@
 		socket.on('incomingMessage', () => { console.log('incoming message') })
 		socket.on('messageRoomFailed', () => { console.log('message room failed') })
 		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
-		socket.emit('connectedToRoom', { channelId: target.value.id })
 	})
 
 	const	sendMessage = () => {

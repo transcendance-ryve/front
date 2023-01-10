@@ -14,19 +14,11 @@
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import createRoom from '@/requests/SideBar/createRoom'
+	import type { Form } from '@/requests/SideBar/createRoom'
 
 	const	sbStore = useSideBarStore()
 
-	interface DataForm {
-		name: string
-		status: string,
-		avatar: null,
-		avatarFile: File | null,
-		password: string
-		invitees: string[]
-	}
-
-	const	form: DataForm = reactive({
+	const	form: Form = reactive({
 		name: '',
 		status: 'PUBLIC',
 		avatar: null,
@@ -47,7 +39,7 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
-	const	createChannel = async () => {
+	const	createChannel = () => {
 		//	handle errors
 		let	error = false
 		if (!form.name) {
@@ -59,28 +51,7 @@
 			error = true
 		}
 		if (!error) {
-			await createRoom(form)
-			// let	formData = new FormData()
-			// formData.set('image', form.avatarFile as File);
-			// socket.emit('createRoom', {
-			// 	createInfo: {
-			// 		name: form.name,
-			// 		status: form.status,
-			// 		password: form.password,
-			// 		users: { id: form.invitees }
-			// 	},
-			// 	avatar: formData.get('image')
-			// }, { headers: { 'content-Type': 'multipart/form-data;' } })
-			// socket.emit('createRoom', {
-			// 	createInfo: {
-			// 		name: form.name,
-			// 		status: form.status,
-			// 		password: form.password,
-			// 		users: { id: form.invitees }
-			// 	},
-			// 	avatar: form.avatarFile
-			// })
-			// channels/createRoom
+			createRoom(form)
 		}
 	}
 
@@ -88,8 +59,6 @@
 		sbStore.newChan = false;
 		sbStore.openConv('Channel', channelId)
 	})
-
-	socket.on('createRoomFailed', () => { alert('Error cannot create this channel') })
 
 </script>
 

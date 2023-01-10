@@ -8,12 +8,6 @@
 	
 	const	userStore = useUserStore()
 	userStore.connectSocket()
-	const	socket = userStore.socket
-
-	socket.on('pong', () => { console.log('pong') })
-	socket.emit('ping', () => { console.log('ping emit') })
-
-	socket.on('chanInvitationReceived', () => { console.log('invitation received') })
 
 </script>
 
@@ -25,7 +19,7 @@
 				<RouterView />
 			</section>
 			<SideBar />
-			<!-- <Notifications /> -->
+			<Notifications />
 		</main>
 	</div>
 
