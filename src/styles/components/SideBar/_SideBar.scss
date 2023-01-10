@@ -43,20 +43,10 @@
 					fill: $white-200;
 				}
 			}
-			.NotifLogo-wrapper {
-				display: flex;
-			}
 			.Notif-active {
-				padding: 8em;
-				// background: $red;
-				border-radius: 6em;
-				.SectionsBtns-Logo {
-					width: 24em;
-					height: 24em;
-					animation: notifWiggle 5s linear infinite;
-					svg {
-						fill: white;
-					}
+				animation: notifWiggle 5s linear infinite;
+				svg {
+					fill: white;
 				}
 			}
 		}
