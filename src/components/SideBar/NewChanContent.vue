@@ -1,24 +1,29 @@
 <script setup lang="ts">
 
-	import { ref, reactive, computed, watch, type Ref } from 'vue'
+	import { ref, reactive, computed, watch, type Ref, withDefaults, toRefs } from 'vue'
 	import { logoFriends, logoAdd, logoSearch } from '../../assets/logoSVG'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
+
 	export interface user {
 		id: string,
 		username: string,
 		avatar: string
 	}
 
-	const props = defineProps({
-		protectedStatus: {
-			type: Boolean,
-			default: false,
-		},
+	export interface Props {
+		protectedStatus: boolean,
+		invitees: string[]
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		protectedStatus: false,
 	})
+
+	const	p = toRefs(props)
 
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
@@ -66,11 +71,13 @@
 
 	const	addUser = (user: user) => {
 		inviteesList.value.unshift(user)
+		p.invitees.value.unshift(user.id)
 		addList.value.splice(addList.value.indexOf(user), 1)
 	}
 
 	const	deleteUser = (index: number) => {
 		inviteesList.value.splice(index, 1)
+		p.invitees.value.splice(index, 1)
 	}
 
 </script>

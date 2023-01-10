@@ -21,13 +21,15 @@
 		status: string,
 		chanAvatar: string
 		password: string
+		invitees: string[]
 	}
 
 	const	form = reactive({
 		name: '',
 		status: 'PUBLIC',
 		chanAvatar: '',
-		password: ''
+		password: '',
+		invitees: []
 	})
 
 	const	uploadAvatar = (e:any) => {
@@ -52,8 +54,16 @@
 			alert('Empty password')
 			error = true
 		}
-		if (!error)
-			socket.emit('createRoom', { createInfo: { name: form.name, status: form.status, password: form.password } })
+		if (!error) {
+			socket.emit('createRoom', { createInfo: {
+				name: form.name,
+				status: form.status,
+				password: form.password,
+				users: { id: form.invitees }
+			}})
+			sbStore.state.section = 2
+			sbStore.newChan = false
+		}
 	}
 
 </script>
@@ -111,6 +121,7 @@
 			v-if="form.status === 'PROTECTED'"
 			v-model="form.password"
 			placeholder="Password"
+			type="password"
 			:logo="logoLock"
 			logoSize="18em"
 			inputHeight="42em"
@@ -118,7 +129,10 @@
 			inputFont="500 14em 'Poppins'"
 		/>
 
-		<NewChanContent :protectedStatus="form.status === 'PROTECTED'"/>
+		<NewChanContent
+			:protectedStatus="form.status === 'PROTECTED'"
+			:invitees="form.invitees"
+		/>
 
 		<div class="newChan-btns">
 			<Btn1
