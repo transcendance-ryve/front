@@ -68,10 +68,9 @@
 	@media (max-width: $laptopL) {
 		position: absolute;
 		z-index: 3;
-		top: calc(100px + 32px);
 		right: -420px;
 		width: 450px;
-		height: calc(100% - 100px - 64px);
+		height: calc(100% - 64px);
 		min-height: calc(540px - 64px);
 		font-size: 1px;
 		box-shadow: -4em 4em 6em rgba(0, 0, 0, 0.3);

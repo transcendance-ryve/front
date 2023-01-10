@@ -51,6 +51,7 @@
 			error = true
 		}
 		if (!error) {
+			console.log('before create', form.invitees)
 			createRoom(form)
 		}
 	}

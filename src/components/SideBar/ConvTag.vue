@@ -12,28 +12,20 @@
 		logoPeople,
 		logoMsg
 	} from '../../assets/logoSVG'
-	import type { channel } from '@/requests/SideBar/getChannelByID'
+	import type { Channel } from '@/requests/SideBar/getChannelByID'
+	import type { User } from '@/components/SideBar/SideBarConv.vue'
+	import type { Target } from '@/components/SideBar/SideBarConv.vue'
 
+	// export interface Props {
+	// 	type: string
+	// 	target: Channel | User
+	// }
 	export interface Props {
 		type: string
-		target: channel
+		target: Target
 	}
 
 	const props = defineProps<Props>()
-
-	// const props = defineProps({
-	// 	type : {
-	// 		type: String,
-	// 		default: ''
-	// 	},
-	// 	name: {
-	// 		type: String,
-	// 	},
-	// 	status: {
-	// 		type: String,
-	// 		default: ''
-	// 	}
-	// })
 
 	const	options = [
 		{
@@ -60,6 +52,7 @@
 	const	userList = ref(false)
 
 	const	p = toRefs(props)
+	// console.log(p.type.value, p.target.value)
 	const	btns = computed(() => {
 		if (p.type.value == 'Friend') {
 			if (p.target.value.status == 'In Game')
@@ -109,6 +102,8 @@
 			emit('quit')
 	}
 
+	const	name = p.target.value.name ? p.target.value.name : p.target.value.username
+
 </script>
 
 <template>
@@ -116,10 +111,10 @@
 	<div class="ConvTag">
 		<div class="ConvTag-content">
 			<div class="ConvTag-infos">
-				<img class="Infos-avatar" src="../../assets/user.png" alt="avatar">
+				<img class="Infos-avatar" :src="target.avatar" alt="avatar">
 				<div class="Infos-content">
 					<div class="Infos-nameWrap">
-						<span class="Infos-name">{{ target.name }}</span>
+						<span class="Infos-name">{{ name }}</span>
 						<Status :status="target.status"/>
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">

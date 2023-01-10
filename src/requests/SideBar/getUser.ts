@@ -2,25 +2,37 @@ import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
 import type { Ref } from 'vue'
 
-export interface Channel { id: string, avatar: string, name: string, status: string }
+export interface User {
+	id: string,
+	username: string,
+	avatar: string,
+	status: string,
+	level: number,
+	experience: number,
+	next_level: number,
+	rank_point: number,
+	wins: number,
+	loses: number,
+	played: number
+}
 
-const getChannelByID = async (id: string, res: Ref<Partial<Channel>>) => {
+const getUsers = async (id: string, select: string, user: Ref<Partial<User>>) => {
 
 	const	dataState: axiosState = { error: null, loading: true }
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/channels/'
-		+ id
+		'/users/'
+		+ id + '?select=' + select
 	)
 	if (error.value) {
 		//	handle errors
 		dataState.error = error.value
 	}
 	else if (response.value) {
-		res.value = response.value
 		dataState.loading = loading.value
+		user.value = response.value
 	}
 	return dataState
 }
 
-export default getChannelByID
+export default getUsers

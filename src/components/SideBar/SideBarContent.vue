@@ -22,7 +22,7 @@
 		status: string,		//	user / chan		status
 		time: number,		//	user / chan		timer
 		lastMsg: string,	//	user / chan		last message
-		usersCount: number,		//	chan			users count
+		usersCount: number,	//	chan			users count
 	}
 
 	const	data4: Partial<contentData>[] = reactive([

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, type Ref, onMounted } from 'vue'
+	import { ref, type Ref, onMounted } from 'vue'
 	import ConvTag from './ConvTag.vue'
 	import ConvContent from './ConvContent.vue'
 	import ConvList from './ConvList.vue'
@@ -9,22 +9,46 @@
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import type { axiosState } from '@/requests/useAxios'
 	import getChannelsByID from '@/requests/SideBar/getChannelByID'
-	import type { channel } from '@/requests/SideBar/getChannelByID'
+	import type { Channel } from '@/requests/SideBar/getChannelByID'
+	import getUser from '@/requests/SideBar/getUser'
 	import getMessages from '@/requests/SideBar/getMessages'
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
 
+	// export interface User {
+	// 	id: string,
+	// 	avatar: string,
+	// 	username: string,
+	// 	status: string,
+	// }
+
+	export interface Target {
+		id: string,
+		avatar: string,
+		name: string,
+		username: string,
+		status: string,
+	}
 
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
 		loading: true
 	})
 
-	const	target: Ref<channel> = ref({
+	// const	target: Ref<Channel | User> = ref({
+	// 	id: '',
+	// 	avatar: '',
+	// 	name: '',
+	// 	username: '',
+	// 	status: '',
+	// })
+
+	const	target: Ref<Target> = ref({
 		id: '',
+		avatar: '',
 		name: '',
+		username: '',
 		status: '',
-		usersCount: 0
 	})
 
 	const	sbStore = useSideBarStore()
@@ -35,7 +59,10 @@
 	const	socket = userStore.socket
 
 	onMounted(async () => {
-		dataState.value = await getChannelsByID(sbStore.conv.id, target)
+		if (sbStore.conv.type === 'Channel')
+			dataState.value = await getChannelsByID(sbStore.conv.id, target)
+		else
+			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 		dataState.value = await getMessages(target.value.id, messages)
 		socket.on('incomingMessage', () => { console.log('incoming message') })
 		socket.on('messageRoomFailed', () => { console.log('message room failed') })

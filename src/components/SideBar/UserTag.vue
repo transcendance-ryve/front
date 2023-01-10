@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 	import { toRefs, computed } from 'vue'
-	import type { user } from '@/components/SideBar/NewChanContent.vue'
 	import OptionBtn from './OptionBtn.vue'
 	import {
 		logoEye,
