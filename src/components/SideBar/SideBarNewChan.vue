@@ -63,10 +63,10 @@
 				password: form.password,
 				users: { id: form.invitees }
 			}})
-			sbStore.state.section = 2
-			sbStore.newChan = false
 		}
 	}
+
+	socket.on('roomCreated', () => { sbStore.state.section = 2; sbStore.newChan = false })
 
 </script>
 
