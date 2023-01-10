@@ -5,6 +5,7 @@
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
+	import { useUserStore } from '@/stores/UserStore'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
 
@@ -24,6 +25,7 @@
 	})
 
 	const	p = toRefs(props)
+	const	userStore = useUserStore()
 
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
@@ -45,7 +47,7 @@
 		if (toFind.value && sectionSelected.value === 'Add') {
 			addList.value = await getUsers(toFind.value, dataState)
 			addList.value = addList.value.filter(user => {
-				return !isInvited(user)
+				return !isInvited(user) && user.id != userStore.me.id
 			})
 		}
 	})
