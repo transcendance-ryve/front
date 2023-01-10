@@ -1,15 +1,20 @@
 <script setup lang="ts">
 
 	import NotifTag from './NotifTag.vue'
-	import { useUserStore } from '@/stores/UserStore';
+	import { useUserStore } from '@/stores/UserStore'
+	import { useSideBarStore } from '@/stores/SideBarStore';
 
 	const	userStore = useUserStore()
+	const	sbStore = useSideBarStore()
 	const	socket = userStore.socket
 
 	socket.on('pong', () => { console.log('pong') })
 	socket.emit('ping', () => { console.log('ping emit') })
 
-	socket.on('incomingMessage', () => { console.log('incoming message') })
+	socket.on('incomingMessage', (msg: any) => {
+		console.log('incoming message', msg)
+		sbStore.conv.lastMsg = msg
+	})
 	socket.on('messageRoomFailed', () => { console.log('message room failed') })
 	socket.on('chanInvitationReceived', () => { alert('invitation received') })
 	socket.on('inviteToRoomFailed', () => { alert('Invite to room failed') })

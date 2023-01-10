@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, type Ref, onMounted } from 'vue'
+	import { ref, type Ref, onMounted, watch } from 'vue'
 	import ConvTag from './ConvTag.vue'
 	import ConvContent from './ConvContent.vue'
 	import ConvList from './ConvList.vue'
@@ -55,11 +55,15 @@
 
 	const	sendMessage = () => {
 		if (input.value) {
-			messages.value.push({ content: input.value })
+			// messages.value.push({ content: input.value })
 			socket.emit('messageRoom', { messageInfo: { channelId: target.value.id, content: input.value } })
 			input.value = input.value.slice(input.value.length)
 		}
 	}
+
+	watch(sbStore.conv, () => {
+		messages.value.push({ content: sbStore.conv.lastMsg })
+	})
 
 </script>
 
