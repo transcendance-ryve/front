@@ -19,25 +19,36 @@
 	interface formData {
 		name: string
 		status: string,
-		chanAvatar: string
+		avatar: null,
+		avatarFile: File | null,
 		password: string
 		invitees: string[]
 	}
 
-	const	form = reactive({
+	const	form: formData = reactive({
 		name: '',
 		status: 'PUBLIC',
-		chanAvatar: '',
+		avatar: null,
+		avatarFile: null,
 		password: '',
 		invitees: []
 	})
 
+	// const	uploadAvatar = (e:any) => {
+	// 	const	img = e.target.files[0]
+	// 	const	reader = new FileReader()
+	// 	reader.readAsDataURL(img)
+	// 	reader.onload = (e:any) => {
+	// 		form.chanAvatar = e.target.result
+	// 	}
+	// }
+
 	const	uploadAvatar = (e:any) => {
-		const	img = e.target.files[0]
-		const	reader = new FileReader()
-		reader.readAsDataURL(img)
+		form.avatarFile = e.target.files[0]
+		const	reader: FileReader = new FileReader()
+		reader.readAsDataURL(form.avatarFile as File)
 		reader.onload = (e:any) => {
-			form.chanAvatar = e.target.result
+			form.avatar = e.target.result
 		}
 	}
 
@@ -56,12 +67,17 @@
 			error = true
 		}
 		if (!error) {
-			socket.emit('createRoom', { createInfo: {
-				name: form.name,
-				status: form.status,
-				password: form.password,
-				users: { id: form.invitees }
-			}})
+			let	formData = new FormData()
+			formData.set('image', form.avatarFile as File);
+			socket.emit('createRoom', {
+				createInfo: {
+					name: form.name,
+					status: form.status,
+					password: form.password,
+					users: { id: form.invitees }
+				},
+				image: formData.get('image')
+			}, { headers: { 'content-Type': 'multipart/form-data;' } })
 		}
 	}
 
@@ -78,7 +94,7 @@
 
 	<div class="SideBar-newChan">
 		<div class="newChan-infos">
-			<UploadAvatar :avatar="form.chanAvatar" id="channelAvatar-input" @change="uploadAvatar"/>
+			<UploadAvatar :avatar="form.avatar" id="channelAvatar-input" @change="uploadAvatar"/>
 			<div class="Infos-content">
 				<BaseInput
 					placeholder="Name"

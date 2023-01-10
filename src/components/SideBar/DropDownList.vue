@@ -19,28 +19,6 @@
 		open: false
 	})
 
-	// const props = defineProps({
-	// 	label: {
-	// 		type: String,
-	// 		default: ''
-	// 	},
-	// 	list: {
-	// 		type: Object,
-	// 	},
-	// 	owner: {
-	// 		type: Boolean,
-	// 		default: false,
-	// 	},
-	// 	admin: {
-	// 		type: Boolean,
-	// 		default: false
-	// 	},
-	// 	open: {
-	// 		type: Boolean,
-	// 		default: false
-	// 	}
-	// })
-
 	const	p = toRefs(props)
 
 	const	open = ref(p.open.value)

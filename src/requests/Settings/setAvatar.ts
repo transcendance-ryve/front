@@ -4,7 +4,6 @@ import { useUserStore } from '@/stores/UserStore'
 
 const setAvatar = async (avatarFile: File) => {
 
-	let	image: FormDataEntryValue | null
 	let	formData = new FormData()
 	formData.set('image', avatarFile);
 

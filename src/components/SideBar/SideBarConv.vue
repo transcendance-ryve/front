@@ -14,6 +14,7 @@
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
 
+
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
 		loading: true
@@ -68,7 +69,7 @@
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
-			<ConvList v-if="userList" />
+			<ConvList v-if="userList && !dataState.error && !dataState.loading" :id="target.id"/>
 		</div>
 		<BaseInput
 			v-if="!userList"

@@ -25,7 +25,7 @@
 				<RouterView />
 			</section>
 			<SideBar />
-			<Notifications />
+			<!-- <Notifications /> -->
 		</main>
 	</div>
 

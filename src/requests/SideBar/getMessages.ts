@@ -18,7 +18,6 @@ const getMessages = async (id: string, res: Ref<any[]>) => {
 		dataState.error = error.value
 	}
 	else if (response.value) {
-		console.log('msg res', response.value)
 		res.value = response.value
 		dataState.loading = loading.value
 	}
