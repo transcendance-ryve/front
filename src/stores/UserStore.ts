@@ -12,11 +12,15 @@ export const useUserStore = defineStore('userStore', () => {
 
 	const	me: Ref = ref(loginApi.value ? JSON.parse(localStorage.getItem('me') || '') : '')
 
-	const	socket: Ref<any> = ref(useSocketIO().socket)
+	const	socket: Ref<any> = ref()
 
 	function	updateMe(data: any) {
 		localStorage.setItem('me', JSON.stringify(data))
 		me.value = data
+	}
+
+	function	connectSocket() {
+		socket.value = useSocketIO().socket
 	}
 
 	return {
@@ -24,5 +28,6 @@ export const useUserStore = defineStore('userStore', () => {
 		me,
 		socket,
 		updateMe,
+		connectSocket
 	}
 })

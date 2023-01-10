@@ -7,6 +7,7 @@
 	import Notifications from '@/components/Notifications/Notifications.vue'
 	
 	const	userStore = useUserStore()
+	userStore.connectSocket()
 	const	socket = userStore.socket
 
 	socket.on('pong', () => { console.log('pong') })
