@@ -6,7 +6,11 @@
 	import SideBar from '../components/SideBar/SideBar.vue'
 	import Notifications from '@/components/Notifications/Notifications.vue'
 	
-	// const	userStore = useUserStore()
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
+
+	socket.on('pong', () => { console.log('pong') })
+	socket.emit('ping', () => { console.log('ping emit') })
 
 </script>
 

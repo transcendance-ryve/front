@@ -12,7 +12,8 @@
 	import type { channel } from '@/requests/SideBar/getChannelByID'
 	import getMessages from '@/requests/SideBar/getMessages'
 	import type { message } from '@/requests/SideBar/getMessages'
-	import { useSocketIO } from '@/socket/socket.io'
+	// import { useSocketIO } from '@/socket/socket.io'
+	import { useUserStore } from '@/stores/UserStore'
 
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
@@ -30,7 +31,8 @@
 	const	input: Ref<string> = ref('')
 	const	messages: Ref<any[]> = ref([])
 	const	userList = ref(false)
-	const	{ socket } = useSocketIO()
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
 
 	onMounted(async () => {
 		dataState.value = await getChannelsByID(sbStore.conv.id, target)

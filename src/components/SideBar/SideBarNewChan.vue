@@ -12,7 +12,8 @@
 	import NewChanContent from './NewChanContent.vue'
 	import Btn1 from '../Utils/Btn1.vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
-	import { useSocketIO } from '@/socket/socket.io'
+	// import { useSocketIO } from '@/socket/socket.io'
+	import { useUserStore } from '@/stores/UserStore'
 
 	const	sbStore = useSideBarStore()
 
@@ -41,7 +42,8 @@
 		}
 	}
 
-	const	{ socket } = useSocketIO()
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
 
 	const	createChannel = () => {
 		//	handle errors
