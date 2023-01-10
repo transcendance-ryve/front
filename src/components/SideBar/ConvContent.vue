@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, onMounted, toRefs } from 'vue'
-
+	import { toRefs } from 'vue'
 
 	export interface Props {
 		messages: any[]

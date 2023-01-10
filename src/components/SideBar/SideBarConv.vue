@@ -15,12 +15,6 @@
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
 
-	// export interface User {
-	// 	id: string,
-	// 	avatar: string,
-	// 	username: string,
-	// 	status: string,
-	// }
 
 	export interface Target {
 		id: string,
@@ -34,14 +28,6 @@
 		error: null,
 		loading: true
 	})
-
-	// const	target: Ref<Channel | User> = ref({
-	// 	id: '',
-	// 	avatar: '',
-	// 	name: '',
-	// 	username: '',
-	// 	status: '',
-	// })
 
 	const	target: Ref<Target> = ref({
 		id: '',
