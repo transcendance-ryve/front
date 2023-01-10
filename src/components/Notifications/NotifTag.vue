@@ -4,9 +4,9 @@
 	import { logoCloseNotif } from '@/assets/logoSVG'
 
 	export interface Props {
-		label: string
-		text: string
-		avatar: string
+		label?: string
+		text?: string
+		avatar?: string
 	}
 
 	const props = withDefaults(defineProps<Props>(), {

@@ -2,29 +2,44 @@
 
 	import { ref, toRefs } from 'vue'
 	import UserTag from './UserTag.vue'
+	import type { User } from './UserTag.vue'
 	import { logoListArrow } from '../../assets/logoSVG'
 
-	const props = defineProps({
-		label: {
-			type: String,
-			default: ''
-		},
-		list: {
-			type: Object,
-		},
-		owner: {
-			type: Boolean,
-			default: false,
-		},
-		admin: {
-			type: Boolean,
-			default: false
-		},
-		open: {
-			type: Boolean,
-			default: false
-		}
+	export interface Props {
+		label: string
+		users: User[]
+		owner?: boolean
+		admin?: boolean
+		open?: boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		owner: false,
+		admin: false,
+		open: false
 	})
+
+	// const props = defineProps({
+	// 	label: {
+	// 		type: String,
+	// 		default: ''
+	// 	},
+	// 	list: {
+	// 		type: Object,
+	// 	},
+	// 	owner: {
+	// 		type: Boolean,
+	// 		default: false,
+	// 	},
+	// 	admin: {
+	// 		type: Boolean,
+	// 		default: false
+	// 	},
+	// 	open: {
+	// 		type: Boolean,
+	// 		default: false
+	// 	}
+	// })
 
 	const	p = toRefs(props)
 
@@ -63,10 +78,10 @@
 		<div class="DropDownList" v-if="open">
 			<UserTag
 				class="DropDownList-Tag"
-				v-for="(user, index) in list"
+				v-for="(user, index) in users"
 				:key="index"
 				:section="userTagType()"
-				:userName="user.name"
+				:user="user"
 			/>
 		</div>
 	</div>

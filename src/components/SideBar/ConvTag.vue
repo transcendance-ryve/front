@@ -12,20 +12,28 @@
 		logoPeople,
 		logoMsg
 	} from '../../assets/logoSVG'
+	import type { channel } from '@/requests/SideBar/getChannelByID'
 
-	const props = defineProps({
-		type : {
-			type: String,
-			default: ''
-		},
-		name: {
-			type: String,
-		},
-		status: {
-			type: String,
-			default: ''
-		}
-	})
+	export interface Props {
+		type: string
+		target: channel
+	}
+
+	const props = defineProps<Props>()
+
+	// const props = defineProps({
+	// 	type : {
+	// 		type: String,
+	// 		default: ''
+	// 	},
+	// 	name: {
+	// 		type: String,
+	// 	},
+	// 	status: {
+	// 		type: String,
+	// 		default: ''
+	// 	}
+	// })
 
 	const	options = [
 		{
@@ -54,7 +62,7 @@
 	const	p = toRefs(props)
 	const	btns = computed(() => {
 		if (p.type.value == 'Friend') {
-			if (p.status.value == 'In Game')
+			if (p.target.value.status == 'In Game')
 				return [
 					{
 						name: 'Spectate',
@@ -111,8 +119,8 @@
 				<img class="Infos-avatar" src="../../assets/user.png" alt="avatar">
 				<div class="Infos-content">
 					<div class="Infos-nameWrap">
-						<span class="Infos-name">{{ name }}</span>
-						<Status :status="status"/>
+						<span class="Infos-name">{{ target.name }}</span>
+						<Status :status="target.status"/>
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">
 						<OptionBtn

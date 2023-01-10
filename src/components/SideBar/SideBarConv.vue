@@ -12,7 +12,6 @@
 	import type { channel } from '@/requests/SideBar/getChannelByID'
 	import getMessages from '@/requests/SideBar/getMessages'
 	import type { message } from '@/requests/SideBar/getMessages'
-	// import { useSocketIO } from '@/socket/socket.io'
 	import { useUserStore } from '@/stores/UserStore'
 
 	const	dataState: Ref<axiosState> = ref({
@@ -63,8 +62,7 @@
 			<ConvTag
 				v-if="!dataState.error && !dataState.loading"
 				:type="sbStore.conv.type"
-				:name="target.name"
-				:status="target.status"
+				:target="target"
 				@userList="userList = true"
 				@conv="userList = false"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"

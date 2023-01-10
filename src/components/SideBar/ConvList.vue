@@ -5,124 +5,125 @@
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownList from './DropDownList.vue'
 	import UserTag from './UserTag.vue'
+	import type { User } from './UserTag.vue'
 	import { logoFriends, logoAdd } from '../../assets/logoSVG'
 
 	const	sectionSelected = ref('Users')
 	const	toFind = ref('')
 	const	isAdmin = Math.floor(Math.random() * 2) == 0 ? false : true
 
-	const	allUsers = reactive([
-		'Karim',
-		'Kylian',
-		'Antoine',
-		'Ousmane',
-		'Kingsley',
-		'Raphael',
-		'Benjamin',
-		'Theo',
-		'Lucas',
-		'Adrien',
-		'Alphonse',
-		'Steve',
-		'Olivier'
+	const	allUsers: User[] = reactive([
+		{id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Kylian', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Antoine', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Ousmane', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Kingsley', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Raphael', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Benjamin', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Theo', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Lucas', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Alphonse', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Steve', avatar: 'http://localhost:3000/default.png'},
+		{id: '0', username: 'Olivier', avatar: 'http://localhost:3000/default.png'}
 	])
 
-	const	bannedListData = reactive([
+	const	bannedListData: User[] = reactive([
 		{
-			name: 'Karim'
+			id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Kingsley'
+			id: '0', username: 'Kingsley', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Antoine'
+			id: '0', username: 'Antoine', avatar: 'http://localhost:3000/default.png'
 		}
 	])
 
-	const	pendingListData = reactive([
+	const	pendingListData: User[] = reactive([
 		{
-			name: 'Adrien'
+			id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Raphael'
+			id: '0', username: 'Raphael', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Lucas'
+			id: '0', username: 'Lucas', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Steve'
+			id: '0', username: 'Steve', avatar: 'http://localhost:3000/default.png'
 		}
 	])
 
-	const	adminListData = reactive([
+	const	adminListData: User[] = reactive([
 		{
-			name: 'Reda'
+			id: '0', username: 'Reda', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Yohann'
+			id: '0', username: 'Yohann', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Vincent'
+			id: '0', username: 'Vincent', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Hedi'
+			id: '0', username: 'Hedi', avatar: 'http://localhost:3000/default.png'
 		}
 	])
 
-	const	userListData = reactive([
+	const	userListData: User[] = reactive([
 		{
-			name: 'Kylian'
+			id: '0', username: 'Kylian', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Ousmane'
+			id: '0', username: 'Ousmane', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Alphonse'
+			id: '0', username: 'Alphonse', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Olivier'
+			id: '0', username: 'Olivier', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Theo'
+			id: '0', username: 'Theo', avatar: 'http://localhost:3000/default.png'
 		},
 		{
-			name: 'Benjamin'
+			id: '0', username: 'Benjamin', avatar: 'http://localhost:3000/default.png'
 		}
 	])
 
 	const	bannedList = computed(() => {
 		if (toFind.value)
-			return bannedListData.filter(user => user.name.toLowerCase().includes(toFind.value.toLowerCase()))
+			return bannedListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
 			return bannedListData
 	})
 
 	const	pendingList = computed(() => {
 		if (toFind.value)
-			return pendingListData.filter(user => user.name.toLowerCase().includes(toFind.value.toLowerCase()))
+			return pendingListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
 			return pendingListData
 	})
 
 	const	adminList = computed(() => {
 		if (toFind.value)
-			return adminListData.filter(user => user.name.toLowerCase().includes(toFind.value.toLowerCase()))
+			return adminListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
 			return adminListData
 	})
 
 	const	userList = computed(() => {
 		if (toFind.value)
-			return userListData.filter(user => user.name.toLowerCase().includes(toFind.value.toLowerCase()))
+			return userListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
 			return userListData
 	})
 
 	const	addList = computed(() => {
 		if (toFind.value)
-			return allUsers.filter(userName => userName.toLowerCase().includes(toFind.value.toLowerCase()))
+			return allUsers.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
-			return false
+			return []
 	})
 
 </script>
@@ -152,20 +153,20 @@
 				<DropDownList
 					v-if="bannedList.length"
 					label="Banned"
-					:list="bannedList"
+					:users="bannedList"
 					:admin="isAdmin"
 				/>
 
 				<DropDownList
 					v-if="pendingList.length"
 					label="Pending"
-					:list="pendingList"
+					:users="pendingList"
 				/>
 
 				<DropDownList
 					v-if="adminList.length"
 					label="Administrators"
-					:list="adminList"
+					:users="adminList"
 					:admin="isAdmin"
 					:open="true"
 				/>
@@ -173,7 +174,7 @@
 				<DropDownList
 					v-if="userList.length"
 					label="Users"
-					:list="userList"
+					:users="userList"
 					:admin="isAdmin"
 					:open="true"
 				/>
@@ -188,10 +189,10 @@
 			</div>
 			<div class="ConvList-content ConvList-content--add" v-if="sectionSelected == 'Add'">
 				<UserTag
-					v-for="(userName, index) in addList"
+					v-for="(user, index) in addList"
 					:key="index"
 					:section="sectionSelected"
-					:userName="userName"
+					:user="user"
 				/>
 				<span
 					class="Content-noResult"

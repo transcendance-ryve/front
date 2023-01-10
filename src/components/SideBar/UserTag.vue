@@ -13,9 +13,15 @@
 		logoStop
 	} from '../../assets/logoSVG'
 
+	export interface User {
+		id: string,
+		username: string,
+		avatar: string
+	}
+
 	export interface Props {
 		section: string
-		user: user
+		user: User
 	}
 
 	const props = withDefaults(defineProps<Props>(), {

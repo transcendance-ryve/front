@@ -12,7 +12,6 @@
 	import NewChanContent from './NewChanContent.vue'
 	import Btn1 from '../Utils/Btn1.vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
-	// import { useSocketIO } from '@/socket/socket.io'
 	import { useUserStore } from '@/stores/UserStore'
 
 	const	sbStore = useSideBarStore()
