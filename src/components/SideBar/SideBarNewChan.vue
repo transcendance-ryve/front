@@ -59,7 +59,7 @@
 			error = true
 		}
 		if (!error) {
-			await createRoom(FormData)
+			await createRoom(form)
 			// let	formData = new FormData()
 			// formData.set('image', form.avatarFile as File);
 			// socket.emit('createRoom', {
