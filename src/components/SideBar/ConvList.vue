@@ -349,16 +349,10 @@
 			return []
 	})
 
-	// const	addUser = (user: User) => {
-	// 	pendingListData.unshift(user)
-	// 	p.invitees.value.unshift(user.id)
-	// 	addList.value.splice(addList.value.indexOf(user), 1)
-	// }
-
-	// const	deleteUser = (index: number) => {
-	// 	inviteesList.value.splice(index, 1)
-	// 	p.invitees.value.splice(index, 1)
-	// }
+	const	addUser = (user: User) => {
+		pendingListData.unshift(user)
+		addList.value.splice(addList.value.indexOf(user), 1)
+	}
 
 	const	isInvited = (user: User) => {
 		for (let i = 0; i < pendingListData.length; i++)
@@ -471,6 +465,7 @@
 					:key="index"
 					:section="sectionSelected"
 					:user="user"
+					@add="addUser"
 				/>
 				<span
 					class="Content-noResult"

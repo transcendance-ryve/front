@@ -13,10 +13,11 @@
 	import Btn1 from '../Utils/Btn1.vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
+	import createRoom from '@/requests/SideBar/createRoom'
 
 	const	sbStore = useSideBarStore()
 
-	interface formData {
+	interface DataForm {
 		name: string
 		status: string,
 		avatar: null,
@@ -25,7 +26,7 @@
 		invitees: string[]
 	}
 
-	const	form: formData = reactive({
+	const	form: DataForm = reactive({
 		name: '',
 		status: 'PUBLIC',
 		avatar: null,
@@ -33,15 +34,6 @@
 		password: '',
 		invitees: []
 	})
-
-	// const	uploadAvatar = (e:any) => {
-	// 	const	img = e.target.files[0]
-	// 	const	reader = new FileReader()
-	// 	reader.readAsDataURL(img)
-	// 	reader.onload = (e:any) => {
-	// 		form.chanAvatar = e.target.result
-	// 	}
-	// }
 
 	const	uploadAvatar = (e:any) => {
 		form.avatarFile = e.target.files[0]
@@ -55,7 +47,7 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
-	const	createChannel = () => {
+	const	createChannel = async () => {
 		//	handle errors
 		let	error = false
 		if (!form.name) {
@@ -67,17 +59,28 @@
 			error = true
 		}
 		if (!error) {
-			let	formData = new FormData()
-			formData.set('image', form.avatarFile as File);
-			socket.emit('createRoom', {
-				createInfo: {
-					name: form.name,
-					status: form.status,
-					password: form.password,
-					users: { id: form.invitees }
-				},
-				image: formData.get('image')
-			}, { headers: { 'content-Type': 'multipart/form-data;' } })
+			await createRoom(FormData)
+			// let	formData = new FormData()
+			// formData.set('image', form.avatarFile as File);
+			// socket.emit('createRoom', {
+			// 	createInfo: {
+			// 		name: form.name,
+			// 		status: form.status,
+			// 		password: form.password,
+			// 		users: { id: form.invitees }
+			// 	},
+			// 	avatar: formData.get('image')
+			// }, { headers: { 'content-Type': 'multipart/form-data;' } })
+			// socket.emit('createRoom', {
+			// 	createInfo: {
+			// 		name: form.name,
+			// 		status: form.status,
+			// 		password: form.password,
+			// 		users: { id: form.invitees }
+			// 	},
+			// 	avatar: form.avatarFile
+			// })
+			// channels/createRoom
 		}
 	}
 
