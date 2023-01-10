@@ -71,6 +71,8 @@
 		sbStore.openConv('Channel', channelId)
 	})
 
+	socket.on('createRoomFailed', () => { alert('Error cannot create this channel') })
+
 </script>
 
 <template>

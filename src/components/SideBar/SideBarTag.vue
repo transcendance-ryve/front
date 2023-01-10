@@ -58,7 +58,7 @@
 						<span class="Infos-name">{{data.name || data.username}}</span>
 						<Status :status="data.status"/>
 					</div>
-					<Status v-if="data.users" :users="data.users"/>
+					<Status v-if="data.usersCount" :users="data.usersCount"/>
 				</div>
 				<!-- <div v-if="data.lastMsg" class="LastMsgWrap"> -->
 					<div v-if="data.lastMsg || (sbStore.state.section === 1 && sbStore.state.friendsState === 1)" class="LastMsgWrap">	//	a suppr

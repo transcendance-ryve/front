@@ -11,6 +11,7 @@
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
+	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
 
 	export interface	contentData {
 		id: string,			//	user			id
@@ -20,7 +21,7 @@
 		status: string,		//	user / chan		status
 		time: number,		//	user / chan		timer
 		lastMsg: string,	//	user / chan		last message
-		users: number,		//	chan			users count
+		usersCount: number,		//	chan			users count
 	}
 
 	const	data1: Partial<contentData>[] = reactive([
@@ -643,7 +644,7 @@
 			else if (sbStore.state.notifsState == 2)
 				fetchData = await getFriendsRequests(dataState)
 			else
-				fetchData = data7
+				fetchData = await getChannelsNotifs(dataState)
 		}
 		contentData.value = fetchData
 	}
@@ -742,7 +743,7 @@
 				:key="index"
 				:type="sbStore.state.notifsState"
 				:data="item"
-				@click="profileRedirect(item.id || '')"
+				@click="sbStore.state.notifsState !== 3 ? profileRedirect(item.id || '') : ''"
 			/>
 		</div>
 	</div>
