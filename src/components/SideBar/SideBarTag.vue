@@ -34,12 +34,13 @@
 
 	const	addToFriend = (id: string) => {
 		sbStore.hiddenTags.push(id)
-		sendFriendRequest(id.toString())
+		socket.emit('add_friend', { friendId: p.data.value.id })
 	}
 
 	const	notifAccept = (id: string) => {
 		if (p.type.value === 2) {
-			acceptFriendRequest(id)
+			// acceptFriendRequest(id)
+			socket.emit('accept_friend', { friendId: p.data.value.id })
 			sbStore.hiddenTags.push(id)
 		}
 		else if (p.type.value === 3)
@@ -47,7 +48,9 @@
 	}
 
 	const	notifRefuse = (id: string) => {
-		if (p.type.value === 3)
+		if (p.type.value === 2)
+			socket.emit('decline_friend', { friendId: p.data.value.id })
+		else if (p.type.value === 3)
 			socket.emit('declineInvitation', { invitationInfo: { channelId: p.data.value.id } })
 	}
 
