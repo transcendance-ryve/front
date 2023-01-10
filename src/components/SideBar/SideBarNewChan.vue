@@ -66,7 +66,10 @@
 		}
 	}
 
-	socket.on('roomCreated', () => { sbStore.state.section = 2; sbStore.newChan = false })
+	socket.on('roomCreated', (channelId: string) => {
+		sbStore.newChan = false;
+		sbStore.openConv('Channel', channelId)
+	})
 
 </script>
 
