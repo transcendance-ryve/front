@@ -86,17 +86,19 @@
 			]
 	})
 
-	const	emit = defineEmits(['userList', 'conv'])
+	const	emit = defineEmits(['userList', 'conv', 'quit'])
 
 	const	manageOptions = (optionName: string) => {
-		if (optionName == 'Members') {
+		if (optionName === 'Members') {
 			userList.value = true
 			emit('userList')
 		}
-		else if (optionName == 'Conversation') {
+		else if (optionName === 'Conversation') {
 			userList.value = false
 			emit('conv')
 		}
+		else if (optionName === 'Quit')
+			emit('quit')
 	}
 
 </script>

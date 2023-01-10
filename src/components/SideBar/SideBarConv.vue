@@ -39,6 +39,7 @@
 		dataState.value = await getMessages(target.value.id, messages)
 		socket.on('incomingMessage', () => { console.log('incoming message') })
 		socket.on('messageRoomFailed', () => { console.log('message room failed') })
+		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 		socket.emit('connectedToRoom', { channelId: target.value.id })
 	})
 
@@ -66,6 +67,7 @@
 				:status="target.status"
 				@userList="userList = true"
 				@conv="userList = false"
+				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
 			<ConvList v-if="userList" />
