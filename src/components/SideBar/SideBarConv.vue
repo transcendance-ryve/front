@@ -45,10 +45,13 @@
 	const	socket = userStore.socket
 
 	onMounted(async () => {
-		if (sbStore.conv.type === 'Channel')
-			dataState.value = await getChannelsByID(sbStore.conv.id, target)
-		else
+		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
+			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
+			socket.on('DMChan', (res: any) => { console.log('DMChan', res) })
+		}
+		else
+			dataState.value = await getChannelsByID(sbStore.conv.id, target)
 		dataState.value = await getMessages(target.value.id, messages)
 		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})

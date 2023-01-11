@@ -25,6 +25,7 @@
 	socket.on('friend_declined', (res: any) => { alert('Friend declined'); console.log('friend declined', res) })
 	socket.on('roomJoined', (res: any) => { alert('Room joined'); console.log('Room joined', res) })
 	socket.on('roomDeclined', (res: any) => { alert('Room declined'); console.log('Room declined', res) })
+	socket.on('dmChan')
 
 </script>
 
