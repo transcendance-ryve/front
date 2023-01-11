@@ -105,12 +105,6 @@
 	}
 
 	const	isInChan = (user: User) => {
-		// for (let i = 0; i < bannedListData.length; i++)
-		// 	if (bannedListData[i].id === user.id)
-		// 		return true
-		// for (let i = 0; i < pendingListData.length; i++)
-		// 	if (pendingListData[i].id === user.id)
-		// 		return true
 		if (bannedListData.value.find((u: User) => u.id === user.id) !== undefined)
 			return true
 		if (pendingListData.value.find((u: User) => u.id === user.id) !== undefined)
@@ -154,7 +148,7 @@
 		role.value = getRole()
 		getLists()
 		socket.on('invitationSent', (target: User) => {
-			pendingListData.push(target)
+			pendingListData.value.push(target)
 			addList.value.splice(addList.value.indexOf(target), 1)
 		})
 	})
