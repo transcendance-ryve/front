@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, ref, watch, computed, type Ref, onMounted } from 'vue'
+	import { reactive, ref, watch, computed, type Ref, onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SideBarSwitch from './SideBarSwitch.vue'
@@ -293,21 +293,19 @@
 
 	onMounted(() => {
 		getRawData()
-		if (!sbStore.componentState.content) {
-			socket.on('invitationAccepted', (id: string) => {
-				if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-					contentData.value = contentData.value.filter(item => {
-						return item.id !== id
-					})
-			})
-			socket.on('invitationDeclined', (id: string) => {
-				if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-					contentData.value = contentData.value.filter(item => {
-						return item.id !== id
-					})
-			})
-			sbStore.componentState.content = true
-		}
+		socket.on('invitationAccepted', (id: string) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+				contentData.value = contentData.value.filter(item => item.id !== id)
+		})
+		socket.on('invitationDeclined', (id: string) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+				contentData.value = contentData.value.filter(item => item.id !== id)
+		})
+	})
+
+	onUnmounted(() => {
+		socket.off('invitationAccepted')
+		socket.off('invitationDeclined')
 	})
 
 </script>

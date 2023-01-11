@@ -10,13 +10,6 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		notifsState: 1
 	})
 
-	const	componentState = reactive({
-		content: false,
-		conv: false,
-		convList: false,
-		newChan: false,
-	})
-
 	const	toFind = ref('')
 
 	const	newChan = ref(false)
@@ -25,7 +18,6 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		open: false,
 		type: '',
 		id: '',
-		lastMsg: '',
 	})
 
 	const	hiddenTags: string[] = reactive([])
@@ -54,15 +46,10 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.channelsState = 1
 		state.notifsState = 1
 		clearHiddenTags()
-		componentState.content = false
-		componentState.conv = false
-		componentState.convList = false
-		componentState.newChan = false
 	}
 
 	return {
 		state,
-		componentState,
 		newChan,
 		conv,
 		hiddenTags,

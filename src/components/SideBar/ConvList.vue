@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, computed, watch, type Ref, onMounted, toRefs } from 'vue'
+	import { ref, reactive, computed, watch, type Ref, onMounted, toRefs, onUnmounted } from 'vue'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownList from './DropDownList.vue'
@@ -12,7 +12,6 @@
 	import type { UserInChan } from '@/requests/SideBar/getUsersInChannel'
 	import type { axiosState } from '@/requests/useAxios'
 	import { useUserStore } from '@/stores/UserStore'
-	import { useSideBarStore } from '@/stores/SideBarStore'
 
 	export interface Props {
 		id: string
@@ -143,15 +142,14 @@
 		usersInChannel.value = await getUsersInChannel(p.id.value, dataState)
 		role.value = getRole()
 		getLists()
-		const	sbStore = useSideBarStore()
-		if (!sbStore.componentState.convList) {
-			socket.on('invitationSent', (target: User) => {
-				//	sbStore a gerer
-				pendingListData.push(target)
-				addList.value.splice(addList.value.indexOf(target), 1)
-			})
-			sbStore.componentState.convList = true
-		}
+		socket.on('invitationSent', (target: User) => {
+			pendingListData.push(target)
+			addList.value.splice(addList.value.indexOf(target), 1)
+		})
+	})
+
+	onUnmounted(() => {
+		socket.off('invitationSent')
 	})
 
 </script>

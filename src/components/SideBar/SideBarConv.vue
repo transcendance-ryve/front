@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, type Ref, onMounted, watch } from 'vue'
+	import { ref, type Ref, onMounted, watch, onUnmounted } from 'vue'
 	import ConvTag from './ConvTag.vue'
 	import ConvContent from './ConvContent.vue'
 	import ConvList from './ConvList.vue'
@@ -49,9 +49,12 @@
 		dataState.value = await getMessages(newVal, messages)
 	})
 
-	watch(sbStore.conv, () => {
-		messages.value.push({ content: sbStore.conv.lastMsg })
-	})
+	const	sendMessage = () => {
+		if (input.value) {
+			socket.emit('messageRoom', { messageInfo: { channelId: convId.value, content: input.value } })
+			input.value = ''
+		}
+	}
 
 	onMounted(async () => {
 		if (sbStore.conv.type === 'Friend') {
@@ -62,23 +65,18 @@
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
 			convId.value = target.value.id
 		}
-		if (!sbStore.componentState.conv) {
-			socket.on('incomingMessage', (msg: any) => {
-				console.log('incoming message', msg)
-				sbStore.conv.lastMsg = msg
-			})
-			socket.on('DMChan', (id: string) => { console.log('DMChan', id); convId.value = id })
-			socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
-			sbStore.componentState.conv = true
-		}
+		socket.on('incomingMessage', (msg: any) => {
+			console.log('incoming message', msg)
+			messages.value.push({ content: msg })
+		})
+		socket.once('DMChan', (id: string) => { console.log('DMChan', id); convId.value = id })
+		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 
-	const	sendMessage = () => {
-		if (input.value) {
-			socket.emit('messageRoom', { messageInfo: { channelId: convId.value, content: input.value } })
-			input.value = ''
-		}
-	}
+	onUnmounted(() => {
+		socket.off('incomingMessage')
+		socket.off('roomLeft')
+	})
 
 </script>
 
