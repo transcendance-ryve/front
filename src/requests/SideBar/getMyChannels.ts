@@ -14,7 +14,9 @@ const getMyChannels = async (dataState: axiosState) => {
 	}
 	else if (response.value) {
 		dataState.loading = loading.value
-		return response.value
+		return response.value.filter((chan) => {
+			return chan.status !== 'DIRECTMESSAGE'
+		})
 	}
 }
 

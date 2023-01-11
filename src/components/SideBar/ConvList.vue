@@ -12,6 +12,7 @@
 	import type { UserInChan } from '@/requests/SideBar/getUsersInChannel'
 	import type { axiosState } from '@/requests/useAxios'
 	import { useUserStore } from '@/stores/UserStore'
+	import { useSideBarStore } from '@/stores/SideBarStore'
 
 	export interface Props {
 		id: string
@@ -143,10 +144,14 @@
 		usersInChannel.value = await getUsersInChannel(p.id.value, dataState)
 		role.value = getRole()
 		getLists()
-		socket.on('invitationSent', (target: User) => {
-			pendingListData.push(target)
-			addList.value.splice(addList.value.indexOf(target), 1)
-		})
+		const	sbStore = useSideBarStore()
+		if (!sbStore.componentState.convList) {
+			socket.on('invitationSent', (target: User) => {
+				pendingListData.push(target)
+				addList.value.splice(addList.value.indexOf(target), 1)
+			})
+			sbStore.componentState.convList = true
+		}
 	})
 
 </script>

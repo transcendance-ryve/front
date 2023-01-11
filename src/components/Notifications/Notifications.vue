@@ -11,10 +11,6 @@
 	socket.on('pong', () => { console.log('pong') })
 	socket.emit('ping', () => { console.log('ping emit') })
 
-	socket.on('incomingMessage', (msg: any) => {
-		console.log('incoming message', msg)
-		sbStore.conv.lastMsg = msg
-	})
 	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })
 	socket.on('chanInvitationReceived', (res: any) => { alert('invitation received'), console.log('Invitation received', res) })
 	socket.on('inviteToRoomFailed', (res: any) => { alert('Invite to room failed'), console.log('Invite to room failed', res) })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive } from 'vue'
+	import { onMounted, reactive } from 'vue'
 	import {
 		logoProfile,
 		logoLock,
@@ -56,9 +56,14 @@
 		}
 	}
 
-	socket.on('roomCreated', (channelId: string) => {
-		sbStore.newChan = false;
-		sbStore.openConv('Channel', channelId)
+	onMounted(() => {
+		if (!sbStore.componentState.newChan) {
+			socket.on('roomCreated', (channelId: string) => {
+				sbStore.newChan = false;
+				sbStore.openConv('Channel', channelId)
+			})
+			sbStore.componentState.newChan = true
+		}
 	})
 
 </script>
