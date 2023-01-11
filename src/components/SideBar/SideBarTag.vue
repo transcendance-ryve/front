@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
+	import { toRefs, computed, ref, type Ref } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
@@ -31,6 +31,7 @@
 	const	sbStore = useSideBarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
+	const	password: Ref<string> = ref('')
 
 	const	addToFriend = (id: string) => {
 		sbStore.hiddenTags.push(id)
@@ -52,6 +53,20 @@
 			socket.emit('decline_friend', { friendId: p.data.value.id })
 		else if (p.type.value === 3)
 			socket.emit('declineInvitation', { invitationInfo: { channelId: p.data.value.id } })
+	}
+
+	const	joinChan = () => {
+		if (p.data.value.status === 'PROTECTED' && !password.value)
+			alert('Empty password')
+		socket.emit('joinRoom', {
+			joinInfo: {
+				channelId: p.data.value.id,
+				name: p.data.value.name,
+				status: p.data.value.status,
+				password: password.value
+			}
+		})
+		socket.on('joinRoomFailed', (res: any) => { console.log('Join room failed', res) })
 	}
 
 </script>
@@ -118,6 +133,7 @@
 
 			<BaseInput
 				v-if="data.status == 'PROTECTED'"
+				v-model="password"
 				type="password"
 				placeholder="Password"
 				inputBackground="#272938"
@@ -135,6 +151,7 @@
 				:logo="logoJoin"
 				width="386em"
 				height="40em"
+				@click="joinChan()"
 			/>
 		</div>
 

@@ -7,7 +7,7 @@ const getChannels = async (toFind: string, dataState: axiosState) => {
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/channels'
-		+ '&search=' + toFind
+		+ '?search=' + toFind
 	)
 	if (error.value) {
 		//	handle errors
@@ -15,7 +15,7 @@ const getChannels = async (toFind: string, dataState: axiosState) => {
 	}
 	else if (response.value) {
 		dataState.loading = loading.value
-		return response.value.users
+		return response.value
 	}
 }
 

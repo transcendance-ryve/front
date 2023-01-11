@@ -12,6 +12,7 @@
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
+	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
 
 	export interface	contentData {
@@ -222,9 +223,9 @@
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1)
 				fetchData = await getMyChannels(dataState)
-				// fetchData = data3
 			else
-				fetchData = data4
+				// fetchData = data4
+				fetchData = await getChannels(toFind.value, dataState)
 		}
 		else {
 			if (sbStore.state.notifsState == 1)
@@ -259,15 +260,19 @@
 	}
 
 	watch(toFind, async () => {
-		if (toFind.value && (sbStore.state.section === 1 && sbStore.state.friendsState === 2))
-			contentData.value = await getUsers(toFind.value, dataState)
+		if (toFind.value) {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
+				contentData.value = await getUsers(toFind.value, dataState)
+			else if (sbStore.state.section === 2 && sbStore.state.channelsState === 2)
+				contentData.value = await getChannels(toFind.value, dataState)
+		}
 	})
 
 	const	data = computed(() => {
 		if (dataState.error || dataState.loading)
 			return
 		if (toFind.value) {
-			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
+			if ((sbStore.state.section === 1 && sbStore.state.friendsState === 2) || sbStore.state.section === 2 && sbStore.state.channelsState === 2)
 				return contentData.value
 			else
 				return filterDataBySearch()
