@@ -11,7 +11,7 @@
 		gap: 16em;
 		height: 56em;
 
-		.Btn-2FA {
+		.Status-2FA {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -20,14 +20,19 @@
 			height: 56em;
 			border: none;
 			border-radius: 6em;
-			background: $red;
-			.Btn-value {
+			background: $background-700;
+
+			.Status-value {
 				font-family: 'Poppins';
 				font-weight: 600;
 				font-size: 16em;
 				line-height: 100%;
 				color: white;
 			}
+		}
+
+		.Status-2FA--active {
+			background: $cheat-blue;
 		}
 	}
 

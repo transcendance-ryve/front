@@ -4,6 +4,7 @@
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd } from '../../assets/logoSVG'
 	import Btn1 from '../Utils/Btn1.vue'
+	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router'
 
 	const props = defineProps({
@@ -15,6 +16,8 @@
 			type: Object
 		}
 	})
+
+	const	userStore = useUserStore()
 
 </script>
 
@@ -30,13 +33,16 @@
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type == 1">
-			<button class="Btn-2FA"><span class="Btn-value">2FA</span></button>
+			<div class="Status-2FA" :class="{ 'Status-2FA--active': userStore.me.tfa_enabled }">
+				<span class="Status-value">2FA</span>
+			</div>
 			<Btn1
 				:type=5
 				:logo="logoSettings"
 				value="Settings"
 				width="136em"
 				fontSize="16em"
+				@click="router.push({ path: '/settings' })"
 			/>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type == 2">
