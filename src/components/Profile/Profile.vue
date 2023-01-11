@@ -3,6 +3,7 @@
 	import { onMounted, onUnmounted, reactive } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
+	import { useSideBarStore } from '@/stores/SideBarStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
@@ -10,7 +11,7 @@
 	import { onBeforeRouteUpdate } from 'vue-router'
 	import	getUserProfile, { type userProfileData } from '../../requests/Profile/getUserProfile'
 
-	const	userStore = useUserStore()
+	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
 	contentStore.state = 4
 
@@ -44,21 +45,47 @@
 		getUserProfile(to.params.id as string, data)
 	})
 
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
+
 	onMounted(() => {
-		userStore.socket.on('friend_accepted', (sender: any) => {
+		socket.on('friend_request', (sender: any) => {
+			if (sender.id === data.user.id)
+				data.type = 5
+		})
+		socket.on('friend_request_submitted', (receiver: any) => {
+			if (receiver.id === data.user.id)
+				data.type = 4
+		})
+		socket.on('friend_accepted', (sender: any) => {
 			console.log('change type', data.user.id, sender.id)
 			if (sender.id === data.user.id)
 				data.type = 2
 		})
-		userStore.socket.on('friend_accepted_submitted', (receiver: any) => {
+		socket.on('friend_accepted_submitted', (receiver: any) => {
 			console.log('change type', data.user.id, receiver.id)
 			if (receiver.id === data.user.id)
 				data.type = 2
 		})
+		socket.on('friend_declined', (sender: any) => {
+			console.log('change type', data.user.id, sender.id)
+			if (sender.id === data.user.id)
+				data.type = 3
+		})
+		socket.on('friend_declined_submitted', (receiver: any) => {
+			console.log('change type', data.user.id, receiver.id)
+			if (receiver.id === data.user.id)
+				data.type = 3
+		})
 	})
 
 	onUnmounted(() => {
-		userStore.socket.off('friend_accepted')
+		socket.off('friend_request')
+		socket.off('friend_request_submitted')
+		socket.off('friend_accepted')
+		socket.off('friend_accepted_submitted')
+		socket.off('friend_declined')
+		socket.off('friend_declined_submitted')
 	})
 
 </script>
@@ -69,6 +96,10 @@
 		<ProfileTag
 			:type="data.type"
 			:user="data.user"
+			@message="sbStore.openConv('Friend', data.user.id)"
+			@add="socket.emit('add_friend', { friendId: data.user.id })"
+			@accept="socket.emit('accept_friend', { friendId: data.user.id })"
+			@refuse="socket.emit('decline_friend', { friendId: data.user.id })"
 		/>
 		<div class="Profile-section">
 			<h2 class="Section-name">Statistics</h2>

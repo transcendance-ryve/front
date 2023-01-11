@@ -3,9 +3,15 @@ import { useUserStore } from '../../stores/UserStore'
 
 export type userProfileData = { user: any, type: number, loadingData: boolean, err: null }
 
-const	getType = (status: string) => {
+const	getType = (id: string, status: string, senderId: string) => {
 	if (status === 'ACCEPTED')
 		return 2
+	else if (status === 'PENDING') {
+		if (id !== senderId)
+			return 4
+		else
+			return 5
+	}
 	return 3
 }
 
@@ -28,8 +34,8 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 			//	handle errors
 		}
 		else if (response.value) {
-			// console.log('in get profile', response.value)
-			data.type = getType(response.value.status)
+			console.log('in get profile', response.value)
+			data.type = getType(id, response.value.status, response.value.sender)
 			data.user = response.value.user
 		}
 		data.loadingData = loading.value

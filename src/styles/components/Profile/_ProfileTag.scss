@@ -11,7 +11,7 @@
 		gap: 16em;
 		height: 56em;
 
-		.Status-2FA {
+		.ProfileTag-status {
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -24,14 +24,13 @@
 
 			.Status-value {
 				font-family: 'Poppins';
-				font-weight: 600;
 				font-size: 16em;
 				line-height: 100%;
 				color: white;
 			}
 		}
 
-		.Status-2FA--active {
+		.Status--active {
 			background: $cheat-blue;
 		}
 	}
