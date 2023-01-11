@@ -49,6 +49,10 @@
 		dataState.value = await getMessages(newVal, messages)
 	})
 
+	watch(sbStore.conv, () => {
+		messages.value.push({ content: sbStore.conv.lastMsg })
+	})
+
 	onMounted(async () => {
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
@@ -61,7 +65,7 @@
 		if (!sbStore.componentState.conv) {
 			socket.on('incomingMessage', (msg: any) => {
 				console.log('incoming message', msg)
-				messages.value.push({ content: msg })
+				sbStore.conv.lastMsg = msg
 			})
 			socket.on('DMChan', (id: string) => { console.log('DMChan', id); convId.value = id })
 			socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })

@@ -137,7 +137,6 @@
 			else
 				userListData.value.push(usersInChannel.value[i].user)
 		}
-		return []
 	}
 
 	onMounted(async () => {
@@ -147,6 +146,7 @@
 		const	sbStore = useSideBarStore()
 		if (!sbStore.componentState.convList) {
 			socket.on('invitationSent', (target: User) => {
+				//	sbStore a gerer
 				pendingListData.push(target)
 				addList.value.splice(addList.value.indexOf(target), 1)
 			})

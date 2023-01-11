@@ -25,6 +25,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		open: false,
 		type: '',
 		id: '',
+		lastMsg: '',
 	})
 
 	const	hiddenTags: string[] = reactive([])
