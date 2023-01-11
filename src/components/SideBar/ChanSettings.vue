@@ -41,16 +41,26 @@
 		}
 	}
 
+	// const	readyToUpdate = computed(() => {
+	// 	const	chan = p.channel.value
+	// 	if ((form.name && form.name !== chan.name)
+	// 			|| ((form.status === 'PROTECTED' && ((chan.status === 'PROTECTED' && form.password) || chan.status !== 'PROTECTED'))
+	// 			|| (chan.status === 'PROTECTED' && form.status === 'PROTECTED' && form.password))
+	// 			|| form.avatar)
+	// 		return true
+	// 	return false
+	// })
 	const	readyToUpdate = computed(() => {
 		const	chan = p.channel.value
-		if ((form.name && form.name !== chan.name)
-				|| (form.status !== chan.status
-				|| (chan.status === 'PROTECTED' && form.password))
-				|| form.avatar)
-			return true
-		return false
+		if (!form.avatar && !form.name && (form.status !== 'PROTECTED' && form.status === chan.status))
+			return false
+		if (form.name && form.name === chan.name)
+			return false
+		if (form.status === 'PROTECTED' && chan.status !== 'PROTECTED' && !form.password)
+			return false
+		return true
 	})
-
+	//	on.roomEdited
 	const	updatedChan = () => {
 		if (readyToUpdate.value) {
 			let	formToUpdate: Partial<Form> = form
