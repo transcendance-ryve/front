@@ -15,14 +15,16 @@
 		console.log('incoming message', msg)
 		sbStore.conv.lastMsg = msg
 	})
-	socket.on('messageRoomFailed', () => { console.log('message room failed') })
-	socket.on('chanInvitationReceived', () => { alert('invitation received') })
-	socket.on('inviteToRoomFailed', () => { alert('Invite to room failed') })
-	socket.on('createRoomFailed', () => { alert('Error cannot create this channel') })
-	socket.on('acceptInvitationFailed', () => { alert('Accept invitation failed') })
+	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })
+	socket.on('chanInvitationReceived', (res: any) => { alert('invitation received'), console.log('Invitation received', res) })
+	socket.on('inviteToRoomFailed', (res: any) => { alert('Invite to room failed'), console.log('Invite to room failed', res) })
+	socket.on('createRoomFailed', (res: any) => { alert('Error cannot create this channel'), console.log('Error cannot create channel', res) })
+	socket.on('acceptInvitationFailed', (res: any) => { alert('Accept invitation failed'), console.log('message room failed', res) })
 	socket.on('friend_request', (res: any) => { alert('Friend request'); console.log('friend request', res) })
 	socket.on('friend_accepted', (res: any) => { alert('Friend accepted'); console.log('friend accepted', res) })
 	socket.on('friend_declined', (res: any) => { alert('Friend declined'); console.log('friend declined', res) })
+	socket.on('roomJoined', (res: any) => { alert('Room joined'); console.log('Room joined', res) })
+	socket.on('roomDeclined', (res: any) => { alert('Room declined'); console.log('Room declined', res) })
 
 </script>
 
