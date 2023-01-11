@@ -24,9 +24,9 @@
 	socket.on('inviteToRoomFailed', (res: any) => { alert('Invite to room failed'), console.log('Invite to room failed', res) })
 	socket.on('createRoomFailed', (res: any) => { alert('Error cannot create this channel'), console.log('Error cannot create channel', res) })
 	socket.on('acceptInvitationFailed', (res: any) => { alert('Accept invitation failed'), console.log('message room failed', res) })
-	socket.on('roomJoined', (res: any) => { alert('Room joined'); console.log('Room joined', res) })
+	socket.on('roomJoined', (res: any) => { console.log('Room joined', res) })
 	socket.on('roomDeclined', (res: any) => { alert('Room declined'); console.log('Room declined', res) })
-	socket.on('dmChan', (res: any) => { alert('dmChan'); console.log('dm chan', res) })
+	socket.on('DMChan', (res: any) => { console.log('DM chan', res) })
 	socket.on('joinRoomFailed', (res: any) => { alert('Join room failed'); console.log('Join room failed', res) })
 
 </script>

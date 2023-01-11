@@ -70,6 +70,7 @@
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
+			socket.once('DMChan', (id: string) => { console.log('DMCHAANN'), convId.value = id })
 		}
 		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
@@ -81,7 +82,6 @@
 			console.log('incoming message', msg)
 			messages.value.push({ content: msg })
 		})
-		socket.once('DMChan', (id: string) => { console.log('DMChan', id); convId.value = id })
 		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 

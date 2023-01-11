@@ -235,6 +235,9 @@
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				contentData.value = contentData.value.filter(item => item.id !== id)
 		})
+		socket.on('roomJoined', (id: string) => {
+			sbStore.openConv('Channel', id)
+		})
 	})
 
 	onUnmounted(() => {
@@ -246,6 +249,7 @@
 		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')
+		socket.off('roomJoined')
 	})
 
 </script>
