@@ -52,12 +52,16 @@
 	// })
 	const	readyToUpdate = computed(() => {
 		const	chan = p.channel.value
-		if (!form.avatar && !form.name && (form.status !== 'PROTECTED' && form.status === chan.status))
+		if (!form.avatar && !form.name &&
+				((form.status !== 'PROTECTED' && form.status === chan.status) ||
+				form.status === 'PROTECTED' && chan.status === 'PROTECTED' && !form.password))
 			return false
 		if (form.name && form.name === chan.name)
 			return false
 		if (form.status === 'PROTECTED' && chan.status !== 'PROTECTED' && !form.password)
 			return false
+		// if (form.status === 'PROTECTED' && chan.status === 'PROTECTED' && !form.password)
+		// 	return false
 		return true
 	})
 	//	on.roomEdited
