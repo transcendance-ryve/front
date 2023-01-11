@@ -6,7 +6,8 @@
 	import StatusBtns from './StatusBtns.vue'
 	import Btn1 from '../Utils/Btn1.vue'
 	import ConvList from './ConvList.vue'
-	import type { Form } from '@/requests/SideBar/createRoom'
+	import editChannel from '@/requests/SideBar/editChannel'
+	import type { Form } from '@/requests/SideBar/editChannel'
 	import type { Target } from './SideBarConv.vue'
 	import {
 		logoProfile,
@@ -23,12 +24,12 @@
 	// const	props = toRefs(defineProps<Props>())
 
 	const	form: Form = reactive({
+		id: p.channel.value.id,
 		name: '',
 		status: p.channel.value.status,
 		avatar: null,
 		avatarFile: null,
 		password: '',
-		invitees: []
 	})
 
 	const	uploadAvatar = (e:any) => {
@@ -51,9 +52,19 @@
 	})
 
 	const	updatedChan = () => {
-		if (readyToUpdate.value)
-			console.log('update chan')
+		if (readyToUpdate.value) {
+			let	formToUpdate: Partial<Form> = form
+			if (!formToUpdate.name)
+				delete formToUpdate.name
+			if (formToUpdate.status !== 'PROTECTED' &&
+				(formToUpdate.status === 'PROTECTED' && !formToUpdate.password && p.channel.value.status === 'PROTECTED'))
+				delete formToUpdate.password
+				
+			editChannel(formToUpdate)
+		}
 	}
+
+	// put editRoom { editInfo: { channelId, name, status, password }, image }
 
 </script>
 
