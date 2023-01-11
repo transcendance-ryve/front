@@ -215,11 +215,11 @@
 		})
 		socket.on('friend_accepted_submitted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2) {
-				console.log('okokokok')
 				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
 			}
 		})
 		socket.on('friend_declined_submitted', (receiver: Partial<ContentData>) => {
+			console.log('DECLINED')
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
 		})
@@ -241,6 +241,9 @@
 	onUnmounted(() => {
 		socket.off('friend_request')
 		socket.off('friend_request_submitted')
+		socket.off('friend_accepted')
+		socket.off('friend_accepted_submitted')
+		socket.off('friend_declined_submitted')
 		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')

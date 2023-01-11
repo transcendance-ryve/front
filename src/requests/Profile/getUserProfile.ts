@@ -3,6 +3,12 @@ import { useUserStore } from '../../stores/UserStore'
 
 export type userProfileData = { user: any, type: number, loadingData: boolean, err: null }
 
+const	getType = (status: string) => {
+	if (status === 'ACCEPTED')
+		return 2
+	return 3
+}
+
 const getUserProfile = async (id: string, data: userProfileData) => {
 	const userStore = useUserStore()
 
@@ -22,7 +28,8 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 			//	handle errors
 		}
 		else if (response.value) {
-			data.type = response.value.isFriend ? 2 : 3
+			// console.log('in get profile', response.value)
+			data.type = getType(response.value.status)
 			data.user = response.value.user
 		}
 		data.loadingData = loading.value

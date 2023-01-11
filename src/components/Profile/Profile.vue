@@ -1,8 +1,8 @@
 <script setup lang="ts">
 
-	import { reactive, watch } from 'vue'
+	import { onMounted, onUnmounted, reactive } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
-	import { useSideBarStore } from '@/stores/SideBarStore'
+	import { useUserStore } from '@/stores/UserStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
@@ -10,10 +10,9 @@
 	import { onBeforeRouteUpdate } from 'vue-router'
 	import	getUserProfile, { type userProfileData } from '../../requests/Profile/getUserProfile'
 
+	const	userStore = useUserStore()
 	const	contentStore = useContentStore()
 	contentStore.state = 4
-
-	const	sbStore = useSideBarStore()
 
 	const	data: userProfileData = reactive({
 		user: null,
@@ -41,9 +40,25 @@
 		return data.user[stats[index]]
 	}
 
-
 	onBeforeRouteUpdate((to, from) => {
 		getUserProfile(to.params.id as string, data)
+	})
+
+	onMounted(() => {
+		userStore.socket.on('friend_accepted', (sender: any) => {
+			console.log('change type', data.user.id, sender.id)
+			if (sender.id === data.user.id)
+				data.type = 2
+		})
+		userStore.socket.on('friend_accepted_submitted', (receiver: any) => {
+			console.log('change type', data.user.id, receiver.id)
+			if (receiver.id === data.user.id)
+				data.type = 2
+		})
+	})
+
+	onUnmounted(() => {
+		userStore.socket.off('friend_accepted')
 	})
 
 </script>
