@@ -1,25 +1,30 @@
 <script setup lang="ts">
 
-	import { computed, onMounted, onUnmounted, reactive } from 'vue'
+	import { reactive, toRefs, computed } from 'vue'
+	import UploadAvatar from '../Utils/UploadAvatar.vue'
+	import BaseInput from '../Utils/BaseInput.vue'
+	import StatusBtns from './StatusBtns.vue'
+	import Btn1 from '../Utils/Btn1.vue'
+	import ConvList from './ConvList.vue'
+	import type { Form } from '@/requests/SideBar/createRoom'
+	import type { Target } from './SideBarConv.vue'
 	import {
 		logoProfile,
 		logoLock
 	} from '../../assets/logoSVG'
-	import UploadAvatar from '../Utils/UploadAvatar.vue'
-	import BaseInput from '../Utils/BaseInput.vue'
-	import StatusBtns from './StatusBtns.vue'
-	import NewChanContent from './NewChanContent.vue'
-	import Btn1 from '../Utils/Btn1.vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
-	import { useUserStore } from '@/stores/UserStore'
-	import createRoom from '@/requests/SideBar/createRoom'
-	import type { Form } from '@/requests/SideBar/createRoom'
 
-	const	sbStore = useSideBarStore()
+	export interface Props {
+		channel: Target
+		role: string
+	}
+
+	const	props = defineProps<Props>()
+	const	p = toRefs(props)
+	// const	props = toRefs(defineProps<Props>())
 
 	const	form: Form = reactive({
 		name: '',
-		status: 'PUBLIC',
+		status: p.channel.value.status,
 		avatar: null,
 		avatarFile: null,
 		password: '',
@@ -35,43 +40,31 @@
 		}
 	}
 
-	const	userStore = useUserStore()
-	const	socket = userStore.socket
-
-	const	readyToCreate = computed(() => {
-		if (!form.name)
-			return false
-		if (form.status === 'PROTECTED' && !form.password)
-			return false
-		return true
+	const	readyToUpdate = computed(() => {
+		const	chan = p.channel.value
+		if ((form.name && form.name !== chan.name)
+				|| (form.status !== chan.status
+				|| (chan.status === 'PROTECTED' && form.password))
+				|| form.avatar)
+			return true
+		return false
 	})
 
-	const	createChannel = () => {
-		if (readyToCreate.value)
-			createRoom(form)
+	const	updatedChan = () => {
+		if (readyToUpdate.value)
+			console.log('update chan')
 	}
-
-	onMounted(() => {
-		socket.on('roomCreated', (channelId: string) => {
-			sbStore.newChan = false;
-			sbStore.openConv('Channel', channelId)
-		})
-	})
-
-	onUnmounted(() => {
-		socket.off('roomCreated')
-	})
 
 </script>
 
 <template>
 
-	<div class="SideBar-newChan">
-		<div class="NewChan-infos">
+	<div class="ChanSettings">
+		<div class="Settings-infos">
 			<UploadAvatar :avatar="form.avatar" id="channelAvatar-input" @change="uploadAvatar"/>
 			<div class="Infos-content">
 				<BaseInput
-					placeholder="Name"
+					:placeholder="channel.name"
 					v-model="form.name"
 					:logo="logoProfile"
 					logoSize="18em"
@@ -85,7 +78,7 @@
 		<BaseInput
 			v-if="form.status === 'PROTECTED'"
 			v-model="form.password"
-			placeholder="Password"
+			:placeholder="channel.status === 'PROTECTED' ? 'Change password' : 'Password'"
 			type="password"
 			:logo="logoLock"
 			logoSize="18em"
@@ -94,26 +87,23 @@
 			inputFont="500 14em 'Poppins'"
 		/>
 
-		<NewChanContent
-			:protectedStatus="form.status === 'PROTECTED'"
-			:invitees="form.invitees"
-		/>
+		<ConvList :id="channel.id" :role="role"/>
 
-		<div class="NewChan-btns">
+		<div class="Settings-btns">
 			<Btn1
 				:type=3
 				value="Back"
 				width="201em"
 				height="48em"
-				@click="sbStore.newChan = false"
+				@click="$emit('close')"
 			/>
 			<Btn1
-				:class="{'Btn--inactive': !readyToCreate}"
+				:class="{'Btn--inactive': !readyToUpdate}"
 				:type=1
-				value="Create"
+				value="Update"
 				width="201em"
 				height="48em"
-				@click="createChannel()"
+				@click="updatedChan"
 			/>
 		</div>
 	</div>

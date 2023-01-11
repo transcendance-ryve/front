@@ -219,7 +219,6 @@
 			}
 		})
 		socket.on('friend_declined_submitted', (receiver: Partial<ContentData>) => {
-			console.log('DECLINED')
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
 		})

@@ -15,6 +15,7 @@
 
 	export interface Props {
 		id: string
+		role: string
 	}
 
 	const	props = defineProps<Props>()
@@ -29,7 +30,6 @@
 	})
 	const	sectionSelected = ref('Users')
 	const	toFind = ref('')
-	const	role: Ref<string> = ref('')
 
 	const	usersInChannel: Ref<UserInChan[]> = ref([])
 
@@ -125,14 +125,6 @@
 		}
 	})
 
-	const	getRole = () => {
-		for (let i = 0; i < usersInChannel.value.length; i++) {
-			if (usersInChannel.value[i].user.id === userStore.me.id)
-				return usersInChannel.value[i].role
-		}
-		return ''
-	}
-
 	const	getLists = () => {
 		for (let i = 0; i < usersInChannel.value.length; i++) {
 			const	role = usersInChannel.value[i].role
@@ -145,7 +137,6 @@
 
 	onMounted(async () => {
 		usersInChannel.value = await getUsersInChannel(p.id.value, dataState)
-		role.value = getRole()
 		getLists()
 		socket.on('invitationSent', (target: User) => {
 			pendingListData.value.push(target)

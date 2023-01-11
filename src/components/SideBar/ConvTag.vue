@@ -10,19 +10,15 @@
 		logoPlayCircle,
 		logoQuit,
 		logoPeople,
-		logoMsg
+		logoMsg,
+		logoSettings
 	} from '../../assets/logoSVG'
-	import type { Channel } from '@/requests/SideBar/getChannelByID'
-	import type { User } from '@/components/SideBar/SideBarConv.vue'
 	import type { Target } from '@/components/SideBar/SideBarConv.vue'
 
-	// export interface Props {
-	// 	type: string
-	// 	target: Channel | User
-	// }
 	export interface Props {
 		type: string
 		target: Target
+		owner: boolean
 	}
 
 	const props = defineProps<Props>()
@@ -52,47 +48,30 @@
 	const	userList = ref(false)
 
 	const	p = toRefs(props)
-	// console.log(p.type.value, p.target.value)
+
 	const	btns = computed(() => {
 		if (p.type.value == 'Friend') {
-			if (p.target.value.status == 'In Game')
-				return [
-					{
-						name: 'Spectate',
-						logo: logoPlayCircle,
-					},
-					{
-						name: 'See',
-						logo: logoEye,
-					}
-				]
+			if (p.target.value.status === 'In Game')
+				return [{ name: 'Spectate', logo: logoPlayCircle }, { name: 'See', logo: logoEye, }]
 			else
-				return [
-					{
-						name: 'See',
-						logo: logoEye,
-					},
-				]
+				return [{ name: 'See', logo: logoEye }]
 		}
 		else
-			return [
-				{
-					name: 'Quit',
-					logo: logoQuit,
-				},
-				{
-					name: userList.value == true ? 'Conversation' : 'Members',
-					logo: userList.value == true ? logoMsg : logoPeople,
-				}
-			]
+			return [{ name: 'Quit', logo: logoQuit }, {
+				name: userList.value === true ? 'Conversation' : p.owner.value ? 'Settings' : 'Members',
+				logo: userList.value === true ? logoMsg :  p.owner.value ? logoSettings : logoPeople,
+			}]
 	})
 
-	const	emit = defineEmits(['userList', 'conv', 'quit'])
+	const	emit = defineEmits(['userList', 'conv', 'settings', 'quit'])
 
 	const	manageOptions = (optionName: string) => {
 		if (optionName === 'Members') {
 			userList.value = true
 			emit('userList')
+		}
+		else if (optionName === 'Settings') {
+			emit('settings')
 		}
 		else if (optionName === 'Conversation') {
 			userList.value = false

@@ -4,6 +4,7 @@
 	import ConvTag from './ConvTag.vue'
 	import ConvContent from './ConvContent.vue'
 	import ConvList from './ConvList.vue'
+	import ChanSettings from './ChanSettings.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import { logoSend } from '../../assets/logoSVG'
 	import { useSideBarStore } from '../../stores/SideBarStore'
@@ -41,9 +42,11 @@
 	const	input: Ref<string> = ref('')
 	const	messages: Ref<any[]> = ref([])
 	const	userList = ref(false)
+	const	settings = ref(false)
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	let		convId: Ref<string> = ref('')
+	let		role: Ref<string> = ref('')
 
 	watch(convId, async (newVal: string) => {
 		dataState.value = await getMessages(newVal, messages)
@@ -64,6 +67,8 @@
 		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
 			convId.value = target.value.id
+			socket.emit('getRole', { channelId: convId.value })
+			socket.once('role', (res: string) => role.value = res)
 		}
 		socket.on('incomingMessage', (msg: any) => {
 			console.log('incoming message', msg)
@@ -84,6 +89,7 @@
 
 	<div class="SideBarConv">
 		<div
+			v-if="!settings"
 			class="SideBarConv-contentWrap"
 			:class="{'ContentWrap--List': userList == true}"
 		>
@@ -91,15 +97,18 @@
 				v-if="!dataState.error && !dataState.loading"
 				:type="sbStore.conv.type"
 				:target="target"
+				:owner="role === 'OWNER' ? true : false"
 				@userList="userList = true"
+				@settings="settings = true"
 				@conv="userList = false"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
-			<ConvList v-if="userList && !dataState.error && !dataState.loading" :id="target.id"/>
+			<ConvList v-if="userList && !dataState.error && !dataState.loading" :id="target.id" :role="role"/>
 		</div>
+		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false"/>
 		<BaseInput
-			v-if="!userList"
+			v-if="!userList && !settings"
 			v-model="input"
 			placeholder="Write your message"
 			:logo="logoSend"
