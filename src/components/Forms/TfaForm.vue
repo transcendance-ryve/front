@@ -46,6 +46,7 @@
 </script>
 
 <template>
+
 	<main class="Form-wrap">
 		<h1>2FA</h1>
 		<form @submit.prevent="submitForm">
