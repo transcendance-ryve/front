@@ -41,10 +41,6 @@
 		return data.user[stats[index]]
 	}
 
-	watch(sbStore.hiddenTags, () => {
-		if (sbStore.state.section === 3 && sbStore.state.notifsState === 2 && sbStore.hiddenTags.includes(data.user.id))
-			data.type = 2
-	}) 
 
 	onBeforeRouteUpdate((to, from) => {
 		getUserProfile(to.params.id as string, data)

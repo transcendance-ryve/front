@@ -34,16 +34,12 @@
 	const	password: Ref<string> = ref('')
 
 	const	addToFriend = (id: string) => {
-		sbStore.hiddenTags.push(id)
 		socket.emit('add_friend', { friendId: p.data.value.id })
 	}
 
 	const	notifAccept = (id: string) => {
-		if (p.type.value === 2) {
-			// acceptFriendRequest(id)
+		if (p.type.value === 2)
 			socket.emit('accept_friend', { friendId: p.data.value.id })
-			sbStore.hiddenTags.push(id)
-		}
 		else if (p.type.value === 3)
 			socket.emit('acceptInvitation', { invitationInfo: { channelId: p.data.value.id } })
 	}
@@ -72,7 +68,7 @@
 
 <template>
 
-	<div class="SideBarTag" v-if="!sbStore.hiddenTags.includes(data.id || '')" >
+	<div class="SideBarTag" >
 		<div class="SideBarTag-content">
 			<img
 				class="Content-avatar"

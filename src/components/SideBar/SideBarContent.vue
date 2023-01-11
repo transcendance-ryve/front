@@ -154,7 +154,6 @@
 	// }
 
 	watch(sbStore.state, async () => {
-		sbStore.clearHiddenTags()
 		await getRawData()
 		// sortData()
 	})
@@ -202,6 +201,28 @@
 
 	onMounted(() => {
 		getRawData()
+		socket.on('friend_request', (sender: Partial<ContentData>) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+				contentData.value.unshift(sender)
+		})
+		socket.on('friend_request_submitted', (receiver: Partial<ContentData>) => {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
+				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
+		})
+		socket.on('friend_accepted', (sender: Partial<ContentData>) => {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+				contentData.value.unshift(sender)
+		})
+		socket.on('friend_accepted_submitted', (receiver: Partial<ContentData>) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2) {
+				console.log('okokokok')
+				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
+			}
+		})
+		socket.on('friend_declined_submitted', (receiver: Partial<ContentData>) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
+		})
 		socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
 			console.log('in invit', sender)
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
@@ -218,6 +239,8 @@
 	})
 
 	onUnmounted(() => {
+		socket.off('friend_request')
+		socket.off('friend_request_submitted')
 		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')

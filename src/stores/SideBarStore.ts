@@ -20,12 +20,6 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		id: '',
 	})
 
-	const	hiddenTags: string[] = reactive([])
-
-	function	clearHiddenTags() {
-		hiddenTags.splice(0)
-	}
-
 	function	updateSection(newVal: number) {
 		if (newChan.value)
 			newChan.value = false
@@ -45,18 +39,15 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.friendsState = 1
 		state.channelsState = 1
 		state.notifsState = 1
-		clearHiddenTags()
 	}
 
 	return {
 		state,
 		newChan,
 		conv,
-		hiddenTags,
 		toFind,
 		updateSection,
 		openConv,
-		clearHiddenTags,
 		resetState
 	}
 })
