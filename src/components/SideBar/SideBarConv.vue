@@ -70,7 +70,7 @@
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
-			socket.once('DMChan', (id: string) => { console.log('DMCHAANN'), convId.value = id })
+			socket.once('DMChan', (id: string) => { convId.value = id })
 		}
 		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 	import { toRefs, computed } from 'vue'
+	import { useUserStore } from '@/stores/UserStore'
 	import OptionBtn from './OptionBtn.vue'
 	import {
 		logoEye,
@@ -134,11 +135,13 @@
 			emit('delete')
 	}
 
+	const	userStore = useUserStore()
+
 </script>
 
 <template>
 
-	<div class="UserTag">
+	<div class="UserTag" :class="{'UserTag--me': user.id === userStore.me.id}">
 		<div class="UserTag-infos">
 			<img class="UserTag-avatar" :src="user.avatar" alt="user-avatar">
 			<span class="UserTag-userNameWrap">
