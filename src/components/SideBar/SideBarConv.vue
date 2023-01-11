@@ -43,23 +43,30 @@
 	const	userList = ref(false)
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
+	let		convId: Ref<string> = ref('')
+
+	watch(convId, async (newVal: string) => {
+		dataState.value = await getMessages(newVal, messages)
+	})
 
 	onMounted(async () => {
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
-			socket.on('DMChan', (res: any) => { console.log('DMChan', res) })
+			socket.on('DMChan', (id: string) => { console.log('DMChan', id); convId.value = id })
 		}
-		else
+		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
-		dataState.value = await getMessages(target.value.id, messages)
+			convId.value = target.value.id
+		}
+		// dataState.value = await getMessages(convId, messages)
 		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 
 	const	sendMessage = () => {
 		if (input.value) {
 			// messages.value.push({ content: input.value })
-			socket.emit('messageRoom', { messageInfo: { channelId: target.value.id, content: input.value } })
+			socket.emit('messageRoom', { messageInfo: { channelId: convId.value, content: input.value } })
 			input.value = input.value.slice(input.value.length)
 		}
 	}

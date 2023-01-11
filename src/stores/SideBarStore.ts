@@ -49,6 +49,8 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		clearHiddenTags()
 	}
 
+	
+
 	return {
 		state,
 		newChan,
