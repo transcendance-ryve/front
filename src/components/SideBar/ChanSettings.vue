@@ -53,7 +53,7 @@
 			return false
 		return true
 	})
-	//	on.roomEdited
+
 	const	updatedChan = () => {
 		if (readyToUpdate.value) {
 			let	formToUpdate: Partial<Form> = form
