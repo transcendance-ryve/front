@@ -65,6 +65,8 @@
 	}
 
 	onMounted(async () => {
+		const	input: HTMLElement = document.getElementById('WriteMessage')?.children[0] as HTMLElement
+		input.focus()
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
@@ -114,6 +116,7 @@
 		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false" @update="updateChan()"/>
 		<BaseInput
 			v-if="!userList && !settings"
+			id="WriteMessage"
 			v-model="input"
 			placeholder="Write your message"
 			:logo="logoSend"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import { reactive, computed } from 'vue'
+	import { reactive, computed, onMounted } from 'vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
 	import {
@@ -41,6 +41,11 @@
 			alert('error, form not submitted')
 	}
 
+	onMounted(() => {
+		const	input: HTMLElement = document.getElementById('Password')?.children[0] as HTMLElement
+		input.focus()
+	})
+
 </script>
 
 <template>
@@ -49,6 +54,7 @@
 		<form @submit.prevent="submitForm">
 			<div class="Form-inputsWrap">
 				<BaseInput
+					id="Password"
 					v-model="formData.password"
 					placeholder="Choose password"
 					type="password"
