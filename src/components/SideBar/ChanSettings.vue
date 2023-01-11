@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
-	import { reactive, toRefs, computed } from 'vue'
+	import { reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
+	import { useUserStore } from '@/stores/UserStore'
 	import UploadAvatar from '../Utils/UploadAvatar.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import StatusBtns from './StatusBtns.vue'
@@ -21,7 +22,6 @@
 
 	const	props = defineProps<Props>()
 	const	p = toRefs(props)
-	// const	props = toRefs(defineProps<Props>())
 
 	const	form: Form = reactive({
 		id: p.channel.value.id,
@@ -41,15 +41,6 @@
 		}
 	}
 
-	// const	readyToUpdate = computed(() => {
-	// 	const	chan = p.channel.value
-	// 	if ((form.name && form.name !== chan.name)
-	// 			|| ((form.status === 'PROTECTED' && ((chan.status === 'PROTECTED' && form.password) || chan.status !== 'PROTECTED'))
-	// 			|| (chan.status === 'PROTECTED' && form.status === 'PROTECTED' && form.password))
-	// 			|| form.avatar)
-	// 		return true
-	// 	return false
-	// })
 	const	readyToUpdate = computed(() => {
 		const	chan = p.channel.value
 		if (!form.avatar && !form.name &&
@@ -60,8 +51,6 @@
 			return false
 		if (form.status === 'PROTECTED' && chan.status !== 'PROTECTED' && !form.password)
 			return false
-		// if (form.status === 'PROTECTED' && chan.status === 'PROTECTED' && !form.password)
-		// 	return false
 		return true
 	})
 	//	on.roomEdited
@@ -78,7 +67,11 @@
 		}
 	}
 
-	// put editRoom { editInfo: { channelId, name, status, password }, image }
+	const	emit = defineEmits(['update'])
+	const	useStore = useUserStore()
+	onMounted(() => {
+		useStore.socket.once('roomEdited', () => emit('update'))
+	})
 
 </script>
 

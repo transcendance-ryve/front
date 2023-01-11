@@ -59,6 +59,11 @@
 		}
 	}
 
+	const	updateChan = async () => {
+		dataState.value = await getChannelsByID(sbStore.conv.id, target)
+		settings.value = false
+	}
+
 	onMounted(async () => {
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
@@ -106,7 +111,7 @@
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
 			<ConvList v-if="userList && !dataState.error && !dataState.loading" :id="target.id" :role="role"/>
 		</div>
-		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false"/>
+		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false" @update="updateChan()"/>
 		<BaseInput
 			v-if="!userList && !settings"
 			v-model="input"
