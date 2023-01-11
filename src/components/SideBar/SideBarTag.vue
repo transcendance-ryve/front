@@ -66,7 +66,6 @@
 				password: password.value
 			}
 		})
-		socket.on('joinRoomFailed', (res: any) => { console.log('Join room failed', res) })
 	}
 
 </script>
@@ -88,10 +87,8 @@
 					</div>
 					<Status v-if="data.usersCount" :users="data.usersCount"/>
 				</div>
-				<!-- <div v-if="data.lastMsg" class="LastMsgWrap"> -->
-					<div v-if="data.lastMsg || (sbStore.state.section === 1 && sbStore.state.friendsState === 1)" class="LastMsgWrap">	//	a suppr
-					<!-- <span class="LastMsg">{{data.lastMsg}}</span> -->
-					<span class="LastMsg">{{data.lastMsg || 'sds cndoew lopa cbwqed adod eai'}}</span>	//	a suppr
+				<div v-if="data.messages?.length" class="LastMsgWrap">
+					<span class="LastMsg">{{data.messages[0].content}}</span>
 				</div>
 			</div>
 		</div>

@@ -15,7 +15,7 @@
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
 
-	export interface	contentData {
+	export interface	ContentData {
 		id: string,			//	user			id
 		avatar: string,		//	user / chan		avatar
 		username: string,	//	user 			name
@@ -24,103 +24,10 @@
 		time: number,		//	user / chan		timer
 		lastMsg: string,	//	user / chan		last message
 		usersCount: number,	//	chan			users count
+		messages: any[]		//	user / chan		last message
 	}
 
-	const	data4: Partial<contentData>[] = reactive([
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'RYVE',
-			time: 1,
-			status: 'PUBLIC',
-			users: 4
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN1',
-			time: 2,
-			status: 'PROTECTED',
-			users: 42
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN2',
-			time: 3,
-			status: 'PUBLIC',
-			users: 14
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN3',
-			time: 4,
-			status: 'PUBLIC',
-			users: 106
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN4',
-			time: 5,
-			status: 'PUBLIC',
-			users: 8
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN5',
-			time: 6,
-			status: 'PROTECTED',
-			users: 4000
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN6',
-			time: 7,
-			status: 'PUBLIC',
-			users: 2
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN7',
-			time: 8,
-			status: 'PROTECTED',
-			users: 7
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN8',
-			time: 9,
-			status: 'PUBLIC',
-			users: 4
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN9',
-			time: 10,
-			status: 'PROTECTED',
-			users: 21
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN10',
-			time: 11,
-			status: 'PUBLIC',
-			users: 10
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN11',
-			time: 12,
-			status: 'PUBLIC',
-			users: 18
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'CHAN12',
-			time: 13,
-			status: 'PUBLIC',
-			users: 1
-		},
-	])
-
-	const	data5: Partial<contentData>[] = reactive([
+	const	data5: Partial<ContentData>[] = reactive([
 		{
 			avatar: 'http://localhost:3000/default.png',
 			name: 'Karim',
@@ -209,10 +116,10 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
-	const	contentData: Ref<Partial<contentData>[]> = ref([])
+	const	contentData: Ref<Partial<ContentData>[]> = ref([])
 
 	const	getRawData = async () => {
-		let	fetchData: Partial<contentData>[] = []
+		let	fetchData: Partial<ContentData>[] = []
 
 		if (sbStore.state.section == 1) {
 			if (sbStore.state.friendsState == 1)
@@ -221,8 +128,10 @@
 				fetchData = await getUsers(toFind.value, dataState)
 		}
 		else if (sbStore.state.section == 2) {
-			if (sbStore.state.channelsState == 1)
+			if (sbStore.state.channelsState == 1) {
 				fetchData = await getMyChannels(dataState)
+				console.log('Channels', fetchData)
+			}
 			else
 				// fetchData = data4
 				fetchData = await getChannels(toFind.value, dataState)
@@ -293,6 +202,11 @@
 
 	onMounted(() => {
 		getRawData()
+		socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
+			console.log('in invit', sender)
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+				contentData.value.unshift(sender)
+		})
 		socket.on('invitationAccepted', (id: string) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				contentData.value = contentData.value.filter(item => item.id !== id)
@@ -304,6 +218,7 @@
 	})
 
 	onUnmounted(() => {
+		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')
 	})

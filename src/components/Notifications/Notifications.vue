@@ -12,7 +12,7 @@
 	socket.emit('ping', () => { console.log('ping emit') })
 
 	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })
-	socket.on('chanInvitationReceived', (res: any) => { alert('invitation received'), console.log('Invitation received', res) })
+	socket.on('chanInvitationReceived', (res: any) => { alert('chan invitation received'), console.log('chan Invitation received', res) })
 	socket.on('inviteToRoomFailed', (res: any) => { alert('Invite to room failed'), console.log('Invite to room failed', res) })
 	socket.on('createRoomFailed', (res: any) => { alert('Error cannot create this channel'), console.log('Error cannot create channel', res) })
 	socket.on('acceptInvitationFailed', (res: any) => { alert('Accept invitation failed'), console.log('message room failed', res) })
@@ -21,7 +21,8 @@
 	socket.on('friend_declined', (res: any) => { alert('Friend declined'); console.log('friend declined', res) })
 	socket.on('roomJoined', (res: any) => { alert('Room joined'); console.log('Room joined', res) })
 	socket.on('roomDeclined', (res: any) => { alert('Room declined'); console.log('Room declined', res) })
-	socket.on('dmChan')
+	socket.on('dmChan', (res: any) => { alert('dmChan'); console.log('dm chan', res) })
+	socket.on('joinRoomFailed', (res: any) => { alert('Join room failed'); console.log('Join room failed', res) })
 
 </script>
 

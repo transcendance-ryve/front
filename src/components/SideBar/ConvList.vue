@@ -35,7 +35,7 @@
 
 	const	addListData: Ref<User[]> = ref([])
 
-	const	bannedListData: User[] = reactive([
+	const	bannedListData: Ref<User[]> = ref([
 		{
 			id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png'
 		},
@@ -47,7 +47,7 @@
 		}
 	])
 
-	const	pendingListData: User[] = reactive([
+	const	pendingListData: Ref<User[]> = ref([
 		{
 			id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png'
 		},
@@ -67,16 +67,16 @@
 
 	const	bannedList = computed(() => {
 		if (toFind.value)
-			return bannedListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
+			return bannedListData.value.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
 			return bannedListData
 	})
 
 	const	pendingList = computed(() => {
 		if (toFind.value)
-			return pendingListData.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
+			return pendingListData.value.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
-			return pendingListData
+			return pendingListData.value
 	})
 
 	const	adminList = computed(() => {
@@ -104,10 +104,21 @@
 		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.id.value, friendId: user.id } })
 	}
 
-	const	isInvited = (user: User) => {
-		for (let i = 0; i < pendingListData.length; i++)
-			if (pendingListData[i].id === user.id)
-				return true
+	const	isInChan = (user: User) => {
+		// for (let i = 0; i < bannedListData.length; i++)
+		// 	if (bannedListData[i].id === user.id)
+		// 		return true
+		// for (let i = 0; i < pendingListData.length; i++)
+		// 	if (pendingListData[i].id === user.id)
+		// 		return true
+		if (bannedListData.value.find((u: User) => u.id === user.id) !== undefined)
+			return true
+		if (pendingListData.value.find((u: User) => u.id === user.id) !== undefined)
+			return true
+		if (adminListData.value.find((u: User) => u.id === user.id) !== undefined)
+			return true
+		if (userListData.value.find((u: User) => u.id === user.id) !== undefined)
+			return true
 		return false
 	}
 
@@ -115,7 +126,7 @@
 		if (toFind.value && sectionSelected.value === 'Add') {
 			addListData.value = await getUsers(toFind.value, dataState)
 			addListData.value = addListData.value.filter(user => {
-				return !isInvited(user) && user.id != userStore.me.id
+				return !isInChan(user)
 			})
 		}
 	})
