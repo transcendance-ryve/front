@@ -14,7 +14,7 @@
 	import { useUserStore } from '@/stores/UserStore'
 
 	export interface Props {
-		id: string
+		channelId: string
 		role: string
 	}
 
@@ -69,7 +69,7 @@
 		if (toFind.value)
 			return bannedListData.value.filter(user => user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		else
-			return bannedListData
+			return bannedListData.value
 	})
 
 	const	pendingList = computed(() => {
@@ -100,8 +100,8 @@
 			return []
 	})
 
-	const	addUser = (user: User) => {
-		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.id.value, friendId: user.id } })
+	const	addUser = (id: string) => {
+		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.channelId.value, friendId: id } })
 	}
 
 	const	isInChan = (user: User) => {
@@ -136,16 +136,21 @@
 	}
 
 	onMounted(async () => {
-		usersInChannel.value = await getUsersInChannel(p.id.value, dataState)
+		usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
 		getLists()
 		socket.on('invitationSent', (target: User) => {
 			pendingListData.value.push(target)
-			addList.value.splice(addList.value.indexOf(target), 1)
+			addListData.value.splice(addListData.value.indexOf(target), 1)
+		})
+		socket.on('userPromoted', (target: User) => {
+			adminListData.value.push(target)
+			userListData.value.splice(userListData.value.indexOf(target), 1)
 		})
 	})
 
 	onUnmounted(() => {
 		socket.off('invitationSent')
+		socket.off('userPromoted')
 	})
 
 </script>
@@ -174,6 +179,7 @@
 			<div class="ConvList-content" v-if="sectionSelected == 'Users'">
 				<DropDownList
 					v-if="bannedList.length"
+					:channelId="channelId"
 					label="Banned"
 					:users="bannedList"
 					:admin="role === 'ADMIN' ? true : false"
@@ -182,12 +188,14 @@
 
 				<DropDownList
 					v-if="pendingList.length"
+					:channelId="channelId"
 					label="Pending"
 					:users="pendingList"
 				/>
 
 				<DropDownList
 					v-if="adminList.length"
+					:channelId="channelId"
 					label="Administrators"
 					:users="adminList"
 					:admin="role === 'ADMIN' ? true : false"
@@ -197,6 +205,7 @@
 
 				<DropDownList
 					v-if="userList.length"
+					:channelId="channelId"
 					label="Users"
 					:users="userList"
 					:admin="role === 'ADMIN' ? true : false"

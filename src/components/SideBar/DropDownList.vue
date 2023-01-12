@@ -2,10 +2,12 @@
 
 	import { ref, toRefs } from 'vue'
 	import UserTag from './UserTag.vue'
+	import { useUserStore } from '@/stores/UserStore'
 	import type { User } from './UserTag.vue'
 	import { logoListArrow } from '../../assets/logoSVG'
 
 	export interface Props {
+		channelId: string
 		label: string
 		users: User[]
 		owner?: boolean
@@ -40,6 +42,13 @@
 		closed.value = !open.value
 	}
 
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
+
+	const	promoteUser = (id: string) => {
+		socket.emit('promoteUser', { roleInfo: { userId: id, channelId: p.channelId.value } })
+	}
+
 </script>
 
 <template>
@@ -60,6 +69,7 @@
 				:key="index"
 				:section="userTagType()"
 				:user="user"
+				@Promote="promoteUser"
 			/>
 		</div>
 	</div>

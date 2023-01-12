@@ -24,6 +24,8 @@
 		user: User
 	}
 
+	export type emits = 'See' | 'Add' | 'Delete' | 'Mute' | 'Promote' | 'Demote' | 'Ban'
+
 	const props = withDefaults(defineProps<Props>(), {
 		section: 'Invitees',
 	})
@@ -126,16 +128,21 @@
 			]
 	})
 
-	const	emit = defineEmits(['add', 'delete'])
+	const	emit = defineEmits(['See', 'Add', 'Delete', 'Mute', 'Promote', 'Demote', 'Ban'])
 
-	const	manageOptions = (optionName: string) => {
-		if (optionName == 'Add')
-			emit('add', p.user.value)
-		else if (optionName == 'Delete')
-			emit('delete')
+	const	manageOptions = (optionName: emits) => {
+		// if (optionName == 'Add')
+		// 	emit('add', p.user.value)
+		// else if (optionName == 'Delete')
+		// 	emit('delete')
+		emit(optionName, p.user.value.id)
 	}
 
 	const	userStore = useUserStore()
+
+	//	emit.promoteUser, { roleInfo: { userId, channelId } }
+	//	on.promoteUserFailed
+	//	on.userPromoted(id)
 
 </script>
 

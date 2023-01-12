@@ -18,7 +18,7 @@
 	export interface Props {
 		type: string
 		target: Target
-		owner: boolean
+		admin: boolean
 	}
 
 	const props = defineProps<Props>()
@@ -58,8 +58,8 @@
 		}
 		else
 			return [{ name: 'Quit', logo: logoQuit }, {
-				name: userList.value === true ? 'Conversation' : p.owner.value ? 'Settings' : 'Members',
-				logo: userList.value === true ? logoMsg :  p.owner.value ? logoSettings : logoPeople,
+				name: userList.value === true ? 'Conversation' : p.admin.value ? 'Settings' : 'Members',
+				logo: userList.value === true ? logoMsg :  p.admin.value ? logoSettings : logoPeople,
 			}]
 	})
 

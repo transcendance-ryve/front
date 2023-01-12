@@ -104,7 +104,7 @@
 				v-if="!dataState.error && !dataState.loading"
 				:type="sbStore.conv.type"
 				:target="target"
-				:owner="role === 'OWNER' ? true : false"
+				:admin="role === 'OWNER' || role === 'ADMIN' ? true : false"
 				@userList="userList = true"
 				@settings="settings = true"
 				@conv="userList = false"
