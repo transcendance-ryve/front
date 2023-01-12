@@ -36,6 +36,8 @@
 	socket.on('demoteUserFailed', (res: any) => { console.log('demote user failed', res) })
 	socket.on('userMuted', (res: any) => { console.log('user muted', res) })
 	socket.on('muteUserFailed', (res: any) => { console.log('mute user failed', res) })
+	socket.on('userUnmuted', (res: any) => { console.log('user unmuted', res) })
+	socket.on('unmuteUserFailed', (res: any) => { console.log('unmute user failed', res) })
 
 </script>
 

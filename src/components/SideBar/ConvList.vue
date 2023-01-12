@@ -156,6 +156,11 @@
 			if (userMuted)
 				userMuted.isMute = true
 		})
+		socket.on('userUnmuted', (id: string) => {
+			const	userUnmuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
+			if (userUnmuted)
+				userUnmuted.isMute = false
+		})
 	})
 
 	onUnmounted(() => {

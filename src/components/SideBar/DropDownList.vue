@@ -59,6 +59,10 @@
 		socket.emit('muteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
 	}
 
+	const	demuteUser = (user: IUserTag) => {
+		socket.emit('unmuteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
+	}
+
 </script>
 
 <template>
@@ -82,6 +86,7 @@
 				@promote="promoteUser"
 				@demote="demoteUser"
 				@mute="muteUser"
+				@demute="demuteUser"
 			/>
 		</div>
 	</div>
