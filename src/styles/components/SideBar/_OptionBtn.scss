@@ -30,3 +30,35 @@
 		}
 	}
 }
+
+.OptionBtn--mute {
+	background: #FF8A00;
+	.OptionBtn-logo > svg {
+		fill: white;
+	}
+
+	&:hover {
+		background: rgba(255, 138, 0, 0.5) !important;
+		transition: background 150ms ease-in-out;
+		.OptionBtn-logo > svg {
+			transition: fill 150ms ease-in-out;
+			fill: $white-200;
+		}
+	}
+}
+
+.OptionBtn--ban {
+	background: $red;
+	.OptionBtn-logo > svg {
+		fill: white;
+	}
+
+	&:hover {
+		background: rgba(255, 70, 70, 0.5) !important;
+		transition: background 150ms ease-in-out;
+		.OptionBtn-logo > svg {
+			transition: fill 150ms ease-in-out;
+			fill: $white-200;
+		}
+	}
+}

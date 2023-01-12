@@ -111,7 +111,7 @@
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
-			<ConvList v-if="userList && !dataState.error && !dataState.loading" :id="target.id" :role="role"/>
+			<ConvList v-if="userList && !dataState.error && !dataState.loading" :channelId="target.id" :role="role"/>
 		</div>
 		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false" @update="updateChan()"/>
 		<BaseInput

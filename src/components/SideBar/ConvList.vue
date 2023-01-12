@@ -5,7 +5,7 @@
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownList from './DropDownList.vue'
 	import UserTag from './UserTag.vue'
-	import type { User } from './UserTag.vue'
+	import type { IUserTag } from './UserTag.vue'
 	import { logoFriends, logoAdd } from '../../assets/logoSVG'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getUsersInChannel from '@/requests/SideBar/getUsersInChannel'
@@ -31,39 +31,39 @@
 	const	sectionSelected = ref('Users')
 	const	toFind = ref('')
 
-	const	usersInChannel: Ref<UserInChan[]> = ref([])
+	const	usersInChannel: Ref<IUserTag[]> = ref([])
 
-	const	addListData: Ref<User[]> = ref([])
+	const	addListData: Ref<IUserTag[]> = ref([])
 
-	const	bannedListData: Ref<User[]> = ref([
+	const	bannedListData: Ref<IUserTag[]> = ref([
 		{
-			id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: true, isBan: false
 		},
 		{
-			id: '0', username: 'Kingsley', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Kingsley', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: true
 		},
 		{
-			id: '0', username: 'Antoine', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Antoine', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
 		}
 	])
 
-	const	pendingListData: Ref<User[]> = ref([
+	const	pendingListData: Ref<IUserTag[]> = ref([
 		{
-			id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
 		},
 		{
-			id: '0', username: 'Raphael', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Raphael', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
 		},
 		{
-			id: '0', username: 'Lucas', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Lucas', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
 		},
 		{
-			id: '0', username: 'Steve', avatar: 'http://localhost:3000/default.png'
+			id: '0', username: 'Steve', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
 		}
 	])
 
-	const	adminListData: Ref<User[]> = ref([])
-	const	userListData: Ref<User[]> = ref([])
+	const	adminListData: Ref<IUserTag[]> = ref([])
+	const	userListData: Ref<IUserTag[]> = ref([])
 
 	const	bannedList = computed(() => {
 		if (toFind.value)
@@ -104,14 +104,14 @@
 		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.channelId.value, friendId: id } })
 	}
 
-	const	isInChan = (user: User) => {
-		if (bannedListData.value.find((u: User) => u.id === user.id) !== undefined)
+	const	isInChan = (user: IUserTag) => {
+		if (bannedListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
 			return true
-		if (pendingListData.value.find((u: User) => u.id === user.id) !== undefined)
+		if (pendingListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
 			return true
-		if (adminListData.value.find((u: User) => u.id === user.id) !== undefined)
+		if (adminListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
 			return true
-		if (userListData.value.find((u: User) => u.id === user.id) !== undefined)
+		if (userListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
 			return true
 		return false
 	}
@@ -127,24 +127,34 @@
 
 	const	getLists = () => {
 		for (let i = 0; i < usersInChannel.value.length; i++) {
-			const	role = usersInChannel.value[i].role
-			if (role === 'ADMIN' || role === 'OWNER')
-				adminListData.value.push(usersInChannel.value[i].user)
+			const	user = usersInChannel.value[i]
+			if (user.role === 'ADMIN' || user.role === 'OWNER')
+				adminListData.value.push(user)
 			else
-				userListData.value.push(usersInChannel.value[i].user)
+				userListData.value.push(user)
 		}
 	}
 
 	onMounted(async () => {
 		usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
+		console.log(usersInChannel.value)
 		getLists()
-		socket.on('invitationSent', (target: User) => {
+		socket.on('invitationSent', (target: IUserTag) => {
 			pendingListData.value.push(target)
 			addListData.value.splice(addListData.value.indexOf(target), 1)
 		})
-		socket.on('userPromoted', (target: User) => {
+		socket.on('userPromoted', (target: IUserTag) => {
 			adminListData.value.push(target)
 			userListData.value.splice(userListData.value.indexOf(target), 1)
+		})
+		socket.on('userDemoted', (target: IUserTag) => {
+			userListData.value.push(target)
+			adminListData.value.splice(userListData.value.indexOf(target), 1)
+		})
+		socket.on('userMuted', (id: string) => {
+			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
+			if (userMuted)
+				userMuted.isMute = true
 		})
 	})
 

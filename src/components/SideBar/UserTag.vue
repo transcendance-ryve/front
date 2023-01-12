@@ -13,18 +13,21 @@
 		logoStop
 	} from '../../assets/logoSVG'
 
-	export interface User {
+	export interface IUserTag {
 		id: string,
 		username: string,
-		avatar: string
+		avatar: string,
+		role: string,
+		isMute: boolean,
+		isBan: boolean,
 	}
 
 	export interface Props {
 		section: string
-		user: User
+		user: IUserTag
 	}
 
-	export type emits = 'See' | 'Add' | 'Delete' | 'Mute' | 'Promote' | 'Demote' | 'Ban'
+	export type emits = 'see' | 'add' | 'delete' | 'mute' | 'promote' | 'demote' | 'ban'
 
 	const props = withDefaults(defineProps<Props>(), {
 		section: 'Invitees',
@@ -36,7 +39,7 @@
 		if (p.section.value == 'onlySee')
 			return [
 				{
-					name: 'See',
+					name: 'see',
 					logo: logoEye,
 					color: '#0177FB',
 					toolTip: 'View profile'
@@ -45,13 +48,13 @@
 		else if (p.section.value == 'Invitees' || p.section.value == 'delete')
 			return [
 				{
-					name: 'See',
+					name: 'see',
 					logo: logoEye,
 					color: '#0177FB',
 					toolTip: 'View profile'
 				},
 				{
-					name: 'Delete',
+					name: 'delete',
 					logo: logoTrash,
 					color: '#E32F2F',
 					toolTip: 'Delete'
@@ -60,13 +63,13 @@
 		else if (p.section.value == 'Add')
 			return [
 				{
-					name: 'See',
+					name: 'see',
 					logo: logoEye,
 					color: '#0177FB',
 					toolTip: 'View profile'
 				},
 				{
-					name: 'Add',
+					name: 'add',
 					logo: logoAdd,
 					color: '#168F41',
 					toolTip: 'Add user'
@@ -75,60 +78,60 @@
 		else if (p.section.value == 'allPrivileges')
 			return [
 				{
-					name: 'See',
+					name: 'see',
 					logo: logoEye,
 					color: '#0177FB',
 					toolTip: 'View profile'
 				},
 				{
-					name: 'Mute',
+					name: p.user.value.isMute ? 'demute' : 'mute',
 					logo: logoMute,
 					color: '#FF8A00',
-					toolTip: 'Mute'
+					toolTip: p.user.value.isMute ? 'Demute' : 'Mute'
 				},
 				{
-					name: 'Promote',
+					name: 'promote',
 					logo: logoPromote,
 					color: '#168F41',
 					toolTip: 'Promote'
 				},
 				{
-					name: 'Ban',
+					name: p.user.value.isBan ? 'deban' : 'ban',
 					logo: logoStop,
 					color: '#E32F2F',
-					toolTip: 'Ban'
+					toolTip: p.user.value.isBan ? 'Deban' : 'Ban',
 				},
 			]
 		else if (p.section.value == 'allPrivilegesA')
 			return [
 				{
-					name: 'See',
+					name: 'see',
 					logo: logoEye,
 					color: '#0177FB',
 					toolTip: 'View profile'
 				},
 				{
-					name: 'Mute',
+					name: p.user.value.isMute ? 'demute' : 'mute',
 					logo: logoMute,
 					color: '#FF8A00',
-					toolTip: 'Mute'
+					toolTip: p.user.value.isMute ? 'Demute' : 'Mute'
 				},
 				{
-					name: 'Demote',
+					name: 'demote',
 					logo: logoDemote,
 					color: '#E32F2F',
 					toolTip: 'Demote'
 				},
 				{
-					name: 'Ban',
+					name: p.user.value.isBan ? 'deban' : 'ban',
 					logo: logoStop,
 					color: '#E32F2F',
-					toolTip: 'Ban'
+					toolTip: p.user.value.isBan ? 'Deban' : 'Ban',
 				},
 			]
 	})
 
-	const	emit = defineEmits(['See', 'Add', 'Delete', 'Mute', 'Promote', 'Demote', 'Ban'])
+	const	emit = defineEmits(['see', 'add', 'delete', 'mute', 'promote', 'demote', 'ban'])
 
 	const	manageOptions = (optionName: emits) => {
 		// if (optionName == 'Add')
@@ -158,6 +161,10 @@
 		<div class="UserTag-options">
 			<OptionBtn
 				v-for="(option, index) in options"
+				:class="{
+					'OptionBtn--mute': option.name === 'demute',
+					'OptionBtn--ban': option.name === 'deban'
+				}"
 				:key="index"
 				:logo="option.logo"
 				:hoverColor="option.color"

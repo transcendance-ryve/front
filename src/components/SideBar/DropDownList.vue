@@ -3,13 +3,13 @@
 	import { ref, toRefs } from 'vue'
 	import UserTag from './UserTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import type { User } from './UserTag.vue'
+	import type { IUserTag } from './UserTag.vue'
 	import { logoListArrow } from '../../assets/logoSVG'
 
 	export interface Props {
 		channelId: string
 		label: string
-		users: User[]
+		users: IUserTag[]
 		owner?: boolean
 		admin?: boolean
 		open?: boolean
@@ -49,6 +49,14 @@
 		socket.emit('promoteUser', { roleInfo: { userId: id, channelId: p.channelId.value } })
 	}
 
+	const	demoteUser = (id: string) => {
+		socket.emit('demoteUser', { roleInfo: { userId: id, channelId: p.channelId.value } })
+	}
+
+	const	muteUser = (id: string) => {
+		socket.emit('muteUser', { muteInfo: { channelId: p.channelId.value, targetId: id, action: 'MUTE' } })
+	}
+
 </script>
 
 <template>
@@ -69,7 +77,9 @@
 				:key="index"
 				:section="userTagType()"
 				:user="user"
-				@Promote="promoteUser"
+				@promote="promoteUser"
+				@demote="demoteUser"
+				@mute="muteUser"
 			/>
 		</div>
 	</div>

@@ -30,8 +30,12 @@
 	socket.on('roomDeclined', (res: any) => { alert('Room declined'); console.log('Room declined', res) })
 	socket.on('DMChan', (res: any) => { console.log('DM chan', res) })
 	socket.on('joinRoomFailed', (res: any) => { alert('Join room failed'); console.log('Join room failed', res) })
-	socket.on('userPromoted', (res: any) => { console.log('Promote user', res) })
-	socket.on('promoteUserFailed', (res: any) => { console.log('promoteUser failed', res) })
+	socket.on('userPromoted', (res: any) => { console.log('user promoted', res) })
+	socket.on('promoteUserFailed', (res: any) => { console.log('promote user failed', res) })
+	socket.on('userDemoted', (res: any) => { console.log('user demoted', res) })
+	socket.on('demoteUserFailed', (res: any) => { console.log('demote user failed', res) })
+	socket.on('userMuted', (res: any) => { console.log('user muted', res) })
+	socket.on('muteUserFailed', (res: any) => { console.log('mute user failed', res) })
 
 </script>
 
