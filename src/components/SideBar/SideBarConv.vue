@@ -15,6 +15,7 @@
 	import getMessages from '@/requests/SideBar/getMessages'
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
+	import type { IUserTag } from './UserTag.vue'
 
 
 	export interface Target {
@@ -82,10 +83,27 @@
 			messages.value.push({ content: msg })
 		})
 		socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
+		socket.on('userPromoted', (target: IUserTag) => {
+			console.log('user promoted')
+			if (target.id === userStore.me.id) {
+				role.value = 'ADMIN'
+				userList.value = false
+				settings.value = true
+			}
+		})
+		socket.on('userDemoted', (target: IUserTag) => {
+			if (target.id === userStore.me.id) {
+				role.value = 'MEMBER'
+				settings.value = false
+				userList.value = true
+			}
+		})
 	})
 
 	onUnmounted(() => {
 		socket.off('incomingMessage')
+		socket.off('userPromoted')
+		socket.off('userDemoted')
 	})
 
 </script>

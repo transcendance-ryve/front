@@ -151,11 +151,13 @@
 			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('userPromoted', (target: IUserTag) => {
+			console.log('user promoted')
 			if (!adminListData.value.find((user: IUserTag) => user.id === target.id))
 				adminListData.value.push(target)
 			userListData.value.splice(userListData.value.indexOf(target), 1)
 		})
 		socket.on('userDemoted', (target: IUserTag) => {
+			console.log('user demoted')
 			if (!userListData.value.find((user: IUserTag) => user.id === target.id))
 				userListData.value.push(target)
 			adminListData.value.splice(userListData.value.indexOf(target), 1)
