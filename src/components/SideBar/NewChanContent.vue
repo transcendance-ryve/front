@@ -5,7 +5,7 @@
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
-	import type { User } from './UserTag.vue'
+	import type { IUserTag } from './UserTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
@@ -24,14 +24,14 @@
 
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
-	const	inviteesList: Ref<User[]> = ref([])
-	const	addList: Ref<User[]> = ref([])
+	const	inviteesList: Ref<IUserTag[]> = ref([])
+	const	addList: Ref<IUserTag[]> = ref([])
 	const	dataState: axiosState = reactive({
 		error: null,
 		loading: false
 	})
 
-	const	isInvited = (user: User) => {
+	const	isInvited = (user: IUserTag) => {
 		for (let i = 0; i < inviteesList.value.length; i++)
 			if (inviteesList.value[i].id === user.id)
 				return true
@@ -66,7 +66,7 @@
 			return inviteesList.value
 	})
 
-	const	addUser = (user: User) => {
+	const	addUser = (user: IUserTag) => {
 		inviteesList.value.unshift(user)
 		p.invitees.value.unshift(user.id)
 		addList.value.splice(addList.value.indexOf(user), 1)
