@@ -39,6 +39,8 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.friendsState = 1
 		state.channelsState = 1
 		state.notifsState = 1
+		conv.open = false
+		newChan.value = false
 	}
 
 	return {

@@ -199,41 +199,62 @@
 		}
 	}
 
+	const	unshiftTag = (tag: Partial<ContentData>) => {
+		if (contentData.value.find((item: Partial<ContentData>) => item.id === tag.id) === undefined)
+			contentData.value.unshift(tag)
+	}
+
+	const	removeTag = (tag: Partial<ContentData>) => {
+		contentData.value = contentData.value.filter(item => item.id !== tag.id)
+	}
+
 	onMounted(() => {
 		getRawData()
 		socket.on('friend_request', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
-				contentData.value.unshift(sender)
+				unshiftTag(sender)
+			else if (sbStore.state.section === 1 && sbStore.state.notifsState === 2)
+				removeTag(sender)
 		})
 		socket.on('friend_request_submitted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
-				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
+				removeTag(receiver)
 		})
-		socket.on('friend_accepted', (sender: Partial<ContentData>) => {
+		socket.on('friend_accepted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				contentData.value.unshift(sender)
+				unshiftTag(receiver)
 		})
-		socket.on('friend_accepted_submitted', (receiver: Partial<ContentData>) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2) {
-				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
-			}
-		})
-		socket.on('friend_declined_submitted', (receiver: Partial<ContentData>) => {
+		socket.on('friend_accepted_submitted', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
-				contentData.value = contentData.value.filter(item => item.id !== receiver.id)
+				removeTag(sender)
+			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+				unshiftTag(sender)
+		})
+		socket.on('friend_declined_submitted', (sender: Partial<ContentData>) => {
+			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+				removeTag(sender)
+			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+				unshiftTag(sender)
+		})
+		socket.on('friend_removed', (sender: Partial<ContentData>) => {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+				removeTag(sender)
+		})
+		socket.on('friend_removed_submitted', (receiver: Partial<ContentData>) => {
+			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+				removeTag(receiver)
 		})
 		socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
-			console.log('in invit', sender)
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-				contentData.value.unshift(sender)
+				unshiftTag(sender)
 		})
 		socket.on('invitationAccepted', (id: string) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-				contentData.value = contentData.value.filter(item => item.id !== id)
+				removeTag({ id })
 		})
 		socket.on('invitationDeclined', (id: string) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-				contentData.value = contentData.value.filter(item => item.id !== id)
+				removeTag({ id })
 		})
 		socket.on('roomJoined', (id: string) => {
 			sbStore.openConv('Channel', id)
@@ -246,6 +267,8 @@
 		socket.off('friend_accepted')
 		socket.off('friend_accepted_submitted')
 		socket.off('friend_declined_submitted')
+		socket.off('friend_removed')
+		socket.off('friend_removed_submitted')
 		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')

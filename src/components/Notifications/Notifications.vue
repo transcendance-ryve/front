@@ -12,11 +12,13 @@
 	socket.emit('ping', () => { console.log('ping emit') })
 
 	socket.on('friend_request', (res: any) => { alert('Friend request'); console.log('friend request', res) })
-	socket.on('friend_request_submitted', (res: any) => { alert('Friend request submitted'); console.log('friend request submitted', res) })
-	socket.on('friend_accepted', (res: any) => { alert('Friend accepted'); console.log('friend accepted', res) })
-	socket.on('friend_accepted_submitted', (res: any) => { alert('Friend accepted submitted'); console.log('friend accepted submitted', res) })
-	socket.on('friend_declined', (res: any) => { alert('Friend declined'); console.log('friend declined', res) })
-	socket.on('friend_declined_submitted', (res: any) => { alert('Friend declined submitted'); console.log('friend declined submitted', res) })
+	socket.on('friend_request_submitted', (res: any) => { console.log('friend request submitted', res) })
+	socket.on('friend_accepted', (res: any) => { console.log('friend accepted', res) })
+	socket.on('friend_accepted_submitted', (res: any) => { console.log('friend accepted submitted', res) })
+	socket.on('friend_declined', (res: any) => { console.log('friend declined', res) })
+	socket.on('friend_declined_submitted', (res: any) => { console.log('friend declined submitted', res) })
+	socket.on('friend_removed', (res: any) => { console.log('friend removed', res) })
+	socket.on('friend_removed_submitted', (res: any) => { console.log('friend removed submitted', res) })
 
 
 	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })

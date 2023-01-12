@@ -57,23 +57,27 @@
 			if (receiver.id === data.user.id)
 				data.type = 4
 		})
-		socket.on('friend_accepted', (sender: any) => {
-			console.log('change type', data.user.id, sender.id)
-			if (sender.id === data.user.id)
-				data.type = 2
-		})
-		socket.on('friend_accepted_submitted', (receiver: any) => {
-			console.log('change type', data.user.id, receiver.id)
+		socket.on('friend_accepted', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 2
 		})
-		socket.on('friend_declined', (sender: any) => {
-			console.log('change type', data.user.id, sender.id)
+		socket.on('friend_accepted_submitted', (sender: any) => {
+			if (sender.id === data.user.id)
+				data.type = 2
+		})
+		socket.on('friend_declined', (receiver: any) => {
+			if (receiver.id === data.user.id)
+				data.type = 3
+		})
+		socket.on('friend_declined_submitted', (sender: any) => {
 			if (sender.id === data.user.id)
 				data.type = 3
 		})
-		socket.on('friend_declined_submitted', (receiver: any) => {
-			console.log('change type', data.user.id, receiver.id)
+		socket.on('friend_removed', (sender: any) => {
+			if (sender.id === data.user.id)
+				data.type = 3
+		})
+		socket.on('friend_removed_submitted', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 3
 		})
@@ -86,6 +90,8 @@
 		socket.off('friend_accepted_submitted')
 		socket.off('friend_declined')
 		socket.off('friend_declined_submitted')
+		socket.off('friend_removed')
+		socket.off('friend_removed_submitted')
 	})
 
 </script>
@@ -97,6 +103,7 @@
 			:type="data.type"
 			:user="data.user"
 			@message="sbStore.openConv('Friend', data.user.id)"
+			@delete="socket.emit('remove_friend', { friendId: data.user.id })"
 			@add="socket.emit('add_friend', { friendId: data.user.id })"
 			@accept="socket.emit('accept_friend', { friendId: data.user.id })"
 			@refuse="socket.emit('decline_friend', { friendId: data.user.id })"
