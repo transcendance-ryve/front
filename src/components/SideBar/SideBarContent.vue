@@ -256,8 +256,8 @@
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				removeTag({ id })
 		})
-		socket.on('roomJoined', (id: string) => {
-			console.log('room Joined in content')
+		socket.on('joinRoomSuccess', (id: string) => {
+			sbStore.openConv('Channel', id)
 		})
 	})
 
@@ -272,7 +272,7 @@
 		socket.off('chanInvitationReceived')
 		socket.off('invitationAccepted')
 		socket.off('invitationDeclined')
-		socket.off('roomJoined')
+		socket.off('joinRoomSuccess')
 	})
 
 </script>
