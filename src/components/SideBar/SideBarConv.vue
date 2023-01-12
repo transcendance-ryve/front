@@ -68,7 +68,7 @@
 		const	input: HTMLElement = document.getElementById('WriteMessage')?.children[0] as HTMLElement
 		input.focus()
 		if (sbStore.conv.type === 'Friend') {
-			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)
+			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)			
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
 			socket.once('DMChan', (id: string) => { convId.value = id })
 		}
@@ -79,15 +79,13 @@
 			socket.once('role', (res: string) => role.value = res)
 		}
 		socket.on('incomingMessage', (msg: any) => {
-			console.log('incoming message', msg)
 			messages.value.push({ content: msg })
 		})
-		socket.on('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
+		socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 
 	onUnmounted(() => {
 		socket.off('incomingMessage')
-		socket.off('roomLeft')
 	})
 
 </script>

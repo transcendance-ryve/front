@@ -5,7 +5,7 @@
 	import OptionBtn from './OptionBtn.vue'
 	import {
 		logoEye,
-		logoMute,
+		logoStop,
 		logoTrash,
 		logoPlayCircle,
 		logoQuit,
@@ -32,10 +32,10 @@
 
 		},
 		{
-			name: 'Mute',
-			logo: logoMute,
+			name: 'Block',
+			logo: logoStop,
 			color: '#FF8A00',
-			toolTip: 'Mute'
+			toolTip: 'Block'
 		},
 		{
 			name: 'Delete',
@@ -103,6 +103,7 @@
 							:logo="option.logo"
 							:hoverColor="option.color"
 							:toolTip="option.toolTip"
+							@click="$emit(option.name)"
 						/>
 					</div>
 					<span class="Infos-CreateDate" v-else>Created 23 July 2015</span>

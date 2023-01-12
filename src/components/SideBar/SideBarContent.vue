@@ -130,7 +130,6 @@
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1) {
 				fetchData = await getMyChannels(dataState)
-				console.log('Channels', fetchData)
 			}
 			else
 				// fetchData = data4
@@ -256,6 +255,9 @@
 		socket.on('invitationDeclined', (id: string) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				removeTag({ id })
+		})
+		socket.on('roomJoined', (id: string) => {
+			console.log('room Joined in content')
 		})
 	})
 

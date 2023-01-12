@@ -9,7 +9,8 @@
 	import { logoFriends, logoAdd } from '../../assets/logoSVG'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getUsersInChannel from '@/requests/SideBar/getUsersInChannel'
-	import type { UserInChan } from '@/requests/SideBar/getUsersInChannel'
+	import getBannedInChannels from '@/requests/SideBar/getBannedInChannel'
+	import getPendingInChannels from '@/requests/SideBar/getPendingInChannel'
 	import type { axiosState } from '@/requests/useAxios'
 	import { useUserStore } from '@/stores/UserStore'
 
@@ -37,20 +38,7 @@
 
 	const	bannedListData: Ref<IUserTag[]> = ref([])
 
-	const	pendingListData: Ref<IUserTag[]> = ref([
-		{
-			id: '0', username: 'Adrien', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
-		},
-		{
-			id: '0', username: 'Raphael', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
-		},
-		{
-			id: '0', username: 'Lucas', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
-		},
-		{
-			id: '0', username: 'Steve', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
-		}
-	])
+	const	pendingListData: Ref<IUserTag[]> = ref([])
 
 	const	adminListData: Ref<IUserTag[]> = ref([])
 	const	userListData: Ref<IUserTag[]> = ref([])
@@ -114,8 +102,7 @@
 			})
 		}
 		else {
-			usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
-			getLists()
+			await getDatas()
 		}
 	})
 
@@ -138,13 +125,30 @@
 		}
 	}
 
-	onMounted(async () => {
+	const	getDatas = async () => {
 		usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
-		console.log(usersInChannel.value)
+		bannedListData.value = await getBannedInChannels(p.channelId.value, dataState)
+		pendingListData.value = await getPendingInChannels(p.channelId.value, dataState)
 		getLists()
+	}
+
+	onMounted(async () => {
+		getDatas()
+		socket.on('newUserInRoom', (target: IUserTag) => {
+			pendingListData.value.splice(pendingListData.value.indexOf(target), 1)
+			userListData.value.push(target)
+		})
+		socket.on('userLeftTheRoom', (id: string) => {
+			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== id)
+			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== id)
+		})
 		socket.on('invitationSent', (target: IUserTag) => {
 			pendingListData.value.push(target)
 			addListData.value.splice(addListData.value.indexOf(target), 1)
+		})
+		socket.on('roomDeclined', (target: any) => {
+			console.log()
+			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('userPromoted', (target: IUserTag) => {
 			adminListData.value.push(target)
@@ -178,12 +182,16 @@
 	})
 
 	onUnmounted(() => {
+		socket.off('newUserInRoom')
+		socket.off('userLeftTheRoom')
 		socket.off('invitationSent')
+		socket.off('roomDeclined')
 		socket.off('userPromoted')
 		socket.off('userDemoted')
 		socket.off('userMuted')
 		socket.off('userUnmuted')
-
+		socket.off('userBanned')
+		socket.off('userUnbanned')
 	})
 
 </script>
