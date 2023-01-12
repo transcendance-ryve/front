@@ -54,14 +54,15 @@
 	const	joinChan = () => {
 		if (p.data.value.status === 'PROTECTED' && !password.value)
 			alert('Empty password')
-		socket.emit('joinRoom', {
-			joinInfo: {
-				channelId: p.data.value.id,
-				name: p.data.value.name,
-				status: p.data.value.status,
-				password: password.value
-			}
-		})
+		else
+			socket.emit('joinRoom', {
+				joinInfo: {
+					channelId: p.data.value.id,
+					name: p.data.value.name,
+					status: p.data.value.status,
+					password: password.value
+				}
+			})
 	}
 
 </script>

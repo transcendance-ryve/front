@@ -248,8 +248,6 @@
 				unshiftTag(sender)
 		})
 		socket.on('invitationAccepted', (id: string) => {
-			// if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-			// 	removeTag({ id })
 			sbStore.openConv('Channel', id)
 		})
 		socket.on('invitationDeclined', (id: string) => {
