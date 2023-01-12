@@ -68,9 +68,15 @@
 	}
 
 	const	emit = defineEmits(['update', 'close'])
-	const	useStore = useUserStore()
+	const	userStore = useUserStore()
+	let		listener: any
+
 	onMounted(() => {
-		useStore.socket.once('roomEdited', () => emit('update'))
+		listener = userStore.socket.once('roomEdited', () => emit('update'))
+	})
+
+	onUnmounted(() => {
+		userStore.socket.off(listener)
 	})
 
 </script>

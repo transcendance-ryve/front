@@ -207,70 +207,72 @@
 		contentData.value = contentData.value.filter(item => item.id !== tag.id)
 	}
 
+	const	listeners: any[] = []
 	onMounted(() => {
 		getRawData()
-		socket.on('friend_request', (sender: Partial<ContentData>) => {
+		listeners.push(socket.on('friend_request', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				unshiftTag(sender)
 			else if (sbStore.state.section === 1 && sbStore.state.notifsState === 2)
 				removeTag(sender)
-		})
-		socket.on('friend_request_submitted', (receiver: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_request_submitted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
 				removeTag(receiver)
-		})
-		socket.on('friend_accepted', (receiver: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_accepted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
 				unshiftTag(receiver)
-		})
-		socket.on('friend_accepted_submitted', (sender: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_accepted_submitted', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				removeTag(sender)
 			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
 				unshiftTag(sender)
-		})
-		socket.on('friend_declined_submitted', (sender: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_declined_submitted', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				removeTag(sender)
 			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
 				unshiftTag(sender)
-		})
-		socket.on('friend_removed', (sender: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_removed', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
 				removeTag(sender)
-		})
-		socket.on('friend_removed_submitted', (receiver: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('friend_removed_submitted', (receiver: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
 				removeTag(receiver)
-		})
-		socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
+		}))
+		listeners.push(socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				unshiftTag(sender)
-		})
-		socket.on('invitationAccepted', (id: string) => {
+		}))
+		listeners.push(socket.on('invitationAccepted', (id: string) => {
 			sbStore.openConv('Channel', id)
-		})
-		socket.on('invitationDeclined', (id: string) => {
+		}))
+		listeners.push(socket.on('invitationDeclined', (id: string) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				removeTag({ id })
-		})
-		socket.on('joinRoomSuccess', (id: string) => {
+		}))
+		listeners.push(socket.on('joinRoomSuccess', (id: string) => {
 			sbStore.openConv('Channel', id)
-		})
+		}))
 	})
 
 	onUnmounted(() => {
-		socket.off('friend_request')
-		socket.off('friend_request_submitted')
-		socket.off('friend_accepted')
-		socket.off('friend_accepted_submitted')
-		socket.off('friend_declined_submitted')
-		socket.off('friend_removed')
-		socket.off('friend_removed_submitted')
-		socket.off('chanInvitationReceived')
-		socket.off('invitationAccepted')
-		socket.off('invitationDeclined')
-		socket.off('joinRoomSuccess')
+		// socket.off('friend_request')
+		// socket.off('friend_request_submitted')
+		// socket.off('friend_accepted')
+		// socket.off('friend_accepted_submitted')
+		// socket.off('friend_declined_submitted')
+		// socket.off('friend_removed')
+		// socket.off('friend_removed_submitted')
+		// socket.off('chanInvitationReceived')
+		// socket.off('invitationAccepted')
+		// socket.off('invitationDeclined')
+		// socket.off('joinRoomSuccess')
+		listeners.forEach(listener => socket.off(listener))
 	})
 
 </script>

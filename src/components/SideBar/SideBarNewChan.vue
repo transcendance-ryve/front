@@ -51,15 +51,16 @@
 			createRoom(form)
 	}
 
+	let	listener: any
 	onMounted(() => {
-		socket.on('roomCreated', (channelId: string) => {
+		listener = socket.on('roomCreated', (channelId: string) => {
 			sbStore.newChan = false;
 			sbStore.openConv('Channel', channelId)
 		})
 	})
 
 	onUnmounted(() => {
-		socket.off('roomCreated')
+		socket.off(listener)
 	})
 
 </script>

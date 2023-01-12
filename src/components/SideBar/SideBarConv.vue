@@ -72,13 +72,13 @@
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)			
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
-			socket.once('DMChan', (id: string) => { convId.value = id })
+			listeners.push(socket.once('DMChan', (id: string) => { convId.value = id }))
 		}
 		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
 			convId.value = target.value.id
 			socket.emit('getRole', { channelId: convId.value })
-			socket.once('role', (res: string) => role.value = res)
+			listeners.push(socket.once('role', (res: string) => role.value = res))
 			listeners.push(socket.on('userPromoted', (target: IUserTag) => {
 				if (userStore.me.id === target.id) {
 					userList.value = false
@@ -95,7 +95,7 @@
 		listeners.push(socket.on('incomingMessage', (msg: any) => {
 			messages.value.push({ content: msg })
 		}))
-		socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
+		listeners.push(socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 }))
 	})
 
 	onUnmounted(() => {

@@ -47,51 +47,53 @@
 
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
+	const	listeners: any[] = []
 
 	onMounted(() => {
-		socket.on('friend_request', (sender: any) => {
+		listeners.push(socket.on('friend_request', (sender: any) => {
 			if (sender.id === data.user.id)
 				data.type = 5
-		})
-		socket.on('friend_request_submitted', (receiver: any) => {
+		}))
+		listeners.push(socket.on('friend_request_submitted', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 4
-		})
-		socket.on('friend_accepted', (receiver: any) => {
+		}))
+		listeners.push(socket.on('friend_accepted', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 2
-		})
-		socket.on('friend_accepted_submitted', (sender: any) => {
+		}))
+		listeners.push(socket.on('friend_accepted_submitted', (sender: any) => {
 			if (sender.id === data.user.id)
 				data.type = 2
-		})
-		socket.on('friend_declined', (receiver: any) => {
+		}))
+		listeners.push(socket.on('friend_declined', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 3
-		})
-		socket.on('friend_declined_submitted', (sender: any) => {
+		}))
+		listeners.push(socket.on('friend_declined_submitted', (sender: any) => {
 			if (sender.id === data.user.id)
 				data.type = 3
-		})
-		socket.on('friend_removed', (sender: any) => {
+		}))
+		listeners.push(socket.on('friend_removed', (sender: any) => {
 			if (sender.id === data.user.id)
 				data.type = 3
-		})
-		socket.on('friend_removed_submitted', (receiver: any) => {
+		}))
+		listeners.push(socket.on('friend_removed_submitted', (receiver: any) => {
 			if (receiver.id === data.user.id)
 				data.type = 3
-		})
+		}))
 	})
 
 	onUnmounted(() => {
-		socket.off('friend_request')
-		socket.off('friend_request_submitted')
-		socket.off('friend_accepted')
-		socket.off('friend_accepted_submitted')
-		socket.off('friend_declined')
-		socket.off('friend_declined_submitted')
-		socket.off('friend_removed')
-		socket.off('friend_removed_submitted')
+		// socket.off('friend_request')
+		// socket.off('friend_request_submitted')
+		// socket.off('friend_accepted')
+		// socket.off('friend_accepted_submitted')
+		// socket.off('friend_declined')
+		// socket.off('friend_declined_submitted')
+		// socket.off('friend_removed')
+		// socket.off('friend_removed_submitted')
+		listeners.forEach(listener => socket.off(listener))
 	})
 
 </script>

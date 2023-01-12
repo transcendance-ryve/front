@@ -161,11 +161,11 @@
 				userListData.value.push(target)
 			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== target.id)
 		}))
-		socket.on('userMuted', (id: string) => {
+		listeners.push(socket.on('userMuted', (id: string) => {
 			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
 			if (userMuted)
 				userMuted.isMute = true
-		})
+		}))
 		listeners.push(socket.on('userUnmuted', (id: string) => {
 			const	userUnmuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
 			if (userUnmuted)
