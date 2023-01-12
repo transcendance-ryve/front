@@ -160,7 +160,7 @@
 			console.log('user demoted')
 			if (!userListData.value.find((user: IUserTag) => user.id === target.id))
 				userListData.value.push(target)
-			adminListData.value.splice(userListData.value.indexOf(target), 1)
+			adminListData.value.splice(adminListData.value.indexOf(target), 1)
 		})
 		socket.on('userMuted', (id: string) => {
 			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
