@@ -5,6 +5,7 @@
 	import { useUserStore } from '@/stores/UserStore'
 	import type { IUserTag } from './UserTag.vue'
 	import { logoListArrow } from '../../assets/logoSVG'
+	import { profileRedirect } from '@/router/index'
 
 	export interface Props {
 		channelId: string
@@ -95,6 +96,7 @@
 				@demute="demuteUser"
 				@ban="banUser"
 				@deban="debanUser"
+				@see="(user) => profileRedirect(user.id)"
 			/>
 		</div>
 	</div>

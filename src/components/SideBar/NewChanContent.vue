@@ -9,6 +9,7 @@
 	import { useUserStore } from '@/stores/UserStore'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
+	import { profileRedirect } from '@/router/index'
 
 	export interface Props {
 		protectedStatus: boolean,
@@ -122,6 +123,7 @@
 				:user="user"
 				@add="addUser"
 				@delete="deleteUser(index)"
+				@see="(user) => profileRedirect(user.id)"
 			/>
 			<span
 				class="Content-noResult"

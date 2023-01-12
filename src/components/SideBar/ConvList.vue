@@ -13,6 +13,7 @@
 	import getPendingInChannels from '@/requests/SideBar/getPendingInChannel'
 	import type { axiosState } from '@/requests/useAxios'
 	import { useUserStore } from '@/stores/UserStore'
+	import { profileRedirect } from '@/router/index'
 
 	export interface Props {
 		channelId: string
@@ -280,6 +281,7 @@
 					:section="sectionSelected"
 					:user="user"
 					@add="addUser"
+					@see="user => profileRedirect(user.id)"
 				/>
 				<span
 					class="Content-noResult"
