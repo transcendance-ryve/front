@@ -23,6 +23,8 @@
 
 	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })
 	socket.on('chanInvitationReceived', (res: any) => { alert('chan invitation received'), console.log('chan Invitation received', res) })
+	socket.on('invitationAccepted', (res: any) => { console.log('invitation accepted', res) })
+	socket.on('invitationDeclined', (res: any) => { console.log('invitation declined', res) })
 	socket.on('inviteToRoomFailed', (res: any) => { alert('Invite to room failed'), console.log('Invite to room failed', res) })
 	socket.on('createRoomFailed', (res: any) => { alert('Error cannot create this channel'), console.log('Error cannot create channel', res) })
 	socket.on('acceptInvitationFailed', (res: any) => { alert('Accept invitation failed'), console.log('message room failed', res) })
