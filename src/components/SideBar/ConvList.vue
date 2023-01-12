@@ -133,77 +133,59 @@
 		getLists()
 	}
 
+	const	listeners: any[] = []
 	onMounted(async () => {
 		getDatas()
-		socket.on('newUserInRoom', (target: IUserTag) => {
+		listeners.push(socket.on('newUserInRoom', (target: IUserTag) => {
 			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
 			userListData.value.push(target)
-		})
-		socket.on('userLeftTheRoom', (id: string) => {
+		}))
+		listeners.push(socket.on('userLeftTheRoom', (id: string) => {
 			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== id)
 			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== id)
-		})
-		socket.on('invitationSent', (target: IUserTag) => {
+		}))
+		listeners.push(socket.on('invitationSent', (target: IUserTag) => {
 			pendingListData.value.push(target)
 			addListData.value = addListData.value.filter((u: IUserTag) => u.id !== target.id)
-		})
-		socket.on('roomDeclined', (target: any) => {
+		}))
+		listeners.push(socket.on('roomDeclined', (target: any) => {
 			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
-		})
-		socket.on('userPromoted', (target: IUserTag) => {
-			if (userStore.me.id === target.id) {
-				// console.log('i am promoted')
-				// socket.off('userPromoted')
-				// roleUpdated.value = true
-			}
+		}))
+		listeners.push(socket.on('userPromoted', (target: IUserTag) => {
 			if (!adminListData.value.find((user: IUserTag) => user.id === target.id))
 				adminListData.value.push(target)
 			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
-		})
-		socket.on('userDemoted', (target: IUserTag) => {
-			if (userStore.me.id === target.id) {
-				// console.log('i am demoted')
-				// socket.off('userDemoted')
-				// roleUpdated.value = true
-			}
+		}))
+		listeners.push(socket.on('userDemoted', (target: IUserTag) => {
 			if (!userListData.value.find((user: IUserTag) => user.id === target.id))
 				userListData.value.push(target)
 			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== target.id)
-		})
+		}))
 		socket.on('userMuted', (id: string) => {
 			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
 			if (userMuted)
 				userMuted.isMute = true
 		})
-		socket.on('userUnmuted', (id: string) => {
+		listeners.push(socket.on('userUnmuted', (id: string) => {
 			const	userUnmuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
 			if (userUnmuted)
 				userUnmuted.isMute = false
-		})
-		socket.on('userBanned', (target: IUserTag) => {
+		}))
+		listeners.push(socket.on('userBanned', (target: IUserTag) => {
 			const	userBanned: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === target.id)
 			if (userBanned) {
 				userBanned.isBan = true
 				bannedListData.value.push(target)
 				userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
 			}
-		})
-		socket.on('userUnbanned', (target: IUserTag) => {
+		}))
+		listeners.push(socket.on('userUnbanned', (target: IUserTag) => {
 			bannedListData.value = bannedListData.value.filter((u: IUserTag) => u.id !== target.id)
-		})
+		}))
 	})
 
 	onUnmounted(() => {
-		socket.off('newUserInRoom')
-		socket.off('userLeftTheRoom')
-		socket.off('invitationSent')
-		socket.off('roomDeclined')
-		socket.off('userPromoted')
-		socket.off('userDemoted')
-		socket.off('userMuted')
-		socket.off('userUnmuted')
-		socket.off('userBanned')
-		socket.off('userUnbanned')
+		listeners.forEach(listener => socket.off(listener))
 	})
 
 </script>

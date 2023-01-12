@@ -65,6 +65,7 @@
 		settings.value = false
 	}
 
+	const	listeners: any[] = []
 	onMounted(async () => {
 		const	input: HTMLElement = document.getElementById('WriteMessage')?.children[0] as HTMLElement
 		input.focus()
@@ -78,15 +79,27 @@
 			convId.value = target.value.id
 			socket.emit('getRole', { channelId: convId.value })
 			socket.once('role', (res: string) => role.value = res)
+			listeners.push(socket.on('userPromoted', (target: IUserTag) => {
+				if (userStore.me.id === target.id) {
+					userList.value = false
+					settings.value = true
+				}
+			}))
+			listeners.push(socket.on('userDemoted', (target: IUserTag) => {
+				if (userStore.me.id === target.id) {
+					settings.value = false
+					userList.value = true
+				}
+			}))
 		}
-		socket.on('incomingMessage', (msg: any) => {
+		listeners.push(socket.on('incomingMessage', (msg: any) => {
 			messages.value.push({ content: msg })
-		})
+		}))
 		socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
 	})
 
 	onUnmounted(() => {
-		socket.off('incomingMessage')
+		listeners.forEach(listener => socket.off(listener))
 	})
 
 </script>
