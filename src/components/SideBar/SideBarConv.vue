@@ -46,8 +46,8 @@
 	const	settings = ref(false)
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-	let		convId: Ref<string> = ref('')
-	let		role: Ref<string> = ref('')
+	const	convId: Ref<string> = ref('')
+	const	role: Ref<string> = ref('')
 
 	watch(convId, async (newVal: string) => {
 		dataState.value = await getMessages(newVal, messages)
@@ -83,27 +83,10 @@
 			messages.value.push({ content: msg })
 		})
 		socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 })
-		socket.on('userPromoted', (target: IUserTag) => {
-			console.log('user promoted')
-			if (target.id === userStore.me.id) {
-				role.value = 'ADMIN'
-				userList.value = false
-				settings.value = true
-			}
-		})
-		socket.on('userDemoted', (target: IUserTag) => {
-			if (target.id === userStore.me.id) {
-				role.value = 'MEMBER'
-				settings.value = false
-				userList.value = true
-			}
-		})
 	})
 
 	onUnmounted(() => {
 		socket.off('incomingMessage')
-		socket.off('userPromoted')
-		socket.off('userDemoted')
 	})
 
 </script>
@@ -127,9 +110,18 @@
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
-			<ConvList v-if="userList && !dataState.error && !dataState.loading" :channelId="target.id" :role="role"/>
+			<ConvList
+				v-if="userList && !dataState.error && !dataState.loading"
+				:channelId="target.id" :role="role"
+			/>
 		</div>
-		<ChanSettings v-if="settings" :channel="target" :role="role" @close="settings = false" @update="updateChan()"/>
+		<ChanSettings
+			v-if="settings"
+			:channel="target"
+			:role="role"
+			@close="settings = false"
+			@update="updateChan()"
+		/>
 		<BaseInput
 			v-if="!userList && !settings"
 			id="WriteMessage"
@@ -144,4 +136,3 @@
 	</div>
 
 </template>
-//	joinRoomSuccess

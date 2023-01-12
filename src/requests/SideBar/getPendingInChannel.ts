@@ -16,7 +16,6 @@ const   getUserTagArray = (response: any[]) => {
 			isBan: true,
 		})
 	})
-	console.log('pending returned', res)
 	return res
 }
 
@@ -33,7 +32,6 @@ const   getPendingInChannels = async (channelId: string, dataState: axiosState) 
 		dataState.error = error.value
 	}
 	else if (response.value) {
-		console.log('response in pending', response.value)
 		dataState.loading = loading.value
 		return getUserTagArray(response.value)
 	}

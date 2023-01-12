@@ -135,7 +135,7 @@
 	onMounted(async () => {
 		getDatas()
 		socket.on('newUserInRoom', (target: IUserTag) => {
-			pendingListData.value.splice(pendingListData.value.indexOf(target), 1)
+			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
 			userListData.value.push(target)
 		})
 		socket.on('userLeftTheRoom', (id: string) => {
@@ -144,23 +144,30 @@
 		})
 		socket.on('invitationSent', (target: IUserTag) => {
 			pendingListData.value.push(target)
-			addListData.value.splice(addListData.value.indexOf(target), 1)
+			addListData.value = addListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('roomDeclined', (target: any) => {
-			console.log()
 			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('userPromoted', (target: IUserTag) => {
-			console.log('user promoted')
+			if (userStore.me.id === target.id) {
+				// console.log('i am promoted')
+				// socket.off('userPromoted')
+				// roleUpdated.value = true
+			}
 			if (!adminListData.value.find((user: IUserTag) => user.id === target.id))
 				adminListData.value.push(target)
-			userListData.value.splice(userListData.value.indexOf(target), 1)
+			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('userDemoted', (target: IUserTag) => {
-			console.log('user demoted')
+			if (userStore.me.id === target.id) {
+				// console.log('i am demoted')
+				// socket.off('userDemoted')
+				// roleUpdated.value = true
+			}
 			if (!userListData.value.find((user: IUserTag) => user.id === target.id))
 				userListData.value.push(target)
-			adminListData.value.splice(adminListData.value.indexOf(target), 1)
+			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 		socket.on('userMuted', (id: string) => {
 			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
@@ -177,11 +184,11 @@
 			if (userBanned) {
 				userBanned.isBan = true
 				bannedListData.value.push(target)
-				userListData.value.splice(userListData.value.indexOf(target), 1)
+				userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
 			}
 		})
 		socket.on('userUnbanned', (target: IUserTag) => {
-			bannedListData.value.splice(bannedListData.value.indexOf(target), 1)
+			bannedListData.value = bannedListData.value.filter((u: IUserTag) => u.id !== target.id)
 		})
 	})
 
