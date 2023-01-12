@@ -21,7 +21,7 @@
 	socket.on('friend_removed_submitted', (res: any) => { console.log('friend removed submitted', res) })
 
 
-	socket.on('messageRoomFailed', (res: any) => { console.log('message room failed'), console.log('Message room failed', res) })
+	socket.on('messageRoomFailed', (res: any) => { console.log('Message room failed', res) })
 	socket.on('chanInvitationReceived', (res: any) => { alert('chan invitation received'), console.log('chan Invitation received', res) })
 	socket.on('invitationAccepted', (res: any) => { console.log('invitation accepted', res) })
 	socket.on('invitationDeclined', (res: any) => { console.log('invitation declined', res) })
@@ -40,6 +40,10 @@
 	socket.on('muteUserFailed', (res: any) => { console.log('mute user failed', res) })
 	socket.on('userUnmuted', (res: any) => { console.log('user unmuted', res) })
 	socket.on('unmuteUserFailed', (res: any) => { console.log('unmute user failed', res) })
+	socket.on('userBanned', (res: any) => { console.log('user banned', res) })
+	socket.on('banUserFailed', (res: any) => { console.log('ban user failed', res) })
+	socket.on('userUnbanned', (res: any) => { console.log('user unbanned', res) })
+	socket.on('unbanUserFailed', (res: any) => { console.log('unban user failed', res) })
 
 </script>
 

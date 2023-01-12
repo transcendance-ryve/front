@@ -43,7 +43,7 @@
 					toolTip: 'View profile'
 				}
 			]
-		else if (p.section.value == 'Invitees' || p.section.value == 'delete')
+		else if (p.section.value == 'Invitees')
 			return [
 				{
 					name: 'see',
@@ -94,10 +94,10 @@
 					toolTip: 'Promote'
 				},
 				{
-					name: p.user.value.isBan ? 'deban' : 'ban',
+					name: 'ban',
 					logo: logoStop,
 					color: '#E32F2F',
-					toolTip: p.user.value.isBan ? 'Deban' : 'Ban',
+					toolTip: 'Ban',
 				},
 			]
 		else if (p.section.value == 'allPrivilegesA')
@@ -115,6 +115,21 @@
 					toolTip: 'Demote'
 				},
 			]
+		else if (p.section.value == 'banned')
+				return [
+					{
+						name: 'see',
+						logo: logoEye,
+						color: '#0177FB',
+						toolTip: 'View profile'
+					},
+					{
+						name: 'deban',
+						logo: logoStop,
+						color: '#E32F2F',
+						toolTip: 'Deban',
+					}
+				]
 		else
 			return []
 	})
@@ -138,7 +153,7 @@
 				:class="{
 					'OptionBtn--mute': option.name === 'demute',
 					'OptionBtn--ban': option.name === 'deban'
-				}"
+					}"
 				:key="index"
 				:logo="option.logo"
 				:hoverColor="option.color"

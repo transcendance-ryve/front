@@ -28,7 +28,7 @@
 
 	const	userTagType = () => {
 		if (p.label.value === 'Banned' && (p.admin.value || p.owner.value))
-			return 'delete'
+			return 'banned'
 		else if (p.label.value === 'Administrators' && p.owner.value)
 			return 'allPrivilegesA'
 		else if (p.label.value === 'Users' && (p.admin.value || p.owner.value))
@@ -61,6 +61,14 @@
 		socket.emit('unmuteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
 	}
 
+	const	banUser = (user: IUserTag) => {
+		socket.emit('banUser', { banInfo: { channelId: p.channelId.value, targetId: user.id, action: 'BAN' } })
+	}
+
+	const	debanUser = (user: IUserTag) => {
+		socket.emit('unbanUser', { banInfo: { channelId: p.channelId.value, targetId: user.id, action: 'BAN' } })
+	}
+
 </script>
 
 <template>
@@ -85,6 +93,8 @@
 				@demote="demoteUser"
 				@mute="muteUser"
 				@demute="demuteUser"
+				@ban="banUser"
+				@deban="debanUser"
 			/>
 		</div>
 	</div>

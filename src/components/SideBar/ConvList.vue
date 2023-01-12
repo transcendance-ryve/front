@@ -170,6 +170,17 @@
 			if (userUnmuted)
 				userUnmuted.isMute = false
 		})
+		socket.on('userBanned', (target: IUserTag) => {
+			const	userBanned: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === target.id)
+			if (userBanned) {
+				userBanned.isBan = true
+				bannedListData.value.push(target)
+				userListData.value.splice(userListData.value.indexOf(target), 1)
+			}
+		})
+		socket.on('userUnbanned', (target: IUserTag) => {
+			bannedListData.value.splice(bannedListData.value.indexOf(target), 1)
+		})
 	})
 
 	onUnmounted(() => {
