@@ -47,6 +47,15 @@
 		}
 	})
 
+	watch(sectionSelected, async () => {
+		if (sectionSelected.value === 'Add' && toFind.value) {
+			addList.value = await getUsers(toFind.value, dataState)
+			addList.value = addList.value.filter(user => {
+				return !isInvited(user) && user.id != userStore.me.id
+			})
+		}
+	})
+
 	const	filterInviteesList = () => {
 		console.log(inviteesList.value)
 		return inviteesList.value.filter(user => {

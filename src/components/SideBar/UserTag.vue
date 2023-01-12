@@ -27,8 +27,6 @@
 		user: IUserTag
 	}
 
-	export type emits = 'see' | 'add' | 'delete' | 'mute' | 'promote' | 'demote' | 'ban'
-
 	const props = withDefaults(defineProps<Props>(), {
 		section: 'Invitees',
 	})
@@ -36,7 +34,7 @@
 	const	p = toRefs(props)
 
 	const	options = computed(() => {
-		if (p.section.value == 'onlySee')
+		if (p.section.value == 'onlySee' || userStore.me.id === p.user.value.id)
 			return [
 				{
 					name: 'see',
@@ -111,37 +109,15 @@
 					toolTip: 'View profile'
 				},
 				{
-					name: p.user.value.isMute ? 'demute' : 'mute',
-					logo: logoMute,
-					color: '#FF8A00',
-					toolTip: p.user.value.isMute ? 'Demute' : 'Mute'
-				},
-				{
 					name: 'demote',
 					logo: logoDemote,
 					color: '#E32F2F',
 					toolTip: 'Demote'
 				},
-				{
-					name: p.user.value.isBan ? 'deban' : 'ban',
-					logo: logoStop,
-					color: '#E32F2F',
-					toolTip: p.user.value.isBan ? 'Deban' : 'Ban',
-				},
 			]
 		else
 			return []
 	})
-
-	const	emit = defineEmits(['see', 'add', 'delete', 'mute', 'promote', 'demote', 'ban'])
-
-	const	manageOptions = (optionName: emits) => {
-		// if (optionName == 'Add')
-		// 	emit('add', p.user.value)
-		// else if (optionName == 'Delete')
-		// 	emit('delete')
-		emit(optionName, p.user.value)
-	}
 
 	const	userStore = useUserStore()
 
@@ -168,7 +144,7 @@
 				:hoverColor="option.color"
 				:toolTip="option.toolTip"
 				:shift="index === options.length - 1 ? true : false"
-				@click="manageOptions(option.name)"
+				@click="$emit(option.name, user)"
 			/>
 		</div>
 	</div>

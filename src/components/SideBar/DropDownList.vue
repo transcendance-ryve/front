@@ -23,17 +23,15 @@
 
 	const	p = toRefs(props)
 
-	console.log('in list', p.users.value)
-
 	const	open = ref(p.open.value)
 	const	closed = ref(false)
 
 	const	userTagType = () => {
-		if (p.label.value == 'Banned' && (p.admin.value || p.owner.value))
+		if (p.label.value === 'Banned' && (p.admin.value || p.owner.value))
 			return 'delete'
-		else if (p.label.value == 'Administrators' && p.owner.value)
+		else if (p.label.value === 'Administrators' && p.owner.value)
 			return 'allPrivilegesA'
-		else if (p.label.value == 'Users' && (p.admin.value || p.owner.value))
+		else if (p.label.value === 'Users' && (p.admin.value || p.owner.value))
 			return 'allPrivileges'
 		else
 			return 'onlySee'

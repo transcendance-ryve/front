@@ -125,6 +125,15 @@
 		}
 	})
 
+	watch(sectionSelected, async () => {
+		if (sectionSelected.value === 'Add' && toFind.value) {
+			addListData.value = await getUsers(toFind.value, dataState)
+			addListData.value = addListData.value.filter(user => {
+				return !isInChan(user)
+			})
+		}
+	})
+
 	const	getLists = () => {
 		for (let i = 0; i < usersInChannel.value.length; i++) {
 			const	user = usersInChannel.value[i]
@@ -166,6 +175,10 @@
 	onUnmounted(() => {
 		socket.off('invitationSent')
 		socket.off('userPromoted')
+		socket.off('userDemoted')
+		socket.off('userMuted')
+		socket.off('userUnmuted')
+
 	})
 
 </script>

@@ -67,7 +67,7 @@
 		}
 	}
 
-	const	emit = defineEmits(['update'])
+	const	emit = defineEmits(['update', 'close'])
 	const	useStore = useUserStore()
 	onMounted(() => {
 		useStore.socket.once('roomEdited', () => emit('update'))
