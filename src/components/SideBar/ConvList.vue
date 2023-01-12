@@ -35,17 +35,7 @@
 
 	const	addListData: Ref<IUserTag[]> = ref([])
 
-	const	bannedListData: Ref<IUserTag[]> = ref([
-		{
-			id: '0', username: 'Karim', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: true, isBan: false
-		},
-		{
-			id: '0', username: 'Kingsley', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: true
-		},
-		{
-			id: '0', username: 'Antoine', avatar: 'http://localhost:3000/default.png', role: 'MEMBER', isMute: false, isBan: false
-		}
-	])
+	const	bannedListData: Ref<IUserTag[]> = ref([])
 
 	const	pendingListData: Ref<IUserTag[]> = ref([
 		{
@@ -123,6 +113,10 @@
 				return !isInChan(user)
 			})
 		}
+		else {
+			usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
+			getLists()
+		}
 	})
 
 	watch(sectionSelected, async () => {
@@ -137,9 +131,9 @@
 	const	getLists = () => {
 		for (let i = 0; i < usersInChannel.value.length; i++) {
 			const	user = usersInChannel.value[i]
-			if (user.role === 'ADMIN' || user.role === 'OWNER')
+			if ((user.role === 'ADMIN' || user.role === 'OWNER') && !adminListData.value.find((u: IUserTag) => u.id === user.id))
 				adminListData.value.push(user)
-			else
+			else if (user.role === 'MEMBER' && !userListData.value.find((u: IUserTag) => u.id === user.id))
 				userListData.value.push(user)
 		}
 	}
