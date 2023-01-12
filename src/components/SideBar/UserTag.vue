@@ -138,7 +138,7 @@
 		// 	emit('add', p.user.value)
 		// else if (optionName == 'Delete')
 		// 	emit('delete')
-		emit(optionName, p.user.value.id)
+		emit(optionName, p.user.value)
 	}
 
 	const	userStore = useUserStore()
@@ -169,7 +169,7 @@
 				:logo="option.logo"
 				:hoverColor="option.color"
 				:toolTip="option.toolTip"
-				:shift="index == options.length - 1 ? true : false"
+				:shift="index === options.length - 1 ? true : false"
 				@click="manageOptions(option.name)"
 			/>
 		</div>

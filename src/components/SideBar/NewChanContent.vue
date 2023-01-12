@@ -48,6 +48,7 @@
 	})
 
 	const	filterInviteesList = () => {
+		console.log(inviteesList.value)
 		return inviteesList.value.filter(user => {
 			return (user.username.toLowerCase().includes(toFind.value.toLowerCase()))
 		})
@@ -67,6 +68,7 @@
 	})
 
 	const	addUser = (user: IUserTag) => {
+		console.log(user)
 		inviteesList.value.unshift(user)
 		p.invitees.value.unshift(user.id)
 		addList.value.splice(addList.value.indexOf(user), 1)

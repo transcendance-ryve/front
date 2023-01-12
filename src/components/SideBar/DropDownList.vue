@@ -45,16 +45,16 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
-	const	promoteUser = (id: string) => {
-		socket.emit('promoteUser', { roleInfo: { userId: id, channelId: p.channelId.value } })
+	const	promoteUser = (user: IUserTag) => {
+		socket.emit('promoteUser', { roleInfo: { userId: user.id, channelId: p.channelId.value } })
 	}
 
-	const	demoteUser = (id: string) => {
-		socket.emit('demoteUser', { roleInfo: { userId: id, channelId: p.channelId.value } })
+	const	demoteUser = (user: IUserTag) => {
+		socket.emit('demoteUser', { roleInfo: { userId: user.id, channelId: p.channelId.value } })
 	}
 
-	const	muteUser = (id: string) => {
-		socket.emit('muteUser', { muteInfo: { channelId: p.channelId.value, targetId: id, action: 'MUTE' } })
+	const	muteUser = (user: IUserTag) => {
+		socket.emit('muteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
 	}
 
 </script>
