@@ -23,6 +23,8 @@
 
 	const	p = toRefs(props)
 
+	console.log('in list', p.users.value)
+
 	const	open = ref(p.open.value)
 	const	closed = ref(false)
 

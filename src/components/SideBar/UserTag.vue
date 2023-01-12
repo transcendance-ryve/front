@@ -129,6 +129,8 @@
 					toolTip: p.user.value.isBan ? 'Deban' : 'Ban',
 				},
 			]
+		else
+			return []
 	})
 
 	const	emit = defineEmits(['see', 'add', 'delete', 'mute', 'promote', 'demote', 'ban'])
@@ -142,10 +144,6 @@
 	}
 
 	const	userStore = useUserStore()
-
-	//	emit.promoteUser, { roleInfo: { userId, channelId } }
-	//	on.promoteUserFailed
-	//	on.userPromoted(id)
 
 </script>
 

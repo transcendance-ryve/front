@@ -100,8 +100,8 @@
 			return []
 	})
 
-	const	addUser = (id: string) => {
-		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.channelId.value, friendId: id } })
+	const	addUser = (user: IUserTag) => {
+		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.channelId.value, friendId: user.id } })
 	}
 
 	const	isInChan = (user: IUserTag) => {
