@@ -41,16 +41,19 @@
 
 	const	getStat = (index: number) => {
 		if (index == 2) {
-			let	ratio: number = data.user.loses == 0 ? data.user.wins : data.user.wins / data.user.loses
+			let	ratio: number = data.user.loses === 0 ? data.user.wins : data.user.wins / data.user.loses
 			ratio = isNaN(ratio) ? 0 : ratio
 			return Number.isInteger(ratio) ? ratio : parseFloat(ratio.toFixed(2))
 		}
+		else if (index > 2)
+			index--
 		const	stats: userKeys[] = [
 			'rank_point',
 			'played',
 			'wins',
 			'loses',
 		]
+		console.log('stat', data.user[stats[index]])
 		return data.user[stats[index]] as number
 	}
 
