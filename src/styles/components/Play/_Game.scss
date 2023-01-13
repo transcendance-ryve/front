@@ -1,0 +1,41 @@
+.game__content {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+	height: 100%;
+	width: 100%;
+	
+	.game__header {
+		display: flex;
+		background-color: $background-600;
+		border-radius: 6px;
+	}
+
+	.game__canvas_container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to right, $dark-blue, $red);
+		padding: calc(100% * 0.006);
+		border-radius: 6px;
+		position: relative;
+
+		.game__canvas {
+			width: 100%;
+			height: 100%;
+			background-color: $background-600;
+		}
+
+		&::after {
+			position: absolute;
+			content: "";
+			top: 0;
+			left: calc(100% / 2 - (100% * 0.006) / 2);
+			width: calc(100% * 0.006);
+			height: 100%;
+			background: #7860A6;
+		}
+	}
+}

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 	import Btn1 from '../Utils/Btn1.vue';
 
 	defineProps({
@@ -12,13 +11,9 @@
 			default: false
 		}
 	})
-
-	const	emit = defineEmits(['start', 'cancel', 'accept', 'refuse'])
-
 </script>
 
 <template>
-
 	<div class="Modal-BtnWrapper" :class="{'BtnWrapper--row': gameFound}">
 		<Btn1
 			v-if="!start"
@@ -28,7 +23,7 @@
 			width="177em"
 			height="56em"
 			fontSize="20em"
-			@click="emit('start')"
+			@click="$emit('start')"
 		/>
 
 		<Btn1
@@ -39,7 +34,7 @@
 			width="136em"
 			height="56em"
 			fontSize="20em"
-			@click="emit('cancel')"
+			@click="$emit('cancel')"
 		/>
 		<span v-if="!start && !gameFound" class="Queue-value">13</span>
 
@@ -51,7 +46,7 @@
 			width="100em"
 			height="56em"
 			fontSize="20em"
-			@click="emit('accept')"
+			@click="$emit('accept')"
 		/>
 		<Btn1
 			v-if="gameFound"
@@ -61,7 +56,7 @@
 			width="92em"
 			height="56em"
 			fontSize="20em"
-			@click="emit('refuse')"
+			@click="$emit('refuse')"
 		/>
 	</div>
 
