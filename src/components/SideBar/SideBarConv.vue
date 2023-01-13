@@ -16,6 +16,7 @@
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { IUserTag } from './UserTag.vue'
+	import { profileRedirect } from '@/router/index'
 
 
 	export interface Target {
@@ -52,6 +53,11 @@
 	watch(convId, async (newVal: string) => {
 		dataState.value = await getMessages(newVal, messages)
 	})
+
+	const	removeFriend = () => {
+		socket.emit('remove_friend', { friendId: target.value.id })
+		sbStore.conv.open = false
+	}
 
 	const	sendMessage = () => {
 		if (input.value) {
@@ -126,6 +132,8 @@
 				@userList="userList = true"
 				@settings="settings = true"
 				@conv="userList = false"
+				@see="profileRedirect(target.id)"
+				@delete="removeFriend()"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
 			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>

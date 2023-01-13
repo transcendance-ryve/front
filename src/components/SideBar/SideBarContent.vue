@@ -152,8 +152,6 @@
 		listeners.push(socket.on('friend_declined_submitted', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
 				removeTag(sender)
-			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				unshiftTag(sender)
 		}))
 		listeners.push(socket.on('friend_removed', (sender: Partial<ContentData>) => {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)

@@ -53,7 +53,6 @@
 			'wins',
 			'loses',
 		]
-		console.log('stat', data.user[stats[index]])
 		return data.user[stats[index]] as number
 	}
 

@@ -61,13 +61,15 @@
 			}]
 	})
 
-	const	emit = defineEmits(['userList', 'conv', 'settings', 'quit'])
+	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'delete'])
 
 	const	manageOptions = (optionName: string) => {
 		if (optionName === 'Members') {
 			userList.value = true
 			emit('userList')
 		}
+		else if (optionName === 'See')
+			emit('see')
 		else if (optionName === 'Settings') {
 			emit('settings')
 		}
@@ -77,6 +79,10 @@
 		}
 		else if (optionName === 'Quit')
 			emit('quit')
+		else if (optionName === 'Block')
+			emit('block')
+		else if (optionName === 'Delete')
+			emit('delete')
 	}
 
 	const	name = props.target.name ? props.target.name : props.target.username
@@ -101,7 +107,7 @@
 							:logo="option.logo"
 							:hoverColor="option.color"
 							:toolTip="option.toolTip"
-							@click="$emit(option.name)"
+							@click="manageOptions(option.name)"
 						/>
 					</div>
 					<span class="Infos-CreateDate" v-else>Created 23 July 2015</span>
