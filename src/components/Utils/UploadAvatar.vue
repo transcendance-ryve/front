@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
+	import { withDefaults } from 'vue';
 	import { logoPhoto } from '../../assets/logoSVG'
 
-	const props = defineProps({
-		id: {
-			type: String,
-			default: 'image-input'
-		},
-		avatar: {
-			type: null,
-			default: null
-		}
+	interface Props {
+		id: string,
+		avatar: string | null
+	}
+
+	withDefaults(defineProps<Props>(), {
+		id: 'image-input',
+		avatar: null
 	})
 
 </script>

@@ -1,33 +1,29 @@
 <script setup lang="ts">
 
-	import { ref, toRefs, watch } from 'vue'
+	import { withDefaults, ref, toRefs, watch, type Ref } from 'vue'
 	import BaseInput from './BaseInput.vue'
 	import { logoSearch } from '../../assets/logoSVG'
 
-	const	props = defineProps({
-		defaultValue: {
-			type: String,
-			default: '',
-		},
-		inputBackground: {
-			type: String,
-			default: '#1F1E2C',
-		},
-		inputHeight: {
-			type: String,
-			default: '48em',
-		},
-		borderRadius: {
-			default: '6em'
-		},
+	interface Props {
+		defaultValue?: string,
+		inputBackground?: string,
+		inputHeight?: string,
+		borderRadius?: string,
+	}
+
+	const	props = withDefaults(defineProps<Props>(), {
+		defaultValue: '',
+		inputBackground: '#1F1E2C',
+		inputHeight: '48em',
+		borderRadius: '6em'
 	})
 
 	const	p = toRefs(props)
 
-	const	input = ref(p.defaultValue.value.substring(0))
-	let		isWriting = false
+	const	input: Ref<string> = ref(p.defaultValue.value.substring(0))
+	let		isWriting: boolean = false
 	let		timer: number
-	const	emit = defineEmits(['search'])
+	const	emit: any = defineEmits(['search'])
 	let		updateInput: boolean = false
 
 	watch(p.defaultValue, () => {

@@ -1,31 +1,22 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
+	import { computed, withDefaults } from 'vue'
 
-	const props = defineProps({
-		label: {
-			type: String,
-			default: '',
-		},
-		options: {
-			type: Array,
-			default: [''],
-		},
-		selectValue: {
-			type: String,
-			default: ''
-		},
-		width: {
-			type: String,
-			default: '50rem',
-		},
-		height: {
-			type: String,
-			default: '30rem',
-		},
-		logo: {
-			type: String
-		}
+	interface Props {
+		label?: string
+		options: string[]
+		selectValue?: string
+		width?: string
+		height?: string
+		logo?: string
+	}
+
+	const	props = withDefaults(defineProps<Props>(), {
+		label: '',
+		selectValue: '',
+		width: '50rem',
+		height: '30rem',
+		logo: ''
 	})
 
 	const	emit = defineEmits(['select'])

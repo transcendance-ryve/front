@@ -1,34 +1,25 @@
 <script setup lang="ts">
 
-	const props = defineProps({
-		type: {
-			type: Number,
-			default: 1
-		},
-		value: {
-			type: String,
-			default: '',
-		},
-		logo: {
-			type: [String, Boolean],
-			default: false,
-		},
-		fillLogo: {
-			type: [Boolean],
-			default: true,
-		},
-		fontSize: {
-			type: String,
-			default: '14em',
-		},
-		width: {
-			type: [String, Boolean],
-			default: false,
-		},
-		height: {
-			type: [String, Boolean],
-			default: false,
-		}
+	import { withDefaults } from 'vue';
+
+	interface Props {
+		type?: number
+		value?: string
+		logo?: string | boolean
+		fillLogo?: boolean
+		fontSize?: string
+		width?: string | boolean
+		height?: string | boolean
+	}
+
+	const	props = withDefaults(defineProps<Props>(), {
+		type: 1,
+		value: '',
+		logo: false,
+		fillLogo: true,
+		fontSize: '14em',
+		width: false,
+		height: false
 	})
 
 	const	classType: string = 'Btn1--type' + props.type

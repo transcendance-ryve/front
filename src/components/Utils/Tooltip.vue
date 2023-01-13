@@ -1,41 +1,28 @@
 <script setup lang="ts">
 
-	const props = defineProps({
-		value: {
-			type: String,
-			default: '',
-		},
-		backgroundColor: {
-			type: String,
-			default: '#1F1E2C'
-		},
-		toolTipHeight: {
-			type: String,
-			default: '30em',
-		},
-		toolTipPadding: {
-			type: String,
-			default: '8em',
-		},
-		borderRadius: {
-			type: String,
-			default: '6em',
-		},
-		toolTipFont: {
-			type: String,
-			default: '500 14em \'Poppins\'',
-		},
-		dist: {
-			type: String,
-			default: '12em',
-		},
-		shift: {
-			type: Boolean,
-			default: false
-		}
-	})
+	import { withDefaults } from 'vue';
 
-	
+	interface Props {
+		value?: string
+		backgroundColor?: string
+		toolTipHeight?: string
+		toolTipPadding?: string
+		borderRadius?: string
+		toolTipFont?: string
+		dist?: string
+		shift?: boolean
+	}
+
+	withDefaults(defineProps<Props>(), {
+		value: '',
+		backgroundColor: '#1F1E2C',
+		toolTipHeight: '30em',
+		toolTipPadding: '8em',
+		borderRadius: '6em',
+		toolTipFont: '500 14em \'Poppins\'',
+		dist: '12em',
+		shift: false
+	})
 
 </script>
 

@@ -3,34 +3,6 @@
 	import { toRefs, computed, withDefaults } from 'vue'
 	import type { User } from '@/types/User'
 
-	// export interface Props {
-	// 	avatar?: string
-	// 	username?: string
-	// 	level?: number
-	// 	experience?: number
-	// 	nextLevel?: number
-	// 	mainColor?: string
-	// 	xpBackground?: string
-	// 	avatarBorder?: boolean
-	// 	reverse?: boolean
-	// 	sizeXS?: boolean
-	// 	sizeXL?: boolean
-	// }
-
-	// const props = withDefaults(defineProps<Props>(), {
-	// 	avatar: '',
-	// 	username: '',
-	// 	level: 0,
-	// 	experience: 0,
-	// 	nextLevel: 0,
-	// 	mainColor: '#0177FB',
-	// 	xpBackground: '#1F1E2C',
-	// 	avatarBorder: false,
-	// 	reverse: false,
-	// 	sizeXS: false,
-	// 	sizeXL: false
-	// })
-
 	export interface Props {
 		user: Partial<User>
 		mainColor?: string
@@ -55,9 +27,9 @@
 		percent = Number.isInteger(percent) ? percent : parseFloat(percent.toFixed(2))
 		return percent.toString() + '%'
 	})
-	const	borderAvatar = props.avatarBorder ?
+	const	borderAvatar: string = props.avatarBorder ?
 		'4em solid' + props.mainColor : 'none'
-	const		avatarWidth = props.avatarBorder ? '72em' : '64em'
+	const	avatarWidth: string = props.avatarBorder ? '72em' : '64em'
 
 </script>
 
