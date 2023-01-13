@@ -85,14 +85,6 @@
 	})
 
 	onUnmounted(() => {
-		// socket.off('friend_request')
-		// socket.off('friend_request_submitted')
-		// socket.off('friend_accepted')
-		// socket.off('friend_accepted_submitted')
-		// socket.off('friend_declined')
-		// socket.off('friend_declined_submitted')
-		// socket.off('friend_removed')
-		// socket.off('friend_removed_submitted')
 		listeners.forEach(listener => socket.off(listener))
 	})
 
