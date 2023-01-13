@@ -36,7 +36,6 @@
 			y: number,
 			width: number,
 			height: number,
-			speed: number,
 			color: string,
 		},
 		right: {
@@ -44,7 +43,6 @@
 			y: number,
 			width: number,
 			height: number,
-			speed: number,
 			color: string,
 		},
 	}
@@ -53,9 +51,12 @@
 		x: number,
 		y: number,
 		radius: number,
-		speed: number,
-		velocityX: number,
-		velocityY: number,
+		color: string,
+	}
+
+	interface defaultGrid {
+		width: number,
+		height: number,
 	}
 
 	const userStore = useUserStore()
@@ -83,6 +84,11 @@
 	}
 
 	let players: Players;
+
+
+
+
+	let defaultGrid: defaultGrid;
 
 	const keys: Keys = {
 		w: false,
@@ -215,10 +221,10 @@
 
 	/* Socket handler */
 
-	const update = (game: { width: number, height: number, paddles: Paddles, ball: Ball }): void => {
+	const update = (game: { paddles: Paddles, ball: Ball }): void => {
 		const ctx = canvas.value.getContext('2d');
 		
-		const ratio = canvas.value.width / game.width;
+		const ratio = canvas.value.width / defaultGrid.width;
 
 		canvas.value.width = canvas.value.offsetWidth;
 		canvas.value.height = canvas.value.clientHeight;
@@ -227,9 +233,13 @@
 		drawBall(ctx, game.ball, ratio);
 	}
 
-	const start = (data: Players): void => {
-		players = data;
+	const start = (data: { players: Players, width: number, height: number }): void => {
+		defaultGrid.height = data.height;
+		defaultGrid.width = data.width;
+
+		players = data.players;
 	}
+
 	const updateScore = (data: { id: string, score: number }): void => {
 		if (data.id === players.left.id) {
 			players.left.score = data.score;
@@ -243,8 +253,8 @@
 
 	/* Socket listeners */
 
-	listeners.push(socket.on("start", (data: Players) => { start(data) }));
-	listeners.push(socket.on("update", (game: { width: number, height: number, paddles: Paddles, ball: Ball }) => { update(game) }))
+	listeners.push(socket.on("start", (data: { players: Players, width: number, height: number }) => { start(data) }));
+	listeners.push(socket.on("update", (game: { paddles: Paddles, ball: Ball }) => { update(game) }))
 	listeners.push(socket.on("score", (data: { id: string, score: number }) => { updateScore(data) }))
 	// listeners.push(socket.on("bonus_spawn", (data: any) => bonusSpawn() ))
 	// listeners.push(socket.on("bonus_taken", (data: any) => bonusTaken() ))
