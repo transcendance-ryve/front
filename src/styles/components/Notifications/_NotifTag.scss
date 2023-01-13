@@ -3,13 +3,15 @@
 	justify-content: space-between;
 	align-items: center;
 	width: 350em;
-	height: 88em;
-	padding: 12em 16em;
+	min-height: 88em;
+	padding: 12em 16em 9em 16em;
+	gap: 24em;
 	background: rgba(36, 35, 51, 0.6);
 	box-shadow: 0 4em 4em rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(4px);
 	border-bottom: 3em solid $white-200;
 	border-radius: 0 12em 12em 0;
+	animation: notifPop .5s ease-in-out;
 
 	.NotifTag-closeBtn {
 		cursor: pointer;
@@ -28,7 +30,7 @@
 		display: flex;
 		flex-direction: row-reverse;
 		align-items: center;
-		gap: 32em;
+		gap: 24em;
 
 		.Content-avatar {
 			width: 64em;
@@ -41,19 +43,79 @@
 			flex-direction: column;
 			align-items: flex-end;
 			font-family: 'Poppins';
+			letter-spacing: -0.01em;
+			text-align: end;
 			gap: 8em;
 
-			.Content-label {
+			.Text-label {
 				font-size: 18em;
 				line-height: 100%;
 				color: white;
 			}
 
-			.Content-text {
+			.Text-value {
 				font-size: 14em;
+				letter-spacing: -0.01em;
 				line-height: 100%;
-				color: $cheat-blue;
+				color: white;
 			}
 		}
+	}
+}
+
+.NotifTag--friend {
+	.NotifTag-content > .Content-text {
+		.Text-value {
+			color: $cheat-blue;
+		}
+	}
+}
+
+.NotifTag--channel {
+	.NotifTag-content > .Content-text {
+		.Text-value {
+			color: #CCCF3C;
+		}
+	}
+}
+
+.NotifTag--success {
+	.NotifTag-content > .Content-text {
+		.Text-label {
+			color: $green;
+		}
+	}
+}
+
+.NotifTag--error {
+	.NotifTag-content > .Content-text {
+		.Text-label {
+			color: $red;
+		}
+	}
+}
+
+.NotifTag--close {
+	animation: notifClose .5s ease-in-out;
+}
+
+@keyframes notifPop {
+	0% {
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes notifClose {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+		opacity: 0;
 	}
 }

@@ -1,11 +1,11 @@
 .Notifications {
 	display: flex;
 	flex-direction: column-reverse;
-	// width: 200em;
-	// height: 300em;
 	position: absolute;
 	left: 0;
 	top: 20em;
 	gap: 12em;
 	z-index: 2;
+	// transition: height .5s ease-in-out;
+	// background: red;
 }

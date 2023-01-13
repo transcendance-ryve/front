@@ -1,31 +1,42 @@
 <script setup lang="ts">
 
-	import { withDefaults } from 'vue'
+	import { ref } from 'vue'
 	import { logoCloseNotif } from '@/assets/logoSVG'
+	import { useNotifStore } from '@/stores/NotificationsStore'
+	import type { notification } from '@/stores/NotificationsStore'
 
 	export interface Props {
-		label?: string
-		text?: string
-		avatar?: string
+		notif: notification
 	}
 
-	const props = withDefaults(defineProps<Props>(), {
-		label: '',
-		text: '',
-		avatar: '',
-	})
+	const	props = defineProps<Props>()
+
+	const	notifStore = useNotifStore()
+	const	notifClose = ref(false)
+	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
+
+	let		timer: number | undefined = undefined
+	const	closeNotif = () => {
+		if (timer)
+			clearTimeout(timer)
+		notifClose.value = true
+		setTimeout(() => notifStore.removeNotif(props.notif.id), 500)
+	}
+
+	timer = setTimeout(() => closeNotif(), 3000)
 
 </script>
 
 <template>
 
-	<div class="NotifTag">
-		<span class="NotifTag-closeBtn" v-html="logoCloseNotif"></span>
+	<div
+		:class="[classNames, {'NotifTag--close': notifClose }]">
+		<span class="NotifTag-closeBtn" v-html="logoCloseNotif" @click="closeNotif()"></span>
 		<div class="NotifTag-content">
-			<img class="Content-avatar" :src="avatar" alt="">
+			<img v-if="notif.avatar" class="Content-avatar" :src="notif.avatar" alt="">
 			<div class="Content-text">
-				<span class="Content-label">{{ label }}</span>
-				<span class="Content-text">{{ text }}</span>
+				<span v-if="notif.label" class="Text-label">{{ notif.label }}</span>
+				<span v-if="notif.text" class="Text-value">{{ notif.text }}</span>
 			</div>
 		</div>
 	</div>
