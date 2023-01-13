@@ -7,18 +7,13 @@
 
 	const	notifStore = useNotifStore()
 	const	userStore = useUserStore()
-	const	socket = userStore.socket
+	const	socket: any = userStore.socket
 
 	const	listeners: any[] = []
 
-	// setInterval(() => notifStore.addNotif('Ping', '', ''), Math.random() * 2000)
-	// setTimeout(() => notifStore.addNotif('Ping', '', ''), 1000)
-
-	// socket.on('pong', () => { console.log('pong') })
-	// socket.emit('ping', () => { console.log('ping emit') })
-
 	onMounted(() => {
 		// listeners.push(socket.on('pong', () => { notifStore.addNotif('', 'Pong', '', '') }))
+		// socket.emit('ping', () => { console.log('ping emit') })
 
 		listeners.push(socket.on('user_connected', (id: string) => notifStore.addNotif('infoG', '', 'connected')))
 		listeners.push(socket.on('friend_accepted', (res: any) => { notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) }))

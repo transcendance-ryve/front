@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref } from 'vue'
+	import { ref, type Ref } from 'vue'
 	import { logoCloseNotif } from '@/assets/logoSVG'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import type { notification } from '@/stores/NotificationsStore'
@@ -12,7 +12,7 @@
 	const	props = defineProps<Props>()
 
 	const	notifStore = useNotifStore()
-	const	notifClose = ref(false)
+	const	notifClose: Ref<boolean> = ref(false)
 	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
 	let		timer: number | undefined = undefined
 
