@@ -1,20 +1,20 @@
 <script setup lang="ts">
 
-	import { type Ref } from 'vue'
+	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd, logoAccept, logoRefuse } from '../../assets/logoSVG'
 	import Btn1 from '../Utils/Btn1.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router'
+	import type { User } from '@/types/User'
 
-	const props = defineProps({
-		type: {
-			type: Number,
-			default: 1
-		},
-		user: {
-			type: Object
-		}
+	interface Props {
+		type: number
+		user: User
+	}
+
+	withDefaults(defineProps<Props>(), {
+		type: 1,
 	})
 
 	const	userStore = useUserStore()

@@ -1,7 +1,6 @@
 import useAxios from '@/requests/useAxios'
 import { useUserStore } from '../../stores/UserStore'
-
-export type userProfileData = { user: any, type: number, loadingData: boolean, err: null }
+import type { ProfileData } from '@/types/ProfileData'
 
 const	getType = (id: string, status: string, senderId: string) => {
 	if (status === 'ACCEPTED')
@@ -15,7 +14,7 @@ const	getType = (id: string, status: string, senderId: string) => {
 	return 3
 }
 
-const getUserProfile = async (id: string, data: userProfileData) => {
+const getUserProfile = async (id: string, data: ProfileData) => {
 	const userStore = useUserStore()
 
 	if (id == userStore.me.id) {
@@ -36,6 +35,7 @@ const getUserProfile = async (id: string, data: userProfileData) => {
 		else if (response.value) {
 			data.type = getType(id, response.value.status, response.value.sender)
 			data.user = response.value.user
+			console.log('profile', response.value)
 		}
 		data.loadingData = loading.value
 		data.err = error.value

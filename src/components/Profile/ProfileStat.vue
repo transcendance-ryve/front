@@ -1,16 +1,18 @@
 <script setup lang="ts">
 
-	const props = defineProps({
-		index: {
-			type: Number,
-			default: 0
-		},
-		value: {
-			type: Number
-		}
+	import { withDefaults } from 'vue'
+
+	interface Props {
+		index: number
+		value: number
+	}
+
+	withDefaults(defineProps<Props>(), {
+		index: 0,
+		value: 0
 	})
 
-	const	labels = [
+	const	labels: string[] = [
 		'Ranking points',
 		'Play count',
 		'W/L Ratio',

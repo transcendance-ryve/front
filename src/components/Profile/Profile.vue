@@ -9,14 +9,28 @@
 	import MatchHistory from './MatchHistory.vue'
 	import router from '@/router'
 	import { onBeforeRouteUpdate } from 'vue-router'
-	import	getUserProfile, { type userProfileData } from '../../requests/Profile/getUserProfile'
+	import	getUserProfile from '../../requests/Profile/getUserProfile'
+	import type { ProfileData } from '@/types/ProfileData'
+	import type { userKeys } from '@/types/User'
 
 	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
 	contentStore.state = 4
 
-	const	data: userProfileData = reactive({
-		user: null,
+	const	data: ProfileData = reactive({
+		user: {
+			id: '',
+			username: '',
+			avatar: '',
+			status: '',
+			level: 0,
+			experience: 0,
+			next_level: 0,
+			rank_point: 0,
+			wins: 0,
+			loses: 0,
+			played: 0,
+		},
 		type: 1,
 		loadingData: false,
 		err: null
@@ -31,14 +45,14 @@
 			ratio = isNaN(ratio) ? 0 : ratio
 			return Number.isInteger(ratio) ? ratio : parseFloat(ratio.toFixed(2))
 		}
-		const	stats = [
+		const	stats: userKeys[] = [
 			'rank_point',
 			'played',
-			'ratio',
 			'wins',
 			'loses',
 		]
-		return data.user[stats[index]]
+		console.log('stat', stats[index], data.user[stats[index]])
+		return data.user[stats[index]] as number
 	}
 
 	onBeforeRouteUpdate((to, from) => {
