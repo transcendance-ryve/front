@@ -22,3 +22,14 @@ export interface ResetPasswordForm {
 export interface TfaForm {
 	code: string;
 }
+
+export interface SettingsForm {
+	avatar: null,
+	avatarFile: File | null,
+	username: string,
+	oldPassword: string,
+	newPassword: string,
+	confirmPassword: string,
+	code2FA: string,
+	state2FA: boolean
+}

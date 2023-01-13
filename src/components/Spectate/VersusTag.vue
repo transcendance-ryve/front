@@ -1,26 +1,24 @@
 <script setup lang="ts">
 
-	import { toRef, toRefs, computed } from 'vue'
+	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoScore, logoScoreBlue, logoScoreRed } from '../../assets/logoSVG'
+	import type { User } from '../../types'
 
-	const	props = defineProps({
-		user: {
-			type: Object
-		},
-		reverse: {
-			type: Boolean,
-			default: false
-		}
+	interface Props {
+		user: User
+		reverse: boolean
+	}
+
+	const	props = withDefaults(defineProps<Props>(), {
+		reverse: false
 	})
 
-	const	p = toRefs(props)
-
-	const	userColor = p.reverse.value ? '#FF4646' : '#0177FB'
+	const	userColor: string = props.reverse ? '#FF4646' : '#0177FB'
 
 	const	logo = (index: number) => {
-		if (index <= p.user?.value?.score)
-			return p.reverse.value ? logoScoreRed : logoScoreBlue
+		if (index <= props.user.score)
+			return props.reverse ? logoScoreRed : logoScoreBlue
 		else
 			return logoScore
 	}

@@ -1,10 +1,13 @@
 <script setup lang="ts">
 
-	const props = defineProps({
-		active: {
-			type: Boolean,
-			default: false
-		}
+	import { withDefaults } from 'vue';
+
+	interface Props {
+		active: boolean
+	}
+
+	withDefaults(defineProps<Props>(), {
+		active: false
 	})
 
 </script>

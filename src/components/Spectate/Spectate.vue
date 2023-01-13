@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, ref, computed, watch } from 'vue'
+	import { reactive, ref, computed, watch, type Ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
@@ -128,11 +128,11 @@
 		}
 	])
 
-	const		order = ref('des')
-	const		page = ref(1)
-	const		dataIndex = ref(0)
-	const		toFind = ref('')
-	const		perPage = ref(12)
+	const		order: Ref<string> = ref('des')
+	const		page: Ref<number> = ref(1)
+	const		dataIndex: Ref<number> = ref(0)
+	const		toFind: Ref<string> = ref('')
+	const		perPage: Ref<number> = ref(12)
 
 	const	dataSorted = computed(() => data.sort((a, b) => {
 				if (order.value == 'des')
@@ -144,8 +144,8 @@
 	)
 
 	const	inputRes = computed(() => {
-		return dataSorted.value.filter(game => game.player1.name.toLowerCase().includes(toFind.value.toLowerCase())
-												|| game.player2.name.toLowerCase().includes(toFind.value.toLowerCase()))
+		return dataSorted.value.filter(game => game.player1.username.toLowerCase().includes(toFind.value.toLowerCase())
+												|| game.player2.username.toLowerCase().includes(toFind.value.toLowerCase()))
 	})
 
 	const	games = computed(() => {

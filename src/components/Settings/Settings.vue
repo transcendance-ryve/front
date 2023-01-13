@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { onMounted, reactive, ref } from 'vue'
+	import { onMounted, reactive, ref, type Ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import UploadAvatar from '../Utils/UploadAvatar.vue';
@@ -16,31 +16,21 @@
 	import getQRCode from '@/requests/Settings/getQRCode'
 	import toggle2FA from '@/requests/Settings/toggle2FA'
 	import generateNewQRCode from '@/requests/Settings/generateNewQRCode'
+	import type { SettingsForm } from '@/types/Forms';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
 
 	const	userStore = useUserStore()
 
-	const	QRCode = ref('')
+	const	QRCode: Ref<string> = ref('')
 
 	const	dataState: axiosState = reactive({
 		error: null,
 		loading: false
 	})
 
-	type	data = {
-		avatar: null,
-		avatarFile: File | null,
-		username: string,
-		oldPassword: string,
-		newPassword: string,
-		confirmPassword: string,
-		code2FA: string,
-		state2FA: boolean
-	}
-
-	const	settingsData: data = reactive({
+	const	settingsData: SettingsForm = reactive({
 		avatar: null,
 		avatarFile: null,
 		username: '',
