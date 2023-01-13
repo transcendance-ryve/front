@@ -23,7 +23,7 @@
 		setTimeout(() => notifStore.removeNotif(props.notif.id), 500)
 	}
 
-	timer = setTimeout(() => closeNotif(), 3000)
+	// timer = setTimeout(() => closeNotif(), 3000)
 
 </script>
 

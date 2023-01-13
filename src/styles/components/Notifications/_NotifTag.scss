@@ -2,7 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 350em;
+	// width: 350em;
+	min-width: 350em;	//
 	min-height: 88em;
 	padding: 12em 16em 9em 16em;
 	gap: 24em;
