@@ -9,7 +9,7 @@
 	import { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
 	import getFriends from '@/requests/Friends/getFriends'
-	import getUsers from '@/requests/SideBar/getUsers'
+	import getAddFriendsList from '@/requests/Friends/getAddFriendsList'
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
 	import getChannels from '@/requests/SideBar/getChannels'
@@ -125,7 +125,7 @@
 			if (sbStore.state.friendsState == 1)
 				fetchData = await getFriends(dataState)
 			else if (toFind.value)
-				fetchData = await getUsers(toFind.value, dataState)
+				fetchData = await getAddFriendsList(toFind.value, dataState)
 		}
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1) {
@@ -169,7 +169,7 @@
 	watch(toFind, async () => {
 		if (toFind.value) {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
-				contentData.value = await getUsers(toFind.value, dataState)
+				contentData.value = await getAddFriendsList(toFind.value, dataState)
 			else if (sbStore.state.section === 2 && sbStore.state.channelsState === 2)
 				contentData.value = await getChannels(toFind.value, dataState)
 		}
