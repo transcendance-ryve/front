@@ -1,7 +1,9 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
+import type { ContentData } from '@/components/SideBar/SideBarContent.vue'
+// import type { ContentData } from '@/types/ContentData'
 
-const getFriends = async (toFind: string, dataState: axiosState) => {
+const getAddFriendsList = async (toFind: string, dataState: axiosState) => {
 
 	dataState.loading = true
 	const { response, loading, error } = await useAxios(
@@ -14,7 +16,7 @@ const getFriends = async (toFind: string, dataState: axiosState) => {
 		dataState.error = error.value
 	}
 	else if (response.value) {
-		const	res: any[] = []
+		const	res: Partial<ContentData>[] = []
 		response.value.users.forEach((item: any) => {
 			if (item.status === 'NONE') {
 				res.push(item.user)
@@ -25,4 +27,4 @@ const getFriends = async (toFind: string, dataState: axiosState) => {
 	}
 }
 
-export default getFriends
+export default getAddFriendsList
