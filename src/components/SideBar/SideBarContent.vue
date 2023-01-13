@@ -27,87 +27,6 @@
 		messages: any[]		//	user / chan		last message
 	}
 
-	const	data5: Partial<ContentData>[] = reactive([
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Karim',
-			time: 5,
-			status: 'IN GAME'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Kylian',
-			time: 23,
-			status: 'ONLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Antoine',
-			time: 4,
-			status: 'OFFLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Ousmane',
-			time: 8,
-			status: 'ONLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Kingsley',
-			time: 2,
-			status: 'ONLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Raphael',
-			time: 17,
-			status: 'OFFLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Benjamin',
-			time: 6,
-			status: 'ONLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Theo',
-			time: 1,
-			status: 'IN GAME'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Lucas',
-			time: 63,
-			status: 'ONLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Adrien',
-			time: 55,
-			status: 'OFFLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Alphonse',
-			time: 13,
-			status: 'OFFLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Steve',
-			time: 16,
-			status: 'OFFLINE'
-		},
-		{
-			avatar: 'http://localhost:3000/default.png',
-			name: 'Olivier',
-			time: 51,
-			status: 'ONLINE'
-		},
-	])
-
 	const	dataState: axiosState = reactive({
 		error: null,
 		loading: false
@@ -137,7 +56,7 @@
 		}
 		else {
 			if (sbStore.state.notifsState == 1)
-				fetchData = data5
+				fetchData = []
 			else if (sbStore.state.notifsState == 2)
 				fetchData = await getFriendsRequests(dataState)
 			else
@@ -258,6 +177,11 @@
 		listeners.push(socket.on('joinRoomSuccess', (id: string) => {
 			sbStore.openConv('Channel', id)
 		}))
+		//	il me faut l'id du channel pour le supprimer
+		// listeners.push(socket.on('userBanned', (id: string) => {
+		// 	if (sbStore.state.section === 2 && sbStore.state.channelsState === 1)
+		// 		removeTag({ id })
+		// }))
 	})
 
 	onUnmounted(() => {

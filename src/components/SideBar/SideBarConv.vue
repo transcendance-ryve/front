@@ -91,6 +91,12 @@
 					userList.value = true
 				}
 			}))
+			listeners.push(socket.on('userBanned', (target: IUserTag) => {
+				if (userStore.me.id === target.id) {
+					sbStore.conv.open = false
+					sbStore.state.section = 2
+				}
+			}))
 		}
 		listeners.push(socket.on('incomingMessage', (msg: any) => {
 			messages.value.push({ content: msg })
