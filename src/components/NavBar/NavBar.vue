@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref } from 'vue'
+	import { ref, type Ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import router from '../../router/index' //
@@ -12,7 +12,7 @@
 	const	contentStore = useContentStore()
 	const	userStore = useUserStore()
 
-	let		userInfoXS = ref(false)
+	let		userInfoXS: Ref<boolean> = ref(false)
 
 	const	manageResponsive = () => {
 		if (window.innerWidth <= 1440)

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 	import { useContentStore } from '../../stores/ContentStore'
-	import router from '../../router/index'
 	import { logoPlay, logoLeaderboard, logoSpectate } from '../../assets/logoSVG'
 
 	const	contentStore = useContentStore()
