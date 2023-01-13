@@ -26,7 +26,7 @@
 		listeners.push(socket.on('friend_removed', (res: any) => notifStore.addNotif('friend', res.username, 'has deleted you', res.avatar)))
 		listeners.push(socket.on('friend_accepted_submitted', (res: any) => notifStore.addNotif('friend', res.username, 'new friend', res.avatar)))
 		listeners.push(socket.on('friend_request_submitted', (res: any) => notifStore.addNotif('success', 'Success', 'invitation sent', res.avatar)))
-		listeners.push(socket.on('friend_declined_submitted', (res: any) => notifStore.addNotif('success', 'Success', 'friend invitation declined', res.avatar)))
+		listeners.push(socket.on('friend_declined_submitted', (res: any) => notifStore.addNotif('success', 'Success', 'invitation declined', res.avatar)))
 		listeners.push(socket.on('friend_removed_submitted', (res: any) => notifStore.addNotif('success', 'Success', 'friend removed', res.avatar)))
 
 		listeners.push(socket.on('chanInvitationReceived', (res: any) => notifStore.addNotif('channel', res.name, 'new channel invitation', res.avatar)))
