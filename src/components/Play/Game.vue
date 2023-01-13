@@ -182,24 +182,24 @@
 	const drawPaddles = (
 		ctx: CanvasRenderingContext2D,
 		paddles: Paddles,
-		ratio: number
+		ratio: { x: number, y: number }
 	): void => {
 		drawRoundedRect(
 			ctx,
-			paddles.left.x * ratio,
-			paddles.left.y * ratio,
-			paddles.left.width * ratio,
-			paddles.left.height * ratio,
+			paddles.left.x * ratio.x,
+			paddles.left.y * ratio.y,
+			paddles.left.width * ratio.x,
+			paddles.left.height * ratio.y,
 			6,
 			paddles.left.color
 		)
 
 		drawRoundedRect(
 			ctx,
-			paddles.right.x * ratio,
-			paddles.right.y * ratio,
-			paddles.right.width * ratio,
-			paddles.right.height * ratio,
+			paddles.right.x * ratio.x,
+			paddles.right.y * ratio.y,
+			paddles.right.width * ratio.x,
+			paddles.right.height * ratio.y,
 			6,
 			paddles.right.color
 		)
@@ -208,13 +208,13 @@
 	const drawBall = (
 		ctx: CanvasRenderingContext2D,
 		ball: Ball,
-		ratio: number
+		ratio: { x: number, y: number }
 	): void => {
 		ctx.beginPath();
 		ctx.arc(
-			ball.x * ratio,
-			ball.y * ratio,
-			ball.radius * ratio,
+			ball.x * ratio.x,
+			ball.y * ratio.y,
+			ball.radius * ratio.x,
 			0,
 			Math.PI * 2
 		);
@@ -229,7 +229,10 @@
 		console.log(game);
 		const ctx = canvas.value.getContext('2d');
 		
-		const ratio = canvas.value.width / defaultGrid.width;
+		const ratio = {
+			x: canvas.value.width / defaultGrid.width,
+			y: canvas.value.height / defaultGrid.height,
+		}
 
 		canvas.value.width = canvas.value.offsetWidth;
 		canvas.value.height = canvas.value.clientHeight;
