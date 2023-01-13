@@ -104,6 +104,8 @@
 
 	const	updatePage = (n: number) => {
 		queries.page = n.toString()
+		if (queries.page === '0')
+			queries.page = '1'
 	}
 
 	watch(queries, async () => {
@@ -112,7 +114,7 @@
 	})
 
 	watch(pagesCount, newVal => {
-		if (parseInt(queries.page!) > newVal)
+		if (parseInt(queries.page) > newVal)
 			updatePage(newVal)
 	})
 
