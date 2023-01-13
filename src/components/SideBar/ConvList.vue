@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, computed, watch, type Ref, onMounted, toRefs, onUnmounted } from 'vue'
+	import { ref, reactive, computed, watch, type Ref, onMounted, onUnmounted } from 'vue'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownList from './DropDownList.vue'
@@ -21,8 +21,6 @@
 	}
 
 	const	props = defineProps<Props>()
-
-	const	p = toRefs(props)
 
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
@@ -80,7 +78,7 @@
 	})
 
 	const	addUser = (user: IUserTag) => {
-		socket.emit('inviteToRoom', { inviteInfo: { channelId: p.channelId.value, friendId: user.id } })
+		socket.emit('inviteToRoom', { inviteInfo: { channelId: props.channelId, friendId: user.id } })
 	}
 
 	const	isInChan = (user: IUserTag) => {
@@ -127,9 +125,9 @@
 	}
 
 	const	getDatas = async () => {
-		usersInChannel.value = await getUsersInChannel(p.channelId.value, dataState)
-		bannedListData.value = await getBannedInChannels(p.channelId.value, dataState)
-		pendingListData.value = await getPendingInChannels(p.channelId.value, dataState)
+		usersInChannel.value = await getUsersInChannel(props.channelId, dataState)
+		bannedListData.value = await getBannedInChannels(props.channelId, dataState)
+		pendingListData.value = await getPendingInChannels(props.channelId, dataState)
 		getLists()
 	}
 

@@ -1,14 +1,10 @@
 <script setup lang="ts">
 
-	import { toRefs } from 'vue'
-
 	export interface Props {
 		messages: any[]
 	}
 
-	const	props = defineProps<Props>()
-
-	const	p = toRefs(props)
+	defineProps<Props>()
 
 </script>
 

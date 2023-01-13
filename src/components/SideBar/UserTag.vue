@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
+	import { computed } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import OptionBtn from './OptionBtn.vue'
 	import {
@@ -31,10 +31,8 @@
 		section: 'Invitees',
 	})
 
-	const	p = toRefs(props)
-
 	const	options = computed(() => {
-		if (p.section.value == 'onlySee' || userStore.me.id === p.user.value.id)
+		if (props.section == 'onlySee' || userStore.me.id === props.user.id)
 			return [
 				{
 					name: 'see',
@@ -43,7 +41,7 @@
 					toolTip: 'View profile'
 				}
 			]
-		else if (p.section.value == 'Invitees')
+		else if (props.section == 'Invitees')
 			return [
 				{
 					name: 'see',
@@ -58,7 +56,7 @@
 					toolTip: 'Delete'
 				}
 			]
-		else if (p.section.value == 'Add')
+		else if (props.section == 'Add')
 			return [
 				{
 					name: 'see',
@@ -73,7 +71,7 @@
 					toolTip: 'Add user'
 				}
 			]
-		else if (p.section.value == 'allPrivileges')
+		else if (props.section == 'allPrivileges')
 			return [
 				{
 					name: 'see',
@@ -82,10 +80,10 @@
 					toolTip: 'View profile'
 				},
 				{
-					name: p.user.value.isMute ? 'demute' : 'mute',
+					name: props.user.isMute ? 'demute' : 'mute',
 					logo: logoMute,
 					color: '#FF8A00',
-					toolTip: p.user.value.isMute ? 'Demute' : 'Mute'
+					toolTip: props.user.isMute ? 'Demute' : 'Mute'
 				},
 				{
 					name: 'promote',
@@ -100,7 +98,7 @@
 					toolTip: 'Ban',
 				},
 			]
-		else if (p.section.value == 'allPrivilegesA')
+		else if (props.section == 'allPrivilegesA')
 			return [
 				{
 					name: 'see',
@@ -115,7 +113,7 @@
 					toolTip: 'Demote'
 				},
 			]
-		else if (p.section.value == 'banned')
+		else if (props.section == 'banned')
 				return [
 					{
 						name: 'see',

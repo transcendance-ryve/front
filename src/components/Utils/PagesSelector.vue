@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
+	import { computed } from 'vue'
 	import BaseInput from './BaseInput.vue'
 	import LeaderboardTag from '../Leaderboard/LeaderboardTag.vue'
 	import { logoFirstPage, logoLastPage } from '../../assets/logoSVG'
@@ -10,18 +10,16 @@
 		pagesSize: number,
 	}>();
 
-	const p = toRefs(props);
-
 	const	pagesBtn = computed(() => {
-		if (p.pagesSize.value == 2)
+		if (props.pagesSize == 2)
 			return [1, 2]
-		else if ((p.pagesSize.value > 1 && p.pagesSize.value < 4) ||
-				p.pagesSize.value > 3 && p.page.value == 1)
+		else if ((props.pagesSize > 1 && props.pagesSize < 4) ||
+			props.pagesSize > 3 && props.page == 1)
 			return [1, 2, 3]
-		else if (p.pagesSize.value > 3 && p.page.value == p.pagesSize.value)
-			return [p.pagesSize.value - 2, p.pagesSize.value - 1, p.pagesSize.value]
+		else if (props.pagesSize > 3 && props.page == props.pagesSize)
+			return [props.pagesSize - 2, props.pagesSize - 1, props.pagesSize]
 		else
-			return [p.page.value -1, p.page.value, p.page.value + 1]
+			return [props.page -1, props.page, props.page + 1]
 	})
 
 

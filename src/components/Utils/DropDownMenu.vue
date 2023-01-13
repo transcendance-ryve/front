@@ -30,10 +30,8 @@
 
 	const	emit = defineEmits(['select'])
 
-	const	p = toRefs(props)
-
 	const	optionsToSelect = computed(() => {
-		return p.options.value.filter(val => val != p.selectValue.value)
+		return props.options.filter(val => val != props.selectValue)
 	})
 
 	const	selectVal = (value: any) => {

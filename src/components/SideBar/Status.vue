@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed } from 'vue'
+	import { computed } from 'vue'
 
 	const props = defineProps({
 		status: {
@@ -13,13 +13,11 @@
 		}
 	})
 
-	const p = toRefs(props);
-
 	const	statusClass = computed(() => {
-		if (p.status?.value == 'IN GAME')
+		if (props.status == 'IN GAME')
 			return 'Status--INGAME'
 		else
-		 return 'Status--' + p.status?.value
+		 return 'Status--' + props.status
 	})
 
 </script>

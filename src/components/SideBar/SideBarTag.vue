@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { toRefs, computed, ref, type Ref, onMounted, onUnmounted } from 'vue'
+	import { computed, ref, type Ref, onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
@@ -19,13 +19,11 @@
 
 	const props = defineProps<Props>()
 
-	const p = toRefs(props);
-
 	const	statusClass = computed(() => {
-		if (p.data.value.status == 'In Game')
+		if (props.data.status == 'In Game')
 			return 'Status--inGame'
 		else
-			return 'Status--' + p.data.value.status
+			return 'Status--' + props.data.status
 	})
 
 	const	sbStore = useSideBarStore()
@@ -34,33 +32,33 @@
 	const	password: Ref<string> = ref('')
 
 	const	addToFriend = (id: string) => {
-		socket.emit('add_friend', { friendId: p.data.value.id })
+		socket.emit('add_friend', { friendId: props.data.id })
 	}
 
 	const	notifAccept = (id: string) => {
-		if (p.type.value === 2)
-			socket.emit('accept_friend', { friendId: p.data.value.id })
-		else if (p.type.value === 3)
-			socket.emit('acceptInvitation', { invitationInfo: { channelId: p.data.value.id } })
+		if (props.type === 2)
+			socket.emit('accept_friend', { friendId: props.data.id })
+		else if (props.type === 3)
+			socket.emit('acceptInvitation', { invitationInfo: { channelId: props.data.id } })
 	}
 
 	const	notifRefuse = (id: string) => {
-		if (p.type.value === 2)
-			socket.emit('decline_friend', { friendId: p.data.value.id })
-		else if (p.type.value === 3)
-			socket.emit('declineInvitation', { invitationInfo: { channelId: p.data.value.id } })
+		if (props.type === 2)
+			socket.emit('decline_friend', { friendId: props.data.id })
+		else if (props.type === 3)
+			socket.emit('declineInvitation', { invitationInfo: { channelId: props.data.id } })
 	}
 
 	const	joinChan = () => {
-		if (p.data.value.status === 'PROTECTED' && !password.value)
+		if (props.data.status === 'PROTECTED' && !password.value)
 			alert('Empty password')
 		else
 			socket.emit('joinRoom', {
 				joinInfo: {
-					channelId: p.data.value.id,
-					name: p.data.value.name,
-					status: p.data.value.status,
-					password: password.value
+					channelId: props.data.id,
+					name: props.data.name,
+					status: props.data.status,
+					password: password
 				}
 			})
 	}
@@ -68,12 +66,12 @@
 	const	listeners: any[] = []
 	onMounted(() => {
 		listeners.push(socket.on('user_connected', (id: string) => {
-			if (id === p.data.value.id)
-				p.data.value.status = 'ONLINE'
+			if (id === props.data.id)
+				props.data.status = 'ONLINE'
 		}))
 		listeners.push(socket.on('user_disconnected', (id: string) => {
-			if (id === p.data.value.id)
-				p.data.value.status = 'OFFLINE'
+			if (id === props.data.id)
+				props.data.status = 'OFFLINE'
 		}))
 	})
 

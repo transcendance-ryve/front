@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, ref, toRefs } from 'vue'
+	import { computed, ref } from 'vue'
 	import Status from './Status.vue'
 	import OptionBtn from './OptionBtn.vue'
 	import {
@@ -47,19 +47,17 @@
 
 	const	userList = ref(false)
 
-	const	p = toRefs(props)
-
 	const	btns = computed(() => {
-		if (p.type.value == 'Friend') {
-			if (p.target.value.status === 'In Game')
+		if (props.type == 'Friend') {
+			if (props.target.status === 'In Game')
 				return [{ name: 'Spectate', logo: logoPlayCircle }, { name: 'See', logo: logoEye, }]
 			else
 				return [{ name: 'See', logo: logoEye }]
 		}
 		else
 			return [{ name: 'Quit', logo: logoQuit }, {
-				name: userList.value === true ? 'Conversation' : p.admin.value ? 'Settings' : 'Members',
-				logo: userList.value === true ? logoMsg :  p.admin.value ? logoSettings : logoPeople,
+				name: userList.value === true ? 'Conversation' : props.admin ? 'Settings' : 'Members',
+				logo: userList.value === true ? logoMsg :  props.admin ? logoSettings : logoPeople,
 			}]
 	})
 
@@ -81,7 +79,7 @@
 			emit('quit')
 	}
 
-	const	name = p.target.value.name ? p.target.value.name : p.target.value.username
+	const	name = props.target.name ? props.target.name : props.target.username
 
 </script>
 

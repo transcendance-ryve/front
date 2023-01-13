@@ -1,6 +1,4 @@
 <script setup lang="ts">
-	import { toRefs } from 'vue'
-
 
 	const props = defineProps({
 		type: {
@@ -33,9 +31,7 @@
 		}
 	})
 
-	const p = toRefs(props)
-
-	const	classType: string = 'Btn1--type' + p.type.value
+	const	classType: string = 'Btn1--type' + props.type
 
 </script>
 

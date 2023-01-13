@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, computed, watch, type Ref, withDefaults, toRefs } from 'vue'
+	import { ref, reactive, computed, watch, type Ref, withDefaults } from 'vue'
 	import { logoFriends, logoAdd, logoSearch } from '../../assets/logoSVG'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -20,7 +20,6 @@
 		protectedStatus: false,
 	})
 
-	const	p = toRefs(props)
 	const	userStore = useUserStore()
 
 	const	sectionSelected = ref('Invitees')
@@ -78,13 +77,13 @@
 
 	const	addUser = (user: IUserTag) => {
 		inviteesList.value.unshift(user)
-		p.invitees.value.unshift(user.id)
+		props.invitees.unshift(user.id)
 		addList.value.splice(addList.value.indexOf(user), 1)
 	}
 
 	const	deleteUser = (index: number) => {
 		inviteesList.value.splice(index, 1)
-		p.invitees.value.splice(index, 1)
+		props.invitees.splice(index, 1)
 	}
 
 </script>

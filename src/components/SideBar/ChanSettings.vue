@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
+	import { reactive, computed, onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import UploadAvatar from '@/components/Utils/UploadAvatar.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
@@ -21,12 +21,11 @@
 	}
 
 	const	props = defineProps<Props>()
-	const	p = toRefs(props)
 
 	const	form: Form = reactive({
-		id: p.channel.value.id,
+		id: props.channel.id,
 		name: '',
-		status: p.channel.value.status,
+		status: props.channel.status,
 		avatar: null,
 		avatarFile: null,
 		password: '',
@@ -42,7 +41,7 @@
 	}
 
 	const	readyToUpdate = computed(() => {
-		const	chan = p.channel.value
+		const	chan = props.channel
 		if (!form.avatar && !form.name &&
 				((form.status !== 'PROTECTED' && form.status === chan.status) ||
 				form.status === 'PROTECTED' && chan.status === 'PROTECTED' && !form.password))
@@ -60,7 +59,7 @@
 			if (!formToUpdate.name)
 				delete formToUpdate.name
 			if (formToUpdate.status !== 'PROTECTED' &&
-				(formToUpdate.status === 'PROTECTED' && !formToUpdate.password && p.channel.value.status === 'PROTECTED'))
+				(formToUpdate.status === 'PROTECTED' && !formToUpdate.password && props.channel.status === 'PROTECTED'))
 				delete formToUpdate.password
 				
 			editChannel(formToUpdate)

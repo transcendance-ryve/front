@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, toRefs } from 'vue'
+	import { ref } from 'vue'
 	import UserTag from './UserTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { IUserTag } from './UserTag.vue'
@@ -22,17 +22,15 @@
 		open: false
 	})
 
-	const	p = toRefs(props)
-
-	const	open = ref(p.open.value)
+	const	open = ref(props.open)
 	const	closed = ref(false)
 
 	const	userTagType = () => {
-		if (p.label.value === 'Banned' && (p.admin.value || p.owner.value))
+		if (props.label === 'Banned' && (props.admin || props.owner))
 			return 'banned'
-		else if (p.label.value === 'Administrators' && p.owner.value)
+		else if (props.label === 'Administrators' && props.owner)
 			return 'allPrivilegesA'
-		else if (p.label.value === 'Users' && (p.admin.value || p.owner.value))
+		else if (props.label === 'Users' && (props.admin || props.owner))
 			return 'allPrivileges'
 		else
 			return 'onlySee'
@@ -47,27 +45,27 @@
 	const	socket = userStore.socket
 
 	const	promoteUser = (user: IUserTag) => {
-		socket.emit('promoteUser', { roleInfo: { userId: user.id, channelId: p.channelId.value } })
+		socket.emit('promoteUser', { roleInfo: { userId: user.id, channelId: props.channelId } })
 	}
 
 	const	demoteUser = (user: IUserTag) => {
-		socket.emit('demoteUser', { roleInfo: { userId: user.id, channelId: p.channelId.value } })
+		socket.emit('demoteUser', { roleInfo: { userId: user.id, channelId: props.channelId } })
 	}
 
 	const	muteUser = (user: IUserTag) => {
-		socket.emit('muteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
+		socket.emit('muteUser', { muteInfo: { channelId: props.channelId, targetId: user.id, action: 'MUTE' } })
 	}
 
 	const	demuteUser = (user: IUserTag) => {
-		socket.emit('unmuteUser', { muteInfo: { channelId: p.channelId.value, targetId: user.id, action: 'MUTE' } })
+		socket.emit('unmuteUser', { muteInfo: { channelId: props.channelId, targetId: user.id, action: 'MUTE' } })
 	}
 
 	const	banUser = (user: IUserTag) => {
-		socket.emit('banUser', { banInfo: { channelId: p.channelId.value, targetId: user.id, action: 'BAN' } })
+		socket.emit('banUser', { banInfo: { channelId: props.channelId, targetId: user.id, action: 'BAN' } })
 	}
 
 	const	debanUser = (user: IUserTag) => {
-		socket.emit('unbanUser', { banInfo: { channelId: p.channelId.value, targetId: user.id, action: 'BAN' } })
+		socket.emit('unbanUser', { banInfo: { channelId: props.channelId, targetId: user.id, action: 'BAN' } })
 	}
 
 </script>
