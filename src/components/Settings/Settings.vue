@@ -66,6 +66,11 @@
 	}
 
 	const	newQRCode = async () => {
+		if (userStore.me.tfa_enabled) {
+			userStore.me.tfa_enabled = false
+			userStore.updateMe(userStore.me)
+			settingsData.state2FA = false
+		}
 		QRCode.value = await generateNewQRCode(dataState)
 	}
 
