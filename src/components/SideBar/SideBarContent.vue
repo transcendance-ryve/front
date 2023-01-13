@@ -255,9 +255,9 @@
 			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
 				removeTag({ id })
 		}))
-		// listeners.push(socket.on('joinRoomSuccess', (id: string) => {
-		// 	sbStore.openConv('Channel', id)
-		// }))
+		listeners.push(socket.on('joinRoomSuccess', (id: string) => {
+			sbStore.openConv('Channel', id)
+		}))
 	})
 
 	onUnmounted(() => {
