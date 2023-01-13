@@ -58,12 +58,12 @@
 <template>
 
 	<div class="Notifications" v-if="notifStore.notifs.length">
-		<!-- <NotifTag
+		<NotifTag
 			v-for="notif in notifStore.notifs"
 			:key="notif.id"
 			:notif="notif"
-		/> -->
-		<NotifTag
+		/>
+		<!-- <NotifTag
 			:notif="{
 				type: 'friend',
 				id: '1',
@@ -89,7 +89,7 @@
 				text: 'new channel invitation',
 				avatar: 'http://localhost:3000/default.png'
 			}"
-		/>
+		/> -->
 	</div>
 
 </template>
