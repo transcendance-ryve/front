@@ -1,10 +1,6 @@
 import useAxios from '@/requests/useAxios'
 import router from '@/router'
-
-export type leaderboardData = { users: any[], count: number, loadingData: boolean, err: null }
-export type leaderboardQueries = { page: string, take: string, sort: string, order: string, search: string }
-export type queriesKeys = 'page' | 'take' | 'sort' | 'order' | 'search'
-
+import type { leaderboardData, leaderboardQueries } from '@/types/Leaderboard'
 
 const	getQueriesInUrl = (path: string) => {
 	return (path.substring(path.indexOf('?')))

@@ -7,23 +7,17 @@
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
-	import {
-		getQueriesInUrl,
-		replaceUrl,
-		getLeaderboard,
-		type leaderboardData,
-		type leaderboardQueries,
-		type queriesKeys
-	} from '@/requests/Leaderboard/getLeaderboard'
+	import { getQueriesInUrl, replaceUrl, getLeaderboard } from '@/requests/Leaderboard/getLeaderboard'
+	import type { leaderboardData, leaderboardQueries, queriesKeys } from '@/types/Leaderboard'
 	import router, { profileRedirect } from '@/router/index'
 	import {type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 
-	const	contentStore = useContentStore()
+	const	contentStore: any = useContentStore()
 	contentStore.state = 2
 
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
-	let		routeUpdating = false
+	let		routeUpdating: boolean = false
 
 	const	data: leaderboardData = reactive({
 		users: [],
