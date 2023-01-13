@@ -1,44 +1,28 @@
 <script setup lang="ts">
 
-	defineProps({
-		modelValue: {
-			type: [String, Number],
-			default: '',
-		},
-		inputBackground: {
-			type: String,
-			default: '#1F1E2C',
-		},
-		logo: {
-			type: [String, Boolean],
-			default: false,
-		},
-		logoSize: {
-			type: String,
-			default: '24em',
-		},
-		inputHeight: {
-			type: String,
-			default: '48em',
-		},
-		inputPadding: {
-			type: String,
-			default: '12em',
-		},
-		inputGap: {
-			type: String,
-			default: '12em',
-		},
-		borderRadius: {
-			default: '6em'
-		},
-		inputFont: {
-			type: String,
-			default: '500 18em \'Poppins\'',
-		}
+	export interface Props {
+		modelValue?: string | number
+		inputBackground?: string
+		logo?: string | boolean
+		logoSize?: string
+		inputHeight?: string
+		inputPadding?: string
+		inputGap?: string
+		borderRadius?: string
+		inputFont?: string
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		modelValue: '',
+		inputBackground: '#1F1E2C',
+		logo: false,
+		logoSize: '24em',
+		inputHeight: '48em',
+		inputPadding: '12em',
+		inputGap: '12em',
+		borderRadius: '6em',
+		inputFont: '500 18em \'Poppins\'',
 	})
-
-
 
 </script>
 
@@ -48,7 +32,7 @@
 		<input
 			type="text"
 			:value="modelValue"
-			@input="$emit('update:modelValue', $event.target.value)"
+			@input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
 			v-bind="$attrs"
 		>
 		<span v-if="logo" class="inputLogo" v-html="logo"></span>

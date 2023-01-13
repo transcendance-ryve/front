@@ -1,8 +1,7 @@
 <script setup lang="ts">
-
 	import NotifTag from './NotifTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import { useSideBarStore } from '@/stores/SideBarStore';
+	import { useSideBarStore } from '@/stores/SideBarStore'
 
 	const	userStore = useUserStore()
 	const	sbStore = useSideBarStore()
