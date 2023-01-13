@@ -2,7 +2,7 @@
 
 	import { reactive, toRefs, computed, onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import UploadAvatar from '../Utils/UploadAvatar.vue'
+	import UploadAvatar from '@/components/Utils/UploadAvatar.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import StatusBtns from './StatusBtns.vue'
 	import Btn1 from '../Utils/Btn1.vue'
