@@ -1,5 +1,7 @@
+import type { User } from './User';
+
 export interface leaderboardData {
-	users: any[],
+	users: User[],
 	count: number,
 	loadingData: boolean,
 	err: null

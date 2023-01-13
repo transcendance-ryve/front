@@ -1,15 +1,11 @@
 <script setup lang="ts">
 
-	import { toRefs } from 'vue'
+	interface props {
+		label: string
+		value: number
+	}
 
-	const	props = defineProps({
-		label: {
-			type: String
-		},
-		value: {
-			type: Number
-		},
-	})
+	defineProps<props>()
 
 </script>
 

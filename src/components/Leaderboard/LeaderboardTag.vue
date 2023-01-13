@@ -2,23 +2,19 @@
 
 	import UserInfos from '../Utils/UserInfos.vue'
 	import LeaderboardTagStat from './LeaderboardTagStat.vue'
-	import { useContentStore } from '../../stores/ContentStore'
+	import type { User } from '@/types/User'
+	import { withDefaults } from 'vue'
 
-	defineProps({
-		user: {
-			type: Object
-		},
-		rank: {
-			type: Number,
-			default: 0
-		},
-		selectValue: {
-			type: [String, Boolean],
-			default: false
-		}
+	interface props {
+		user: User
+		rank: number
+		selectValue: string | boolean
+	}
+
+	withDefaults(defineProps<props>(), {
+		rank: 0,
+		selectValue: false
 	})
-
-	const	contentStore = useContentStore()
 
 </script>
 
