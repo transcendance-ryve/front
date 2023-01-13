@@ -88,7 +88,10 @@
 
 
 
-	let defaultGrid: DefaultGrid;
+	let defaultGrid: DefaultGrid = {
+		width: 0,
+		height: 0,
+	};
 
 	const keys: Keys = {
 		w: false,
@@ -215,13 +218,15 @@
 			0,
 			Math.PI * 2
 		);
-		ctx.fillStyle = '#fff';
+		ctx.fillStyle = ball.color;
 		ctx.closePath();
+		ctx.fill();
 	}
 
 	/* Socket handler */
 
 	const update = (game: { paddles: Paddles, ball: Ball }): void => {
+		console.log(game);
 		const ctx = canvas.value.getContext('2d');
 		
 		const ratio = canvas.value.width / defaultGrid.width;
