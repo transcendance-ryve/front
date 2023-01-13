@@ -67,12 +67,12 @@
 
 	const	listeners: any[] = []
 	onMounted(() => {
-		listeners.push(socket.on('user_connected', (data: any) => {
-			if (data.id === p.data.value.id)
+		listeners.push(socket.on('user_connected', (id: string) => {
+			if (id === p.data.value.id)
 				p.data.value.status = 'ONLINE'
 		}))
-		listeners.push(socket.on('user_disconnected', (data: any) => {
-			if (data.id === p.data.value.id)
+		listeners.push(socket.on('user_disconnected', (id: string) => {
+			if (id === p.data.value.id)
 				p.data.value.status = 'OFFLINE'
 		}))
 	})

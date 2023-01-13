@@ -20,14 +20,14 @@
 	onMounted(() => {
 		// listeners.push(socket.on('pong', () => { notifStore.addNotif('', 'Pong', '', '') }))
 
-		listeners.push(socket.on('user_connected', (res: any) => notifStore.addNotif('infoG', res.username, 'connected', res.avatar)))
+		listeners.push(socket.on('user_connected', (id: string) => notifStore.addNotif('infoG', '', 'connected')))
 		listeners.push(socket.on('friend_accepted', (res: any) => { notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) }))
 		listeners.push(socket.on('friend_accepted_submitted', (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar)))
 		listeners.push(socket.on('friend_request_submitted', (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar)))
 		listeners.push(socket.on('invitationAccepted', () => notifStore.addNotif('infoG', '', 'invitation accepted')))
 		listeners.push(socket.on('invitationSent', (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar)))
 
-		listeners.push(socket.on('user_disconnected', (res: any) => notifStore.addNotif('infoR', res.username, 'disconnected', res.avatar)))
+		listeners.push(socket.on('user_disconnected',  (id: string) => notifStore.addNotif('infoG', '', 'disconnected')))
 		listeners.push(socket.on('friend_declined', (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar)))
 		listeners.push(socket.on('friend_removed', (res: any) => notifStore.addNotif('infoR', res.username, 'has deleted you', res.avatar)))
 		listeners.push(socket.on('friend_declined_submitted', (res: any) => notifStore.addNotif('infoR', res.username, 'invitation declined', res.avatar)))
