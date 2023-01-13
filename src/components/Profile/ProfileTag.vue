@@ -25,11 +25,7 @@
 
 	<div class="ProfileTag">
 		<UserInfos
-			:avatar="user?.avatar"
-			:username="user?.username"
-			:level="user?.level"
-			:experience="user?.experience"
-			:nextLevel="user?.next_level"
+			:user="user"
 			:sizeXL="true"
 		/>
 		<div class="ProfileTag-btnsWrap" v-if="type === 1">

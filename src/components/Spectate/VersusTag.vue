@@ -1,13 +1,14 @@
 <script setup lang="ts">
 
+	import { ref, type Ref } from 'vue'
 	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoScore, logoScoreBlue, logoScoreRed } from '../../assets/logoSVG'
-	import type { User } from '../../types'
+	import type { Player, User } from '@/types/User'
 
 	interface Props {
-		user: User
-		reverse: boolean
+		player: Player
+		reverse?: boolean
 	}
 
 	const	props = withDefaults(defineProps<Props>(), {
@@ -17,11 +18,20 @@
 	const	userColor: string = props.reverse ? '#FF4646' : '#0177FB'
 
 	const	logo = (index: number) => {
-		if (index <= props.user.score)
+		if (index <= props.player.score)
 			return props.reverse ? logoScoreRed : logoScoreBlue
 		else
 			return logoScore
 	}
+
+	const	user: Ref<Partial<User>> = ref({
+		id: props.player.id,
+		avatar: props.player.avatar,
+		username: props.player.username,
+		level: props.player.level,
+		experience: props.player.experience,
+		next_level: props.player.next_level
+	})
 
 </script>
 
@@ -32,11 +42,7 @@
 		:class="{'VersusTag--reverse': reverse}"
 	>
 		<UserInfos
-			:avatar="user.avatar"
-			:username="user.username"
-			:level="user.level"
-			:experience="user.experience"
-			:nextLevel="user.next_level"
+			:user="user"
 			:mainColor="userColor"
 			:avatarBorder="true"
 			:reverse="reverse"

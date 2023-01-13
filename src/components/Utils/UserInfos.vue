@@ -1,13 +1,38 @@
 <script setup lang="ts">
 
 	import { toRefs, computed, withDefaults } from 'vue'
+	import type { User } from '@/types/User'
+
+	// export interface Props {
+	// 	avatar?: string
+	// 	username?: string
+	// 	level?: number
+	// 	experience?: number
+	// 	nextLevel?: number
+	// 	mainColor?: string
+	// 	xpBackground?: string
+	// 	avatarBorder?: boolean
+	// 	reverse?: boolean
+	// 	sizeXS?: boolean
+	// 	sizeXL?: boolean
+	// }
+
+	// const props = withDefaults(defineProps<Props>(), {
+	// 	avatar: '',
+	// 	username: '',
+	// 	level: 0,
+	// 	experience: 0,
+	// 	nextLevel: 0,
+	// 	mainColor: '#0177FB',
+	// 	xpBackground: '#1F1E2C',
+	// 	avatarBorder: false,
+	// 	reverse: false,
+	// 	sizeXS: false,
+	// 	sizeXL: false
+	// })
 
 	export interface Props {
-		avatar?: string
-		username?: string
-		level?: number
-		experience?: number
-		nextLevel?: number
+		user: Partial<User>
 		mainColor?: string
 		xpBackground?: string
 		avatarBorder?: boolean
@@ -17,11 +42,6 @@
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
-		avatar: '',
-		username: '',
-		level: 0,
-		experience: 0,
-		nextLevel: 0,
 		mainColor: '#0177FB',
 		xpBackground: '#1F1E2C',
 		avatarBorder: false,
@@ -30,16 +50,14 @@
 		sizeXL: false
 	})
 
-	const	p = toRefs(props)
-
 	const	percentXP = computed(() => {
-		let	percent: number = p.experience.value * 100 / p.nextLevel.value
+		let	percent: number = (props.user.experience || 0) * 100 / (props.user.next_level || 0)
 		percent = Number.isInteger(percent) ? percent : parseFloat(percent.toFixed(2))
 		return percent.toString() + '%'
 	})
-	const	borderAvatar = p.avatarBorder.value ?
-		'4em solid' + p.mainColor.value : 'none'
-	const		avatarWidth = p.avatarBorder.value ? '72em' : '64em'
+	const	borderAvatar = props.avatarBorder ?
+		'4em solid' + props.mainColor : 'none'
+	const		avatarWidth = props.avatarBorder ? '72em' : '64em'
 
 </script>
 
@@ -55,16 +73,16 @@
 	>
 		<img
 			class="UserInfos-avatar"
-			:src="avatar"
+			:src="user.avatar"
 			alt="avatar"
 		>
 		<div class="UserInfos-content">
-			<span class="Content-name">{{ username }}</span>
+			<span class="Content-name">{{ user.username }}</span>
 			<div class="Content-level">
 				<span class="Level-percentWrap">
 					<span class="Level-percent"></span>
 				</span>
-				<span class="Level">LVL {{ level }} - {{ percentXP }}</span>
+				<span class="Level">LVL {{ user.level }} - {{ percentXP }}</span>
 			</div>
 		</div>
 		<slot></slot>

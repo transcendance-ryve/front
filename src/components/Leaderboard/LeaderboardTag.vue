@@ -25,13 +25,7 @@
 			<div class="LeaderboardTag-rank">
 				<span class="Rank-value">#{{ rank }}</span>
 			</div>
-			<UserInfos
-				:avatar="user.avatar"
-				:username="user.username"
-				:level="user.level"
-				:experience="user.experience"
-				:nextLevel="user.next_level"
-			/>
+			<UserInfos :user="user" />
 		</div>
 		<div class="LeaderboardTag-StatWrap">
 			<LeaderboardTagStat

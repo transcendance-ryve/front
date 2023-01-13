@@ -30,3 +30,18 @@ export interface User {
 	loses: number;
 	played: number;
 }
+
+export interface Player {
+	id: string,
+	username: string,
+	avatar: string,
+	score: number,
+	level: number,
+	experience: number,
+	next_level: number,
+}
+
+export interface Players {
+	left: Player,
+	right: Player,
+}

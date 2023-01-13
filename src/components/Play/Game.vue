@@ -272,10 +272,10 @@
 	<div class="game__content">
 		<div class="game__header">			
 			<VersusTag
-				:user="players?.left || defaultPlayers.left"
+				:player="players?.left || defaultPlayers.left"
 			/>
 			<VersusTag
-				:user="players?.right || defaultPlayers.right"
+				:player="players?.right || defaultPlayers.right"
 				:reverse="true"
 			/>
 		</div>
