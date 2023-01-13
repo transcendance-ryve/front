@@ -17,7 +17,6 @@ export const useNotifStore = defineStore('notifStore', () => {
 
 	const	removeNotif = (id: string) => {
 		notifs.splice(notifs.findIndex(notif => notif.id === id), 1)
-		console.log('notif removed', notifs)
 	}
 
 	watch(notifs, () => {
