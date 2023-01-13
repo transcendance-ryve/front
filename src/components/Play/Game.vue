@@ -54,7 +54,7 @@
 		color: string,
 	}
 
-	interface defaultGrid {
+	interface DefaultGrid {
 		width: number,
 		height: number,
 	}
@@ -88,7 +88,7 @@
 
 
 
-	let defaultGrid: defaultGrid;
+	let defaultGrid: DefaultGrid;
 
 	const keys: Keys = {
 		w: false,
