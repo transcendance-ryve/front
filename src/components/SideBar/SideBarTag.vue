@@ -1,20 +1,20 @@
 <script setup lang="ts">
 
-	import { toRefs, computed, ref, type Ref } from 'vue'
+	import { toRefs, computed, ref, type Ref, onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn1 from '../Utils/Btn1.vue'
-	import type { contentData } from '@/components/SideBar/SideBarContent.vue'
+	import type { ContentData } from '@/components/SideBar/SideBarContent.vue'
 	import router from '@/router'
 	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
 	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
 
 	export interface Props {
 		type: number
-		data: Partial<contentData>
+		data: Partial<ContentData>
 	}
 
 	const props = defineProps<Props>()
@@ -64,6 +64,24 @@
 				}
 			})
 	}
+
+	const	listeners: any[] = []
+	onMounted(() => {
+		listeners.push(socket.on('user_connected', (id: string) => {
+			if (id === p.data.value.id)
+				p.data.value.status = 'ONLINE'
+		}))
+		listeners.push(socket.on('user_disconnected', (id: string) => {
+			if (id === p.data.value.id)
+				p.data.value.status = 'OFFLINE'
+		}))
+	})
+
+	onUnmounted(() => {
+		listeners.forEach((listener) => {
+			socket.off(listener)
+		})
+	})
 
 </script>
 

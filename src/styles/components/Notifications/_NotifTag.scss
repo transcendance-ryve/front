@@ -64,18 +64,10 @@
 	}
 }
 
-.NotifTag--friend {
+.NotifTag--infoB {
 	.NotifTag-content > .Content-text {
 		.Text-value {
 			color: $cheat-blue;
-		}
-	}
-}
-
-.NotifTag--channel {
-	.NotifTag-content > .Content-text {
-		.Text-value {
-			color: #CCCF3C;
 		}
 	}
 }
@@ -91,6 +83,30 @@
 .NotifTag--error {
 	.NotifTag-content > .Content-text {
 		.Text-label {
+			color: $red;
+		}
+	}
+}
+
+.NotifTag--infoY {
+	.NotifTag-content > .Content-text {
+		.Text-value {
+			color: #CCCF3C;
+		}
+	}
+}
+
+.NotifTag--infoG {
+	.NotifTag-content > .Content-text {
+		.Text-value {
+			color: $green;
+		}
+	}
+}
+
+.NotifTag--infoR {
+	.NotifTag-content > .Content-text {
+		.Text-value {
 			color: $red;
 		}
 	}
