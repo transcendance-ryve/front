@@ -2,14 +2,11 @@
 	import { reactive, computed, onMounted } from 'vue'
 	import BaseInput from '@/components/Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
-	import {
-		required,
-		email,
-		helpers
-	} from '@vuelidate/validators'
+	import { required, email, helpers } from '@vuelidate/validators'
 	import { logoEmail } from '../../assets/logoSVG'
+	import type { ForgotPasswordForm } from '@/types/Forms'
 
-	const	formData = reactive({
+	const	formData: ForgotPasswordForm = reactive({
 		email: '',
 	})
 

@@ -2,24 +2,20 @@
 	import { reactive, computed, onMounted } from 'vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
-	import {
-		required,
-		minLength,
-		helpers
-	} from '@vuelidate/validators'
+	import { required, minLength, helpers } from '@vuelidate/validators'
 	import { logoProfile, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
 	import router from '@/router'
+	import type { LoginForm } from '@/types/Forms'
 
-
-	const	formData = reactive({
-		id: '',
+	const	formData: LoginForm = reactive({
+		email: '',
 		password: '',
 	})
 
 	const	rules = computed(() => {
 		return {
-			id: {        //    custom error msg with helpers.withMessage
+			email: {        //    custom error msg with helpers.withMessage
 				required: helpers.withMessage('Please enter a username', required),
 			},
 			password: {
@@ -36,7 +32,7 @@
 	const	submitForm = async () => {
 		const    result = await v$.value.$validate();
 		if (result)    {
-			emit('login', formData.id, formData.password)
+			emit('login', formData.email, formData.password)
 		}
 		else
 			alert('error, form not submitted')
@@ -61,15 +57,15 @@
 			<div class="Form-inputsWrap">
 				<BaseInput
 					id="UserName"
-					v-model="formData.id"
+					v-model="formData.email"
 					placeholder="Username or Email"
 					:logo="logoProfile"
 				/>
 				<span
 					class="form-error"
-					v-if="v$.id.$error"
+					v-if="v$.email.$error"
 				>
-					{{ v$.id.$errors[0].$message }}
+					{{ v$.email.$errors[0].$message }}
 				</span>
 				<BaseInput
 					v-model="formData.password"

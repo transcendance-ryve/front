@@ -9,8 +9,9 @@
 		helpers
 	} from '@vuelidate/validators'
 	import { logoLock } from '../../assets/logoSVG'
+	import type { ResetPasswordForm } from '@/types/Forms'
 
-	const	formData = reactive({
+	const	formData: ResetPasswordForm = reactive({
 		password: '',
 		confirmPassword: ''
 	})

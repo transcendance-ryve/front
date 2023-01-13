@@ -12,8 +12,9 @@
 	} from '@vuelidate/validators'
 	import { logoProfile, logoEmail, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
+	import type { RegisterForm } from '@/types/Forms'
 
-	const	formData = reactive({
+	const	formData: RegisterForm = reactive({
 		username: '',
 		email: '',
 		password: '',

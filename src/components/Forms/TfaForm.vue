@@ -7,8 +7,9 @@
 		helpers
 	} from '@vuelidate/validators'
 	import { logoQrCode } from '../../assets/logoSVG'
+	import type { TfaForm } from '@/types/Forms'
 
-	const	formData = reactive({
+	const	formData: TfaForm = reactive({
 		code: '',
 	})
 
