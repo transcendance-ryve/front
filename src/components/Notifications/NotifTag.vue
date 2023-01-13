@@ -14,8 +14,8 @@
 	const	notifStore = useNotifStore()
 	const	notifClose = ref(false)
 	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
-
 	let		timer: number | undefined = undefined
+
 	const	closeNotif = () => {
 		if (timer)
 			clearTimeout(timer)
