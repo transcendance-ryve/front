@@ -199,95 +199,11 @@
 	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import VersusTag from '../Spectate/VersusTag.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
+	import router, { profileRedirect } from '@/router/index'
 	import type { Player, Players } from '@/types/User'
 	import type { MatchHistoryData, MatchHistoryQueries, queriesKeys } from '@/types/MatchHistory'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
-	import { getMatchHistory } from '@/requests/Profile/getMatchHistory'
-
-	const	users: Partial<Player>[] = [
-		{
-			id: '234',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Karim',
-			score: 1,
-		},
-		{
-			id: '24',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Kylian',
-			score: 2,
-		},
-		{
-			id: '2',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Antoine',
-			score: 3,
-		},
-		{
-			id: '3',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Ousmane',
-			score: 4,
-		},
-		{
-			id: '4',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Benjamin',
-			score: 1,
-		},
-		{
-			id: '5',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Theo',
-			score: 0,
-		},
-		{
-			id: '6',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Lucas',
-			score: 0,
-		},
-		{
-			id: '7',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Adrien',
-			score: 5,
-		},
-		{
-			id: '8',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Alphonse',
-			score: 0,
-		},
-		{
-			id: '9',
-			avatar: "http://localhost:3000/default.png",
-			username: 'Steve',
-			score: 4,
-		},
-	]
-	const	gamesData: Players[] = reactive([
-		{
-			left: users[0],
-			right: users[1],
-		},
-		{
-			left: users[2],
-			right: users[3],
-		},
-		{
-			left: users[4],
-			right: users[5],
-		},
-		{
-			left: users[6],
-			right: users[7],
-		},
-		{
-			left: users[8],
-			right: users[9],
-		},
-	])
+	import { getMatchHistory, getQueriesInUrl, replaceUrl } from '@/requests/Profile/getMatchHistory'
 
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	let		routeUpdating: boolean = false
@@ -348,8 +264,8 @@
 	}
 
 	watch(queries, async () => {
-		// if (!routeUpdating)
-			// await replaceUrl(JSON.parse(JSON.stringify(queries)))
+		if (!routeUpdating)
+			await replaceUrl(JSON.parse(JSON.stringify(queries)))
 	})
 
 	watch(pagesCount, newVal => {
@@ -358,21 +274,20 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-		if (to.fullPath === '/leaderboard')
+		if (Object.keys(to.query).length === 0)
 			return false
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		// await getLeaderboard(getQueriesInUrl(to.fullPath), data)
+		await getMatchHistory(getQueriesInUrl(to.fullPath), data)
 		routeUpdating = false
 	})
 
 	onMounted(async () => {
-		// getUrlQueries(router.currentRoute.value.query)
-		await getMatchHistory(queries.search, data)
+		getUrlQueries(router.currentRoute.value.query)
+		checkQueries()
+		await getMatchHistory(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 	})
-
-	getMatchHistory(queries.search, data)
 
 </script>
 
@@ -414,7 +329,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="MatchHistory-content">
+		<div v-if="!data.err && !data.loadingData" class="MatchHistory-content">
 			<div
 				class="Content-Versus"
 				v-for="(game, index) in data.games"

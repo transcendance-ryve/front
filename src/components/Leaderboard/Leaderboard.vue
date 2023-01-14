@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, ref, type Ref, computed, watch } from 'vue'
+	import { reactive, onMounted, computed, watch } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import LeaderboardTag from './LeaderboardTag.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -119,7 +119,7 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-		if (to.fullPath === '/leaderboard')
+		if (Object.keys(to.query).length === 0)
 			return false
 		routeUpdating = true
 		if (to.query !== from.query)
@@ -128,9 +128,11 @@
 		routeUpdating = false
 	})
 
-	getUrlQueries(router.currentRoute.value.query)
-	checkQueries()
-	getLeaderboard(getQueriesInUrl(router.currentRoute.value.fullPath), data)
+	onMounted(() => {
+		getUrlQueries(router.currentRoute.value.query)
+		checkQueries()
+		getLeaderboard(getQueriesInUrl(router.currentRoute.value.fullPath), data)
+	})
 
 </script>
 
