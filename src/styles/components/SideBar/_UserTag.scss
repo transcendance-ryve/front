@@ -35,7 +35,7 @@
 		display: flex;
 		gap: 16em;
 
-		.OptionBtn {
+		.ActionBtn {
 			opacity: 0;
 		}
 	}
@@ -45,7 +45,7 @@
 			background: $dark-blue;
 			transition: background 150ms ease-in-out;
 		}
-		.OptionBtn {
+		.ActionBtn {
 			opacity: 1;
 			transition: opacity 150ms ease-in-out;
 			transition: background 150ms ease-in-out;

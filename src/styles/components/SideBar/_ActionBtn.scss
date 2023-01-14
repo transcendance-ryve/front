@@ -1,4 +1,4 @@
-.OptionBtn {
+.ActionBtn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -9,7 +9,7 @@
 	border-radius: 50%;
 	position: relative;
 
-	.OptionBtn-logo {
+	.ActionBtn-logo {
 		width: 16em;
 		height: 16em;
 		svg {
@@ -21,7 +21,7 @@
 	}
 
 	&:hover {
-		.OptionBtn-logo svg {
+		.ActionBtn-logo svg {
 			fill: white;
 			transition: fill 150ms ease-in-out;
 		}
@@ -31,32 +31,32 @@
 	}
 }
 
-.OptionBtn--mute {
+.ActionBtn--mute {
 	background: #FF8A00;
-	.OptionBtn-logo > svg {
+	.ActionBtn-logo > svg {
 		fill: white;
 	}
 
 	&:hover {
 		background: rgba(255, 138, 0, 0.5) !important;
 		transition: background 150ms ease-in-out;
-		.OptionBtn-logo > svg {
+		.ActionBtn-logo > svg {
 			transition: fill 150ms ease-in-out;
 			fill: $white-200;
 		}
 	}
 }
 
-.OptionBtn--ban {
+.ActionBtn--ban {
 	background: $red;
-	.OptionBtn-logo > svg {
+	.ActionBtn-logo > svg {
 		fill: white;
 	}
 
 	&:hover {
 		background: rgba(227, 47, 47, 0.5) !important;
 		transition: background 150ms ease-in-out;
-		.OptionBtn-logo > svg {
+		.ActionBtn-logo > svg {
 			transition: fill 150ms ease-in-out;
 			fill: $white-200;
 		}

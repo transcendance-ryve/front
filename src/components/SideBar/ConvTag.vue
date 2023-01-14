@@ -2,7 +2,7 @@
 
 	import { computed, ref } from 'vue'
 	import Status from './Status.vue'
-	import OptionBtn from './OptionBtn.vue'
+	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
 	import {
 		logoEye,
 		logoStop,
@@ -23,7 +23,7 @@
 
 	const props = defineProps<Props>()
 
-	const	options = [
+	const actionBtns: ActionBtnValue[] = [
 		{
 			name: 'See',
 			logo: logoEye,
@@ -101,8 +101,8 @@
 						<Status :status="target.status"/>
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">
-						<OptionBtn
-							v-for="(option, index) in options"
+						<ActionBtn
+							v-for="(option, index) in actionBtns"
 							:key="index"
 							:logo="option.logo"
 							:hoverColor="option.color"
