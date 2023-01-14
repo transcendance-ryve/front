@@ -22,7 +22,7 @@
 		listeners.push(socket.on('invitationAccepted', () => notifStore.addNotif('infoG', '', 'invitation accepted')))
 		listeners.push(socket.on('invitationSent', (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar)))
 
-		listeners.push(socket.on('user_disconnected',  (id: string) => notifStore.addNotif('infoG', '', 'disconnected')))
+		listeners.push(socket.on('user_disconnected',  (id: string) => notifStore.addNotif('infoR', '', 'disconnected')))
 		listeners.push(socket.on('friend_declined', (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar)))
 		listeners.push(socket.on('friend_removed', (res: any) => notifStore.addNotif('infoR', res.username, 'has deleted you', res.avatar)))
 		listeners.push(socket.on('friend_declined_submitted', (res: any) => notifStore.addNotif('infoR', res.username, 'invitation declined', res.avatar)))
