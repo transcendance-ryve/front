@@ -28,6 +28,9 @@
 			display: flex;
 			border-radius: 6em;
 			background: $background-600;
+			.VersusTag {
+				min-height: 112em;
+			}
 		}
 	}
 

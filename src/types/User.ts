@@ -59,6 +59,6 @@ export interface Player {
 }
 
 export interface Players {
-	left: Player,
-	right: Player,
+	left: Partial<Player>,
+	right: Partial<Player>,
 }

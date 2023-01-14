@@ -50,7 +50,7 @@
 		>
 		<div class="UserInfos-content">
 			<span class="Content-name">{{ user.username }}</span>
-			<div class="Content-level">
+			<div class="Content-level" v-if="user.level">
 				<span class="Level-percentWrap">
 					<span class="Level-percent"></span>
 				</span>
