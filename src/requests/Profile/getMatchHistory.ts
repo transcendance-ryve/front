@@ -23,7 +23,6 @@ const getMatchHistory = async (urlQueries: string, data: MatchHistoryData) => {
 	data.loadingData = loading.value
 	data.err = error.value
 	if (!data.err) {
-        console.log('match history response', response.value)
 		data.games = response.value.games
 		data.count = response.value.count
 	}
