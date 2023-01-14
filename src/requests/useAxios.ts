@@ -3,6 +3,7 @@ import { ref, type Ref } from 'vue'
 import router from '../router/index'
 import { useUserStore } from '../stores/UserStore'
 import { useSideBarStore } from '@/stores/SideBarStore'
+import type { UserConnected } from '@/types/User'
 
 
 axios.defaults.baseURL = 'http://localhost:3000'
@@ -28,7 +29,7 @@ const	useAxios = async (method: Methods, url: string, body: object | any = null,
 			const	sbStore = useSideBarStore()
 
 			localStorage.clear()
-			userStore.me = ''
+			userStore.me = {} as UserConnected
 			userStore.loginApi = false
 			sbStore.resetState()
 			if (!router.currentRoute.value.fullPath.includes('/accounts'))
