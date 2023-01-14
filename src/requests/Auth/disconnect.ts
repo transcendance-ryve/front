@@ -15,6 +15,7 @@ const disconnect = async () => {
 	const	sbStore = useSideBarStore()
 	userStore.me = {} as UserConnected
 	userStore.loginApi = false
+	userStore.socket.disconnect()
 	sbStore.resetState()
 	if (!router.currentRoute.value.fullPath.includes('/accounts'))
 		router.push({ path: '/accounts' })
