@@ -1,16 +1,15 @@
 <script setup lang="ts">
 
-	import { computed } from 'vue'
+	import { withDefaults, computed } from 'vue'
 
-	const props = defineProps({
-		status: {
-			type: [String, Boolean],
-			default: false,
-		},
-		users: {
-			type: [Number, Boolean],
-			default: false,
-		}
+	interface Props {
+		status?: string | boolean
+		users?: number | boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		status: false,
+		users: false,
 	})
 
 	const	statusClass = computed(() => {
