@@ -8,9 +8,9 @@
 	import { logoPerPage, logoSort, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import { getQueriesInUrl, replaceUrl, getLeaderboard } from '@/requests/Leaderboard/getLeaderboard'
-	import type { leaderboardData, leaderboardQueries, queriesKeys } from '@/types/Leaderboard'
+	import type { LeaderboardData, LeaderboardQueries, queriesKeys } from '@/types/Leaderboard'
 	import router, { profileRedirect } from '@/router/index'
-	import {type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
+	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 
 	const	contentStore: any = useContentStore()
 	contentStore.state = 2
@@ -19,14 +19,14 @@
 	const	menuSort: string[] = ['Rank points', 'Play count', 'Wins', 'Defeats']
 	let		routeUpdating: boolean = false
 
-	const	data: leaderboardData = reactive({
+	const	data: LeaderboardData = reactive({
 		users: [],
 		count: 0,
 		loadingData: false,
 		err: null
 	})
 
-	const	queries: leaderboardQueries = reactive({
+	const	queries: LeaderboardQueries = reactive({
 		page: '1',
 		take: '10',
 		sort: 'rank_point',

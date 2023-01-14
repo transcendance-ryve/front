@@ -13,9 +13,39 @@
 			width: 350em;
 		}
 
-		.Filters-menus {
+		.Filters {
 			display: flex;
 			gap: 16em;
+
+			.Filters-orderBtns {
+				display: flex;
+				gap: 8em;
+
+				.OrderBtn {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					width: 48em;
+					height: 56em;
+					background: $background-600;
+					border-radius: 6em;
+
+					.OrderBtn-logo {
+						width: 24em;
+						height: 24em;
+						svg {
+							width: 100%;
+							height: 100%;
+							fill: white;
+						}
+					}
+				}
+				.OrderBtn--selected {
+					.OrderBtn-logo > svg {
+						fill: $dark-blue;
+					}
+				}
+			}
 		}
 	}
 

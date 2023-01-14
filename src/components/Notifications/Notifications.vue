@@ -15,7 +15,7 @@
 		// listeners.push(socket.on('pong', () => { notifStore.addNotif('', 'Pong', '', '') }))
 		// socket.emit('ping', () => { console.log('ping emit') })
 
-		listeners.push(socket.on('user_connected', (id: string) => notifStore.addNotif('infoG', '', 'connected')))
+		listeners.push(socket.on('user_connected', (res: any) => {notifStore.addNotif('infoG', '', 'connected'); console.log('connected', res)}))
 		listeners.push(socket.on('friend_accepted', (res: any) => { notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) }))
 		listeners.push(socket.on('friend_accepted_submitted', (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar)))
 		listeners.push(socket.on('friend_request_submitted', (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar)))

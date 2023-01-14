@@ -8,6 +8,7 @@
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn from '../Utils/Btn.vue'
 	import type { ContentData } from '@/types/Sidebar'
+	import type { User } from '@/types/User'
 	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
 	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
 
@@ -56,12 +57,12 @@
 
 	const	listeners: any[] = []
 	onMounted(() => {
-		listeners.push(socket.on('user_connected', (id: string) => {
-			if (id === props.data.id)
+		listeners.push(socket.on('user_connected', (user: Partial<User>) => {
+			if (user.id === props.data.id)
 				props.data.status = 'ONLINE'
 		}))
-		listeners.push(socket.on('user_disconnected', (id: string) => {
-			if (id === props.data.id)
+		listeners.push(socket.on('user_disconnected', (user: Partial<User>) => {
+			if (user.id === props.data.id)
 				props.data.status = 'OFFLINE'
 		}))
 	})

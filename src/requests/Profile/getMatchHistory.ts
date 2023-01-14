@@ -1,32 +1,32 @@
 import useAxios from '@/requests/useAxios'
 import router from '@/router'
-import type { LeaderboardData, LeaderboardQueries } from '@/types/Leaderboard'
+import type { MatchHistoryData, MatchHistoryQueries } from '@/types/MatchHistory'
 
 const	getQueriesInUrl = (path: string) => {
 	return (path.substring(path.indexOf('?')))
 }
 
-const	replaceUrl = async (queries: Partial<LeaderboardQueries>) => {
+const	replaceUrl = async (queries: Partial<MatchHistoryQueries>) => {
 	if (!queries.search)
 		delete queries.search
 	await router.push({ query: queries})
 }
 
-const getLeaderboard = async (urlQueries: string, data: LeaderboardData) => {
+const getMatchHistory = async (urlQueries: string, data: MatchHistoryData) => {
 
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/users'
-		+ urlQueries
-		+ '&select=id,username,avatar,level,experience,next_level,rank_point,wins,loses,played'
+		'/game/history'
+		+ '?search=' + urlQueries
 	)
 	data.loadingData = loading.value
 	data.err = error.value
 	if (!data.err) {
-		data.users = response.value.users
+        console.log('match history response', response.value)
+		data.games = response.value.games
 		data.count = response.value.count
 	}
 }
 
-export { getQueriesInUrl, replaceUrl, getLeaderboard }
+export { getQueriesInUrl, replaceUrl, getMatchHistory }

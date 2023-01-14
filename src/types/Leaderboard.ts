@@ -1,13 +1,13 @@
 import type { User } from './User';
 
-export interface leaderboardData {
+export interface LeaderboardData {
 	users: User[],
 	count: number,
 	loadingData: boolean,
 	err: null
 }
 
-export interface leaderboardQueries {
+export interface LeaderboardQueries {
 	page: string,
 	take: string,
 	sort: string,
