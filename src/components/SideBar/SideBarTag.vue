@@ -6,9 +6,8 @@
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
-	import Btn1 from '../Utils/Btn1.vue'
+	import Btn from '../Utils/Btn.vue'
 	import type { ContentData } from '@/types/Sidebar'
-	import router from '@/router'
 	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
 	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
 
@@ -17,15 +16,7 @@
 		data: Partial<ContentData>
 	}
 
-	const props = defineProps<Props>()
-
-	const	statusClass = computed(() => {
-		if (props.data.status == 'In Game')
-			return 'Status--inGame'
-		else
-			return 'Status--' + props.data.status
-	})
-
+	const	props = defineProps<Props>()
 	const	sbStore = useSideBarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
@@ -107,14 +98,14 @@
 		</div>
 
 		<div class="SideBarTag-options" v-if="(sbStore.state.section == 1 && type == 1)">
-			<Btn1
+			<Btn
 				class="SideBarTag-btn"
 				:type=1 value="Invite to party"
 				:logo="logoPlay"
 				width="185em"
 				height="44em"
 			/>
-			<Btn1
+			<Btn
 				class="SideBarTag-btn"
 				:type=2
 				value="Send message"
@@ -130,7 +121,7 @@
 			:class="{'SideBarTag-options--protected': data.status == 'PROTECTED'}"
 			v-if="type == 2 && sbStore.state.section != 3"
 		>
-			<Btn1
+			<Btn
 				v-if="sbStore.state.section == 1"
 				class="SideBarTag-btn"
 				:type=1
@@ -153,7 +144,7 @@
 				inputFont="500 14em 'Poppins'"
 			/>
 
-			<Btn1
+			<Btn
 				v-if="sbStore.state.section == 2"
 				class="SideBarTag-btn"
 				:type=1
@@ -166,7 +157,7 @@
 		</div>
 
 		<div v-if="sbStore.state.section == 3" class="SideBarTag-options">
-			<Btn1
+			<Btn
 				class="SideBarTag-btn"
 				:type=1
 				value="Accept"
@@ -175,7 +166,7 @@
 				height="44em"
 				@click.stop="notifAccept(data.id || '')"
 			/>
-			<Btn1
+			<Btn
 				class="SideBarTag-btn"
 				:type=2
 				value="Refuse"

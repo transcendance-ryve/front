@@ -22,34 +22,34 @@
 		height: false
 	})
 
-	const	classType: string = 'Btn1--type' + props.type
+	const	classType: string = 'Btn--type' + props.type
 
 </script>
 
 <template>
 
 	<button
-		class="Btn1"
+		class="Btn"
 		:class=classType
 	>
 		<span
-			class="Btn1-logo"
+			class="Btn-logo"
 			:class="{'Logo--fill': fillLogo == true}"
 			v-if="logo" v-html="logo"
 		>
 		</span>
-		<span class="Btn1-value">{{ value }}</span>
+		<span class="Btn-value">{{ value }}</span>
 	</button>
 
 </template>
 
 <style lang="scss" scoped>
 
-	.Btn1 {
+	.Btn {
 		width: v-bind(width);
 		height: v-bind(height);
 
-		.Btn1-value {
+		.Btn-value {
 			font-size: v-bind(fontSize)
 		}
 	}

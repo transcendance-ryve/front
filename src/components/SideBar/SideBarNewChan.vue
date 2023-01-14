@@ -9,7 +9,7 @@
 	import BaseInput from '../Utils/BaseInput.vue'
 	import StatusBtns from './StatusBtns.vue'
 	import NewChanContent from './NewChanContent.vue'
-	import Btn1 from '../Utils/Btn1.vue'
+	import Btn from '../Utils/Btn.vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import createRoom from '@/requests/SideBar/createRoom'
@@ -101,14 +101,14 @@
 		/>
 
 		<div class="NewChan-btns">
-			<Btn1
+			<Btn
 				:type=3
 				value="Back"
 				width="201em"
 				height="48em"
 				@click="sbStore.newChan = false"
 			/>
-			<Btn1
+			<Btn
 				:class="{'Btn--inactive': !readyToCreate}"
 				:type=1
 				value="Create"

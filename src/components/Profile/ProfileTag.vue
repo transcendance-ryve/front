@@ -3,7 +3,7 @@
 	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd, logoAccept, logoRefuse } from '../../assets/logoSVG'
-	import Btn1 from '../Utils/Btn1.vue'
+	import Btn from '../Utils/Btn.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router'
 	import type { User } from '@/types/User'
@@ -32,7 +32,7 @@
 			<div class="ProfileTag-status" :class="{ 'Status--active': userStore.me.tfa_enabled }">
 				<span class="Status-value">2FA</span>
 			</div>
-			<Btn1
+			<Btn
 				:type=5
 				:logo="logoSettings"
 				value="Settings"
@@ -42,7 +42,7 @@
 			/>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type === 2">
-			<Btn1
+			<Btn
 				:type=3
 				:logo="logoTrash"
 				value="Delete"
@@ -50,7 +50,7 @@
 				fontSize="16em"
 				@click="$emit('delete')"
 			/>
-			<Btn1
+			<Btn
 				:type=1
 				:logo="logoMsg"
 				value="Message"
@@ -60,7 +60,7 @@
 			/>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type === 3">
-			<Btn1
+			<Btn
 				:type=1
 				:logo="logoAdd"
 				value="Add to friend"
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class="ProfileTag-btnsWrap" v-if="type === 5">
-			<Btn1
+			<Btn
 				:type=1
 				:logo="logoAccept"
 				value="Accept"
@@ -83,7 +83,7 @@
 				fontSize="16em"
 				@click="$emit('accept')"
 			/>
-			<Btn1
+			<Btn
 				:type=3
 				:logo="logoRefuse"
 				:fillLogo="false"

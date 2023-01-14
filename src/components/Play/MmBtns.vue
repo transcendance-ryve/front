@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import Btn1 from '../Utils/Btn1.vue';
+	import Btn from '../Utils/Btn.vue';
 
 	defineProps({
 		start: {
@@ -15,7 +15,7 @@
 
 <template>
 	<div class="Modal-BtnWrapper" :class="{'BtnWrapper--row': gameFound}">
-		<Btn1
+		<Btn
 			v-if="!start"
 			class="Btn-blue"
 			:type=1
@@ -26,7 +26,7 @@
 			@click="$emit('start')"
 		/>
 
-		<Btn1
+		<Btn
 			v-if="start && !gameFound"
 			class="Btn-red"
 			:type=6
@@ -38,7 +38,7 @@
 		/>
 		<span v-if="!start && !gameFound" class="Queue-value">13</span>
 
-		<Btn1
+		<Btn
 			v-if="gameFound"
 			class="Btn-blue"
 			:type=1
@@ -48,7 +48,7 @@
 			fontSize="20em"
 			@click="$emit('accept')"
 		/>
-		<Btn1
+		<Btn
 			v-if="gameFound"
 			class="Btn-red"
 			:type=6

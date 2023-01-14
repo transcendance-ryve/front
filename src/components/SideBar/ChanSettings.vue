@@ -5,7 +5,7 @@
 	import UploadAvatar from '@/components/Utils/UploadAvatar.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import StatusBtns from './StatusBtns.vue'
-	import Btn1 from '../Utils/Btn1.vue'
+	import Btn from '../Utils/Btn.vue'
 	import ConvList from './ConvList.vue'
 	import editChannel from '@/requests/SideBar/editChannel'
 	import type { Form } from '@/requests/SideBar/editChannel'
@@ -113,14 +113,14 @@
 		<ConvList :channelId="channel.id" :role="role"/>
 
 		<div class="Settings-btns">
-			<Btn1
+			<Btn
 				:type=3
 				value="Back"
 				width="201em"
 				height="48em"
 				@click="$emit('close')"
 			/>
-			<Btn1
+			<Btn
 				:class="{'Btn--inactive': !readyToUpdate}"
 				:type=1
 				value="Update"

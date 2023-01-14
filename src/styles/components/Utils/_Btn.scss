@@ -1,4 +1,4 @@
-.Btn1 {
+.Btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -6,14 +6,14 @@
 	border: none;
 	border-radius: 6em;
 
-	.Btn1-value {
+	.Btn-value {
 		font-family: 'Poppins';
 		font-weight: 500;
 		line-height: 100%;
 		letter-spacing: -0.01em;
 	}
 
-	.Btn1-logo {
+	.Btn-logo {
 		width: 24em;
 		height: 24em;
 		svg {
@@ -25,9 +25,9 @@
 }
 
 
-.Btn1--type1 {
+.Btn--type1 {
 	background: $dark-blue;
-	.Btn1-value {
+	.Btn-value {
 		color: white;
 	}
 	.Logo--fill svg {
@@ -35,9 +35,9 @@
 	}
 }
 
-.Btn1--type2 {
+.Btn--type2 {
 	background: $background-500;
-	.Btn1-value {
+	.Btn-value {
 		color: $cheat-blue;
 	}
 	.Logo--fill svg {
@@ -45,9 +45,9 @@
 	}
 }
 
-.Btn1--type3 {
+.Btn--type3 {
 	background: $background-700;
-	.Btn1-value {
+	.Btn-value {
 		color: $cheat-blue;
 	}
 	.Logo--fill svg {
@@ -55,9 +55,9 @@
 	}
 }
 
-.Btn1--type4 {
+.Btn--type4 {
 	background: $background-600;
-	.Btn1-value {
+	.Btn-value {
 		color: white;
 	}
 	.Logo--fill svg {
@@ -65,9 +65,9 @@
 	}
 }
 
-.Btn1--type5 {
+.Btn--type5 {
 	background: $background-700;
-	.Btn1-value {
+	.Btn-value {
 		color: white;
 	}
 	.Logo--fill svg {
@@ -75,9 +75,9 @@
 	}
 }
 
-.Btn1--type6 {
+.Btn--type6 {
 	background: $red;
-	.Btn1-value {
+	.Btn-value {
 		color: white;
 	}
 	.Logo--fill svg {

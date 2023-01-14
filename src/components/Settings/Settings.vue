@@ -7,7 +7,7 @@
 	import BaseInput from '../Utils/BaseInput.vue';
 	import { logoProfile, logoLock, logoQrCode } from '../../assets/logoSVG'
 	import ToggleSwitch from './ToggleSwitch.vue';
-	import Btn1 from '../Utils/Btn1.vue';
+	import Btn from '../Utils/Btn.vue';
 	import router from '@/router';
 	import setUsername from '@/requests/Settings/SetUsername'
 	import setAvatar from '@/requests/Settings/setAvatar'
@@ -171,7 +171,7 @@
 					</div>
 				</div>
 				<div class="GenerateBtn-wrapper">
-					<Btn1
+					<Btn
 						:type=3
 						value="Generate new QRCode"
 						width="206em"
@@ -185,7 +185,7 @@
 		</div>
 
 		<div class="Settings-btns">
-			<Btn1
+			<Btn
 				:type=4
 				value="Back"
 				width="200em"
@@ -193,7 +193,7 @@
 				fontSize="16em"
 				@click="router.back()"
 			/>
-			<Btn1
+			<Btn
 				:type=1
 				value="Update"
 				width="200em"
