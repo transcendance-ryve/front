@@ -12,7 +12,7 @@ const	replaceUrl = async (queries: Partial<LeaderboardQueries>) => {
 	await router.push({ query: queries})
 }
 
-const getLeaderboard = async (urlQueries: string, data: LeaderboardData) => {
+const	getLeaderboard = async (urlQueries: string, data: LeaderboardData) => {
 
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
-	import { reactive, ref, computed, watch, type Ref } from 'vue'
+	import { onMounted, reactive, ref, computed, watch, type Ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
-	import { logoPerPage, logoSort } from '../../assets/logoSVG'
+	import { logoPerPage } from '../../assets/logoSVG'
+	import { getSpectate } from '@/requests/Spectate/getSpectate'
+	import type { SpectateData } from '@/types/Spectate'
 	import VersusTag from './VersusTag.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import type { Player, Players } from '@/types/User'
@@ -127,11 +129,17 @@
 		},
 	])
 
-	const		order: Ref<string> = ref('des')
-	const		page: Ref<number> = ref(1)
-	const		dataIndex: Ref<number> = ref(0)
-	const		toFind: Ref<string> = ref('')
-	const		perPage: Ref<number> = ref(12)
+	const	order: Ref<string> = ref('des')
+	const	page: Ref<number> = ref(1)
+	const	dataIndex: Ref<number> = ref(0)
+	const	toFind: Ref<string> = ref('')
+	const	perPage: Ref<number> = ref(12)
+	const	data: SpectateData = reactive({
+		games: [],
+		count: 0,
+		loadingData: false,
+		err: null
+	})
 
 
 	const	inputRes = computed(() => {
@@ -170,6 +178,10 @@
 			updatePage(newVal)
 	})
 
+	onMounted(async () => {
+		getSpectate(data)
+	})
+
 </script>
 
 <template>
@@ -190,15 +202,6 @@
 					height="56em"
 					:logo="logoPerPage"
 					@select="(val) => perPage = parseInt(val)"
-				/>
-				<DropDownMenu
-					label="Sort by:"
-					:selectValue="order"
-					:options="['Recent', 'Ancient']"
-					width="205em"
-					height="56em"
-					:logo="logoSort"
-					@select="(val) => order = val == 'Recent' ? 'des' : 'asc'"
 				/>
 			</div>
 		</div>
