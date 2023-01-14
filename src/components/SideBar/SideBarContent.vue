@@ -8,24 +8,13 @@
 	import SideBarTag from './SideBarTag.vue'
 	import { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
+	import type { ContentData } from '@/types/Sidebar'
 	import getFriends from '@/requests/Friends/getFriends'
 	import getAddFriendsList from '@/requests/Friends/getAddFriendsList'
 	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
-
-	export interface	ContentData {
-		id: string,			//	user			id
-		avatar: string,		//	user / chan		avatar
-		username: string,	//	user 			name
-		name: string,		//	chan 			name
-		status: string,		//	user / chan		status
-		time: number,		//	user / chan		timer
-		lastMsg: string,	//	user / chan		last message
-		usersCount: number,	//	chan			users count
-		messages: any[]		//	user / chan		last message
-	}
 
 	const	dataState: axiosState = reactive({
 		error: null,
@@ -44,7 +33,7 @@
 			if (sbStore.state.friendsState == 1)
 				fetchData = await getFriends(dataState)
 			else if (toFind.value)
-				fetchData = await getAddFriendsList(toFind.value, dataState)
+				fetchData = await getAddFriendsList(toFind.value, dataState) as Partial<ContentData>[]
 		}
 		else if (sbStore.state.section == 2) {
 			if (sbStore.state.channelsState == 1) {
@@ -88,7 +77,7 @@
 	watch(toFind, async () => {
 		if (toFind.value) {
 			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
-				contentData.value = await getAddFriendsList(toFind.value, dataState)
+				contentData.value = await getAddFriendsList(toFind.value, dataState) as Partial<ContentData>[]
 			else if (sbStore.state.section === 2 && sbStore.state.channelsState === 2)
 				contentData.value = await getChannels(toFind.value, dataState)
 		}

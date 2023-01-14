@@ -6,10 +6,8 @@
 	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
 	import { logoFriends, logoChannels, logoNotifs, logoBubble } from '../../assets/logoSVG'
-	import { onMounted } from '@vue/runtime-core'
 
 	const	sbStore = useSideBarStore()
-
 
 </script>
 

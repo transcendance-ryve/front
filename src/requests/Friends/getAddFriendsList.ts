@@ -1,7 +1,6 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
-import type { ContentData } from '@/components/SideBar/SideBarContent.vue'
-// import type { ContentData } from '@/types/ContentData'
+import type { ContentData } from '@/types/Sidebar'
 
 const getAddFriendsList = async (toFind: string, dataState: axiosState) => {
 
