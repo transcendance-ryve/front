@@ -262,21 +262,12 @@
 
 	/* Socket listeners */
 
-	const	emit = defineEmits(['end'])
-
 	onMounted(() => {
 		listeners.push(socket.on("start", (data: { players: Players, width: number, height: number }) => { start(data) }));
 		listeners.push(socket.on("update", (game: { paddles: Paddles, ball: Ball }) => { update(game) }));
 		listeners.push(socket.on("score", (data: { id: string, score: number }) => { updateScore(data) }));
 		// listeners.push(socket.on("bonus_spawn", (data: any) => bonusSpawn() ))
 		// listeners.push(socket.on("bonus_taken", (data: any) => bonusTaken() ))
-
-		listeners.push(socket.on('gameWin', (id: string) => {
-			emit('end', id);
-		}))
-		listeners.push(socket.on('gameLoose', (id: string) => {
-			emit('end', id);
-		}))
 	})
 
 	onUnmounted(() => {
