@@ -227,7 +227,7 @@
 	/* Socket handler */
 
 	const update = (game: { paddles: Paddles, ball: Ball }): void => {
-		console.log(game);
+		// console.log(game);
 		const ctx = canvas.value.getContext('2d');
 		
 		const ratio = {

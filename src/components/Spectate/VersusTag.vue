@@ -7,7 +7,7 @@
 	import type { Player, User } from '@/types/User'
 
 	interface Props {
-		player: Player
+		player: Partial<Player>
 		reverse?: boolean
 	}
 
@@ -19,7 +19,7 @@
 
 	const	p = toRefs(props)
 	const	logo = (index: number) => {
-		if (index <= p.player.value.score)
+		if (index <= p.player.value.score!)
 			return props.reverse ? logoScoreRed : logoScoreBlue
 		else
 			return logoScore

@@ -29,7 +29,7 @@
 		listeners.push(socket.on('gameLoose', () => {
 			matchmakingVisible.value = true
 		}))
-		listeners.push(socket.on("updateUser", (data: UserConnected) => { console.log('update user', data) ;userStore.updateMe(data) }))
+		listeners.push(socket.on("updateUser", (data: UserConnected) => { userStore.updateMe(data) }))
 	})
 
 	onUnmounted(() => {
