@@ -2,8 +2,8 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import Game from '@/components/Play/Game.vue'
 	import MatchMaking from '@/components/Play/MatchMaking.vue'
-import { ref } from 'vue';
-import { useUserStore } from '@/stores/UserStore';
+	import { ref, onMounted, onUnmounted } from 'vue';
+	import { useUserStore } from '@/stores/UserStore';
 
 	const userStore = useUserStore();
 	const	contentStore = useContentStore()
@@ -16,14 +16,19 @@ import { useUserStore } from '@/stores/UserStore';
 		socket.emit("game_connect");
 	}
 	
-	socket.on("game_connected", () => {
+	const	listener: any = socket.on("game_connected", () => {
 		matchmakingVisible.value = false;
-	});
+	})
+
+	onUnmounted(() => {
+		socket.off(listener)
+	})
+
 </script>
 
 <template>
 	<div class="mainContent-play">
-		<Game />
+		<Game @end="matchmakingVisible = true" />
 
 		<MatchMaking v-if="matchmakingVisible" :toggle="() => connect()" />
 	</div>
