@@ -86,7 +86,11 @@ const router = createRouter({
 					component: ForgotForm,
 				},
 			]
-		}
+		},
+		// {
+		// 	path: '*',
+		// 	redirect: { name: 'home' },
+		// }
 		// {
 		// 	path: '/about',
 		// 	name: 'about',
