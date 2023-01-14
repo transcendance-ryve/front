@@ -119,11 +119,13 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-			routeUpdating = true
-			if (to.query !== from.query)
-				getUrlQueries(to.query)
-			await getLeaderboard(getQueriesInUrl(to.fullPath), data)
-			routeUpdating = false
+		if (to.fullPath === '/leaderboard')
+			return false
+		routeUpdating = true
+		if (to.query !== from.query)
+			getUrlQueries(to.query)
+		await getLeaderboard(getQueriesInUrl(to.fullPath), data)
+		routeUpdating = false
 	})
 
 	getUrlQueries(router.currentRoute.value.query)
