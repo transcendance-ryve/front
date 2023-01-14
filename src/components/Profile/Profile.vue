@@ -111,7 +111,7 @@
 		<ProfileTag
 			:type="data.type"
 			:user="data.user"
-			@message="sbStore.openConv('Friend', data.user.id)"
+			@message="sbStore.openConv('Friend', data.user.id, false)"
 			@delete="socket.emit('remove_friend', { friendId: data.user.id })"
 			@add="socket.emit('add_friend', { friendId: data.user.id })"
 			@accept="socket.emit('accept_friend', { friendId: data.user.id })"

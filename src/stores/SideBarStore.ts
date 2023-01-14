@@ -18,6 +18,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		open: false,
 		type: '',
 		id: '',
+		focus: true
 	})
 
 	function	updateSection(newVal: number) {
@@ -28,10 +29,11 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.section = newVal
 	}
 
-	function	openConv(type: string, id: string = '') {
+	function	openConv(type: string, id: string = '', focus: boolean = true) {
 		conv.open = true
 		conv.type = type
 		conv.id = id
+		conv.focus = focus
 	}
 
 	function	resetState() {

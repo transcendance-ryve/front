@@ -65,8 +65,8 @@
 
 	const	listeners: any[] = []
 	onMounted(async () => {
-		const	input: HTMLElement = document.getElementById('WriteMessage')?.children[0] as HTMLElement
-		input.focus()
+		if (sbStore.conv.focus === true || window.innerWidth > 1440)
+			(document.getElementById('WriteMessage')?.children[0] as HTMLElement).focus()
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)			
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
