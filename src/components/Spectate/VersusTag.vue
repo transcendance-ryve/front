@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, type Ref } from 'vue'
+	import { ref, type Ref, watch, toRefs } from 'vue'
 	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoScore, logoScoreBlue, logoScoreRed } from '../../assets/logoSVG'
@@ -31,6 +31,18 @@
 		level: props.player.level,
 		experience: props.player.experience,
 		next_level: props.player.next_level
+	})
+
+	const	p = toRefs(props)
+	watch(p.player, (playerUpdated) => {
+		user.value = {
+			id: playerUpdated.id,
+			avatar: playerUpdated.avatar,
+			username: playerUpdated.username,
+			level: playerUpdated.level,
+			experience: playerUpdated.experience,
+			next_level: playerUpdated.next_level
+		}
 	})
 
 </script>

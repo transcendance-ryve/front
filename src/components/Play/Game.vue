@@ -1,7 +1,8 @@
 <script setup lang="ts">
+
 	import VersusTag from '@/components/Spectate/VersusTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import { ref, onMounted, onUnmounted } from 'vue';
+	import { ref, type Ref, onMounted, onUnmounted } from 'vue';
 
 	interface Player {
 		id: string,
@@ -64,8 +65,9 @@
 	const canvas = ref(null);
 	const listeners: any = [];
 
-	const defaultPlayers = {
+	let players: Ref<Players> = ref({
 		left: {
+			id: '',
 			username: 'Player 1',
 			avatar: 'http://localhost:3000/default.png',
 			score: 0,
@@ -74,6 +76,7 @@
 			next_level: 100,
 		},
 		right: {
+			id: '',
 			username: 'Player 2',
 			avatar: 'http://localhost:3000/default.png',
 			score: 0,
@@ -81,9 +84,7 @@
 			experience: 0,
 			next_level: 100,
 		},
-	}
-
-	let players: Players;
+	})
 
 
 
@@ -226,7 +227,7 @@
 	/* Socket handler */
 
 	const update = (game: { paddles: Paddles, ball: Ball }): void => {
-		console.log(game);
+		// console.log(game);
 		const ctx = canvas.value.getContext('2d');
 		
 		const ratio = {
@@ -245,14 +246,14 @@
 		defaultGrid.height = data.height;
 		defaultGrid.width = data.width;
 
-		players = data.players;
+		players.value = data.players;
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
-		if (data.id === players.left.id) {
-			players.left.score = data.score;
+		if (data.id === players.value.left.id) {
+			players.value.left.score = data.score;
 		} else {
-			players.right.score = data.score;
+			players.value.right.score = data.score;
 		}
 	}
 	// const playerJoin = (): void => {}
@@ -272,10 +273,10 @@
 	<div class="game__content">
 		<div class="game__header">			
 			<VersusTag
-				:player="players?.left || defaultPlayers.left"
+				:player="players.left"
 			/>
 			<VersusTag
-				:player="players?.right || defaultPlayers.right"
+				:player="players.right"
 				:reverse="true"
 			/>
 		</div>
