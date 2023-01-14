@@ -250,7 +250,6 @@
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
-		console.log('in uptdate score', data);
 		if (data.id === players.value.left.id) {
 			players.value.left.score = data.score;
 		} else {
