@@ -7,7 +7,7 @@
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn1 from '../Utils/Btn1.vue'
-	import type { ContentData } from '@/components/SideBar/SideBarContent.vue'
+	import type { ContentData } from '@/types/Sidebar'
 	import router from '@/router'
 	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
 	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
