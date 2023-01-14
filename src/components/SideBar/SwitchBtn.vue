@@ -1,23 +1,18 @@
 <script setup lang="ts">
 
-	const props = defineProps({
-		value: {
-			type: String,
-			default: '',
-		},
-		selected: {
-			type: Boolean,
-			default: false,
-		},
-		logo: {
-			type: String,
-		},
-		height: {
-			type: String,
-			default: '48em'
-		}
-	})
+	import { withDefaults } from 'vue';
 
+	interface Props {
+		value: string | boolean
+		selected?: boolean
+		logo: string
+		height?: string
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		selected: false,
+		height: '48em'
+	})
 	
 </script>
 

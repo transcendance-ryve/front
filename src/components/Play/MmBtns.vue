@@ -1,16 +1,18 @@
 <script setup lang="ts">
+
+	import { withDefaults } from 'vue';
 	import Btn from '../Utils/Btn.vue';
 
-	defineProps({
-		start: {
-			type: Boolean,
-			default: false
-		},
-		gameFound: {
-			type: Boolean,
-			default: false
-		}
+	interface Props {
+		start?: boolean
+		gameFound?: boolean
+	}
+
+	const props = withDefaults(defineProps<Props>(), {
+		start: false,
+		gameFound: false,
 	})
+
 </script>
 
 <template>
