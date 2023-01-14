@@ -12,19 +12,11 @@
 		logoDemote,
 		logoStop
 	} from '../../assets/logoSVG'
-
-	export interface IUserTag {
-		id: string,
-		username: string,
-		avatar: string,
-		role: string,
-		isMute: boolean,
-		isBan: boolean,
-	}
+	import type { TargetTag } from '@/types/User'
 
 	export interface Props {
 		section: string
-		user: IUserTag
+		user: TargetTag
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
@@ -114,20 +106,20 @@
 				},
 			]
 		else if (props.section == 'banned')
-				return [
-					{
-						name: 'see',
-						logo: logoEye,
-						color: '#0177FB',
-						toolTip: 'View profile'
-					},
-					{
-						name: 'deban',
-						logo: logoStop,
-						color: '#E32F2F',
-						toolTip: 'Deban',
-					}
-				]
+			return [
+				{
+					name: 'see',
+					logo: logoEye,
+					color: '#0177FB',
+					toolTip: 'View profile'
+				},
+				{
+					name: 'deban',
+					logo: logoStop,
+					color: '#E32F2F',
+					toolTip: 'Deban',
+				}
+			]
 		else
 			return []
 	})

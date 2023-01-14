@@ -31,6 +31,23 @@ export interface User {
 	played: number;
 }
 
+export interface Target {
+	id: string,
+	avatar: string,
+	name: string,
+	username: string,
+	status: string,
+}
+
+export interface TargetTag {
+	id: string,
+	username: string,
+	avatar: string,
+	role: string,
+	isMute: boolean,
+	isBan: boolean,
+}
+
 export interface Player {
 	id: string,
 	username: string,

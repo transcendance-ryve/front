@@ -13,11 +13,11 @@
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import createRoom from '@/requests/SideBar/createRoom'
-	import type { Form } from '@/requests/SideBar/createRoom'
+	import type { CreateChanForm } from '@/types/Forms'
 
 	const	sbStore = useSideBarStore()
 
-	const	form: Form = reactive({
+	const	form: CreateChanForm = reactive({
 		name: '',
 		status: 'PUBLIC',
 		avatar: null,

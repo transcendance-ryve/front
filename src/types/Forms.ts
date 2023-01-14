@@ -33,3 +33,21 @@ export interface SettingsForm {
 	code2FA: string,
 	state2FA: boolean
 }
+
+export interface CreateChanForm {
+	name: string
+	status: string,
+	avatar: null,
+	avatarFile: File | null,
+	password: string
+	invitees: string[]
+}
+
+export interface EditChanForm {
+	id: string,
+	name: string
+	status: string,
+	avatar: null,
+	avatarFile: File | null,
+	password: string
+}

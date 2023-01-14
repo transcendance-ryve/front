@@ -1,16 +1,7 @@
 import useAxios from '@/requests/useAxios'
-import type { DataForm } from '@/components/SideBar/SideBarNewChan.vue'
+import type { CreateChanForm } from '@/types/Forms';
 
-export interface Form {
-	name: string
-	status: string,
-	avatar: null,
-	avatarFile: File | null,
-	password: string
-	invitees: string[]
-}
-
-const createRoom = async (data: Form) => {
+const createRoom = async (data: CreateChanForm) => {
 
 	let	formData = new FormData()
 	formData.set('image', data.avatarFile as File);
@@ -29,13 +20,6 @@ const createRoom = async (data: Form) => {
 		},
 		{ headers: { 'content-Type': 'multipart/form-data;' } }
 	)
-	if (error.value) {
-		//	handle errors
-	}
-	else if (response.value) {
-		//	handle succes
-		// console.log(response.value)
-	}
 }
 
 export default createRoom

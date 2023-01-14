@@ -3,14 +3,14 @@
 	import { ref } from 'vue'
 	import UserTag from './UserTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import type { IUserTag } from './UserTag.vue'
+	import type { TargetTag } from '@/types/User'
 	import { logoListArrow } from '../../assets/logoSVG'
 	import { profileRedirect } from '@/router/index'
 
 	export interface Props {
 		channelId: string
 		label: string
-		users: IUserTag[]
+		users: TargetTag[]
 		owner?: boolean
 		admin?: boolean
 		open?: boolean
@@ -44,27 +44,27 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
-	const	promoteUser = (user: IUserTag) => {
+	const	promoteUser = (user: TargetTag) => {
 		socket.emit('promoteUser', { roleInfo: { userId: user.id, channelId: props.channelId } })
 	}
 
-	const	demoteUser = (user: IUserTag) => {
+	const	demoteUser = (user: TargetTag) => {
 		socket.emit('demoteUser', { roleInfo: { userId: user.id, channelId: props.channelId } })
 	}
 
-	const	muteUser = (user: IUserTag) => {
+	const	muteUser = (user: TargetTag) => {
 		socket.emit('muteUser', { muteInfo: { channelId: props.channelId, targetId: user.id, action: 'MUTE' } })
 	}
 
-	const	demuteUser = (user: IUserTag) => {
+	const	demuteUser = (user: TargetTag) => {
 		socket.emit('unmuteUser', { muteInfo: { channelId: props.channelId, targetId: user.id, action: 'MUTE' } })
 	}
 
-	const	banUser = (user: IUserTag) => {
+	const	banUser = (user: TargetTag) => {
 		socket.emit('banUser', { banInfo: { channelId: props.channelId, targetId: user.id, action: 'BAN' } })
 	}
 
-	const	debanUser = (user: IUserTag) => {
+	const	debanUser = (user: TargetTag) => {
 		socket.emit('unbanUser', { banInfo: { channelId: props.channelId, targetId: user.id, action: 'BAN' } })
 	}
 

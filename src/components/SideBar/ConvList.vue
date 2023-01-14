@@ -5,7 +5,7 @@
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownList from './DropDownList.vue'
 	import UserTag from './UserTag.vue'
-	import type { IUserTag } from './UserTag.vue'
+	import type { TargetTag } from '@/types/User'
 	import { logoFriends, logoAdd } from '../../assets/logoSVG'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import getUsersInChannel from '@/requests/SideBar/getUsersInChannel'
@@ -31,16 +31,16 @@
 	const	sectionSelected = ref('Users')
 	const	toFind = ref('')
 
-	const	usersInChannel: Ref<IUserTag[]> = ref([])
+	const	usersInChannel: Ref<TargetTag[]> = ref([])
 
-	const	addListData: Ref<IUserTag[]> = ref([])
+	const	addListData: Ref<TargetTag[]> = ref([])
 
-	const	bannedListData: Ref<IUserTag[]> = ref([])
+	const	bannedListData: Ref<TargetTag[]> = ref([])
 
-	const	pendingListData: Ref<IUserTag[]> = ref([])
+	const	pendingListData: Ref<TargetTag[]> = ref([])
 
-	const	adminListData: Ref<IUserTag[]> = ref([])
-	const	userListData: Ref<IUserTag[]> = ref([])
+	const	adminListData: Ref<TargetTag[]> = ref([])
+	const	userListData: Ref<TargetTag[]> = ref([])
 
 	const	bannedList = computed(() => {
 		if (toFind.value)
@@ -77,18 +77,18 @@
 			return []
 	})
 
-	const	addUser = (user: IUserTag) => {
+	const	addUser = (user: TargetTag) => {
 		socket.emit('inviteToRoom', { inviteInfo: { channelId: props.channelId, friendId: user.id } })
 	}
 
-	const	isInChan = (user: IUserTag) => {
-		if (bannedListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
+	const	isInChan = (user: TargetTag) => {
+		if (bannedListData.value.find((u: TargetTag) => u.id === user.id) !== undefined)
 			return true
-		if (pendingListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
+		if (pendingListData.value.find((u: TargetTag) => u.id === user.id) !== undefined)
 			return true
-		if (adminListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
+		if (adminListData.value.find((u: TargetTag) => u.id === user.id) !== undefined)
 			return true
-		if (userListData.value.find((u: IUserTag) => u.id === user.id) !== undefined)
+		if (userListData.value.find((u: TargetTag) => u.id === user.id) !== undefined)
 			return true
 		return false
 	}
@@ -117,9 +117,9 @@
 	const	getLists = () => {
 		for (let i = 0; i < usersInChannel.value.length; i++) {
 			const	user = usersInChannel.value[i]
-			if ((user.role === 'ADMIN' || user.role === 'OWNER') && !adminListData.value.find((u: IUserTag) => u.id === user.id))
+			if ((user.role === 'ADMIN' || user.role === 'OWNER') && !adminListData.value.find((u: TargetTag) => u.id === user.id))
 				adminListData.value.push(user)
-			else if (user.role === 'MEMBER' && !userListData.value.find((u: IUserTag) => u.id === user.id))
+			else if (user.role === 'MEMBER' && !userListData.value.find((u: TargetTag) => u.id === user.id))
 				userListData.value.push(user)
 		}
 	}
@@ -134,51 +134,51 @@
 	const	listeners: any[] = []
 	onMounted(async () => {
 		getDatas()
-		listeners.push(socket.on('newUserInRoom', (target: IUserTag) => {
-			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
+		listeners.push(socket.on('newUserInRoom', (target: TargetTag) => {
+			pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
 			userListData.value.push(target)
 		}))
 		listeners.push(socket.on('userLeftTheRoom', (id: string) => {
-			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== id)
-			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== id)
+			userListData.value = userListData.value.filter((u: TargetTag) => u.id !== id)
+			adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== id)
 		}))
-		listeners.push(socket.on('invitationSent', (target: IUserTag) => {
+		listeners.push(socket.on('invitationSent', (target: TargetTag) => {
 			pendingListData.value.push(target)
-			addListData.value = addListData.value.filter((u: IUserTag) => u.id !== target.id)
+			addListData.value = addListData.value.filter((u: TargetTag) => u.id !== target.id)
 		}))
 		listeners.push(socket.on('roomDeclined', (target: any) => {
-			pendingListData.value = pendingListData.value.filter((u: IUserTag) => u.id !== target.id)
+			pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
 		}))
-		listeners.push(socket.on('userPromoted', (target: IUserTag) => {
-			if (!adminListData.value.find((user: IUserTag) => user.id === target.id))
+		listeners.push(socket.on('userPromoted', (target: TargetTag) => {
+			if (!adminListData.value.find((user: TargetTag) => user.id === target.id))
 				adminListData.value.push(target)
-			userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
+			userListData.value = userListData.value.filter((u: TargetTag) => u.id !== target.id)
 		}))
-		listeners.push(socket.on('userDemoted', (target: IUserTag) => {
-			if (!userListData.value.find((user: IUserTag) => user.id === target.id))
+		listeners.push(socket.on('userDemoted', (target: TargetTag) => {
+			if (!userListData.value.find((user: TargetTag) => user.id === target.id))
 				userListData.value.push(target)
-			adminListData.value = adminListData.value.filter((u: IUserTag) => u.id !== target.id)
+			adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== target.id)
 		}))
 		listeners.push(socket.on('userMuted', (id: string) => {
-			const	userMuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
+			const	userMuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
 			if (userMuted)
 				userMuted.isMute = true
 		}))
 		listeners.push(socket.on('userUnmuted', (id: string) => {
-			const	userUnmuted: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === id)
+			const	userUnmuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
 			if (userUnmuted)
 				userUnmuted.isMute = false
 		}))
-		listeners.push(socket.on('userBanned', (target: IUserTag) => {
-			const	userBanned: IUserTag | undefined = userListData.value.find((user: IUserTag) => user.id === target.id)
+		listeners.push(socket.on('userBanned', (target: TargetTag) => {
+			const	userBanned: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === target.id)
 			if (userBanned) {
 				userBanned.isBan = true
 				bannedListData.value.push(target)
-				userListData.value = userListData.value.filter((u: IUserTag) => u.id !== target.id)
+				userListData.value = userListData.value.filter((u: TargetTag) => u.id !== target.id)
 			}
 		}))
-		listeners.push(socket.on('userUnbanned', (target: IUserTag) => {
-			bannedListData.value = bannedListData.value.filter((u: IUserTag) => u.id !== target.id)
+		listeners.push(socket.on('userUnbanned', (target: TargetTag) => {
+			bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== target.id)
 		}))
 	})
 

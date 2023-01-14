@@ -1,16 +1,7 @@
 import useAxios from '@/requests/useAxios'
-import type { DataForm } from '@/components/SideBar/SideBarNewChan.vue'
+import type { EditChanForm } from '@/types/Forms';
 
-export interface Form {
-    id: string,
-	name: string
-	status: string,
-	avatar: null,
-	avatarFile: File | null,
-	password: string
-}
-
-const editChannel = async (form: Partial<Form>) => {
+const editChannel = async (form: Partial<EditChanForm>) => {
 
 	let	formData = new FormData()
 	formData.set('image', form.avatarFile as File);

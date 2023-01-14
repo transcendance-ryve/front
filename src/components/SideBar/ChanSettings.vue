@@ -8,8 +8,8 @@
 	import Btn from '../Utils/Btn.vue'
 	import ConvList from './ConvList.vue'
 	import editChannel from '@/requests/SideBar/editChannel'
-	import type { Form } from '@/requests/SideBar/editChannel'
-	import type { Target } from './SideBarConv.vue'
+	import type { EditChanForm } from '@/types/Forms'
+	import type { Target } from '@/types/User'
 	import {
 		logoProfile,
 		logoLock
@@ -22,7 +22,7 @@
 
 	const	props = defineProps<Props>()
 
-	const	form: Form = reactive({
+	const	form: EditChanForm = reactive({
 		id: props.channel.id,
 		name: '',
 		status: props.channel.status,
@@ -55,7 +55,7 @@
 
 	const	updatedChan = () => {
 		if (readyToUpdate.value) {
-			let	formToUpdate: Partial<Form> = form
+			let	formToUpdate: Partial<EditChanForm> = form
 			if (!formToUpdate.name)
 				delete formToUpdate.name
 			if (formToUpdate.status !== 'PROTECTED' &&

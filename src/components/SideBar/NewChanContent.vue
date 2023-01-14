@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
 	import { ref, reactive, computed, watch, type Ref, withDefaults } from 'vue'
-	import { logoFriends, logoAdd, logoSearch } from '../../assets/logoSVG'
+	import { logoFriends, logoAdd } from '../../assets/logoSVG'
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
-	import type { IUserTag } from './UserTag.vue'
+	import type { TargetTag } from '@/types/User'
 	import { useUserStore } from '@/stores/UserStore'
 	import getUsers from '@/requests/SideBar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
@@ -24,14 +24,14 @@
 
 	const	sectionSelected = ref('Invitees')
 	const	toFind = ref('')
-	const	inviteesList: Ref<IUserTag[]> = ref([])
-	const	addList: Ref<IUserTag[]> = ref([])
+	const	inviteesList: Ref<TargetTag[]> = ref([])
+	const	addList: Ref<TargetTag[]> = ref([])
 	const	dataState: axiosState = reactive({
 		error: null,
 		loading: false
 	})
 
-	const	isInvited = (user: IUserTag) => {
+	const	isInvited = (user: TargetTag) => {
 		for (let i = 0; i < inviteesList.value.length; i++)
 			if (inviteesList.value[i].id === user.id)
 				return true
@@ -75,7 +75,7 @@
 			return inviteesList.value
 	})
 
-	const	addUser = (user: IUserTag) => {
+	const	addUser = (user: TargetTag) => {
 		inviteesList.value.unshift(user)
 		props.invitees.unshift(user.id)
 		addList.value.splice(addList.value.indexOf(user), 1)

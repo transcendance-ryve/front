@@ -15,17 +15,9 @@
 	import getMessages from '@/requests/SideBar/getMessages'
 	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
-	import type { IUserTag } from './UserTag.vue'
+	import type { Target } from '@/types/User'
+	import type { TargetTag } from '@/types/User'
 	import { profileRedirect } from '@/router/index'
-
-
-	export interface Target {
-		id: string,
-		avatar: string,
-		name: string,
-		username: string,
-		status: string,
-	}
 
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
@@ -85,19 +77,19 @@
 			convId.value = target.value.id
 			socket.emit('getRole', { channelId: convId.value })
 			listeners.push(socket.once('role', (res: string) => role.value = res))
-			listeners.push(socket.on('userPromoted', (target: IUserTag) => {
+			listeners.push(socket.on('userPromoted', (target: TargetTag) => {
 				if (userStore.me.id === target.id) {
 					userList.value = false
 					settings.value = true
 				}
 			}))
-			listeners.push(socket.on('userDemoted', (target: IUserTag) => {
+			listeners.push(socket.on('userDemoted', (target: TargetTag) => {
 				if (userStore.me.id === target.id) {
 					settings.value = false
 					userList.value = true
 				}
 			}))
-			listeners.push(socket.on('userBanned', (target: IUserTag) => {
+			listeners.push(socket.on('userBanned', (target: TargetTag) => {
 				if (userStore.me.id === target.id) {
 					sbStore.conv.open = false
 					sbStore.state.section = 2

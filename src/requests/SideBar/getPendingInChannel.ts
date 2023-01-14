@@ -1,10 +1,10 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
-import type { IUserTag } from '@/components/SideBar/UserTag'
+import type { TargetTag } from '@/types/User'
 
 const   getUserTagArray = (response: any[]) => {
 
-	const	res: IUserTag[] = []
+	const	res: TargetTag[] = []
 
 	response.map(val => {
 		res.push({

@@ -13,7 +13,7 @@
 		logoMsg,
 		logoSettings
 	} from '../../assets/logoSVG'
-	import type { Target } from '@/components/SideBar/SideBarConv.vue'
+	import type { Target } from '@/types/User'
 
 	export interface Props {
 		type: string
