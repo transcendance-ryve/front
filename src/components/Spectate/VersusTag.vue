@@ -17,8 +17,9 @@
 
 	const	userColor: string = props.reverse ? '#FF4646' : '#0177FB'
 
+	const	p = toRefs(props)
 	const	logo = (index: number) => {
-		if (index <= props.player.score)
+		if (index <= p.player.value.score)
 			return props.reverse ? logoScoreRed : logoScoreBlue
 		else
 			return logoScore
@@ -33,7 +34,6 @@
 		next_level: props.player.next_level
 	})
 
-	const	p = toRefs(props)
 	watch(p.player, (playerUpdated) => {
 		user.value = {
 			id: playerUpdated.id,
@@ -43,7 +43,7 @@
 			experience: playerUpdated.experience,
 			next_level: playerUpdated.next_level
 		}
-	})
+	}, { deep: true })
 
 </script>
 
