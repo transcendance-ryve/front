@@ -14,6 +14,7 @@
 	import type { axiosState } from '@/requests/useAxios'
 	import { useUserStore } from '@/stores/UserStore'
 	import { profileRedirect } from '@/router/index'
+	import type { SocketEvent } from '@/types/Socket'
 
 	export interface Props {
 		channelId: string
@@ -131,59 +132,92 @@
 		getLists()
 	}
 
-	const	listeners: any[] = []
-	onMounted(async () => {
-		getDatas()
-		listeners.push(socket.on('newUserInRoom', (target: TargetTag) => {
-			pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
-			userListData.value.push(target)
-		}))
-		listeners.push(socket.on('userLeftTheRoom', (id: string) => {
-			userListData.value = userListData.value.filter((u: TargetTag) => u.id !== id)
-			adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== id)
-		}))
-		listeners.push(socket.on('invitationSent', (target: TargetTag) => {
-			pendingListData.value.push(target)
-			addListData.value = addListData.value.filter((u: TargetTag) => u.id !== target.id)
-		}))
-		listeners.push(socket.on('roomDeclined', (target: any) => {
-			pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
-		}))
-		listeners.push(socket.on('userPromoted', (target: TargetTag) => {
-			if (!adminListData.value.find((user: TargetTag) => user.id === target.id))
-				adminListData.value.push(target)
-			userListData.value = userListData.value.filter((u: TargetTag) => u.id !== target.id)
-		}))
-		listeners.push(socket.on('userDemoted', (target: TargetTag) => {
-			if (!userListData.value.find((user: TargetTag) => user.id === target.id))
+	const	listeners: SocketEvent[] = [
+		{
+			name: 'newUserInRoom',
+			callback: (target: TargetTag) => {
+				pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
 				userListData.value.push(target)
-			adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== target.id)
-		}))
-		listeners.push(socket.on('userMuted', (id: string) => {
-			const	userMuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
-			if (userMuted)
-				userMuted.isMute = true
-		}))
-		listeners.push(socket.on('userUnmuted', (id: string) => {
-			const	userUnmuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
-			if (userUnmuted)
-				userUnmuted.isMute = false
-		}))
-		listeners.push(socket.on('userBanned', (target: TargetTag) => {
-			const	userBanned: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === target.id)
-			if (userBanned) {
-				userBanned.isBan = true
-				bannedListData.value.push(target)
+			}
+		},
+		{
+			name: 'userLeftTheRoom',
+			callback: (id: string) => {
+				userListData.value = userListData.value.filter((u: TargetTag) => u.id !== id)
+				adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== id)
+			}
+		},
+		{
+			name: 'invitationSent',
+			callback: (target: TargetTag) => {
+				pendingListData.value.push(target)
+				addListData.value = addListData.value.filter((u: TargetTag) => u.id !== target.id)
+			}
+		},
+		{
+			name: 'roomDeclined',
+			callback: (target: any) => {
+				pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
+			}
+		},
+		{
+			name: 'userPromoted',
+			callback: (target: TargetTag) => {
+				if (!adminListData.value.find((user: TargetTag) => user.id === target.id))
+					adminListData.value.push(target)
 				userListData.value = userListData.value.filter((u: TargetTag) => u.id !== target.id)
 			}
-		}))
-		listeners.push(socket.on('userUnbanned', (target: TargetTag) => {
-			bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== target.id)
-		}))
+		},
+		{
+			name: 'userDemoted',
+			callback: (target: TargetTag) => {
+				if (!userListData.value.find((user: TargetTag) => user.id === target.id))
+					userListData.value.push(target)
+				adminListData.value = adminListData.value.filter((u: TargetTag) => u.id !== target.id)
+			}
+		},
+		{
+			name: 'userMuted',
+			callback: (id: string) => {
+				const	userMuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
+				if (userMuted)
+					userMuted.isMute = true
+			}
+		},
+		{
+			name: 'userUnmuted',
+			callback: (id: string) => {
+				const	userUnmuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
+				if (userUnmuted)
+					userUnmuted.isMute = false
+			}
+		},
+		{
+			name: 'userBanned',
+			callback: (target: TargetTag) => {
+				const	userBanned: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === target.id)
+				if (userBanned) {
+					userBanned.isBan = true
+					bannedListData.value.push(target)
+					userListData.value = userListData.value.filter((u: TargetTag) => u.id !== target.id)
+				}
+			}
+		},
+		{
+			name: 'userUnbanned',
+			callback: (target: TargetTag) => {
+				bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== target.id)
+			}
+		}
+	]
+
+	onMounted(async () => {
+		getDatas()
+		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
 	onUnmounted(() => {
-		listeners.forEach(listener => socket.off(listener))
+		listeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
 </script>
