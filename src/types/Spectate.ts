@@ -6,14 +6,17 @@ export interface Game {
 }
 
 export interface SpectateData {
-	gamesData: Game[],
+	games: Game[],
+	count: number,
 	loadingData: boolean,
 	err: null
 }
 
 export interface SpectateQueries {
+	page: string,
+	take: string,
 	order: string,
 	search: string
 }
 
-export type queriesKeys = 'order' | 'search'
+export type queriesKeys = 'page' | 'take' | 'order' | 'search'

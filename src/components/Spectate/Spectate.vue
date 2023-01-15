@@ -4,8 +4,10 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
-	import { logoDesc, logoAsc } from '../../assets/logoSVG'
-	import { getSpectate } from '@/requests/Spectate/getSpectate'
+	import DropDownMenu from '../Utils/DropDownMenu.vue'
+	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
+	import PagesSelector from '../Utils/PagesSelector.vue'
+	import { getQueriesInUrl, replaceUrl, getSpectate } from '@/requests/Spectate/getSpectate'
 	import type { Game, SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
 	import VersusTag from './VersusTag.vue'
 	import router from '@/router/index'
@@ -14,24 +16,27 @@
 	const	contentStore = useContentStore()
 	contentStore.state = 3
 
+	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	data: SpectateData = reactive({
-		gamesData: [],
+		games: [],
+		count: 0,
 		loadingData: false,
 		err: null,
 	})
-
 	let		routeUpdating: boolean = false
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	listerners: any[] = []
 
 	const	queries: SpectateQueries = reactive({
+		page: '1',
+		take: '10',
 		order: 'desc',
 		search: ''
 	})
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
-		const	queriesNames: queriesKeys[] = ['order', 'search']
+		const	queriesNames: queriesKeys[] = ['page', 'take', 'order', 'search']
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
 			const	val = urlQueries[queriesNames[i]] as string
@@ -40,62 +45,66 @@
 	}
 
 	const	checkQueries = () => {
+		const	page: number = parseInt(queries.page)
+		if (isNaN(page) || page < 1)
+			queries.page = '1'
+		if (!menuTake.includes(queries.take)) {
+			const	takeVal: number = parseInt(queries.take)
+			if (isNaN(takeVal) || takeVal < 1)
+				queries.take = '10'
+			else if (takeVal > 100)
+				queries.take = '100'
+		}
 		if (queries.order !== 'desc' && queries.order !== 'asc')
 			queries.order = 'desc'
 	}
 
-	const	inputRes = computed(() => {
-		return data.gamesData.filter(game => game.players.left.username!.toLowerCase().includes(queries.search.toLowerCase())
-							|| game.players.right.username!.toLowerCase().includes(queries.search.toLowerCase()))
+	const	pagesCount = computed(() => {
+		const	takeValue = parseInt(queries.take)
+		let	res: number = Math.round(data.count / takeValue)
+		if (data.count / takeValue > res)
+			res++
+		return res
 	})
 
-	const	games = computed(() => {
-		if (queries.search)
-			return queries.order === 'desc' ? inputRes.value : inputRes.value.reverse()
-		else
-			return queries.order === 'desc' ? data.gamesData : data.gamesData.reverse()
-	})
-
-	const	replaceUrl = async () => {
-		let	newQueries: Partial<SpectateQueries> = { ...queries }
-
-		if (!newQueries.search)
-			delete newQueries.search
-		await router.push({ query: newQueries})
+	const	updatePage = (n: number) => {
+		const	page: string = n.toString()
+		page ? queries.page = page : queries.page = '1'
 	}
 
 	watch(queries, async () => {
 		if (!routeUpdating)
-			await replaceUrl()
+			await replaceUrl({...queries})
+	})
+
+	watch(pagesCount, newVal => {
+		if (parseInt(queries.page) > newVal)
+			updatePage(newVal)
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
 		if (Object.keys(to.query).length === 0)
 			return false
 		routeUpdating = true
-		if (to.query !== from.query) {
+		if (to.query !== from.query)
 			getUrlQueries(to.query)
-			checkQueries()
-		}
-		await getSpectate(data)
+		await getSpectate(getQueriesInUrl(to.fullPath), data)
 		routeUpdating = false
 	})
 
-
-	onMounted(async () => {
+	onMounted(() => {
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
-		await getSpectate(data)
+		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 		socket.emit('onSpectate')
-		listerners.push(socket.on('newGameStarted', (game: Game) => data.gamesData.unshift(game)))
-		listerners.push(socket.on('gameEnded', (gameId: string) => data.gamesData = data.gamesData.filter(game => game.id !== gameId)))
+		listerners.push(socket.on('newGameStarted', (game: Game) => data.games.unshift(game)))
+		listerners.push(socket.on('gameEnded', (gameId: string) => data.games = data.games.filter(game => game.id !== gameId)))
 		listerners.push(socket.on('updateScore', (gameId: string, player: {id: string, score: number}) => {
-			const	game = data.gamesData.find(game => game.id === gameId)
+			const	game = data.games.find(game => game.id === gameId)
 			if (game)
 				player.id === game.players.left.id ?
 				game.players.left.score = player.score : game.players.right.score = player.score
 		}))
-		//	updateScore(gameId, { id, score })
 	})
 
 	onUnmounted(() => {
@@ -115,7 +124,16 @@
 				inputHeight="56em"
 				@search="(val) => queries.search = val"
 			/>
-			<div class="Filters-menus">
+			<div class="Filters">
+				<DropDownMenu
+					label="Per page:"
+					:options="menuTake"
+					:selectValue="queries.take"
+					width="165em"
+					height="56em"
+					:logo="logoPerPage"
+					@select="(value) => queries.take = value"
+				/>
 				<div class="Filters-orderBtns">
 					<button
 						class="OrderBtn"
@@ -140,7 +158,7 @@
 		>
 			<div
 				class="Content-Versus"
-				v-for="(game, index) in games"
+				v-for="(game, index) in data.games"
 				:key=index
 			>
 				<VersusTag
@@ -150,9 +168,14 @@
 					:player="game.players.right"
 					:reverse="true"
 				/>
-				
 			</div>
 		</div>
+		<PagesSelector
+			v-if="!data.err && !data.loadingData"
+			:page="parseInt(queries.page)"
+			:pagesSize="pagesCount"
+			@update="updatePage"
+		/>
 	</div>
 
 </template>

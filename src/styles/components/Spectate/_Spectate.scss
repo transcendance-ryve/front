@@ -13,7 +13,7 @@
 			width: 350em;
 		}
 
-		.Filters-menus {
+		.Filters {
 			display: flex;
 			gap: 16em;
 
@@ -66,6 +66,7 @@
 			display: flex;
 			border-radius: 6em;
 			background: $background-600;
+			position: relative;
 		}
 	}
 	.Spectate-content--maxSize {
