@@ -12,7 +12,7 @@
 		height?: string | boolean
 	}
 
-	const	props = withDefaults(defineProps<Props>(), {
+	const props = withDefaults(defineProps<Props>(), {
 		type: 1,
 		value: '',
 		logo: false,
@@ -22,7 +22,7 @@
 		height: false
 	})
 
-	const	classType: string = 'Btn--type' + props.type
+	const classType: string = 'Btn--type' + props.type
 
 </script>
 

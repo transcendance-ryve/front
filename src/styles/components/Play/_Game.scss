@@ -32,7 +32,7 @@
 			position: absolute;
 			content: "";
 			top: 0;
-			left: calc(100% / 2 - (100% * 0.006) / 2);
+			left: calc((100% / 2) - (100% * 0.006) / 2);
 			width: calc(100% * 0.006);
 			height: 100%;
 			background: #7860A6;

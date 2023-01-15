@@ -2,7 +2,8 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import Game from '@/components/Play/Game.vue'
 	import MatchMaking from '@/components/Play/MatchMaking.vue'
-	import { ref, onMounted, onUnmounted } from 'vue'
+	import Win from '@/components/Play/Win.vue'
+	import { ref, reactive, onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { UserConnected } from '@/types/User'
 
@@ -12,37 +13,43 @@
 	const socket = userStore.socket;
 
 	const matchmakingVisible = ref(true);
+	const endState = reactive({
+		visible: false,
+		win: false,
+	});
 
 	const connect = () => {
 		socket.emit("game_connect");
 	}
 	
-	const	listeners: any[] = []
+	const	listeners: { [key: string]: (data?: any) => void } = {
+		game_connected: () => {matchmakingVisible.value = false},
+		gameWin: () => {endState.visible = true; endState.win = true},
+		gameLoose: () => {endState.visible = true; endState.win = false},
+		updateUser: (data: UserConnected) => { userStore.updateMe(data) },
+	}
 
 	onMounted(() => {
-		listeners.push(socket.on("game_connected", () => {
-			matchmakingVisible.value = false;
-		}))
-		listeners.push(socket.on('gameWin', () => {
-			matchmakingVisible.value = true
-		}))
-		listeners.push(socket.on('gameLoose', () => {
-			matchmakingVisible.value = true
-		}))
-		listeners.push(socket.on("updateUser", (data: UserConnected) => { userStore.updateMe(data) }))
+		for (let name in listeners) {
+			socket.on(name, listeners[name]);
+		}
 	})
 
 	onUnmounted(() => {
-		listeners.forEach((listener) => {
-			socket.off(listener)
-		})
+		for (let name in listeners) {
+			socket.off(name, listeners[name]);
+		}
 	})
-
 </script>
 
 <template>
 	<div class="mainContent-play">
 		<Game />
+
+		<Win :win="endState.win" v-if="endState.visible" :close="() => {
+			endState.visible = false;
+			matchmakingVisible = true;
+		}" />
 
 		<MatchMaking v-if="matchmakingVisible" :toggle="() => connect()" />
 	</div>
