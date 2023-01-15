@@ -14,6 +14,7 @@
 	import { useUserStore } from '@/stores/UserStore'
 	import createRoom from '@/requests/SideBar/createRoom'
 	import type { CreateChanForm } from '@/types/Forms'
+	import type { SocketEvent } from '@/types/Socket'
 
 	const	sbStore = useSideBarStore()
 
@@ -51,16 +52,17 @@
 			createRoom(form)
 	}
 
-	let	listener: any
-	onMounted(() => {
-		listener = socket.on('roomCreated', (channelId: string) => {
+	let	listener: SocketEvent = { name: 'roomCreated', callback: (channelId: string) => {
 			sbStore.newChan = false;
 			sbStore.openConv('Channel', channelId)
-		})
+		}
+	}
+	onMounted(() => {
+		socket.on(listener.name, listener.callback)
 	})
 
 	onUnmounted(() => {
-		socket.off(listener)
+		socket.off(listener.name, listener.callback)
 	})
 
 </script>
