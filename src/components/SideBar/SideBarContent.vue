@@ -15,6 +15,7 @@
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
+	import type { SocketEvent } from '@/types/Socket'
 
 	const	dataState: axiosState = reactive({
 		error: null,
@@ -115,64 +116,99 @@
 		contentData.value = contentData.value.filter(item => item.id !== tag.id)
 	}
 
-	const	listeners: any[] = []
+	const	listeners: SocketEvent[] = [
+		{
+			name: 'friend_request',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+					unshiftTag(sender)
+				else if (sbStore.state.section === 1 && sbStore.state.notifsState === 2)
+					removeTag(sender)
+			}
+		},
+		{
+			name: 'friend_request_submitted',
+			callback: (receiver: Partial<ContentData>) => {
+				if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
+					removeTag(receiver)
+			}
+		},
+		{
+			name: 'friend_accepted',
+			callback: (receiver: Partial<ContentData>) => {
+				if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+					unshiftTag(receiver)
+			}
+		},
+		{
+			name: 'friend_accepted_submitted',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+					removeTag(sender)
+				else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+					unshiftTag(sender)
+			}
+		},
+		{
+			name: 'friend_declined_submitted',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
+					removeTag(sender)
+			}
+		},
+		{
+			name: 'friend_removed',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+					removeTag(sender)
+			}
+		},
+		{
+			name: 'friend_removed_submitted',
+			callback: (receiver: Partial<ContentData>) => {
+				if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
+					removeTag(receiver)
+			}
+		},
+		{
+			name: 'chanInvitationReceived',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+					unshiftTag(sender)
+			}
+		},
+		{
+			name: 'invitationAccepted',
+			callback: (id: string) => sbStore.openConv('Channel', id)
+		},
+		{
+			name: 'invitationDeclined',
+			callback: (id: string) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
+					removeTag({ id })
+			}
+		},
+		{
+			name: 'joinRoomSuccess',
+			callback: (id: string) => sbStore.openConv('Channel', id)
+		},
+		// {	//	il me faut l'id du channel pour le supprimer
+		// 	name: 'userBanned',
+		// 	callback: (id: string) => {
+		// 		if (sbStore.state.section === 2 && sbStore.state.channelsState === 1)
+		// 			removeTag({ id })
+		// 	}
+		// }
+	]
+
 	onMounted(() => {
 		getRawData()
-		listeners.push(socket.on('friend_request', (sender: Partial<ContentData>) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
-				unshiftTag(sender)
-			else if (sbStore.state.section === 1 && sbStore.state.notifsState === 2)
-				removeTag(sender)
-		}))
-		listeners.push(socket.on('friend_request_submitted', (receiver: Partial<ContentData>) => {
-			if (sbStore.state.section === 1 && sbStore.state.friendsState === 2)
-				removeTag(receiver)
-		}))
-		listeners.push(socket.on('friend_accepted', (receiver: Partial<ContentData>) => {
-			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				unshiftTag(receiver)
-		}))
-		listeners.push(socket.on('friend_accepted_submitted', (sender: Partial<ContentData>) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
-				removeTag(sender)
-			else if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				unshiftTag(sender)
-		}))
-		listeners.push(socket.on('friend_declined_submitted', (sender: Partial<ContentData>) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 2)
-				removeTag(sender)
-		}))
-		listeners.push(socket.on('friend_removed', (sender: Partial<ContentData>) => {
-			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				removeTag(sender)
-		}))
-		listeners.push(socket.on('friend_removed_submitted', (receiver: Partial<ContentData>) => {
-			if (sbStore.state.section === 1 && sbStore.state.friendsState === 1)
-				removeTag(receiver)
-		}))
-		listeners.push(socket.on('chanInvitationReceived', (sender: Partial<ContentData>) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-				unshiftTag(sender)
-		}))
-		listeners.push(socket.on('invitationAccepted', (id: string) => {
-			sbStore.openConv('Channel', id)
-		}))
-		listeners.push(socket.on('invitationDeclined', (id: string) => {
-			if (sbStore.state.section === 3 && sbStore.state.notifsState === 3)
-				removeTag({ id })
-		}))
-		listeners.push(socket.on('joinRoomSuccess', (id: string) => {
-			sbStore.openConv('Channel', id)
-		}))
-		//	il me faut l'id du channel pour le supprimer
-		// listeners.push(socket.on('userBanned', (id: string) => {
-		// 	if (sbStore.state.section === 2 && sbStore.state.channelsState === 1)
-		// 		removeTag({ id })
-		// }))
+		listeners.forEach(listener => socket.on(listener.name, listener.callback))
+
 	})
 
 	onUnmounted(() => {
-		listeners.forEach(listener => socket.off(listener))
+		listeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
 </script>
