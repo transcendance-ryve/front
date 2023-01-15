@@ -10,6 +10,7 @@
 	import editChannel from '@/requests/SideBar/editChannel'
 	import type { EditChanForm } from '@/types/Forms'
 	import type { Target } from '@/types/User'
+	import type { SocketEvent } from '@/types/Socket'
 	import {
 		logoProfile,
 		logoLock
@@ -68,14 +69,14 @@
 
 	const	emit = defineEmits(['update', 'close'])
 	const	userStore = useUserStore()
-	let		listener: any
+	let		listener: SocketEvent = { name: 'roomEdited', callback: () => emit('update') }
 
 	onMounted(() => {
-		listener = userStore.socket.once('roomEdited', () => emit('update'))
+		userStore.socket.on(listener.name, listener.callback)
 	})
 
 	onUnmounted(() => {
-		userStore.socket.off(listener)
+		userStore.socket.off(listener.name, listener.callback)
 	})
 
 </script>

@@ -35,7 +35,6 @@ const getUserProfile = async (id: string, data: ProfileData) => {
 		else if (response.value) {
 			data.type = getType(id, response.value.status, response.value.sender)
 			data.user = response.value.user
-			console.log('profile', response.value)
 		}
 		data.loadingData = loading.value
 		data.err = error.value

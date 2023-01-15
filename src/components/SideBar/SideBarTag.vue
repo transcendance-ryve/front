@@ -9,8 +9,7 @@
 	import Btn from '../Utils/Btn.vue'
 	import type { ContentData } from '@/types/Sidebar'
 	import type { User } from '@/types/User'
-	import sendFriendRequest from '@/requests/Friends/sendFriendRequest'
-	import acceptFriendRequest from '@/requests/Friends/acceptFriendRequest'
+	import type { SocketEvent } from '@/types/Socket'
 
 	export interface Props {
 		type: number
@@ -55,21 +54,32 @@
 			})
 	}
 
-	const	listeners: any[] = []
+	const	listeners: SocketEvent[] = [
+		{
+			name: 'user_connected',
+			callback: (user: Partial<User>) => {
+				if (user.id === props.data.id)
+					props.data.status = 'ONLINE'
+			}
+		},
+		{
+			name: 'user_disconnected',
+			callback: (user: Partial<User>) => {
+				if (user.id === props.data.id)
+					props.data.status = 'OFFLINE'
+			}
+		}
+	]
+	
 	onMounted(() => {
-		listeners.push(socket.on('user_connected', (user: Partial<User>) => {
-			if (user.id === props.data.id)
-				props.data.status = 'ONLINE'
-		}))
-		listeners.push(socket.on('user_disconnected', (user: Partial<User>) => {
-			if (user.id === props.data.id)
-				props.data.status = 'OFFLINE'
-		}))
+		listeners.forEach((listener) => {
+			socket.on(listener.name, listener.callback)
+		})
 	})
 
 	onUnmounted(() => {
 		listeners.forEach((listener) => {
-			socket.off(listener)
+			socket.off(listener.name, listener.callback)
 		})
 	})
 
