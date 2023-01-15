@@ -140,10 +140,12 @@
 			>
 				<VersusTag
 					:player="game.left"
+					@click="profileRedirect(game.left.id || '')"
 				/>
 				<VersusTag
 					:player="game.right"
 					:reverse="true"
+					@click="profileRedirect(game.right.id || '')"
 				/>
 			</div>
 		</div>
