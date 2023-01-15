@@ -12,6 +12,7 @@
 	import	getUserProfile from '../../requests/Profile/getUserProfile'
 	import type { ProfileData } from '@/types/ProfileData'
 	import type { userKeys } from '@/types/User'
+	import type { SocketEvent } from '@/types/Socket'
 
 	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
@@ -62,45 +63,66 @@
 
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-	const	listeners: any[] = []
+
+	const	listeners: SocketEvent[] = [
+		{
+			name: 'friend_request',
+			callback: (sender: any) => {
+				console.log('friend_request in profile')
+				if (sender.id === data.user.id) data.type = 5
+			}
+		},
+		{
+			name: 'friend_request_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) data.type = 4
+			}
+		},
+		{
+			name: 'friend_accepted',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) data.type = 2
+			}
+		},
+		{
+			name: 'friend_accepted_submitted',
+			callback: (sender: any) => {
+				if (sender.id === data.user.id) data.type = 2
+			}
+		},
+		{
+			name: 'friend_declined',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) data.type = 3
+			}
+		},
+		{
+			name: 'friend_declined_submitted',
+			callback: (sender: any) => {
+				if (sender.id === data.user.id) data.type = 3
+			}
+		},
+		{
+			name: 'friend_removed',
+			callback: (sender: any) => {
+				if (sender.id === data.user.id) data.type = 3
+			}
+		},
+		{
+			name: 'friend_removed_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) data.type = 3
+			}
+		},
+	]
+
 
 	onMounted(() => {
-		listeners.push(socket.on('friend_request', (sender: any) => {
-			if (sender.id === data.user.id)
-				data.type = 5
-		}))
-		listeners.push(socket.on('friend_request_submitted', (receiver: any) => {
-			if (receiver.id === data.user.id)
-				data.type = 4
-		}))
-		listeners.push(socket.on('friend_accepted', (receiver: any) => {
-			if (receiver.id === data.user.id)
-				data.type = 2
-		}))
-		listeners.push(socket.on('friend_accepted_submitted', (sender: any) => {
-			if (sender.id === data.user.id)
-				data.type = 2
-		}))
-		listeners.push(socket.on('friend_declined', (receiver: any) => {
-			if (receiver.id === data.user.id)
-				data.type = 3
-		}))
-		listeners.push(socket.on('friend_declined_submitted', (sender: any) => {
-			if (sender.id === data.user.id)
-				data.type = 3
-		}))
-		listeners.push(socket.on('friend_removed', (sender: any) => {
-			if (sender.id === data.user.id)
-				data.type = 3
-		}))
-		listeners.push(socket.on('friend_removed_submitted', (receiver: any) => {
-			if (receiver.id === data.user.id)
-				data.type = 3
-		}))
+		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
 	onUnmounted(() => {
-		listeners.forEach(listener => socket.off(listener))
+		listeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
 </script>
