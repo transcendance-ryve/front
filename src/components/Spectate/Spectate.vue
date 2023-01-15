@@ -1,11 +1,12 @@
 <script setup lang="ts">
 
-	import { onMounted, reactive, computed, watch } from 'vue'
+	import { onMounted, onUnmounted, reactive, computed, watch } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
+	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import { logoDesc, logoAsc } from '../../assets/logoSVG'
 	import { getSpectate } from '@/requests/Spectate/getSpectate'
-	import type { SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
+	import type { Game, SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
 	import VersusTag from './VersusTag.vue'
 	import router from '@/router/index'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
@@ -18,7 +19,11 @@
 		loadingData: false,
 		err: null,
 	})
+
 	let		routeUpdating: boolean = false
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
+	const	listerners: any[] = []
 
 	const	queries: SpectateQueries = reactive({
 		order: 'desc',
@@ -81,6 +86,21 @@
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
 		await getSpectate(data)
+		socket.emit('onSpectate')
+		listerners.push(socket.on('newGameStarted', (game: Game) => data.gamesData.unshift(game)))
+		listerners.push(socket.on('gameEnded', (gameId: string) => data.gamesData = data.gamesData.filter(game => game.id !== gameId)))
+		listerners.push(socket.on('updateScore', (res: any) => {
+			console.log('in updateScore', res)
+			// const	game = data.gamesData.find(game => game.id === gameId)
+			// if (game && )
+			// 	game.score = score
+		}))
+		//	updateScore(gameId, { id, score })
+	})
+
+	onUnmounted(() => {
+		listerners.forEach(listener => socket.off(listener))
+		socket.emit('offSpectate')
 	})
 
 </script>
