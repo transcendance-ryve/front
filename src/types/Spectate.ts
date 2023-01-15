@@ -1,17 +1,19 @@
-import type { Players } from './User';
+import type { Players } from '@/types/User'
+
+export interface Game {
+	id: string,
+	players: Players
+}
 
 export interface SpectateData {
-	games: Players[],
-	count: number,
+	gamesData: Game[],
 	loadingData: boolean,
 	err: null
 }
 
 export interface SpectateQueries {
-	page: string,
-	take: string,
 	order: string,
 	search: string
 }
 
-export type queriesKeys = 'page' | 'take' | 'sort' | 'order' | 'search'
+export type queriesKeys = 'order' | 'search'

@@ -39,10 +39,7 @@
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
 			const	val = urlQueries[queriesNames[i]] as string
-			if (val)
-				queries[queriesNames[i]] = val
-			else
-				queries[queriesNames[i]] = ''
+			queries[queriesNames[i]] = val ? val : ''
 		}
 	}
 
@@ -76,9 +73,9 @@
 		if (!menuTake.includes(queries.take)) {
 			const	takeVal: number = parseInt(queries.take)
 			if (isNaN(takeVal) || takeVal < 1)
-			queries.take = '10'
+				queries.take = '10'
 			else if (takeVal > 100)
-			queries.take = '100'
+				queries.take = '100'
 		}
 		if (!sortQueries.includes(queries.sort))
 			queries.sort = 'rank_point'
@@ -103,14 +100,13 @@
 	})
 
 	const	updatePage = (n: number) => {
-		queries.page = n.toString()
-		if (queries.page === '0')
-			queries.page = '1'
+		const	page: string = n.toString()
+		page ? queries.page = page : queries.page = '1'
 	}
 
 	watch(queries, async () => {
 		if (!routeUpdating)
-			await replaceUrl(JSON.parse(JSON.stringify(queries)))
+			await replaceUrl({...queries})
 	})
 
 	watch(pagesCount, newVal => {
