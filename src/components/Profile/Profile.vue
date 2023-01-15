@@ -68,7 +68,6 @@
 		{
 			name: 'friend_request',
 			callback: (sender: any) => {
-				console.log('friend_request in profile')
 				if (sender.id === data.user.id) data.type = 5
 			}
 		},
