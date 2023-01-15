@@ -232,6 +232,7 @@
 	}
 
 	const start = (data: { players: Players, width: number, height: number }): void => {
+		console.log(data);
 		defaultGrid.height = data.height;
 		defaultGrid.width = data.width;
 

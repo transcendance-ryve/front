@@ -116,7 +116,7 @@
 	})
 
 	const spectateGame = (gameID: string) => {
-		socket.emit('spectateGame', gameID);
+		socket.emit('spectateGame', { gameId: gameID });
 
 		gameSelected.value = true;
 	}
