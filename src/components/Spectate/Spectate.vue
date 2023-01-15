@@ -123,7 +123,7 @@
 </script>
 
 <template>
-	<Game v-if="gameSelected" />
+	<Game v-if="gameSelected" :spectate="true" />
 
 	<div v-if="!gameSelected" class="mainContent-spectate">
 		<div class="Spectate-filters">

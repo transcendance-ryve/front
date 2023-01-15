@@ -86,8 +86,8 @@
 	})
 
 	const defaultGrid: DefaultGrid = {
-		width: 0,
-		height: 0,
+		width: 790,
+		height: 390,
 	};
 
 	const keys: Keys = {
