@@ -12,6 +12,7 @@
 	import VersusTag from './VersusTag.vue'
 	import router from '@/router/index'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
+	import type { SocketEvent } from '@/types/Socket'
 	import Game from '../Play/Game.vue'
 
 	const	contentStore = useContentStore()
@@ -27,7 +28,6 @@
 	let		routeUpdating: boolean = false
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-	const	listerners: any[] = []
 
 	const	queries: SpectateQueries = reactive({
 		page: '1',
@@ -95,23 +95,36 @@
 		routeUpdating = false
 	})
 
+	const	listerners: SocketEvent[] = [
+		{
+			name: 'newGameStarted',
+			callback: (game: any) => data.games.unshift(game)
+		},
+		{
+			name: 'gameEnded',
+			callback: (gameId: string) => data.games = data.games.filter(game => game.id !== gameId)
+		},
+		{
+			name: 'updateScore',
+			callback: (gameId: string, player: {id: string, score: number}) => {
+				const	game = data.games.find(game => game.id === gameId)
+				if (game)
+					player.id === game.players.left.id ?
+					game.players.left.score = player.score : game.players.right.score = player.score
+			}
+		}
+	]
+
 	onMounted(() => {
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
 		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 		socket.emit('onSpectate')
-		listerners.push(socket.on('newGameStarted', (game: any) => data.games.unshift(game)))
-		listerners.push(socket.on('gameEnded', (gameId: string) => data.games = data.games.filter(game => game.id !== gameId)))
-		listerners.push(socket.on('updateScore', (gameId: string, player: {id: string, score: number}) => {
-			const	game = data.games.find(game => game.id === gameId)
-			if (game)
-				player.id === game.players.left.id ?
-				game.players.left.score = player.score : game.players.right.score = player.score
-		}))
+		listerners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
 	onUnmounted(() => {
-		listerners.forEach(listener => socket.off(listener))
+		listerners.forEach(listener => socket.off(listener.name, listener.callback))
 		socket.emit('offSpectate')
 	})
 
