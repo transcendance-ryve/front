@@ -4,14 +4,15 @@
 	justify-content: center;
 	align-items: center;
 
-	position: absolute;
 	width: 100%;
 	height: 100%;
-	top: 0;
-	left: 0;
 
 	background: rgba(31, 30, 44, 0.75);
 	backdrop-filter: blur(2.8px);
+
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .win__content {
@@ -48,6 +49,29 @@
 	h2 {
 		font-size: 24em;
 		line-height: 100%;
+		color: $white;
+	}
+}
+
+.win__content_brand_spectate {
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 32px;
+	width: 100%;
+
+	img {
+		width: 96px;
+		height: 96px;
+		border-radius: 100%;
+	}
+
+	h1 {
+		font-size: 24em;
+		line-height: 100%;
+
 		color: $white;
 	}
 }

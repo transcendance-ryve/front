@@ -13,10 +13,7 @@
 	const socket = userStore.socket;
 
 	const matchmakingVisible = ref(true);
-	const endState = reactive({
-		visible: false,
-		win: false,
-	});
+	
 
 	const connect = () => {
 		socket.emit("game_connect");
@@ -24,8 +21,6 @@
 	
 	const	listeners: { [key: string]: (data?: any) => void } = {
 		game_connected: () => {matchmakingVisible.value = false},
-		gameWin: () => {endState.visible = true; endState.win = true},
-		gameLoose: () => {endState.visible = true; endState.win = false},
 		updateUser: (data: UserConnected) => { userStore.updateMe(data) },
 	}
 
@@ -44,12 +39,7 @@
 
 <template>
 	<div class="mainContent-play">
-		<Game />
-
-		<Win :win="endState.win" v-if="endState.visible" :close="() => {
-			endState.visible = false;
-			matchmakingVisible = true;
-		}" />
+		<Game :close="() => matchmakingVisible = true" />
 
 		<MatchMaking v-if="matchmakingVisible" :toggle="() => connect()" />
 	</div>

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 	import VersusTag from '@/components/Spectate/VersusTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import { ref, type Ref, onMounted, onUnmounted } from 'vue';
+	import { ref, reactive, type Ref, onMounted, onUnmounted } from 'vue';
+	import Win from '../Play/Win.vue'
+	import Btn from '../Utils/Btn.vue'
 
 	interface Player {
 		id: string,
@@ -58,8 +60,21 @@
 	const socket = userStore.socket;
 	const canvas = ref(null);
 
+	const endState = reactive({
+		visible: false,
+		state: "win",
+		player: {
+			id: 'wdwadwad',
+			username: 'Sethhh',
+			avatar: 'http://localhost:3000/default.png',
+			color: "#ff0000"
+		},
+	});
+
 	interface Props {
 		spectate?: boolean,
+		close: () => void,
+		gameID?: string,
 	}
 
 	const props: Props = defineProps<Props>();
@@ -96,7 +111,6 @@
 		up: false,
 		down: false,
 	}
-	
 
 	const handleKeyup = (e: any) => {
 		switch (e.key) {
@@ -232,7 +246,6 @@
 	}
 
 	const start = (data: { players: Players, width: number, height: number }): void => {
-		console.log(data);
 		defaultGrid.height = data.height;
 		defaultGrid.width = data.width;
 
@@ -250,7 +263,16 @@
 	const listeners: any = {
 		start: start,
 		update: update,
-		score: updateScore
+		score: updateScore,
+		gameWinner: (id: string) => {
+			endState.visible = true;
+			if (props.spectate) {
+				endState.state = "spectate"
+				if (id === players.value.left.id) endState.player = { color: "#0177FB", ...players.value.left };
+				else endState.player = { color: "#FF4646", ...players.value.right };
+			} else if (userStore?.me.id === id) endState.state = "win";
+			else endState.state = "lose";
+		},
 	}
 
 	/* onMounted && onUnmounted */
@@ -264,7 +286,7 @@
 			window.addEventListener('keyup', handleKeyup, true);
 			window.addEventListener('keydown', handleKeydown, true);
 		}
-	})
+	});
 
 	onUnmounted(() => {
 		for (let name in listeners) {
@@ -275,7 +297,14 @@
 			window.removeEventListener('keydown', handleKeydown, true);
 			window.removeEventListener('keyup', handleKeyup, true);
 		}
-	})
+	});
+
+	const handleClick = () => {
+		if (props.spectate) {
+			socket.emit('leaveSpectateGame', { gameId: props.gameID });
+			props.close();
+		}
+	}
 </script>
 
 <template>
@@ -291,7 +320,23 @@
 		</div>
 		
 		<div class="game__canvas_container">
+			<div class="game__canvas_background"/>
+			<div class="game__canvas_background"/>
+
 			<canvas ref="canvas" class="game__canvas" />
+
+			<div
+				v-if="spectate && !endState.visible"
+				class="game__canvas_leave">
+				<button @click="handleClick">Leave spectate</button>
+			</div>
+
+			<Win
+				v-if="endState.visible"
+				:state="endState.state"
+				:player="endState.player"
+				:close="() => { endState.visible = false; close() }"
+			/>
 		</div>
 	</div>
 </template>

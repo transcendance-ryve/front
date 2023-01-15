@@ -36,7 +36,7 @@
 		search: ''
 	})
 
-	const gameSelected = ref(false);
+	const gameSelected = ref("");
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['page', 'take', 'order', 'search']
@@ -118,12 +118,17 @@
 	const spectateGame = (gameID: string) => {
 		socket.emit('spectateGame', { gameId: gameID });
 
-		gameSelected.value = true;
+		gameSelected.value = gameID;
 	}
 </script>
 
 <template>
-	<Game v-if="gameSelected" :spectate="true" />
+	<Game
+		v-if="gameSelected !== ''"
+		:spectate="true"
+		:close="() => gameSelected = ''"
+		:gameID="gameSelected"
+	/>
 
 	<div v-if="!gameSelected" class="mainContent-spectate">
 		<div class="Spectate-filters">

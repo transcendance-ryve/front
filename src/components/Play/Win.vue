@@ -1,24 +1,35 @@
 <template>
 	<div class="win__container">
-		<div class="win__content">
-			<div v-if="win" class="win__content_brand win">
+		<div class="win__content" v-if="state !== 'spectate'">
+			<div v-if="state === 'win'" class="win__content_brand win">
 				<h1>Winner</h1>
 				<h2>You won the game</h2>
 			</div>
-			<div v-if="!win" class="win__content_brand loose">
-				<h1>Looser</h1>
+			<div v-if="state === 'lose'" class="win__content_brand loose">
+				<h1>Loser</h1>
 				<h2>You loose the game</h2>
 			</div>
-			<Btn value="Back to matchmaking" width="240px" height="50px" :type=2 fontSize="18px" @click="handleClick" />
+			<Btn value="Back to matchmaking" width="240px" height="50px" fontSize="18px" @click="handleClick" />
+		</div>
+		<div v-if="state === 'spectate' && player" class="win__content_brand_spectate">
+			<img :src="player.avatar" alt="avatar" :style="{'border': '4px solid ' + player.color}">
+			<h1><span :style="{'color': player.color}">{{ player?.username }}</span> won the game</h1>
+			<Btn value="Leave spectate" width="200px" height="50px" fontSize="18px" @click="handleClick" />
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 	import Btn from "@/components/Utils/Btn.vue";
+import type { Player } from "@/types/User";
 
 	interface Props {
-		win?: boolean;
+		state?: string;
+		player?: {
+			username: string;
+			avatar: string;
+			color: string;
+		} | undefined,
 		close: () => void;
 	}
 
