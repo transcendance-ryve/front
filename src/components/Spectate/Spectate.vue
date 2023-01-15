@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { onMounted, onUnmounted, reactive, computed, watch } from 'vue'
+	import { onMounted, onUnmounted, reactive, computed, watch, ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -8,10 +8,11 @@
 	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import { getQueriesInUrl, replaceUrl, getSpectate } from '@/requests/Spectate/getSpectate'
-	import type { Game, SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
+	import type { SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
 	import VersusTag from './VersusTag.vue'
 	import router from '@/router/index'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
+	import { Game } from '../Play/Game.vue'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 3
@@ -34,6 +35,8 @@
 		order: 'desc',
 		search: ''
 	})
+
+	const gameSelected = ref(false);
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['page', 'take', 'order', 'search']
@@ -97,7 +100,7 @@
 		checkQueries()
 		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), data)
 		socket.emit('onSpectate')
-		listerners.push(socket.on('newGameStarted', (game: Game) => data.games.unshift(game)))
+		listerners.push(socket.on('newGameStarted', (game: any) => data.games.unshift(game)))
 		listerners.push(socket.on('gameEnded', (gameId: string) => data.games = data.games.filter(game => game.id !== gameId)))
 		listerners.push(socket.on('updateScore', (gameId: string, player: {id: string, score: number}) => {
 			const	game = data.games.find(game => game.id === gameId)
@@ -112,11 +115,17 @@
 		socket.emit('offSpectate')
 	})
 
+	const spectateGame = (gameID: string) => {
+		socket.emit('spectateGame', gameID);
+
+		gameSelected.value = true;
+	}
 </script>
 
 <template>
+	<Game v-if="gameSelected" />
 
-	<div class="mainContent-spectate">
+	<div v-if="!gameSelected" class="mainContent-spectate">
 		<div class="Spectate-filters">
 			<SearchInput
 				:defaultValue="queries.search"
@@ -160,6 +169,7 @@
 				class="Content-Versus"
 				v-for="(game, index) in data.games"
 				:key=index
+				@click="spectateGame(game.id)"
 			>
 				<VersusTag
 					:player="game.players.left"
@@ -177,5 +187,4 @@
 			@update="updatePage"
 		/>
 	</div>
-
 </template>
