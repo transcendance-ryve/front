@@ -18,6 +18,7 @@
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
 	import { profileRedirect } from '@/router/index'
+	import { SocketEvent } from '@/types/Socket'
 
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
@@ -63,47 +64,56 @@
 		settings.value = false
 	}
 
-	const	listeners: any[] = []
+	const	friendListeners: SocketEvent[] = [
+		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
+		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push({ content: msg }) } }
+	]
+
+	const	chanListeners: SocketEvent[] = [
+		{ name: 'role', callback: (res: string) => role.value = res },
+		{ name: 'userPromoted', callback: (target: TargetTag) => {
+			if (userStore.me.id === target.id) {
+				userList.value = false
+				settings.value = true
+			}
+		}},
+		{ name: 'userDemoted', callback: (target: TargetTag) => {
+			if (userStore.me.id === target.id) {
+				settings.value = false
+				userList.value = true
+			}
+		}},
+		{ name: 'userBanned', callback: (target: TargetTag) => {
+			if (userStore.me.id === target.id) {
+				sbStore.conv.open = false
+				sbStore.state.section = 2
+			}
+		}},
+		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push({ content: msg }) } },
+		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
+	]
+
 	onMounted(async () => {
 		if (sbStore.conv.focus === true || window.innerWidth > 1440)
 			(document.getElementById('WriteMessage')?.children[0] as HTMLElement).focus()
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)			
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
-			listeners.push(socket.once('DMChan', (id: string) => { convId.value = id }))
+			friendListeners.forEach(listener => socket.on(listener.name, listener.callback))
 		}
 		else {
 			dataState.value = await getChannelsByID(sbStore.conv.id, target)
 			convId.value = target.value.id
 			socket.emit('getRole', { channelId: convId.value })
-			listeners.push(socket.once('role', (res: string) => role.value = res))
-			listeners.push(socket.on('userPromoted', (target: TargetTag) => {
-				if (userStore.me.id === target.id) {
-					userList.value = false
-					settings.value = true
-				}
-			}))
-			listeners.push(socket.on('userDemoted', (target: TargetTag) => {
-				if (userStore.me.id === target.id) {
-					settings.value = false
-					userList.value = true
-				}
-			}))
-			listeners.push(socket.on('userBanned', (target: TargetTag) => {
-				if (userStore.me.id === target.id) {
-					sbStore.conv.open = false
-					sbStore.state.section = 2
-				}
-			}))
+			chanListeners.forEach(listener => socket.on(listener.name, listener.callback))
 		}
-		listeners.push(socket.on('incomingMessage', (msg: any) => {
-			messages.value.push({ content: msg })
-		}))
-		listeners.push(socket.once('roomLeft', () => { sbStore.conv.open = false; sbStore.state.section = 2 }))
 	})
 
 	onUnmounted(() => {
-		listeners.forEach(listener => socket.off(listener))
+		if (sbStore.conv.type === 'Friend')
+			friendListeners.forEach(listener => socket.off(listener.name, listener.callback))
+		else
+			chanListeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
 </script>
