@@ -89,11 +89,11 @@
 		socket.emit('onSpectate')
 		listerners.push(socket.on('newGameStarted', (game: Game) => data.gamesData.unshift(game)))
 		listerners.push(socket.on('gameEnded', (gameId: string) => data.gamesData = data.gamesData.filter(game => game.id !== gameId)))
-		listerners.push(socket.on('updateScore', (res: any) => {
-			console.log('in updateScore', res)
-			// const	game = data.gamesData.find(game => game.id === gameId)
-			// if (game && )
-			// 	game.score = score
+		listerners.push(socket.on('updateScore', (gameId: string, player: {id: string, score: number}) => {
+			const	game = data.gamesData.find(game => game.id === gameId)
+			if (game)
+				player.id === game.players.left.id ?
+				game.players.left.score = player.score : game.players.right.score = player.score
 		}))
 		//	updateScore(gameId, { id, score })
 	})
@@ -150,6 +150,7 @@
 					:player="game.players.right"
 					:reverse="true"
 				/>
+				
 			</div>
 		</div>
 	</div>
