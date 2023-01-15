@@ -18,7 +18,7 @@
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
 	import { profileRedirect } from '@/router/index'
-	import { SocketEvent } from '@/types/Socket'
+	import type { SocketEvent } from '@/types/Socket'
 
 	const	dataState: Ref<axiosState> = ref({
 		error: null,
