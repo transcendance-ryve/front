@@ -12,7 +12,7 @@
 	import VersusTag from './VersusTag.vue'
 	import router from '@/router/index'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
-	import { Game } from '../Play/Game.vue'
+	import Game from '../Play/Game.vue'
 
 	const	contentStore = useContentStore()
 	contentStore.state = 3
