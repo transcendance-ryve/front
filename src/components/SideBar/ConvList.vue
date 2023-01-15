@@ -211,7 +211,7 @@
 		}
 	]
 
-	onMounted(async () => {
+	onMounted(() => {
 		getDatas()
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
