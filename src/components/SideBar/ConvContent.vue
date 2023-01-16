@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 
 	import { ref, onMounted, watch } from 'vue';
 	import Message from './Message.vue';
@@ -29,6 +29,58 @@
 			:message="msg"
 			:sameUser="messages[index + 1]?.sender.id === msg.sender.id"
 			:newUser="messages[index - 1]?.sender.id !== msg.sender.id || index === 0 || !messages[index - 1]"
+			:lastUser="index === messages.length - 1"
+			ref="messagesRefs"
+		/>
+	</div>
+</template> -->
+
+
+<script setup lang="ts">
+
+	import { ref, watch } from 'vue';
+	import Message from './Message.vue';
+
+	export interface Props {
+		messages: any[]
+	}
+
+	const props = defineProps<Props>()
+
+	// scroll to bottom when new message
+	const messagesRefs = ref(null);
+
+	watch(messagesRefs, (newMessagesRefs: any) => {
+		// console.log('watch', props.messages[props.messages.length - 1].content)
+		if (newMessagesRefs) {
+			const el = newMessagesRefs[props.messages.length - 1].$el;
+			// console.log('watch', el)
+			if (el) el.scrollIntoView(true);
+		}
+	});
+
+	const	timedMessage = (index: number): boolean => {
+		if (index === 0)
+			return true;
+		const	currentMessage = props.messages[index],
+				prevMessage = props.messages[index - 1];
+		const	currentTime = new Date(currentMessage.createdAt).getUTCMinutes(),
+				prevTime = new Date(prevMessage.createdAt).getUTCMinutes();
+		if (currentTime - prevTime > 3)
+			return true;
+		return false;
+	}
+
+</script>
+
+<template>
+	<div class="ConvContent" ref="messagesContainer">
+		<Message
+			v-for="(msg, index) in messages"
+			:key="index"
+			:message="msg"
+			:sameUser="messages[index + 1]?.sender.id === msg.sender.id"
+			:newUser="timedMessage(index)"
 			:lastUser="index === messages.length - 1"
 			ref="messagesRefs"
 		/>

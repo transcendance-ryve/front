@@ -1,0 +1,11 @@
+.ConvContent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	row-gap: 3em;
+	overflow-y: auto;
+}
+::-webkit-scrollbar {
+	display: none;
+}  

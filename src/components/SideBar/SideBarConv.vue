@@ -66,7 +66,7 @@
 
 	const	friendListeners: SocketEvent[] = [
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
-		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push({ content: msg }) } }
+		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push(msg) } }
 	]
 
 	const	chanListeners: SocketEvent[] = [
@@ -89,7 +89,7 @@
 				sbStore.state.section = 2
 			}
 		}},
-		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push({ content: msg }) } },
+		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push(msg) } },
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
 	]
 
