@@ -179,6 +179,7 @@
 		{
 			name: 'userMuted',
 			callback: (id: string) => {
+				console.log('userMuted', id)
 				const	userMuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
 				if (userMuted)
 					userMuted.isMute = true
@@ -205,8 +206,10 @@
 		},
 		{
 			name: 'userUnbanned',
-			callback: (target: TargetTag) => {
-				bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== target.id)
+			callback: (id: string) => {
+				console.log('userUnbanned', id, bannedListData.value)
+				bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== id)
+				console.log('after filter', bannedListData.value)
 			}
 		}
 	]

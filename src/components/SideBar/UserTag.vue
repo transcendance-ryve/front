@@ -43,10 +43,16 @@
 			toolTip: 'Add user'
 		},
 		{
-			name: props.user.isMute ? 'demute' : 'mute',
+			name: 'demute',
 			logo: logoMute,
 			color: '#FF8A00',
-			toolTip: props.user.isMute ? 'Demute' : 'Mute'
+			toolTip: 'Demute'
+		},
+		{
+			name: 'mute',
+			logo: logoMute,
+			color: '#FF8A00',
+			toolTip: 'Mute'
 		},
 		{
 			name: 'promote',
@@ -82,11 +88,11 @@
 		else if (props.section == 'Add')
 			return [actionBtns[0], actionBtns[2]]
 		else if (props.section == 'allPrivileges')
-			return [actionBtns[0], actionBtns[3], actionBtns[4], actionBtns[6]]
+			return [actionBtns[0], props.user.isMute ? actionBtns[3] : actionBtns[4], actionBtns[5], actionBtns[7]]
 		else if (props.section == 'allPrivilegesA')
-			return [actionBtns[0], actionBtns[5]]
+			return [actionBtns[0], actionBtns[6]]
 		else if (props.section == 'banned')
-			return [actionBtns[0], actionBtns[7]]
+			return [actionBtns[0], actionBtns[8]]
 		else
 			return []
 	})
