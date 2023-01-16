@@ -19,6 +19,7 @@
     "socket.io-client": "^4.5.4",
     "vue": "^3.2.41",
     "vue-3-socket.io": "^1.0.5",
+    "vue-moment": "^4.1.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
