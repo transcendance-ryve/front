@@ -5,19 +5,20 @@ import type { Ref } from 'vue'
 export interface message { value: string }
 
 // const getMessages = async (id: string, res: Ref<message>) => {
-const getMessages = async (id: string, res: Ref<any[]>) => {
+const getMessages = async (id: string, page: number, res: Ref<any[]>) => {
 
 	const	dataState: axiosState = { error: null, loading: true }
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/channels/messages/'
-		+ id
+		+ id + '?take=20&page=' + page
 	)
 	if (error.value) {
 		//	handle errors
 		dataState.error = error.value
 	}
 	else if (response.value) {
+		console.log('getMessages', response.value)
 		res.value = response.value
 		dataState.loading = loading.value
 	}

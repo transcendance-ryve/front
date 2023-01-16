@@ -42,10 +42,19 @@
 	const	socket = userStore.socket
 	const	convId: Ref<string> = ref('')
 	const	role: Ref<string> = ref('')
+	let		page: number = 0
 
-	watch(convId, async (newVal: string) => {
-		dataState.value = await getMessages(newVal, messages)
+	watch(convId, async () => {
+		// await getConvMessages()
+		await getConvMessages()
 	})
+
+	const	getConvMessages = async () => {
+		const	res: Ref<any[]> = ref([])
+		dataState.value = await getMessages(convId.value, page, res)
+		messages.value = res.value.concat(messages.value)
+		page++
+	}
 
 	const	removeFriend = () => {
 		socket.emit('remove_friend', { friendId: target.value.id })
@@ -138,7 +147,11 @@
 				@delete="removeFriend()"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 			/>
-			<ConvContent v-if="!userList && !dataState.error && !dataState.loading" :messages="messages"/>
+			<ConvContent
+				v-if="!userList && !dataState.error && !dataState.loading"
+				:messages="messages"
+				:getFollowing="getConvMessages"
+			/>
 			<ConvList
 				v-if="userList && !dataState.error && !dataState.loading"
 				:channelId="target.id" :role="role"

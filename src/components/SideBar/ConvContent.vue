@@ -38,26 +38,18 @@
 
 <script setup lang="ts">
 
-	import { ref, watch } from 'vue';
+	import { ref, type Ref, toRefs, type ToRefs, watch, nextTick } from 'vue';
 	import Message from './Message.vue';
 
 	export interface Props {
 		messages: any[]
+		getFollowing: Function
 	}
 
 	const props = defineProps<Props>()
-
-	// scroll to bottom when new message
-	const messagesRefs = ref(null);
-
-	watch(messagesRefs, (newMessagesRefs: any) => {
-		// console.log('watch', props.messages[props.messages.length - 1].content)
-		if (newMessagesRefs) {
-			const el = newMessagesRefs[props.messages.length - 1].$el;
-			// console.log('watch', el)
-			if (el) el.scrollIntoView(true);
-		}
-	});
+	const messagesContainer: Ref<HTMLElement> = ref(null!);
+	const { messages }: ToRefs<Readonly<Props>> = toRefs(props);
+		let scrollPosition = 0;
 
 	const	timedMessage = (index: number): boolean => {
 		if (index === 0)
@@ -71,10 +63,23 @@
 		return false;
 	}
 
+	const handleScroll = (e: any) => {
+		if (e.target.scrollTop === 0) {
+			scrollPosition = e.target.scrollHeight - e.target.scrollTop;
+			props.getFollowing();
+		}
+	}
+
+	watch(messages, async () => {
+		await nextTick();
+		messagesContainer.value!.scrollTop = messagesContainer.value!.scrollHeight - scrollPosition;
+		scrollPosition = 0;
+	}, { deep: true })
+
 </script>
 
 <template>
-	<div class="ConvContent" ref="messagesContainer">
+	<div class="ConvContent" ref="messagesContainer" @scroll="handleScroll">
 		<Message
 			v-for="(msg, index) in messages"
 			:key="index"
