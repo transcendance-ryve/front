@@ -1,11 +1,16 @@
 <script setup lang="ts">
-	import { computed, reactive, onMounted, ref } from 'vue'
+	import { computed, reactive, onMounted, ref, defineProps } from 'vue'
 	import Btn from '../Utils/Btn.vue';
 	import { useUserStore } from '@/stores/UserStore';
 	import moment from 'moment';
 
 	const userStore = useUserStore()
 	const socket = userStore.socket;
+
+	interface Props {
+		toggle: () => void;
+	}
+	const props: Props = defineProps<Props>();
 
 	enum State {
 		Matchmaking,
@@ -37,8 +42,8 @@
 
 	onMounted(() => {
 		socket.on("joined_queue", () => {
-			state.value = State.Waiting;
 			startTimer();
+			state.value = State.Waiting;
 
 			socket.on("found_match", () => {
 				state.value = State.Found;
@@ -66,6 +71,12 @@
 	<div
 		class="matchmaking_content"
 	>
+		<button
+			style="font-size: 18px; padding: 10px; border-radius: 6px;"
+			@click="toggle"
+		>
+			Dev start
+		</button>
 		<div class="matchmaking_content__header">
 			<h1>
 				Matchmaking

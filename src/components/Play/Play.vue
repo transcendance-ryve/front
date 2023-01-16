@@ -16,7 +16,9 @@
 	
 
 	const connect = () => {
+		console.log(1);
 		socket.emit("game_connect");
+
 	}
 	
 	const	listeners: { [key: string]: (data?: any) => void } = {
