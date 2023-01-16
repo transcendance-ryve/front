@@ -111,7 +111,7 @@
 			inputFont="500 14em 'Poppins'"
 		/>
 
-		<ConvList :channelId="channel.id" :role="role"/>
+		<ConvList class="inSettings" :channelId="channel.id" :role="role"/>
 
 		<div class="Settings-btns">
 			<Btn
