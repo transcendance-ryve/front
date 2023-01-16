@@ -108,6 +108,13 @@
 			messages.value.push(msg)
 			totalMsg.value++
 		}},
+		{
+			name: 'roomUpdated', callback: (res: { name: string, status: string, avatar: string }) => {
+				target.value.name = res.name
+				target.value.status = res.status
+				target.value.avatar = res.avatar
+			}
+		},
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
 	]
 

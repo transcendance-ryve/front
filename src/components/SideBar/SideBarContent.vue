@@ -179,7 +179,7 @@
 		},
 		{
 			name: 'invitationAccepted',
-			callback: (id: string) => sbStore.openConv('Channel', id)
+			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 } // state a verif sans
 		},
 		{
 			name: 'invitationDeclined',
@@ -190,13 +190,26 @@
 		},
 		{
 			name: 'joinRoomSuccess',
-			callback: (id: string) => sbStore.openConv('Channel', id)
+			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 } // state a verif sans
 		},
 		{
 			name: 'banned',
 			callback: (res: { id: string }) => {
 				if (sbStore.state.section === 2 && sbStore.state.channelsState === 1) {
 					contentData.value = contentData.value.filter(item => item.id !== res.id)
+				}
+			}
+		},
+		{
+			name: 'roomUpdated',
+			callback: (res: { id: string, name: string, status: string, avatar: string }) => {
+				if (sbStore.state.section === 2 && sbStore.state.channelsState === 1) {
+					const index = contentData.value.findIndex(item => item.id === res.id)
+					if (index !== -1) {
+						contentData.value[index].name = res.name
+						contentData.value[index].status = res.status
+						contentData.value[index].avatar = res.avatar
+					}
 				}
 			}
 		}

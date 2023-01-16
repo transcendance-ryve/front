@@ -16,7 +16,7 @@
 		{ name: 'friend_accepted_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) },
 		{ name: 'friend_request_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
 		{ name: 'invitationAccepted', callback: () => notifStore.addNotif('infoG', '', 'invitation accepted') },
-		{ name: 'invitationSent', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
+		{ name: 'inviteToRoomSuccess', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
 
 		{ name: 'user_disconnected', callback: (id: string) => notifStore.addNotif('infoR', '', 'disconnected') },
 		{ name: 'friend_declined', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar) },
