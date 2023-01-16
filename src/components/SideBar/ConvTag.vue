@@ -2,6 +2,7 @@
 
 	import { computed, ref } from 'vue'
 	import Status from './Status.vue'
+	import moment from 'moment'
 	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
 	import {
 		logoEye,
@@ -87,11 +88,6 @@
 
 	const	name = props.target.name ? props.target.name : props.target.username
 
-	const	date = () => {
-		const date = new Date(props.target.createdAt)
-		return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-	}
-
 </script>
 
 <template>
@@ -115,7 +111,7 @@
 							@click="manageOptions(option.name)"
 						/>
 					</div>
-					<span class="Infos-CreateDate" v-else>{{ 'Created ' + date() }}</span>
+					<span class="Infos-CreateDate" v-else>{{ 'Created ' + moment(target.createdAt).format('ll') }}</span>
 				</div>
 			</div>
 			<div class="ConvTag-BtnsWrap">
