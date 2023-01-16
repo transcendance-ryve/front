@@ -13,7 +13,6 @@
 	import type { Channel } from '@/requests/SideBar/getChannelByID'
 	import getUser from '@/requests/SideBar/getUser'
 	import getMessages from '@/requests/SideBar/getMessages'
-	import type { message } from '@/requests/SideBar/getMessages'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
@@ -46,7 +45,6 @@
 	let		page: number = 0
 
 	watch(convId, async () => {
-		// await getConvMessages()
 		await getConvMessages()
 	})
 
