@@ -56,7 +56,9 @@
 			dataState.value = await getMessages(convId.value, page, res, totalMsg)
 			messages.value = res.value.concat(messages.value)
 			page++
+			return true
 		}
+		return false
 	}
 
 	const	removeFriend = () => {

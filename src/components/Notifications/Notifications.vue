@@ -25,6 +25,7 @@
 		{ name: 'friend_removed_submitted', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'friend removed', res.avatar) },
 		{ name: 'invitationDeclined', callback: () => notifStore.addNotif('infoR', '', 'invitation declined') },
 		{ name: 'roomLeft', callback: () => notifStore.addNotif('infoR', '', 'channel leaved') },
+		// { name: 'userBanned', callback: () => notifStore.addNotif('infoR', '', 'you have been banned ') } // TODO
 
 		{ name: 'friend_request', callback: (res: any) => notifStore.addNotif('infoB', res.username, 'new friend invitation', res.avatar) },
 		{ name: 'chanInvitationReceived', callback: (res: any) => notifStore.addNotif('infoY', res.name, 'new channel invitation', res.avatar) },

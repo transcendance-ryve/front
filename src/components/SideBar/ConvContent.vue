@@ -49,7 +49,7 @@
 	const props = defineProps<Props>()
 	const messagesContainer: Ref<HTMLElement> = ref(null!);
 	const { messages }: ToRefs<Readonly<Props>> = toRefs(props);
-		let scrollPosition = 0;
+	let scrollPosition = 0;
 
 	const	timedMessage = (index: number): boolean => {
 		if (index === 0)
@@ -63,10 +63,11 @@
 		return false;
 	}
 
-	const handleScroll = (e: any) => {
+	const handleScroll = async (e: any) => {
 		if (e.target.scrollTop === 0) {
 			scrollPosition = e.target.scrollHeight - e.target.scrollTop;
-			props.getFollowing();
+			if (!await props.getFollowing())
+				scrollPosition = 0
 		}
 	}
 
