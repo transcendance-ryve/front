@@ -41,6 +41,8 @@
 	}
 
 	const	joinChan = () => {
+		if (!password.value)
+			return
 		if (props.data.status === 'PROTECTED' && !password.value)
 			alert('Empty password')
 		else
@@ -158,6 +160,7 @@
 			<Btn
 				v-if="sbStore.state.section == 2"
 				class="SideBarTag-btn"
+				:class="{'SideBarTag-btn--inactive': !password}"
 				:type=1
 				value="Join"
 				:logo="logoJoin"

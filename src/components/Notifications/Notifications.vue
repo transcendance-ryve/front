@@ -37,7 +37,7 @@
 		{ name: 'messageRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'inviteToRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'createRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
-		{ name: 'joinRoomFailed', callback: () => notifStore.addNotif('error', 'Error', 'Cannot join channel') },
+		{ name: 'joinRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'promoteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'demoteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'muteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },

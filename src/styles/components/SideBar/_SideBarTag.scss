@@ -114,6 +114,10 @@
 			.SideBarTag-btn {
 				height: 40em;
 			}
+			.SideBarTag-btn--inactive {
+				cursor: default;
+				opacity: 0.5;
+			}
 		}
 	}
 }
