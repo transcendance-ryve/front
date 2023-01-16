@@ -35,13 +35,14 @@
 
 	const	sbStore = useSideBarStore()
 	const	input: Ref<string> = ref('')
-	const	messages: Ref<any[]> = ref([])
 	const	userList = ref(false)
 	const	settings = ref(false)
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	convId: Ref<string> = ref('')
 	const	role: Ref<string> = ref('')
+	const	messages: Ref<any[]> = ref([])
+	const	totalMsg: Ref<number> = ref(1)
 	let		page: number = 0
 
 	watch(convId, async () => {
@@ -51,9 +52,11 @@
 
 	const	getConvMessages = async () => {
 		const	res: Ref<any[]> = ref([])
-		dataState.value = await getMessages(convId.value, page, res)
-		messages.value = res.value.concat(messages.value)
-		page++
+		if (messages.value.length < totalMsg.value) {
+			dataState.value = await getMessages(convId.value, page, res, totalMsg)
+			messages.value = res.value.concat(messages.value)
+			page++
+		}
 	}
 
 	const	removeFriend = () => {
@@ -75,7 +78,10 @@
 
 	const	friendListeners: SocketEvent[] = [
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
-		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push(msg) } }
+		{ name: 'incomingMessage', callback: (msg: any) => {
+			messages.value.push(msg)
+			totalMsg.value++
+		}}
 	]
 
 	const	chanListeners: SocketEvent[] = [
@@ -98,7 +104,10 @@
 				sbStore.state.section = 2
 			}
 		}},
-		{ name: 'incomingMessage', callback: (msg: any) => { messages.value.push(msg) } },
+		{ name: 'incomingMessage', callback: (msg: any) => {
+			messages.value.push(msg)
+			totalMsg.value++
+		}},
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
 	]
 
