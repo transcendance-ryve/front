@@ -4,7 +4,6 @@ import type { Ref } from 'vue'
 
 export interface message { value: string }
 
-// const getMessages = async (id: string, res: Ref<message>) => {
 const getMessages = async (id: string, page: number, res: Ref<any[]>, totalMsg: Ref<number>) => {
 
 	const	dataState: axiosState = { error: null, loading: true }
