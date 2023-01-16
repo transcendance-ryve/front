@@ -207,9 +207,7 @@
 		{
 			name: 'userUnbanned',
 			callback: (id: string) => {
-				console.log('userUnbanned', id, bannedListData.value)
 				bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== id)
-				console.log('after filter', bannedListData.value)
 			}
 		}
 	]

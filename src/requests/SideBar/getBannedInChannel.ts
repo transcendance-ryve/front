@@ -8,9 +8,9 @@ const   getUserTagArray = (response: any[]) => {
 
 	response.map(val => {
 		res.push({
-			id: val.target.id,
-			username: val.target.username,
-			avatar: val.target.avatar,
+			id: val.id,
+			username: val.username,
+			avatar: val.avatar,
 			role: 'MEMBER',
 			isMute: false,
 			isBan: true,

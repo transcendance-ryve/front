@@ -192,13 +192,14 @@
 			name: 'joinRoomSuccess',
 			callback: (id: string) => sbStore.openConv('Channel', id)
 		},
-		// {	//	il me faut l'id du channel pour le supprimer
-		// 	name: 'userBanned',
-		// 	callback: (id: string) => {
-		// 		if (sbStore.state.section === 2 && sbStore.state.channelsState === 1)
-		// 			removeTag({ id })
-		// 	}
-		// }
+		{
+			name: 'banned',
+			callback: (res: { id: string }) => {
+				if (sbStore.state.section === 2 && sbStore.state.channelsState === 1) {
+					contentData.value = contentData.value.filter(item => item.id !== res.id)
+				}
+			}
+		}
 	]
 
 	onMounted(() => {
