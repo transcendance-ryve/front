@@ -86,13 +86,6 @@
 	flex-direction: column;
 	width: 100%;
 	align-items: center;
-	// margin-bottom: 10em;
-	
-	.created_at_value {
-		font-size: 14em;
-		color: $white-200;
-	}
-
 }
 
 .message__created_at {
@@ -133,6 +126,7 @@
 		padding: 8em 16em;
 		background-color: $background-700;
 		border-radius: 18em;
+		max-width: 70%;
 		.message__value {
 			font-size: 14em;
 		}
