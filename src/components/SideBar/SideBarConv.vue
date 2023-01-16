@@ -30,6 +30,7 @@
 		name: '',
 		username: '',
 		status: '',
+		createdAt: 0
 	})
 
 	const	sbStore = useSideBarStore()

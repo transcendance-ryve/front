@@ -37,6 +37,7 @@ export interface Target {
 	name: string,
 	username: string,
 	status: string,
+	createdAt: number
 }
 
 export interface TargetTag {

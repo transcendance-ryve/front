@@ -87,6 +87,11 @@
 
 	const	name = props.target.name ? props.target.name : props.target.username
 
+	const	date = () => {
+		const date = new Date(props.target.createdAt)
+		return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+	}
+
 </script>
 
 <template>
@@ -110,7 +115,7 @@
 							@click="manageOptions(option.name)"
 						/>
 					</div>
-					<span class="Infos-CreateDate" v-else>Created 23 July 2015</span>
+					<span class="Infos-CreateDate" v-else>{{ 'Created ' + date() }}</span>
 				</div>
 			</div>
 			<div class="ConvTag-BtnsWrap">
