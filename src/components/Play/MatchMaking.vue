@@ -20,7 +20,7 @@
 		elapsed: 0,
 		interval: 0
 	})
-	
+
 	const startTimer = () => {
 		timer.onStart = Date.now();
 
@@ -35,14 +35,26 @@
 		timer.elapsed = 0;
 	}
 
-	const toggleMatchmaking = () => {
-		if (state.value === State.Matchmaking) {
-			startTimer();
+	onMounted(() => {
+		socket.on("joined_queue", () => {
 			state.value = State.Waiting;
-		} else {
+			startTimer();
+
+			socket.on("found_match", () => {
+				state.value = State.Found;
+				clearTimer();
+			})
+		});
+		
+		socket.on("left_queue", () => {
 			state.value = State.Matchmaking;
 			clearTimer();
-		}
+		})
+	})
+
+	const toggleMatchmaking = () => {
+		if (state.value === State.Matchmaking) socket.emit("join_queue");
+		else socket.emit("leave_queue");
 	}
 
 	const cancelMatchmaking = () => {
