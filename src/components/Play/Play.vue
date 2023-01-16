@@ -1,7 +1,7 @@
 <script setup lang="ts">	
 	import { useContentStore } from '../../stores/ContentStore'
 	import Game from '@/components/Play/Game.vue'
-	import MatchMaking from '@/components/Play/MatchMaking.vue'
+	import Matchmaking from '@/components/Play/Matchmaking.vue'
 	import Win from '@/components/Play/Win.vue'
 	import { ref, reactive, onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
@@ -39,8 +39,8 @@
 
 <template>
 	<div class="mainContent-play">
-		<Game :close="() => matchmakingVisible = true" />
+		<Game :close="() => matchmakingVisible = true" />	
 
-		<MatchMaking v-if="matchmakingVisible" :toggle="() => connect()" />
+		<Matchmaking v-if="matchmakingVisible" :toggle="() => connect()" />
 	</div>
 </template>

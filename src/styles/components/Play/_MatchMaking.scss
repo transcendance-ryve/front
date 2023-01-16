@@ -1,57 +1,58 @@
-.MatchMaking-modal {
-	z-index: 2;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+.matchmaking_content {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
-	border-radius: 6em;
+	z-index: 2;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	flex-direction: column;
+  	height: 100%;
+  	width: 100%;
+	padding: 50em;
+	
+	row-gap: 36em;
+
 	background: rgba(31, 30, 44, 0.75);
 	backdrop-filter: blur(2.8px);
-	gap: 50em;
 
-	.Modal-label {
+	.matchmaking_content__header {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 18em;
-		.Label {
-			font-size: 40em;
-			line-height: 100%;
-			color: white;
+		justify-content: center;
+		text-align: center;
+
+		row-gap: 5em;
+		
+		h1 {
+			color: #fff;
+			font-size: 36em;
+			font-weight: bold;
 		}
-		.Label-children {
-			font-size: 24em;
-			line-height: 100%;
-			color: white;
-		}
-		.Label-estimation::before {
-			content: "Your estimated matchmaking time is: ";
+
+		h2 {
 			color: $white-200;
+			font-size: 20em;
+			font-weight: bold;
+
+			span {
+				color: white;
+			}
 		}
-		.Label-time::before {
-			content: "In queue since: ";
-			color: $white-200;
-		}
-		.Label-ready::before {
-			content: "Are you ready?";
-			color: $white-200;
-		}
-		.Modal-loader {
+
+		.matchmaking_content__header_loader {
 			display: inline-block;
 			position: relative;
 			width: 31em;
 			height: 40em;
-
-			.Loader-bar {
+		
+			span {
 				display: inline-block;
 				position: absolute;
 				width: 7em;
 				animation: loader-animation cubic-bezier(0, 0.5, 0.5, 1) 1s infinite;
+				
 				&:nth-child(1) {
 					left: 0;
 					animation-delay: 0;
@@ -79,4 +80,36 @@
 			}
 		}
 	}
+	
+	.matchmaking_content__btns {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		row-gap: 18em;
+
+		p {
+			color: $white-200;
+			font-size: 18em;
+
+			span {
+				color: white;
+			}
+		}
+
+		div {
+			display: flex;
+			column-gap: 20em;
+
+			&:last-child {
+				background-color: $red;
+			}
+		}
+	}
 }
+
+.btn_red {
+	background-color: $red !important;
+}
+
+

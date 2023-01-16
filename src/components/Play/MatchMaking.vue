@@ -1,107 +1,101 @@
 <script setup lang="ts">
-	import { computed, reactive } from 'vue'
-	import { useContentStore } from '../../stores/ContentStore'
-	import { useUserStore } from '@/stores/UserStore'
-	import VersusTag from '../Spectate/VersusTag.vue'
-	import MmBtns from './MmBtns.vue'
+	import { computed, reactive, onMounted, ref } from 'vue'
+	import Btn from '../Utils/Btn.vue';
+	import { useUserStore } from '@/stores/UserStore';
+	import moment from 'moment';
 
-	interface Props {
-		toggle: () => void;
+	const userStore = useUserStore()
+	const socket = userStore.socket;
+
+	enum State {
+		Matchmaking,
+		Waiting,
+		Found
 	}
 
-	const props = defineProps<Props>()
+	let state: any = ref(State.Matchmaking);
 
-	interface matchMaking {
-		label: string,
-		start: boolean,
-		startTimer: Date | null,
-		time: string,
-		intervalID: number,
-		gameFound: boolean
-	}
-
-	const	mm: matchMaking = reactive({
-		label: 'Matchmaking',
-		start: false,
-		startTimer: null,
-		time: '',
-		intervalID: 0,
-		gameFound: false
+	const timer: any = reactive({
+		onStart: 0,
+		elapsed: 0,
+		interval: 0
 	})
+	
+	const startTimer = () => {
+		timer.onStart = Date.now();
 
-	const	startMatchMaking = () => {
-		mm.startTimer = new Date()
-		mm.start = true
-		mm.intervalID = setInterval(timerRunning, 1)
+		timer.interval = setInterval(() => {
+			timer.elapsed = Date.now() - timer.onStart;
+		}, 1000);
 	}
 
-	const	cancelMatchMaking = () => {
-		mm.label = 'Matchmaking'
-		mm.start = false
-		mm.startTimer = null
-		mm.time = ''
-		clearInterval(mm.intervalID)
-		mm.gameFound = false
+	const clearTimer = () => {
+		clearInterval(timer.interval);
+		timer.onStart = 0;
+		timer.elapsed = 0;
 	}
 
-	const	launchGame = () => {
-		alert('Start game')
-	}
-
-	const	zeroPrefix = (num: number, digit: number) => {
-		let zero = '';
-		for (let i = 0; i < digit; i++) {
-			zero += '0';
-  		}
-		return (zero + num).slice(-digit);
-	}
-
-	const	timerRunning = () => {
-		const	currentTime: Date = new Date(),
-		timeElapsed: Date = new Date(currentTime.getTime() - (mm.startTimer?.getTime() || 0)),
-		hour: number = timeElapsed.getUTCHours(),
-		min: number = timeElapsed.getUTCMinutes(),
-		sec: number = timeElapsed.getUTCSeconds()
-
-		if (sec === 1)	{
-			mm.gameFound = true
-			mm.label = 'Game found!'
+	const toggleMatchmaking = () => {
+		if (state.value === State.Matchmaking) {
+			startTimer();
+			state.value = State.Waiting;
+		} else {
+			state.value = State.Matchmaking;
+			clearTimer();
 		}
-		mm.time = hour ? hour.toString() + ':' : ''
-		+ min.toString() + ':'
-		+ zeroPrefix(sec, 2)
+	}
+
+	const cancelMatchmaking = () => {
+		state.value = State.Matchmaking;
 	}
 </script>
 
 <template>
-	<div class="MatchMaking-modal">
-		<div class="Modal-label">
-			<span class="Label">{{ mm.label }}</span>
-			<span
-				class="Label-children"
-				:class="{
-					'Label-estimation': !mm.start,
-					'Label-time': mm.start,
-					'Label-ready': mm.gameFound
-				}">
-				{{ mm.gameFound ? '' : mm.time || '30 seconds' }}
-			</span>
-			<div class="Modal-loader" v-if="mm.start && !mm.gameFound">
-				<div
+	<div
+		class="matchmaking_content"
+	>
+		<div class="matchmaking_content__header">
+			<h1>
+				Matchmaking
+			</h1>
+			<h2 v-if="state === State.Matchmaking">Your estimated matchaking time is: <span>about 30 secondes</span></h2>
+			<h2 v-if="state === State.Waiting">In queue since: <span>{{ moment(timer.elapsed).format("mm:ss") }}</span></h2>
+			<div class="matchmaking_content__header_loader" v-if="state === State.Waiting">
+				<span
 					v-for="n in 3"
-					class="Loader-bar"
 					:key="n"
 				>
-				</div>
+				</span>
 			</div>
 		</div>
-		<MmBtns
-			:start="mm.start"
-			:gameFound="mm.gameFound"
-			@start="toggle()"
-			@cancel="cancelMatchMaking()"
-			@accept="launchGame()"
-			@refuse="cancelMatchMaking()"
-		/>
+		<div class="matchmaking_content__btns">
+			<Btn
+				v-if="state === State.Matchmaking || state === State.Waiting"
+				:value="state === State.Matchmaking ? 'Start game' : 'Cancel'"
+				:class="{ btn_red: state === State.Waiting }"
+				fontSize="18px"
+				width="150px"
+				height="50px"
+				@click="toggleMatchmaking"
+			/>
+			<div v-if="state === State.Found">
+				<Btn
+					value="Accept"
+					fontSize="18px"
+					width="150px"
+					height="50px"
+					@click=""
+				/>
+				<Btn
+					class="btn_red"
+					value="Decline"
+					fontSize="18px"
+					width="150px"
+					height="50px"
+					@click=""
+				/>
+			</div>
+			<p><span>13</span> players in queue</p>
+		</div>
 	</div>
 </template>
