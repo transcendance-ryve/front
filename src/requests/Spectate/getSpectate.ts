@@ -14,7 +14,7 @@ const	replaceUrl = async (queries: Partial<SpectateQueries>) => {
 
 const	getSpectate = async (urlQueries: string, page: number, data: SpectateData) => {
 
-	data.loadingData = true
+	data.loadingData = !page ? true : false
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/game/current'

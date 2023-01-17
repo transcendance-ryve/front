@@ -52,6 +52,7 @@
 	}
 
 	watch(queries, async () => {
+		console.log('fdp')
 		if (!apiCalled)
 			await replaceUrl({...queries})
 	})
@@ -65,7 +66,6 @@
 		page = 0
 		getSpectate(getQueriesInUrl(to.fullPath), page++, data)
 		await nextTick()
-		spectateContent.value!.scrollTop = 0
 		apiCalled = false
 	})
 
@@ -155,8 +155,8 @@
 			</div>
 		</div>
 		<div
+			v-if="!data.loadingData && !data.err"
 			class="Spectate-content"
-			ref="spectateContent"
 			@scroll="handleScroll"
 		>
 			<div
