@@ -12,14 +12,7 @@
 	contentStore.state = 1
 	const socket = userStore.socket;
 
-	const matchmakingVisible = ref(true);
-	
-
-	const connect = () => {
-		console.log(1);
-		socket.emit("game_connect");
-
-	}
+	const matchmakingVisible = ref(true);	
 	
 	const	listeners: { [key: string]: (data?: any) => void } = {
 		game_connected: () => {matchmakingVisible.value = false},
@@ -43,6 +36,6 @@
 	<div class="mainContent-play">
 		<Game :close="() => matchmakingVisible = true" />	
 
-		<Matchmaking v-if="matchmakingVisible" :toggle="() => connect()" />
+		<Matchmaking v-if="matchmakingVisible" :close="() => matchmakingVisible = false" />
 	</div>
 </template>
