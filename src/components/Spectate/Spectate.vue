@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { onMounted, onUnmounted, reactive, computed, watch, ref, nextTick } from 'vue'
+	import { onMounted, onUnmounted, reactive, watch, ref, type Ref, nextTick } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -24,10 +24,10 @@
 		loadingData: false,
 		err: null,
 	})
+	const	spectateContent: Ref<HTMLElement> = ref(null!);
 	let		apiCalled: boolean = false
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-	let		scrollPosition = 0;
 
 	const	queries: SpectateQueries = reactive({
 		order: 'desc',
@@ -65,6 +65,7 @@
 		page = 0
 		getSpectate(getQueriesInUrl(to.fullPath), page++, data)
 		await nextTick()
+		spectateContent.value!.scrollTop = 0
 		apiCalled = false
 	})
 
@@ -111,7 +112,6 @@
 		if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
 			if (!apiCalled && data.games.length < data.count) {
 				apiCalled = true
-				scrollPosition = e.target.scrollTop
 				getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), page++, data)
 				await nextTick()
 				apiCalled = false
@@ -156,6 +156,7 @@
 		</div>
 		<div
 			class="Spectate-content"
+			ref="spectateContent"
 			@scroll="handleScroll"
 		>
 			<div
