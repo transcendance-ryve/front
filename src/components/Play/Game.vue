@@ -298,8 +298,7 @@
 			window.removeEventListener('keyup', handleKeyup, true);
 		}
 
-		if (props.gameID)
-			socket.emit('disconnect_game', { gameId: props.gameID });
+		socket.emit('disconnect_game');
 	});
 
 	const handleClick = () => {
