@@ -13,10 +13,8 @@ export interface SpectateData {
 }
 
 export interface SpectateQueries {
-	page: string,
-	take: string,
 	order: string,
 	search: string
 }
 
-export type queriesKeys = 'page' | 'take' | 'order' | 'search'
+export type queriesKeys = 'order' | 'search'

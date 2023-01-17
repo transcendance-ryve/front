@@ -47,7 +47,7 @@ const router = createRouter({
 						if (Object.keys(to.query).length === 0)
 							return {
 								path: to.fullPath,
-								query: { page: 1, take: 10, order: 'desc' }
+								query: { order: 'desc' }
 							}
 					}
 				},

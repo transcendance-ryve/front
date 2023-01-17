@@ -2,8 +2,8 @@ import useAxios from '@/requests/useAxios'
 import router from '@/router'
 import type { SpectateData, SpectateQueries } from '@/types/Spectate'
 
-const	getQueriesInUrl = (path: string) => {
-	return (path.substring(path.indexOf('?')))
+const	getQueriesInUrl = (path: string, page: number) => {
+	return (path.substring(path.indexOf('?'))) + '&page=' + page.toString()
 }
 
 const	replaceUrl = async (queries: Partial<SpectateQueries>) => {
@@ -18,12 +18,13 @@ const	getSpectate = async (urlQueries: string, data: SpectateData) => {
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/game/current'
-		+ urlQueries
+		+ urlQueries + '&take=15'
 	)
 	data.loadingData = loading.value
 	data.err = error.value
 	if (!data.err) {
-		data.games = response.value.res
+		console.log('response in get spectate', response.value)
+		data.games = data.games.concat(response.value.res)
 		data.count = response.value.count
 	}
 }

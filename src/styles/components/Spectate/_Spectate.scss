@@ -15,35 +15,30 @@
 
 		.Filters {
 			display: flex;
-			gap: 16em;
+			gap: 8em;
 
-			.Filters-orderBtns {
+			.OrderBtn {
 				display: flex;
-				gap: 8em;
+				align-items: center;
+				justify-content: center;
+				width: 48em;
+				height: 56em;
+				background: $background-600;
+				border-radius: 6em;
 
-				.OrderBtn {
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					width: 48em;
-					height: 56em;
-					background: $background-600;
-					border-radius: 6em;
-
-					.OrderBtn-logo {
-						width: 24em;
-						height: 24em;
-						svg {
-							width: 100%;
-							height: 100%;
-							fill: white;
-						}
+				.OrderBtn-logo {
+					width: 24em;
+					height: 24em;
+					svg {
+						width: 100%;
+						height: 100%;
+						fill: white;
 					}
 				}
-				.OrderBtn--selected {
-					.OrderBtn-logo > svg {
-						fill: $dark-blue;
-					}
+			}
+			.OrderBtn--selected {
+				.OrderBtn-logo > svg {
+					fill: $dark-blue;
 				}
 			}
 		}
@@ -52,7 +47,8 @@
 	.Spectate-content {
 		display: flex;
 		flex-direction: column;
-		height: calc(100% - calc(56em + 48em + 2 * 32em));
+		// height: calc(100% - calc(56em + 48em + 2 * 32em));
+		height: calc(100% - calc(56em + 32em));
 		gap: 16em;
 		border-radius: 6em;
 		overflow-y: scroll;
@@ -68,9 +64,6 @@
 			background: $background-600;
 			position: relative;
 		}
-	}
-	.Spectate-content--maxSize {
-		height: calc(100% - calc(56em + 32em));
 	}
 
 	@media (max-width: $laptop) {

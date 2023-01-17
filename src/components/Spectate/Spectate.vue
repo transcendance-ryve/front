@@ -18,28 +18,27 @@
 	const	contentStore = useContentStore()
 	contentStore.state = 3
 
-	const	menuTake: string[] = ['10', '20', '50', '100']
 	const	data: SpectateData = reactive({
 		games: [],
-		count: 0,
+		count: 1,
 		loadingData: false,
 		err: null,
 	})
-	let		routeUpdating: boolean = false
+	let		apiCalled: boolean = false
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
+	let		scrollPosition = 0;
 
 	const	queries: SpectateQueries = reactive({
-		page: '1',
-		take: '10',
 		order: 'desc',
 		search: ''
 	})
+	let	page: number = 0
 
 	const gameSelected = ref("");
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
-		const	queriesNames: queriesKeys[] = ['page', 'take', 'order', 'search']
+		const	queriesNames: queriesKeys[] = ['order', 'search']
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
 			const	val = urlQueries[queriesNames[i]] as string
@@ -48,52 +47,25 @@
 	}
 
 	const	checkQueries = () => {
-		const	page: number = parseInt(queries.page)
-		if (isNaN(page) || page < 1)
-			queries.page = '1'
-		if (!menuTake.includes(queries.take)) {
-			const	takeVal: number = parseInt(queries.take)
-			if (isNaN(takeVal) || takeVal < 1)
-				queries.take = '10'
-			else if (takeVal > 100)
-				queries.take = '100'
-		}
 		if (queries.order !== 'desc' && queries.order !== 'asc')
 			queries.order = 'desc'
 	}
 
-	const	pagesCount = computed(() => {
-		const	takeValue = parseInt(queries.take)
-		let	res: number = Math.round(data.count / takeValue)
-		if (data.count / takeValue > res)
-			res++
-		return res
-	})
-
-	const	updatePage = (n: number) => {
-		const	page: string = n.toString()
-		page ? queries.page = page : queries.page = '1'
-	}
-
 	watch(queries, async () => {
-		if (!routeUpdating)
+		if (!apiCalled)
 			await replaceUrl({...queries})
-	})
-
-	watch(pagesCount, newVal => {
-		if (parseInt(queries.page) > newVal)
-			updatePage(newVal)
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
 		if (Object.keys(to.query).length === 0)
 			return false
-		routeUpdating = true
+		apiCalled = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		getSpectate(getQueriesInUrl(to.fullPath), data)
+		page = 0
+		getSpectate(getQueriesInUrl(to.fullPath, page++), data)
 		await nextTick()
-		routeUpdating = false
+		apiCalled = false
 	})
 
 	const	listerners: SocketEvent[] = [
@@ -117,9 +89,10 @@
 	]
 
 	onMounted(() => {
+		console.log('spec mounted')
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
-		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), data)
+		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath, page++), data)
 		socket.emit('onSpectate')
 		listerners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
@@ -133,6 +106,19 @@
 		socket.emit('spectateGame', { gameId: gameID });
 		gameSelected.value = gameID;
 	}
+
+	const	handleScroll = async (e: any) => {
+		if (e.target.scrollTop + e.target.clientHeight >= e.target.scrollHeight) {
+			if (!apiCalled && data.games.length < data.count) {
+				apiCalled = true
+				scrollPosition = e.target.scrollTop
+				getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath, page++), data)
+				await nextTick()
+				apiCalled = false
+			}
+		}
+	}
+
 </script>
 
 <template>
@@ -152,36 +138,25 @@
 				@search="(val) => queries.search = val"
 			/>
 			<div class="Filters">
-				<DropDownMenu
-					label="Per page:"
-					:options="menuTake"
-					:selectValue="queries.take"
-					width="165em"
-					height="56em"
-					:logo="logoPerPage"
-					@select="(value) => queries.take = value"
-				/>
-				<div class="Filters-orderBtns">
-					<button
-						class="OrderBtn"
-						:class="{'OrderBtn--selected': queries.order === 'desc'}"
-						@click="queries.order ='desc'"
-					>
-						<span class="OrderBtn-logo" v-html="logoDesc"></span>
-					</button>
-					<button
-						class="OrderBtn"
-						:class="{'OrderBtn--selected': queries.order == 'asc'}"
-						@click="queries.order = 'asc'"
-					>
-						<span class="OrderBtn-logo" v-html="logoAsc"></span>
-					</button>
-				</div>
+				<button
+					class="OrderBtn"
+					:class="{'OrderBtn--selected': queries.order === 'desc'}"
+					@click="queries.order ='desc'"
+				>
+					<span class="OrderBtn-logo" v-html="logoDesc"></span>
+				</button>
+				<button
+					class="OrderBtn"
+					:class="{'OrderBtn--selected': queries.order == 'asc'}"
+					@click="queries.order = 'asc'"
+				>
+					<span class="OrderBtn-logo" v-html="logoAsc"></span>
+				</button>
 			</div>
 		</div>
 		<div
-			v-if="!data.loadingData && !data.err"
 			class="Spectate-content"
+			@scroll="handleScroll"
 		>
 			<div
 				class="Content-Versus"
@@ -198,11 +173,5 @@
 				/>
 			</div>
 		</div>
-		<PagesSelector
-			v-if="!data.err && !data.loadingData"
-			:page="parseInt(queries.page)"
-			:pagesSize="pagesCount"
-			@update="updatePage"
-		/>
 	</div>
 </template>
