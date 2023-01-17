@@ -45,6 +45,9 @@
 	}
 
 	const listeners: any = {
+		joined_game: () => {
+			props.close();
+		},
 		joined_queue: () => {
 			clearTimer();
 			startTimer(Date.now());
