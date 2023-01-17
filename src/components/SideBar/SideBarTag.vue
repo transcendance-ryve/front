@@ -12,39 +12,46 @@
 	import type { SocketEvent } from '@/types/Socket'
 
 	export interface Props {
-		type: number
 		data: Partial<ContentData>
 	}
 
 	const	props = defineProps<Props>()
+	const	type: Ref<number> = ref(0)
 	const	sbStore = useSideBarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	password: Ref<string> = ref('')
+
+	const	getType = () => {
+		if (sbStore.state.section === 1)
+			return sbStore.state.friendsState
+		else if (sbStore.state.section === 2)
+			return sbStore.state.channelsState
+		else
+			return sbStore.state.notifsState
+	}
 
 	const	addToFriend = (id: string) => {
 		socket.emit('add_friend', { friendId: props.data.id })
 	}
 
 	const	notifAccept = (id: string) => {
-		if (props.type === 2)
+		if (type.value === 2)
 			socket.emit('accept_friend', { friendId: props.data.id })
-		else if (props.type === 3)
+		else if (type.value === 3)
 			socket.emit('acceptInvitation', { invitationInfo: { channelId: props.data.id } })
 	}
 
 	const	notifRefuse = (id: string) => {
-		if (props.type === 2)
+		if (type.value === 2)
 			socket.emit('decline_friend', { friendId: props.data.id })
-		else if (props.type === 3)
+		else if (type.value === 3)
 			socket.emit('declineInvitation', { invitationInfo: { channelId: props.data.id } })
 	}
 
 	const	joinChan = () => {
-		if (!password.value)
-			return
 		if (props.data.status === 'PROTECTED' && !password.value)
-			alert('Empty password')
+			return
 		else
 			socket.emit('joinRoom', {
 				joinInfo: {
@@ -74,6 +81,7 @@
 	]
 	
 	onMounted(() => {
+		type.value = getType()
 		listeners.forEach((listener) => {
 			socket.on(listener.name, listener.callback)
 		})

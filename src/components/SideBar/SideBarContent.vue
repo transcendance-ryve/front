@@ -212,7 +212,7 @@
 					}
 				}
 			}
-		}
+		},
 	]
 
 	onMounted(() => {
@@ -253,7 +253,6 @@
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
-				:type="sbStore.state.friendsState"
 				:data="item"
 				@click="handleClick(item.id || '')"
 			/>
