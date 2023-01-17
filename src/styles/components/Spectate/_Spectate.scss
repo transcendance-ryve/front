@@ -63,6 +63,12 @@
 			border-radius: 6em;
 			background: $background-600;
 			position: relative;
+			transition: background 100ms;
+
+			&:hover {
+				cursor: pointer;
+				background: #2e3042;
+			}
 		}
 	}
 
