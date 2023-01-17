@@ -4,7 +4,6 @@ export interface	ContentData {
 	username: string,	//	user 			name
 	name: string,		//	chan 			name
 	status: string,		//	user / chan		status
-	lastMsg: string,	//	user / chan		last message
 	usersCount: number,	//	chan			users count
-	messages: any[]		//	user / chan		messages
+	messages: any		//	user / chan		messages
 }

@@ -104,8 +104,8 @@
 					</div>
 					<Status v-if="data.usersCount" :users="data.usersCount"/>
 				</div>
-				<div v-if="data.messages?.length" class="LastMsgWrap">
-					<span class="LastMsg">{{data.messages[0].content}}</span>
+				<div v-if="data.messages" class="LastMsgWrap">
+					<span class="LastMsg">{{data.messages[0]?.content || data.messages.content}}</span>
 				</div>
 			</div>
 		</div>
