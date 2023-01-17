@@ -63,7 +63,7 @@
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
 		page = 0
-		getSpectate(getQueriesInUrl(to.fullPath, page++), data)
+		getSpectate(getQueriesInUrl(to.fullPath), page++, data)
 		await nextTick()
 		apiCalled = false
 	})
@@ -92,7 +92,7 @@
 		console.log('spec mounted')
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
-		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath, page++), data)
+		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), page++, data)
 		socket.emit('onSpectate')
 		listerners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
@@ -112,7 +112,7 @@
 			if (!apiCalled && data.games.length < data.count) {
 				apiCalled = true
 				scrollPosition = e.target.scrollTop
-				getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath, page++), data)
+				getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), page++, data)
 				await nextTick()
 				apiCalled = false
 			}
