@@ -1,7 +1,6 @@
 <script setup lang="ts">
 
 	import { useSideBarStore } from '../../stores/SideBarStore'
-	import SideBarTag from './SideBarTag.vue'
 	import SideBarContent from './SideBarContent.vue'
 	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
