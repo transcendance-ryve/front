@@ -225,6 +225,13 @@
 		listeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
+	const	handleClick = (id: string) => {
+		if (sbStore.state.section === 1 || (sbStore.state.section === 3 && sbStore.state.notifsState !== 3))
+			profileRedirect(id)
+		else if (sbStore.state.section === 2)
+			openConv(id)
+	}
+
 </script>
 
 <template>
@@ -242,34 +249,20 @@
 			<span class="NewChanBtn-value">Create new channel</span>
 		</button>
 
-		<div class="SideBar-content" v-if="sbStore.state.section == 1">
+		<div class="SideBar-content" v-if="!dataState.error">
 			<SideBarTag
 				v-for="(item, index) in data"
 				:key="index"
 				:type="sbStore.state.friendsState"
 				:data="item"
-				@click="profileRedirect(item.id || '')"
+				@click="handleClick(item.id || '')"
 			/>
-		</div>
-
-		<div class="SideBar-content" v-if="sbStore.state.section == 2">
-			<SideBarTag
-				v-for="(item, index) in data"
-				:key="index"
-				:type="sbStore.state.channelsState"
-				:data="item"
-				@click="openConv(item.id)"
-			/>
-		</div>
-
-		<div class="SideBar-content" v-if="sbStore.state.section == 3">
-			<SideBarTag
-				v-for="(item, index) in data"
-				:key="index"
-				:type="sbStore.state.notifsState"
-				:data="item"
-				@click="sbStore.state.notifsState !== 3 ? profileRedirect(item.id || '') : ''"
-			/>
+			<span
+				class="Content-noResult"
+				v-if="toFind && !dataState.loading && !dataState.error && !data?.length"
+			>
+				No results
+			</span>
 		</div>
 	</div>
 

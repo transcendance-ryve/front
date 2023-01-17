@@ -52,7 +52,6 @@
 	}
 
 	watch(queries, async () => {
-		console.log('fdp')
 		if (!apiCalled)
 			await replaceUrl({...queries})
 	})
@@ -172,6 +171,12 @@
 					:reverse="true"
 				/>
 			</div>
+			<span
+					class="Content-noResult"
+					v-if="queries.search && !data.loadingData && !data.err && !data.games.length"
+				>
+					No results
+			</span>
 		</div>
 	</div>
 </template>

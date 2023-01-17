@@ -70,6 +70,13 @@
 				background: #2e3042;
 			}
 		}
+
+		.Content-noResult {
+			margin-top: 5%;
+			color: white;
+			font-size: 18em;
+			text-align: center;
+		}
 	}
 
 	@media (max-width: $laptop) {

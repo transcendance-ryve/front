@@ -56,6 +56,14 @@
 		gap: 16em;
 		border-radius: 6em;
 		overflow-y: scroll;
+
+		.Content-noResult {
+			margin-top: 5%;
+			color: white;
+			font-size: 18em;
+			text-align: center;
+		}
+
 		&::-webkit-scrollbar {
 			display: none;
 		}

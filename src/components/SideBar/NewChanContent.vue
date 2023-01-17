@@ -128,7 +128,7 @@
 				class="Content-noResult"
 				v-if="toFind && !dataState.loading && !list?.length"
 			>
-				No results.
+				No results
 			</span>
 		</div>
 	</div>

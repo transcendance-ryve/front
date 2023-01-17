@@ -10,8 +10,6 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		notifsState: 1
 	})
 
-	const	toFind = ref('')
-
 	const	newChan = ref(false)
 
 	const	conv = reactive({
@@ -49,7 +47,6 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state,
 		newChan,
 		conv,
-		toFind,
 		updateSection,
 		openConv,
 		resetState

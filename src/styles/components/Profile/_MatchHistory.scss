@@ -62,6 +62,12 @@
 				min-height: 112em;
 			}
 		}
+
+		.Content-noResult {
+			font-size: 18em;
+			color: white;
+			text-align: center;
+		}
 	}
 
 	@media (max-width: $laptop) {

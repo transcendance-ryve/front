@@ -7,7 +7,6 @@
 	import VersusTag from '../Spectate/VersusTag.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import router, { profileRedirect } from '@/router/index'
-	import type { Player, Players } from '@/types/User'
 	import type { MatchHistoryData, MatchHistoryQueries, queriesKeys } from '@/types/MatchHistory'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 	import { getMatchHistory, getQueriesInUrl, replaceUrl } from '@/requests/Profile/getMatchHistory'
@@ -149,9 +148,15 @@
 					@click="profileRedirect(game.right.id || '')"
 				/>
 			</div>
+			<span
+				class="Content-noResult"
+				v-if="queries.search && !data.loadingData && !data.err && !data.games.length"
+			>
+				No results
+			</span>
 		</div>
 		<PagesSelector
-			v-if="!data.err && !data.loadingData"
+			v-if="!data.err && !data.loadingData && data.games.length"
 			:page="parseInt(queries.page)"
 			:pagesSize="pagesCount"
 			@update="updatePage"

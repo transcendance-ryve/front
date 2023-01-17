@@ -27,7 +27,7 @@
 			color: white;
 			transition: 150ms ease-in-out;
 		}
-	}	
+	}
 
 	.SideBar-content {
 		display: flex;
@@ -36,6 +36,13 @@
 		flex-direction: column;
 		gap: 16em;
 		overflow-y: scroll;
+
+		.Content-noResult {
+			color: white;
+			font-size: 18em;
+			text-align: center;
+		}
+
 		&::-webkit-scrollbar {
 			display: none;
 		}

@@ -193,6 +193,12 @@
 				:selectValue="getSortName(queries.sort)"
 				@click="profileRedirect(user.id)"
 			/>
+			<span
+					class="Content-noResult"
+					v-if="queries.search && !data.loadingData && !data.err && !data.users.length"
+				>
+					No results
+			</span>
 		</div>
 		<PagesSelector
 			v-if="!data.err && !data.loadingData"
