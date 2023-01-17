@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, onMounted, computed, watch } from 'vue'
+	import { reactive, onMounted, computed, watch, nextTick } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import LeaderboardTag from './LeaderboardTag.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -120,7 +120,8 @@
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		await getLeaderboard(getQueriesInUrl(to.fullPath), data)
+		getLeaderboard(getQueriesInUrl(to.fullPath), data)
+		await nextTick()
 		routeUpdating = false
 	})
 

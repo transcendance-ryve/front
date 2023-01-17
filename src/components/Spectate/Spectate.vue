@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { onMounted, onUnmounted, reactive, computed, watch, ref } from 'vue'
+	import { onMounted, onUnmounted, reactive, computed, watch, ref, nextTick } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
@@ -91,7 +91,8 @@
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		await getSpectate(getQueriesInUrl(to.fullPath), data)
+		getSpectate(getQueriesInUrl(to.fullPath), data)
+		await nextTick()
 		routeUpdating = false
 	})
 
@@ -130,7 +131,6 @@
 
 	const spectateGame = (gameID: string) => {
 		socket.emit('spectateGame', { gameId: gameID });
-
 		gameSelected.value = gameID;
 	}
 </script>

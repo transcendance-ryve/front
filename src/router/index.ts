@@ -60,7 +60,7 @@ const router = createRouter({
 							return {
 								path: to.fullPath,
 								query: { page: 1, take: 10, order: 'desc' }
-							}
+						}
 					}
 				},
 				{
@@ -128,7 +128,7 @@ router.beforeEach(async (to, from) => {
 
 export const profileRedirect = (id: string) => {
 	if (id)
-		router.push({ name: 'profile', params: { id }})
+		router.push({ name: 'profile', params: { id }, query: { page: 1, take: 10, order: 'desc' } })
 }
 
 export default router

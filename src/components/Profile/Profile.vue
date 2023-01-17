@@ -58,7 +58,8 @@
 	}
 
 	onBeforeRouteUpdate((to, from) => {
-		getUserProfile(to.params.id as string, data)
+		if (to.params.id !== from.params.id)
+			getUserProfile(to.params.id as string, data)
 	})
 
 	const	userStore = useUserStore()

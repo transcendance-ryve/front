@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { reactive, computed, watch, onMounted } from 'vue'
+	import { reactive, computed, watch, onMounted, nextTick } from 'vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
@@ -33,7 +33,7 @@
 		const	queriesNames: queriesKeys[] = ['page', 'take', 'order', 'search']
 
 		for (let i: number = 0; i < queriesNames.length; i++) {
-			const	val = urlQueries[queriesNames[i]] as string
+			const	val: string = urlQueries[queriesNames[i]] as string
 			queries[queriesNames[i]] = val ? val : ''
 		}
 	}
@@ -67,7 +67,7 @@
 	}
 
 	watch(queries, async () => {
-		if (!routeUpdating)
+		if (!routeUpdating) 
 			await replaceUrl({...queries})
 	})
 
@@ -82,7 +82,8 @@
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		await getMatchHistory(getQueriesInUrl(to.fullPath), data)
+		getMatchHistory(getQueriesInUrl(to.fullPath), data)
+		await nextTick()
 		routeUpdating = false
 	})
 
