@@ -101,7 +101,7 @@
 	width: 100%;
 	display: flex;
 	color: white;
-	align-items: center;
+	align-items: flex-end;
 	column-gap: 10em;
 
 	&.current {
@@ -127,6 +127,7 @@
 		background-color: $background-700;
 		border-radius: 18em;
 		max-width: 70%;
+		word-wrap: break-word;
 		.message__value {
 			font-size: 14em;
 		}

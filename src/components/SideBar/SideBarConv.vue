@@ -89,14 +89,20 @@
 		{ name: 'role', callback: (res: string) => role.value = res },
 		{ name: 'userPromoted', callback: (target: TargetTag) => {
 			if (userStore.me.id === target.id) {
-				userList.value = false
-				settings.value = true
+				role.value = 'ADMIN'
+				if (userList.value) {
+					userList.value = false
+					settings.value = true
+				}
 			}
 		}},
 		{ name: 'userDemoted', callback: (target: TargetTag) => {
 			if (userStore.me.id === target.id) {
-				settings.value = false
-				userList.value = true
+				role.value = 'MEMBER'
+				if (settings.value) {
+					settings.value = false
+					userList.value = true
+				}
 			}
 		}},
 		{ name: 'userBanned', callback: (target: TargetTag) => {
@@ -157,6 +163,7 @@
 				:type="sbStore.conv.type"
 				:target="target"
 				:admin="role === 'OWNER' || role === 'ADMIN' ? true : false"
+				:userList="userList"
 				@userList="userList = true"
 				@settings="settings = true"
 				@conv="userList = false"

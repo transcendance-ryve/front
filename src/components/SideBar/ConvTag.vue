@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, ref } from 'vue'
+	import { computed, ref, type Ref, toRefs, type ToRefs, watch } from 'vue'
 	import Status from './Status.vue'
 	import moment from 'moment'
 	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
@@ -20,6 +20,7 @@
 		type: string
 		target: Target
 		admin: boolean
+		userList: boolean
 	}
 
 	const props = defineProps<Props>()
@@ -46,38 +47,33 @@
 		}
 	]
 
-	const	userList = ref(false)
-
+	const { type, target, admin, userList }: ToRefs<Readonly<Props>> = toRefs(props)
 	const	btns = computed(() => {
-		if (props.type == 'Friend') {
-			if (props.target.status === 'In Game')
+		if (type.value === 'Friend') {
+			if (target.value.status === 'In Game')
 				return [{ name: 'Spectate', logo: logoPlayCircle }, { name: 'See', logo: logoEye, }]
 			else
 				return [{ name: 'See', logo: logoEye }]
 		}
 		else
 			return [{ name: 'Quit', logo: logoQuit }, {
-				name: userList.value === true ? 'Conversation' : props.admin ? 'Settings' : 'Members',
-				logo: userList.value === true ? logoMsg :  props.admin ? logoSettings : logoPeople,
+				name: userList.value === true ? 'Conversation' : admin.value ? 'Settings' : 'Members',
+				logo: userList.value === true ? logoMsg :  admin.value ? logoSettings : logoPeople,
 			}]
 	})
 
 	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'delete'])
 
 	const	manageOptions = (optionName: string) => {
-		if (optionName === 'Members') {
-			userList.value = true
+		if (optionName === 'Members')
 			emit('userList')
-		}
 		else if (optionName === 'See')
 			emit('see')
 		else if (optionName === 'Settings') {
 			emit('settings')
 		}
-		else if (optionName === 'Conversation') {
-			userList.value = false
+		else if (optionName === 'Conversation')
 			emit('conv')
-		}
 		else if (optionName === 'Quit')
 			emit('quit')
 		else if (optionName === 'Block')
