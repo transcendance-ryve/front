@@ -12,6 +12,7 @@
 	import getBannedInChannels from '@/requests/SideBar/getBannedInChannel'
 	import getPendingInChannels from '@/requests/SideBar/getPendingInChannel'
 	import type { axiosState } from '@/requests/useAxios'
+	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import { profileRedirect } from '@/router/index'
 	import type { SocketEvent } from '@/types/Socket'
@@ -286,7 +287,7 @@
 					v-if="toFind && !bannedList.length &&
 					!pendingList.length && !adminList.length && !userList.length"
 				>
-					No results.
+					No results
 				</span>
 			</div>
 			<div class="ConvList-content ConvList-content--add" v-if="sectionSelected == 'Add'">
@@ -298,6 +299,7 @@
 					@add="addUser"
 					@see="user => profileRedirect(user.id)"
 				/>
+				<LoaderSpinner size="30em" v-if="dataState.loading"/>
 				<span
 					class="Content-noResult"
 					v-if="toFind && !dataState.loading && !addList.length"

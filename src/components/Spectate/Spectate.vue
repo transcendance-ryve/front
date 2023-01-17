@@ -4,9 +4,8 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import SearchInput from '../Utils/SearchInput.vue'
-	import DropDownMenu from '../Utils/DropDownMenu.vue'
-	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
-	import PagesSelector from '../Utils/PagesSelector.vue'
+	import { logoDesc, logoAsc } from '../../assets/logoSVG'
+	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import { getQueriesInUrl, replaceUrl, getSpectate } from '@/requests/Spectate/getSpectate'
 	import type { SpectateData, SpectateQueries, queriesKeys } from '@/types/Spectate'
 	import VersusTag from './VersusTag.vue'
@@ -153,7 +152,7 @@
 			</div>
 		</div>
 		<div
-			v-if="!data.loadingData && !data.err"
+			v-if="!data.err"
 			class="Spectate-content"
 			@scroll="handleScroll"
 		>
@@ -171,6 +170,7 @@
 					:reverse="true"
 				/>
 			</div>
+			<LoaderSpinner size="30em" v-if="data.loadingData"/>
 			<span
 					class="Content-noResult"
 					v-if="queries.search && !data.loadingData && !data.err && !data.games.length"

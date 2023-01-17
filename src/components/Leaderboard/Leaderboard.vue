@@ -11,6 +11,7 @@
 	import type { LeaderboardData, LeaderboardQueries, queriesKeys } from '@/types/Leaderboard'
 	import router, { profileRedirect } from '@/router/index'
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
+	import LoaderSpinner from '@/components/Utils/LoaderSpinner.vue'
 
 	const	contentStore: any = useContentStore()
 	contentStore.state = 2
@@ -181,7 +182,7 @@
 			</div>
 		</div>
 		<div
-			v-if="!data.err && !data.loadingData"
+			v-if="!data.err"
 			class="Leaderboard-content"
 			:class="{'Leaderboard-content--maxSize': pagesCount == 1}"
 		>
@@ -193,6 +194,7 @@
 				:selectValue="getSortName(queries.sort)"
 				@click="profileRedirect(user.id)"
 			/>
+			<LoaderSpinner size="30em" v-if="data.loadingData"/>
 			<span
 					class="Content-noResult"
 					v-if="queries.search && !data.loadingData && !data.err && !data.users.length"

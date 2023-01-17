@@ -32,7 +32,6 @@
 @import './components/SideBar/StatusBtns';
 @import './components/SideBar/Message';
 
-
 //  Play
 @import './components/Play/Play';
 @import './components/Play/Matchmaking';
@@ -66,6 +65,7 @@
 @import './components/Utils/UserInfos';
 @import './components/Utils/ToolTip';
 @import './components/Utils/UploadAvatar';
+@import './components/Utils/LoaderSpinner';
 
 //  Notifications
 @import './components/Notifications/Notifications';

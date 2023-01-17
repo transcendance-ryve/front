@@ -5,6 +5,7 @@
 	import DropDownMenu from '../Utils/DropDownMenu.vue'
 	import { logoPerPage, logoDesc, logoAsc } from '../../assets/logoSVG'
 	import VersusTag from '../Spectate/VersusTag.vue'
+	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import PagesSelector from '../Utils/PagesSelector.vue'
 	import router, { profileRedirect } from '@/router/index'
 	import type { MatchHistoryData, MatchHistoryQueries, queriesKeys } from '@/types/MatchHistory'
@@ -132,7 +133,7 @@
 				</div>
 			</div>
 		</div>
-		<div v-if="!data.err && !data.loadingData" class="MatchHistory-content">
+		<div v-if="!data.err" class="MatchHistory-content">
 			<div
 				class="Content-Versus"
 				v-for="(game, index) in data.games"
@@ -148,6 +149,7 @@
 					@click="profileRedirect(game.right.id || '')"
 				/>
 			</div>
+			<LoaderSpinner size="30em" v-if="data.loadingData"/>
 			<span
 				class="Content-noResult"
 				v-if="queries.search && !data.loadingData && !data.err && !data.games.length"

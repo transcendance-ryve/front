@@ -15,6 +15,7 @@
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
+	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { SocketEvent } from '@/types/Socket'
 
 	const	dataState: axiosState = reactive({
@@ -40,8 +41,7 @@
 			if (sbStore.state.channelsState == 1) {
 				fetchData = await getMyChannels(dataState)
 			}
-			else
-				// fetchData = data4
+			else if (toFind.value)
 				fetchData = await getChannels(toFind.value, dataState)
 		}
 		else {
@@ -257,6 +257,7 @@
 				:data="item"
 				@click="handleClick(item.id || '')"
 			/>
+			<LoaderSpinner size="30em" v-if="dataState.loading"/>
 			<span
 				class="Content-noResult"
 				v-if="toFind && !dataState.loading && !dataState.error && !data?.length"

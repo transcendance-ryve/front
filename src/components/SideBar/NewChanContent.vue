@@ -5,6 +5,7 @@
 	import SwitchBtn from './SwitchBtn.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import UserTag from './UserTag.vue'
+	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { TargetTag } from '@/types/User'
 	import { useUserStore } from '@/stores/UserStore'
 	import getUsers from '@/requests/SideBar/getUsers'
@@ -114,7 +115,7 @@
 
 		<SearchInput @search="(val) => toFind = val"/>
 
-		<div class="newChan-content">
+		<div class="newChan-content" v-if="!dataState.error">
 			<UserTag
 				v-for="(user, index) in list"
 				:key="index"
@@ -124,6 +125,7 @@
 				@delete="deleteUser(index)"
 				@see="(user) => profileRedirect(user.id)"
 			/>
+			<LoaderSpinner size="30em" v-if="dataState.loading"/>
 			<span
 				class="Content-noResult"
 				v-if="toFind && !dataState.loading && !list?.length"
