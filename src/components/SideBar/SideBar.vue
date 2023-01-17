@@ -5,7 +5,7 @@
 	import SideBarContent from './SideBarContent.vue'
 	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
-	import { logoFriends, logoChannels, logoNotifs, logoBubble } from '../../assets/logoSVG'
+	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
 
 	const	sbStore = useSideBarStore()
 
