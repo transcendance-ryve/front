@@ -23,7 +23,6 @@ const	getSpectate = async (urlQueries: string, page: number, data: SpectateData)
 	data.loadingData = loading.value
 	data.err = error.value
 	if (!data.err) {
-		console.log('response in get spectate', response.value)
 		data.games = page ? data.games.concat(response.value.res) : response.value.res
 		data.count = response.value.count
 	}

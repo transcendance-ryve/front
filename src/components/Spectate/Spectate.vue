@@ -90,7 +90,6 @@
 	]
 
 	onMounted(() => {
-		console.log('spec mounted')
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
 		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), page++, data)
