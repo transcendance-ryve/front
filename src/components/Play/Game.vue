@@ -15,6 +15,15 @@
 		next_level: number,
 	}
 
+	interface Bonus {
+		name: string,
+		imgURL: string,
+		x: number,
+		y: number,
+		w: number,
+		h: number
+	}
+
 	interface Players {
 		left: Player,
 		right: Player,
@@ -58,7 +67,24 @@
 
 	const userStore = useUserStore()
 	const socket = userStore.socket;
-	const canvas = ref(null);
+
+	const canvas = ref<HTMLCanvasElement | null>(null);
+	let ctx: CanvasRenderingContext2D | null = null;
+
+	let ratio = {
+		x: 1,
+		y: 1,
+	}
+	
+	let bonus = reactive({
+		name: '',
+		imgURL: '',
+		x: 0,
+		y: 0,
+		w: 0,
+		h: 0,
+		spawned: false,
+	});
 
 	const endState = reactive({
 		visible: false,
@@ -161,7 +187,6 @@
 	/* Draw */
 
 	const drawRoundedRect = (
-		ctx: CanvasRenderingContext2D,
 		x: number,
 		y: number,
 		width: number,
@@ -169,6 +194,8 @@
 		radius: number,
 		color: string
 	): void => {
+		if (!ctx) return;
+
 		if (width < 2 * radius) radius = width / 2;
 		if (height < 2 * radius) radius = height / 2;
 
@@ -184,12 +211,9 @@
 	}
 
 	const drawPaddles = (
-		ctx: CanvasRenderingContext2D,
 		paddles: Paddles,
-		ratio: { x: number, y: number }
 	): void => {
 		drawRoundedRect(
-			ctx,
 			paddles.left.x * ratio.x,
 			paddles.left.y * ratio.y,
 			paddles.left.width * ratio.x,
@@ -199,7 +223,6 @@
 		)
 
 		drawRoundedRect(
-			ctx,
 			paddles.right.x * ratio.x,
 			paddles.right.y * ratio.y,
 			paddles.right.width * ratio.x,
@@ -210,10 +233,10 @@
 	}
 
 	const drawBall = (
-		ctx: CanvasRenderingContext2D,
 		ball: Ball,
-		ratio: { x: number, y: number }
 	): void => {
+		if (!ctx) return;
+
 		ctx.beginPath();
 		ctx.arc(
 			ball.x * ratio.x,
@@ -227,22 +250,35 @@
 		ctx.fill();
 	}
 
-	/* Socket handler */
-
-	const update = (game: { paddles: Paddles, ball: Ball }): void => {
+	const resizeCanvas = (): void => {
 		if (!canvas.value) return;
-		const ctx = canvas.value.getContext('2d');
-		
-		const ratio = {
-			x: canvas.value.width / defaultGrid.width,
-			y: canvas.value.height / defaultGrid.height,
-		}
 
 		canvas.value.width = canvas.value.offsetWidth;
 		canvas.value.height = canvas.value.clientHeight;
 
-		drawPaddles(ctx, game.paddles, ratio);
-		drawBall(ctx, game.ball, ratio);
+		ratio = {
+			x: canvas.value.width / defaultGrid.width,
+			y: canvas.value.height / defaultGrid.height,
+		}
+	}
+
+	/* Socket handler */
+
+	const update = (game: { paddles: Paddles, ball: Ball }): void => {
+		if (!ctx || !canvas.value) return;
+		
+		ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+		if (bonus.spawned)
+			drawRoundedRect(
+				bonus.x * ratio.x,
+				bonus.y * ratio.y,
+				bonus.w * ratio.x,
+				bonus.h * ratio.y,
+				6,
+				"#fff"
+			)
+		drawPaddles(game.paddles);
+		drawBall(game.ball);
 	}
 
 	const start = (data: { players: Players, width: number, height: number }): void => {
@@ -250,6 +286,13 @@
 		defaultGrid.width = data.width;
 
 		players.value = data.players;
+
+		if (canvas.value) {
+			ratio = {
+				x: canvas.value.width / defaultGrid.width,
+				y: canvas.value.height / defaultGrid.height
+			}
+		}
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
@@ -273,30 +316,44 @@
 			} else if (userStore?.me.id === id) endState.state = "win";
 			else endState.state = "lose";
 		},
+		bonus_spawn: (data: Bonus) => {
+			bonus = { ...data, spawned: true}
+		},
+		bonus_despawn: () => {
+			bonus.spawned = false;
+		}
 	}
 
 	/* onMounted && onUnmounted */
 
 	onMounted(() => {
-		for (let name in listeners) {
+		for (let name in listeners)
 			socket.on(name, listeners[name]);
-		}
 
 		if (!props.spectate) {
 			window.addEventListener('keyup', handleKeyup, true);
 			window.addEventListener('keydown', handleKeydown, true);
 		}
+
+		window.addEventListener("resize", resizeCanvas);
+
+		if (canvas.value) {
+			canvas.value.width = canvas.value.offsetWidth;
+			canvas.value.height = canvas.value.clientHeight;
+
+			ctx = canvas.value.getContext('2d');
+		}
 	});
 
 	onUnmounted(() => {
-		for (let name in listeners) {
+		for (let name in listeners)
 			socket.off(name, listeners[name]);
-		}
 
 		if (!props.spectate) {
 			window.removeEventListener('keydown', handleKeydown, true);
 			window.removeEventListener('keyup', handleKeyup, true);
 		}
+		window.removeEventListener("resize", resizeCanvas);
 
 		socket.emit('disconnect_game');
 	});

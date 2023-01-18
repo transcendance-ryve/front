@@ -28,13 +28,12 @@
 		h1 {
 			color: #fff;
 			font-size: 36em;
-			font-weight: bold;
 		}
 
 		h2 {
 			color: $white-200;
 			font-size: 20em;
-			font-weight: bold;
+			font-weight: 500;
 
 			span {
 				color: white;
@@ -87,6 +86,14 @@
 		align-items: center;
 		justify-content: center;
 		row-gap: 18em;
+
+		:first-child {
+			h2 {
+				color: $white-200;
+				font-size: 18em;
+				font-weight: 500;
+			}
+		}
 
 		p {
 			color: $white-200;

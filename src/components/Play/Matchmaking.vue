@@ -3,9 +3,10 @@
 	import Btn from '../Utils/Btn.vue';
 	import { useUserStore } from '@/stores/UserStore';
 	import moment from 'moment';
+	import ToggleSwitch from '../Settings/ToggleSwitch.vue';
 
 	const userStore = useUserStore()
-	const socket = userStore.socket;
+	const socket = userStore.socket
 
 	interface Props {
 		close: () => void;
@@ -20,6 +21,11 @@
 	}
 
 	let state: any = ref(State.Matchmaking);
+	let bonus: any = ref(false);
+	let usersInQueue: any = reactive({
+		bonus: 0,
+		normal: 0
+	});
 
 	const timer: any = reactive({
 		onStart: 0,
@@ -65,6 +71,10 @@
 		},
 		accepted_game_request: () => {
 			state.value = State.Accepted;
+		},
+		matchmaking_queue_count: ({ bonus, normal }: {bonus: number, normal: number }) => {
+			usersInQueue.bonus = bonus;
+			usersInQueue.normal = normal;
 		}
 	}
 
@@ -90,13 +100,9 @@
 	}
 
 	const toggleMatchmaking = () => {
-		if (state.value === State.Matchmaking) socket.emit("join_queue");
+		if (state.value === State.Matchmaking) socket.emit("join_queue", { bonus: bonus.value });
 		else if (state.value === State.Accepted) decline()
 		else socket.emit("leave_queue");
-	}
-
-	const cancelMatchmaking = () => {
-		state.value = State.Matchmaking;
 	}
 </script>
 
@@ -114,7 +120,7 @@
 			<h1>
 				Matchmaking
 			</h1>
-			<h2 v-if="state === State.Matchmaking">Your estimated matchaking time is: <span>about 30 secondes</span></h2>
+			<h2 v-if="state === State.Matchmaking">Your estimated matchaking time is: <span>under 30 seconds</span></h2>
 			<h2
 				v-if="state === State.Waiting || state === State.Found || state === State.Accepted"
 			>
@@ -134,6 +140,11 @@
 			</div>
 		</div>
 		<div class="matchmaking_content__btns">
+			<div v-if="state === State.Matchmaking">
+				<h2>Active bonus:</h2>
+				<ToggleSwitch :active="bonus" @click="bonus = !bonus" />
+			</div>
+
 			<Btn
 				v-if="state === State.Matchmaking || state === State.Waiting || state === State.Accepted"
 				:value="state === State.Matchmaking ? 'Start game' : 'Cancel'"
@@ -160,7 +171,8 @@
 					@click="decline"
 				/>
 			</div>
-			<p><span>13</span> players in queue</p>
+			
+			<p><span>{{ bonus ? usersInQueue.bonus : usersInQueue.normal }}</span> players in queue</p>
 		</div>
 	</div>
 </template>

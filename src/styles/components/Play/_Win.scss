@@ -8,7 +8,7 @@
 	height: 100%;
 
 	background: rgba(31, 30, 44, 0.75);
-	backdrop-filter: blur(2.8px);
+	backdrop-filter: blur(5px);
 
 	position: absolute;
 	top: 0;
@@ -44,12 +44,14 @@
 	h1 {
 		font-size: 80em;
 		line-height: 100%;
+		font-weight: semibold;
 	}
 
 	h2 {
 		font-size: 24em;
 		line-height: 100%;
 		color: $white;
+		font-weight: 400;
 	}
 }
 
@@ -73,5 +75,6 @@
 		line-height: 100%;
 
 		color: $white;
+		font-weight: 500;
 	}
 }
