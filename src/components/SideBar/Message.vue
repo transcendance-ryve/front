@@ -79,5 +79,4 @@
 		lastUser: boolean;
 	}
 	const props: Props = defineProps<Props>();
-	console.log(props.message)
 </script>
