@@ -6,6 +6,7 @@
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import { useSideBarStore } from '@/stores/SideBarStore';
 	import type { SocketEvent } from '@/types/Socket';
+	import { profileRedirect } from '@/router';
 
 	const	notifStore = useNotifStore()
 	const	userStore = useUserStore()
@@ -13,14 +14,14 @@
 	const	socket: any = userStore.socket
 
 	const	listeners: SocketEvent[] = [
-		{ name: 'user_connected', callback: (res: any) => notifStore.addNotif('infoG', '', 'connected') },
+		{ name: 'user_connected', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'connected', res.avatar, () => profileRedirect(res.id)) },
 		{ name: 'friend_accepted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) },
 		{ name: 'friend_accepted_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) },
 		{ name: 'friend_request_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
 		{ name: 'invitationAccepted', callback: () => notifStore.addNotif('infoG', '', 'invitation accepted') },
 		{ name: 'inviteToRoomSuccess', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
 
-		{ name: 'user_disconnected', callback: (id: string) => notifStore.addNotif('infoR', '', 'disconnected') },
+		{ name: 'user_disconnected', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'disconnected', res.avatar, () => profileRedirect(res.id)) },
 		{ name: 'friend_declined', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar) },
 		{ name: 'friend_removed', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'has deleted you', res.avatar) },
 		{ name: 'friend_declined_submitted', callback: (res: any) => notifStore.addNotif('infoR', res.username, 'invitation declined', res.avatar) },
