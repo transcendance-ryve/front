@@ -80,6 +80,7 @@
 	const	friendListeners: SocketEvent[] = [
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
 		{ name: 'incomingMessage', callback: (msg: any) => {
+			console.log('incomingMessage dm', msg)
 			messages.value.push(msg)
 			totalMsg.value++
 		}}
@@ -112,6 +113,7 @@
 			}
 		}},
 		{ name: 'incomingMessage', callback: (msg: any) => {
+			console.log('incomingMessage chan', msg)
 			messages.value.push(msg)
 			totalMsg.value++
 		}},

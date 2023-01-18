@@ -2,8 +2,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	// width: 350em;
-	min-width: 350em;	//
+	width: 350em;
 	min-height: 88em;
 	padding: 12em 16em 9em 16em;
 	gap: 24em;
@@ -46,19 +45,25 @@
 			font-family: 'Poppins';
 			letter-spacing: -0.01em;
 			text-align: end;
+			max-width: 170em; //
 			gap: 8em;
+			text-overflow: ellipsis;
 
 			.Text-label {
 				font-size: 18em;
+				font-weight: 600;
 				line-height: 100%;
 				color: white;
 			}
 
 			.Text-value {
+				width: 100%;
 				font-size: 14em;
 				letter-spacing: -0.01em;
 				line-height: 100%;
-				color: white;
+				color: orange;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}
@@ -108,6 +113,28 @@
 	.NotifTag-content > .Content-text {
 		.Text-value {
 			color: $red;
+		}
+	}
+}
+
+.NotifTag--privateMessage {
+	.NotifTag-content > .Content-text {
+		.Text-label {
+			color: $cheat-blue;
+		}
+		.Text-value {
+			color: white;
+		}
+	}
+}
+
+.NotifTag--channelMessage {
+	.NotifTag-content > .Content-text {
+		.Text-label {
+			color: #CCCF3C;
+		}
+		.Text-value {
+			color: white;
 		}
 	}
 }

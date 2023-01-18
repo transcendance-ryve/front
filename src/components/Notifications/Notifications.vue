@@ -44,6 +44,14 @@
 		{ name: 'unmuteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'banUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'unbanUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+
+		{ name: 'incomingMessage', callback: (res: any) => {
+			if (res.channelName) {
+				notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar)
+			}
+			else
+				notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar)
+		}},
 	]
 
 

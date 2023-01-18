@@ -1,12 +1,31 @@
 <script setup lang="ts">
 
+	import { onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useUserStore } from '@/stores/UserStore'
 	import SideBarContent from './SideBarContent.vue'
 	import SideBarConv from './SideBarConv.vue'
 	import SideBarNewChan from './SideBarNewChan.vue'
 	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
+	import type { SocketEvent } from '@/types/Socket'
 
 	const	sbStore = useSideBarStore()
+	const	socket = useUserStore().socket
+	const	listeners: SocketEvent[] = [
+		{ name: 'friend_request', callback: () => sbStore.notifications.friend++ },
+		{ name: 'friend_accepted_submitted', callback: () => sbStore.notifications.friend-- },
+		{ name: 'friend_declined_submitted', callback: () => sbStore.notifications.friend-- },
+		{ name: 'chanInvitationReceived', callback: () => sbStore.notifications.channel++ },
+		{ name: 'chanInvitationDeleted', callback: () => sbStore.notifications.channel-- },
+	]
+
+	onMounted(() => {
+		listeners.forEach(listener => socket.on(listener.name, listener.callback))
+	})
+
+	onUnmounted(() => {
+		listeners.forEach(listener => socket.off(listener.name, listener.callback))
+	})
 
 </script>
 
@@ -39,7 +58,7 @@
 				:class="{ 'SectionBtns--selected': sbStore.state.section == 3 }"
 				@click="sbStore.updateSection(3)"
 			>
-				<span class="SectionsBtns-Logo" :class="{'Notif-active': sbStore.state.section !== 3}" v-html="logoNotifs"></span>
+				<span class="SectionsBtns-Logo" :class="{'Notif-active': sbStore.notifActive}" v-html="logoNotifs"></span>
 			</button>
 		</div>
 

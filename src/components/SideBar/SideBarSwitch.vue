@@ -18,8 +18,15 @@
 			sbStore.state.friendsState = newVal
 		else if (sbStore.state.section == 2)
 			sbStore.state.channelsState = newVal
-		else
+		else {
 			sbStore.state.notifsState = newVal
+			if (newVal === 1)
+				sbStore.notifications.game = 0
+			else if (newVal === 2)
+				sbStore.notifications.friend = 0
+			else
+				sbStore.notifications.channel = 0
+		}
 	}
 
 	const	btn1 = computed(() => {
