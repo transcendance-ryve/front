@@ -1,9 +1,10 @@
 <script setup lang="ts">
 
-	import { ref, type Ref } from 'vue'
+	import { ref, type Ref, withDefaults } from 'vue'
 	import { logoCloseNotif } from '@/assets/logoSVG'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import type { notification } from '@/stores/NotificationsStore'
+	import { useSideBarStore } from '@/stores/SideBarStore'
 
 	export interface Props {
 		notif: notification
@@ -12,6 +13,7 @@
 	const	props = defineProps<Props>()
 
 	const	notifStore = useNotifStore()
+	const	sbStore = useSideBarStore()
 	const	notifClose: Ref<boolean> = ref(false)
 	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
 	let		timer: number | undefined = undefined
@@ -30,7 +32,9 @@
 <template>
 
 	<div
-		:class="[classNames, {'NotifTag--close': notifClose }]">
+		:class="[classNames, {'NotifTag--close': notifClose }]"
+		@click="notif.handleClick"
+	>
 		<span class="NotifTag-closeBtn" v-html="logoCloseNotif" @click="closeNotif()"></span>
 		<div class="NotifTag-content">
 			<img v-if="notif.avatar" class="Content-avatar" :src="notif.avatar" alt="">

@@ -4,10 +4,12 @@
 	import NotifTag from './NotifTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import { useNotifStore } from '@/stores/NotificationsStore'
+	import { useSideBarStore } from '@/stores/SideBarStore';
 	import type { SocketEvent } from '@/types/Socket';
 
 	const	notifStore = useNotifStore()
 	const	userStore = useUserStore()
+	const	sbStore = useSideBarStore()
 	const	socket: any = userStore.socket
 
 	const	listeners: SocketEvent[] = [
@@ -45,12 +47,15 @@
 		{ name: 'banUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 		{ name: 'unbanUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
 
-		{ name: 'incomingMessage', callback: (res: any) => {
-			if (res.channelName) {
-				notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar)
+		{ name: 'incomingMessage', callback: (res: any, convId: string) => {
+			if (userStore.me.id === res.sender.id)
+				return
+			const	convOpen = sbStore.conv.open
+			if (res.channelName && ((convOpen && sbStore.conv.id !== convId) || !convOpen)) {
+				notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar, () => sbStore.openConv('Channel', convId, false))
 			}
-			else
-				notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar)
+			else if (!res.channelName && ((convOpen && sbStore.conv.id !== res.sender.id) || !convOpen))
+				notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar,  () => sbStore.openConv('Friend', res.sender.id, false))
 		}},
 	]
 
