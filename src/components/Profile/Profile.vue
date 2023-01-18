@@ -18,7 +18,7 @@
 	const	socket = userStore.socket
 	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
-	const	userBlocked: Ref<boolean> = ref(false)
+	const	userBlocked: Ref<boolean | null> = ref(null)
 	contentStore.state = 4
 
 	const	data: ProfileData = reactive({
@@ -143,6 +143,8 @@
 			}
 		},
 	]
+	//	isBlockedRelation({ targetId: data.user.id })
+	// blockRelationStatus()
 
 
 	onMounted(async () => {

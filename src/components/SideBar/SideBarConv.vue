@@ -120,6 +120,7 @@
 		}},
 		{
 			name: 'roomUpdated', callback: (res: { name: string, status: string, avatar: string }) => {
+				console.log('room utpdated')
 				target.value.name = res.name
 				target.value.status = res.status
 				target.value.avatar = res.avatar

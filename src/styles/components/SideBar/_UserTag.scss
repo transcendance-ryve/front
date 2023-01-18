@@ -5,6 +5,7 @@
 	padding: 12em 16em;
 	background: rgba(31, 30, 44, 0.5);
 	border-radius: 6em;
+	gap: 16em;
 
 	.UserTag-infos {
 		display: flex;
@@ -16,17 +17,17 @@
 		}
 
 		.UserTag-userNameWrap {
-			display: flex;
-			align-items: center;
-			justify-content: center;
 			background: $background-700;
 			border-radius: 24em;
-			padding: 0 16em;
+			padding: 8em 16em;
+
 			.UserTag-userName {
+				width: 100%;
 				font-weight: 500;
 				font-size: 16em;
 				line-height: 100%;
 				color: white;
+				white-space: nowrap;
 			}
 		}
 	}
