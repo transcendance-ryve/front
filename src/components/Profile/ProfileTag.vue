@@ -28,6 +28,7 @@
 		/>
 		<div class="ProfileTag-btnsWrap">
 			<Btn
+				v-if="type !== 1"
 				:type="isBlocked ? 8 : 7"
 				:logo="logoBlockMsg"
 				:value="isBlocked ? 'Unblock' : 'Block'"
