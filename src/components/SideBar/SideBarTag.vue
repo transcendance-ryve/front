@@ -58,7 +58,7 @@
 					channelId: props.data.id,
 					name: props.data.name,
 					status: props.data.status,
-					password: password
+					password: password.value
 				}
 			})
 	}
