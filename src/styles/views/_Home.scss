@@ -12,14 +12,10 @@
 		padding: 32px 0;
 		gap: 32rem;
 		position: relative;
+		overflow: hidden;
 
 		.BodyLayout-mainContent {
 			width: 1310rem;
-
-			// @media (min-width: 1920px) {
-			// 	width: 1310px;
-			// 	font-size: 1px;
-			// }
 		}
 
 		@media (min-width: 1920px) {
