@@ -103,6 +103,7 @@
 	color: white;
 	align-items: flex-end;
 	column-gap: 10em;
+	position: relative;
 
 	&.current {
 		justify-content: right;
@@ -121,8 +122,19 @@
 		height: 32em;
 		border-radius: 50%;
 	}
+	.ToolTip-container {
+		position: absolute;
+		width: 32em;
+		height: 32em;
+		cursor: pointer;
+		&:hover {
+			.ToolTip {
+				visibility: visible;
+			}
+		}
+	}
 
-	span {
+	.message__value__wrapper {
 		padding: 8em 16em;
 		background-color: $background-700;
 		border-radius: 18em;
