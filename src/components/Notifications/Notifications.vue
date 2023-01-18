@@ -15,8 +15,8 @@
 
 	const	listeners: SocketEvent[] = [
 		{ name: 'user_connected', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'connected', res.avatar, () => profileRedirect(res.id)) },
-		{ name: 'friend_accepted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) },
-		{ name: 'friend_accepted_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar) },
+		{ name: 'friend_accepted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar, () => profileRedirect(res.id)) },
+		{ name: 'friend_accepted_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar, () => profileRedirect(res.id)) },
 		{ name: 'friend_request_submitted', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
 		{ name: 'invitationAccepted', callback: () => notifStore.addNotif('infoG', '', 'invitation accepted') },
 		{ name: 'inviteToRoomSuccess', callback: (res: any) => notifStore.addNotif('infoG', res.username, 'invitation sent', res.avatar) },
