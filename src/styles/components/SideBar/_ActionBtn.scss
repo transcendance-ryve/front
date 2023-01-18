@@ -63,3 +63,19 @@
 		}
 	}
 }
+
+.ActionBtn--block {
+	background: $orange;
+	.ActionBtn-logo > svg {
+		fill: white;
+	}
+
+	&:hover {
+		background: rgba(255, 138, 0, 0.5) !important;
+		transition: background 150ms ease-in-out;
+		.ActionBtn-logo > svg {
+			transition: fill 150ms ease-in-out;
+			fill: $white-200;
+		}
+	}
+}

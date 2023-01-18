@@ -137,8 +137,10 @@
 		{
 			name: 'newUserInRoom',
 			callback: (target: TargetTag) => {
+				console.log('new user in room')
 				pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
 				userListData.value.push(target)
+				socket.emit('isBlocked', { targetId: target.id })
 			}
 		},
 		{
@@ -209,6 +211,33 @@
 			name: 'userUnbanned',
 			callback: (id: string) => {
 				bannedListData.value = bannedListData.value.filter((u: TargetTag) => u.id !== id)
+			}
+		},
+		{
+			name: 'user_blocked_submitted',
+			callback: (res: { id: string }) => {
+				const	userBlocked: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === res.id)
+					|| adminListData.value.find((user: TargetTag) => user.id === res.id)
+				if (userBlocked)
+					userBlocked.isBlocked = true
+			}
+		},
+		{
+			name: 'user_unblocked_submitted',
+			callback: (res: { id: string }) => {
+				const	userUnblocked: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === res.id)
+					|| adminListData.value.find((user: TargetTag) => user.id === res.id)
+				if (userUnblocked)
+					userUnblocked.isBlocked = false
+			}
+		},
+		{
+			name: 'blockStatus',
+			callback: (isBlocked: boolean, targetId: string) => {
+				const	target: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === targetId)
+					|| adminListData.value.find((user: TargetTag) => user.id === targetId)
+				if (target)
+					target.isBlocked = isBlocked
 			}
 		}
 	]

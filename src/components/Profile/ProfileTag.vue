@@ -2,22 +2,20 @@
 
 	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
-	import { logoSettings, logoTrash, logoMsg, logoAdd, logoAccept, logoRefuse } from '../../assets/logoSVG'
+	import { logoSettings, logoTrash, logoMsg, logoAdd, logoAccept, logoRefuse, logoBlockMsg } from '../../assets/logoSVG'
 	import Btn from '../Utils/Btn.vue'
-	import { useUserStore } from '@/stores/UserStore'
 	import router from '@/router'
 	import type { User } from '@/types/User'
 
 	interface Props {
-		type: number
+		type?: number
 		user: User
+		isBlocked: boolean
 	}
 
-	withDefaults(defineProps<Props>(), {
+	const	props = withDefaults(defineProps<Props>(), {
 		type: 1,
 	})
-
-	const	userStore = useUserStore()
 
 </script>
 
@@ -28,11 +26,17 @@
 			:user="user"
 			:sizeXL="true"
 		/>
-		<div class="ProfileTag-btnsWrap" v-if="type === 1">
-			<div class="ProfileTag-status" :class="{ 'Status--active': userStore.me.tfa_enabled }">
-				<span class="Status-value">2FA</span>
-			</div>
+		<div class="ProfileTag-btnsWrap">
 			<Btn
+				:type="isBlocked ? 8 : 7"
+				:logo="logoBlockMsg"
+				:value="isBlocked ? 'Unblock' : 'Block'"
+				:width="isBlocked ? '140em' : '121em'"
+				fontSize="16em"
+				@click="isBlocked ? $emit('unblock') : $emit('block')"
+			/>
+			<Btn
+				v-if="type === 1"
 				:type=5
 				:logo="logoSettings"
 				value="Settings"
@@ -40,9 +44,8 @@
 				fontSize="16em"
 				@click="router.push({ path: '/settings' })"
 			/>
-		</div>
-		<div class="ProfileTag-btnsWrap" v-if="type === 2">
 			<Btn
+				v-if="type === 2"
 				:type=3
 				:logo="logoTrash"
 				value="Delete"
@@ -51,6 +54,7 @@
 				@click="$emit('delete')"
 			/>
 			<Btn
+				v-if="type === 2"
 				:type=1
 				:logo="logoMsg"
 				value="Message"
@@ -58,9 +62,8 @@
 				fontSize="16em"
 				@click="$emit('message')"
 			/>
-		</div>
-		<div class="ProfileTag-btnsWrap" v-if="type === 3">
 			<Btn
+				v-if="type === 3"
 				:type=1
 				:logo="logoAdd"
 				value="Add to friend"
@@ -68,14 +71,11 @@
 				fontSize="16em"
 				@click="$emit('add')"
 			/>
-		</div>
-		<div class="ProfileTag-btnsWrap" v-if="type === 4">
-			<div class="ProfileTag-status">
+			<div class="ProfileTag-status" v-if="type === 4">
 				<span class="Status-value">Invitation sent</span>
 			</div>
-		</div>
-		<div class="ProfileTag-btnsWrap" v-if="type === 5">
 			<Btn
+				v-if="type === 5"
 				:type=1
 				:logo="logoAccept"
 				value="Accept"
@@ -84,6 +84,7 @@
 				@click="$emit('accept')"
 			/>
 			<Btn
+				v-if="type === 5"
 				:type=3
 				:logo="logoRefuse"
 				:fillLogo="false"

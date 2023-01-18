@@ -6,7 +6,7 @@
 	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
 	import {
 		logoEye,
-		logoStop,
+		logoBlockMsg,
 		logoTrash,
 		logoPlayCircle,
 		logoQuit,
@@ -35,7 +35,7 @@
 		},
 		{
 			name: 'Block',
-			logo: logoStop,
+			logo: logoBlockMsg,
 			color: '#FF8A00',
 			toolTip: 'Block'
 		},

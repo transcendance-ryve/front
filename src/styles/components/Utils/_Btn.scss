@@ -84,3 +84,23 @@
 		fill: white;
 	}
 }
+
+.Btn--type7 {
+	background: $background-700;
+	.Btn-value {
+		color: $red;
+	}
+	.Logo--fill svg {
+		fill: $red;
+	}
+}
+
+.Btn--type8 {
+	background: $background-700;
+	.Btn-value {
+		color: $green;
+	}
+	.Logo--fill svg {
+		fill: $green;
+	}
+}

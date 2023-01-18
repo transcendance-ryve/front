@@ -162,6 +162,24 @@
 					() => sbStore.openConv('Friend', res.sender.id, false))
 			}
 		},
+
+
+		// {
+		// 	name: 'user_blocked',
+		// 	callback: (res: any) => console.log('user_blocked', res)
+		// },
+		// {
+		// 	name: 'user_blocked_submitted',
+		// 	callback: (res: any) => console.log('user_blocked_submitted', res)
+		// },
+		// {
+		// 	name: 'user_unblocked',
+		// 	callback: (res: any) => console.log('user_unblocked', res)
+		// },
+		// {
+		// 	name: 'user_unblocked_submitted',
+		// 	callback: (res: any) => console.log('user_unblocked_submitted', res)
+		// }
 	]
 
 

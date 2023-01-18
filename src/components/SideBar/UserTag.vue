@@ -10,7 +10,8 @@
 		logoMute,
 		logoPromote,
 		logoDemote,
-		logoStop
+		logoStop,
+		logoBlockMsg
 	} from '../../assets/logoSVG'
 	import type { TargetTag } from '@/types/User'
 
@@ -43,7 +44,7 @@
 			toolTip: 'Add user'
 		},
 		{
-			name: 'demute',
+			name: 'unmute',
 			logo: logoMute,
 			color: '#FF8A00',
 			toolTip: 'Demute'
@@ -73,25 +74,39 @@
 			toolTip: 'Ban'
 		},
 		{
-			name: 'deban',
+			name: 'unban',
 			logo: logoStop,
 			color: '#E32F2F',
-			toolTip: 'Deban',
+			toolTip: 'Unban',
+		},
+		{
+			name: 'block',
+			logo: logoBlockMsg,
+			color: '#FF8A00',
+			toolTip: 'Block',
+		},
+		{
+			name: 'unblock',
+			logo: logoBlockMsg,
+			color: '#FF8A00',
+			toolTip: 'Unblock',
 		}
 	]
 
 	const	options = computed(() => {
-		if (props.section == 'onlySee' || userStore.me.id === props.user.id)
+		if (props.section === 'onlySee' || userStore.me.id === props.user.id)
 			return [actionBtns[0]]
-		else if (props.section == 'Invitees')
+		else if (props.section === 'noPrivileges')
+			return [actionBtns[0], props.user.isBlocked ? actionBtns[10] : actionBtns[9]]
+		else if (props.section === 'Invitees')
 			return [actionBtns[0], actionBtns[1]]
-		else if (props.section == 'Add')
+		else if (props.section === 'Add')
 			return [actionBtns[0], actionBtns[2]]
-		else if (props.section == 'allPrivileges')
-			return [actionBtns[0], props.user.isMute ? actionBtns[3] : actionBtns[4], actionBtns[5], actionBtns[7]]
-		else if (props.section == 'allPrivilegesA')
-			return [actionBtns[0], actionBtns[6]]
-		else if (props.section == 'banned')
+		else if (props.section === 'allPrivileges')
+			return [actionBtns[0], actionBtns[5], props.user.isMute ? actionBtns[3] : actionBtns[4], props.user.isBlocked ? actionBtns[10] : actionBtns[9], actionBtns[7]]
+		else if (props.section === 'allPrivilegesA')
+			return [actionBtns[0], actionBtns[6], props.user.isBlocked ? actionBtns[10] : actionBtns[9]]
+		else if (props.section === 'banned')
 			return [actionBtns[0], actionBtns[8]]
 		else
 			return []
@@ -114,8 +129,9 @@
 			<ActionBtn
 				v-for="(option, index) in options"
 				:class="{
-					'ActionBtn--mute': option.name === 'demute',
-					'ActionBtn--ban': option.name === 'deban'
+					'ActionBtn--mute': option.name === 'unmute',
+					'ActionBtn--ban': option.name === 'unban',
+					'ActionBtn--block': option.name === 'unblock'
 					}"
 				:key="index"
 				:logo="option.logo"

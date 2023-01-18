@@ -3,7 +3,7 @@
 	import { ref } from 'vue'
 	import UserTag from './UserTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import type { TargetTag } from '@/types/User'
+	import type { Target, TargetTag } from '@/types/User'
 	import { logoListArrow } from '../../assets/logoSVG'
 	import { profileRedirect } from '@/router/index'
 
@@ -32,6 +32,8 @@
 			return 'allPrivilegesA'
 		else if (props.label === 'Users' && (props.admin || props.owner))
 			return 'allPrivileges'
+		else if ((!props.admin && !props.owner) && (props.label === 'Administrators' || props.label === 'Users'))
+			return 'noPrivileges'
 		else
 			return 'onlySee'
 	}
@@ -68,6 +70,14 @@
 		socket.emit('unbanUser', { banInfo: { channelId: props.channelId, targetId: user.id, action: 'BAN' } })
 	}
 
+	const	blockUser = (user: TargetTag) => {
+		socket.emit('block_user', { blockedId: user.id })
+	}
+
+	const	unblockUser = (user: TargetTag) => {
+		socket.emit('unblock_user', { blockedId: user.id })
+	}
+
 </script>
 
 <template>
@@ -91,9 +101,11 @@
 				@promote="promoteUser"
 				@demote="demoteUser"
 				@mute="muteUser"
-				@demute="demuteUser"
+				@unmute="demuteUser"
 				@ban="banUser"
-				@deban="debanUser"
+				@unban="debanUser"
+				@block="blockUser"
+				@unblock="unblockUser"
 				@see="(user) => profileRedirect(user.id)"
 			/>
 		</div>

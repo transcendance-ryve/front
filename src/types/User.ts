@@ -47,6 +47,7 @@ export interface TargetTag {
 	role: string,
 	isMute: boolean,
 	isBan: boolean,
+	isBlocked: boolean,
 }
 
 export interface Player {

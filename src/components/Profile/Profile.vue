@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { onMounted, onUnmounted, reactive } from 'vue'
+	import { ref, type Ref, onMounted, onUnmounted, reactive } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { useSideBarStore } from '@/stores/SideBarStore'
@@ -14,8 +14,11 @@
 	import type { userKeys } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
 
+	const	userStore = useUserStore()
+	const	socket = userStore.socket
 	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
+	const	userBlocked: Ref<boolean> = ref(false)
 	contentStore.state = 4
 
 	const	data: ProfileData = reactive({
@@ -36,9 +39,6 @@
 		loadingData: false,
 		err: null
 	})
-
-	//	404 for unknown id
-	getUserProfile(router.currentRoute.value.params.id as string, data)
 
 	const	getStat = (index: number) => {
 		if (index == 2) {
@@ -61,9 +61,6 @@
 		if (to.params.id !== from.params.id)
 			getUserProfile(to.params.id as string, data)
 	})
-
-	const	userStore = useUserStore()
-	const	socket = userStore.socket
 
 	const	listeners: SocketEvent[] = [
 		{
@@ -114,10 +111,44 @@
 				if (receiver.id === data.user.id) data.type = 3
 			}
 		},
+		{
+			name: 'blockStatus',
+			callback: (isBlocked: boolean, targetId: string) => {
+				if (targetId === data.user.id)
+					userBlocked.value = isBlocked
+			}
+		},
+		// {
+			// name: 'user_blocked',
+			// callback: (sender: any) => {
+			// 	if (sender.id === data.user.id) data.type = 3
+			// }
+		// },
+		{
+			name: 'user_blocked_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) userBlocked.value = true
+			}
+		},
+		// {
+		// 	name: 'user_unblocked',
+		// 	callback: (sender: any) => {
+		// 		if (sender.id === data.user.id) userBlocked.value = false
+		// 	}
+		// },
+		{
+			name: 'user_unblocked_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === data.user.id) userBlocked.value = false
+			}
+		},
 	]
 
 
-	onMounted(() => {
+	onMounted(async () => {
+		//	404 for unknown id
+		await getUserProfile(router.currentRoute.value.params.id as string, data)
+		socket.emit('isBlocked', { targetId: data.user.id })
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
@@ -133,11 +164,14 @@
 		<ProfileTag
 			:type="data.type"
 			:user="data.user"
+			:isBlocked="userBlocked"
 			@message="sbStore.openConv('Friend', data.user.id, false)"
 			@delete="socket.emit('remove_friend', { friendId: data.user.id })"
 			@add="socket.emit('add_friend', { friendId: data.user.id })"
 			@accept="socket.emit('accept_friend', { friendId: data.user.id })"
 			@refuse="socket.emit('decline_friend', { friendId: data.user.id })"
+			@block="socket.emit('block_user', { blockedId: data.user.id })"
+			@unblock="socket.emit('unblock_user', { blockedId: data.user.id })"
 		/>
 		<div class="Profile-section">
 			<h2 class="Section-name">Statistics</h2>

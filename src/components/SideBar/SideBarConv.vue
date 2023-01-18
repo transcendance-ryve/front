@@ -53,6 +53,7 @@
 		const	res: Ref<any[]> = ref([])
 		if (messages.value.length < totalMsg.value) {
 			dataState.value = await getMessages(convId.value, page, res, totalMsg)
+			console.log('getConvMessages', res.value)
 			messages.value = res.value.concat(messages.value)
 			page++
 			return true

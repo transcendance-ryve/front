@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { withDefaults } from 'vue';
+	import { withDefaults, computed } from 'vue';
 
 	interface Props {
 		type?: number
@@ -22,7 +22,7 @@
 		height: false
 	})
 
-	const classType: string = 'Btn--type' + props.type
+	const classType = computed(() => 'Btn--type' + props.type )
 
 </script>
 
