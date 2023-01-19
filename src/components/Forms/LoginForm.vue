@@ -39,7 +39,7 @@
 	}
 
 	onMounted(() => {
-		const	input: HTMLElement = document.getElementById('UserName')?.children[0] as HTMLElement
+		const	input: HTMLElement = document.getElementById('Email')?.children[0] as HTMLElement
 		input.focus()
 	})
 
