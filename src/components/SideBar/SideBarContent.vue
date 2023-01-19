@@ -236,6 +236,13 @@
 					router.push({ path: '/play' });
 				}
 			}
+		},
+		{
+			name: 'game_request_timeup',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1)
+					removeTag(sender);
+			}
 		}
 	]
 
