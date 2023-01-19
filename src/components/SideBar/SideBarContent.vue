@@ -6,7 +6,7 @@
 	import SideBarSwitch from './SideBarSwitch.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import SideBarTag from './SideBarTag.vue'
-	import { profileRedirect } from '@/router'
+	import router, { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
 	import type { ContentData } from '@/types/Sidebar'
 	import getFriends from '@/requests/Friends/getFriends'
@@ -15,6 +15,7 @@
 	import getMyChannels from '@/requests/SideBar/getMyChannels'
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
+	import getGameRequests from '@/requests/Game/getGameRequests'
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { SocketEvent } from '@/types/Socket'
 
@@ -46,7 +47,7 @@
 		}
 		else {
 			if (sbStore.state.notifsState == 1)
-				fetchData = []
+				fetchData = await getGameRequests(dataState)
 			else if (sbStore.state.notifsState == 2)
 				fetchData = await getFriendsRequests(dataState)
 			else
@@ -213,6 +214,29 @@
 				}
 			}
 		},
+		{
+			name: 'private_game_request',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1)
+					unshiftTag(sender);
+			}
+		},
+		{
+			name: 'game_request_decline',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1)
+					removeTag(sender);
+			}
+		},
+		{
+			name: 'game_request_accept',
+			callback: (sender: Partial<ContentData>) => {
+				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1) {
+					removeTag(sender);
+					router.push({ path: '/play' });
+				}
+			}
+		}
 	]
 
 	onMounted(() => {

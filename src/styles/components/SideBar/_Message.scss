@@ -124,6 +124,7 @@
 	}
 	.ToolTip-container {
 		position: absolute;
+		z-index: 10;
 		width: 32em;
 		height: 32em;
 		cursor: pointer;

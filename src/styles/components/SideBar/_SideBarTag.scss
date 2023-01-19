@@ -5,6 +5,8 @@
 	background: $background-700;
 	padding: 16em;
 	cursor: pointer;
+	position: relative;
+	overflow: hidden;
 
 	.SideBarTag-content {
 		width: 100%;
@@ -119,6 +121,16 @@
 				opacity: 0.5;
 			}
 		}
+	}
+
+	&.countdown::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 3px;
+		background: $dark-blue;
+		z-index: 1;
 	}
 }
 

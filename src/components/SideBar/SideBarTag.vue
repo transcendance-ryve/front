@@ -36,14 +36,18 @@
 	}
 
 	const	notifAccept = (id: string) => {
-		if (type.value === 2)
+		if (type.value === 1)
+			socket.emit('accept_game_request', { matchmaking: false });
+		else if (type.value === 2)
 			socket.emit('accept_friend', { friendId: props.data.id })
 		else if (type.value === 3)
 			socket.emit('acceptInvitation', { invitationInfo: { channelId: props.data.id } })
 	}
 
 	const	notifRefuse = (id: string) => {
-		if (type.value === 2)
+		if (type.value === 1)
+			socket.emit('decline_game_request', { matchmaking: false });
+		else if (type.value === 2)
 			socket.emit('decline_friend', { friendId: props.data.id })
 		else if (type.value === 3)
 			socket.emit('declineInvitation', { invitationInfo: { channelId: props.data.id } })
@@ -61,6 +65,10 @@
 					password: password.value
 				}
 			})
+	}
+
+	const inviteToParty = () => {
+		socket.emit('send_game_request', { opponent: props.data.id, bonus: false });
 	}
 
 	const	listeners: SocketEvent[] = [
@@ -97,7 +105,10 @@
 
 <template>
 
-	<div class="SideBarTag" >
+	<div
+		class="SideBarTag"
+		:class="{countdown: sbStore.state.section === 3 && type === 1}"
+	>
 		<div class="SideBarTag-content">
 			<img
 				class="Content-avatar"
@@ -125,6 +136,7 @@
 				:logo="logoPlay"
 				width="185em"
 				height="44em"
+				@click.stop="inviteToParty"
 			/>
 			<Btn
 				class="SideBarTag-btn"
@@ -202,3 +214,9 @@
 	</div>
 
 </template>
+
+<style>
+	.SideBarTag.countdown::after {
+		width: 100%;
+	}
+</style>

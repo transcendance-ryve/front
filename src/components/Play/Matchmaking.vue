@@ -91,12 +91,12 @@
 	});
 
 	const decline = () => {
-		socket.emit("decline_game_request");
+		socket.emit("decline_game_request", { matchmaking: true });
 		state.value = State.Matchmaking;
 	}
 
 	const accept = () => {
-		socket.emit("accept_game_request");
+		socket.emit("accept_game_request", { matchmaking: true });
 	}
 
 	const toggleMatchmaking = () => {

@@ -162,6 +162,33 @@
 					() => sbStore.openConv('Friend', res.sender.id, false))
 			}
 		},
+		{
+			name: "private_game_request",
+			callback: (res: any) => {
+				console.log(res);
+				notifStore.addNotif('infoY', res.username, 'game request', res.avatar);
+			}
+		},
+		{
+			name: "game_request_error",
+			callback: (res: any) => {
+				console.log(res);
+				notifStore.addNotif('error', 'Error', res);
+			}
+		},
+		{
+			name: "game_request_declined",
+			callback: (res: any) => {
+				notifStore.addNotif('infoR', res.username, 'game request declined', res.avatar);
+			}
+		},
+		{
+			name: "game_request_accepted",
+			callback: (res: any) => {
+				console.log(res);
+				notifStore.addNotif('infoY', res.username, 'game request accepted', res.avatar);
+			}
+		}
 
 
 		// {

@@ -241,7 +241,7 @@
 		ctx.arc(
 			ball.x * ratio.x,
 			ball.y * ratio.y,
-			ball.radius * ratio.x,
+			(ball.radius * ratio.x + ball.radius * ratio.y) / 2,
 			0,
 			Math.PI * 2
 		);
