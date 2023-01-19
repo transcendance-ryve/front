@@ -83,6 +83,8 @@
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
 		{ name: 'incomingMessage', callback: (msg: any) => {
 			console.log('incomingMessage dm', msg)
+			if (friendBlocked.value && msg.sender.id === target.value.id)
+				msg.content = 'This user is blocked'
 			messages.value.push(msg)
 			totalMsg.value++
 		}},
@@ -146,6 +148,10 @@
 			}
 		},
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
+	]
+
+	const	commonListeners: SocketEvent[] = [
+
 	]
 
 	onMounted(async () => {

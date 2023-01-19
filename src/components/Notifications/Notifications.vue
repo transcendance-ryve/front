@@ -188,25 +188,25 @@
 				console.log(res);
 				notifStore.addNotif('infoY', res.username, 'game request accepted', res.avatar);
 			}
-		}
+		},
 
 
 		// {
 		// 	name: 'user_blocked',
 		// 	callback: (res: any) => console.log('user_blocked', res)
 		// },
-		// {
-		// 	name: 'user_blocked_submitted',
-		// 	callback: (res: any) => console.log('user_blocked_submitted', res)
-		// },
+		{
+			name: 'user_blocked_submitted',
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'is blocked', res.avatar)
+		},
 		// {
 		// 	name: 'user_unblocked',
 		// 	callback: (res: any) => console.log('user_unblocked', res)
 		// },
-		// {
-		// 	name: 'user_unblocked_submitted',
-		// 	callback: (res: any) => console.log('user_unblocked_submitted', res)
-		// }
+		{
+			name: 'user_unblocked_submitted',
+			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'is unblocked', res.avatar)
+		}
 	]
 
 

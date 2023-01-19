@@ -132,14 +132,12 @@
 		{
 			name: 'user_blocked',
 			callback: (sender: any) => {
-				console.log('je suis bloqué')
 				if (sender.id === data.user.id && blockRelation.value !== 1) blockRelation.value = 2
 			}
 		},
 		{
 			name: 'user_blocked_submitted',
 			callback: (receiver: any) => {
-				console.log('il est bloqué')
 				if (receiver.id === data.user.id) blockRelation.value = 1
 			}
 		},
