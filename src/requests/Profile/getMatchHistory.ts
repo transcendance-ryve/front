@@ -17,9 +17,7 @@ const	getMatchHistory = async (urlQueries: string, userId: string, data: MatchHi
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/game/history'
-		+ urlQueries,
-		{ userId }
+		'/game/history/' + userId + urlQueries,
 	)
 	data.loadingData = loading.value
 	data.err = error.value
