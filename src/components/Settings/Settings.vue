@@ -16,12 +16,14 @@
 	import getQRCode from '@/requests/Settings/getQRCode'
 	import toggle2FA from '@/requests/Settings/toggle2FA'
 	import generateNewQRCode from '@/requests/Settings/generateNewQRCode'
-	import type { SettingsForm } from '@/types/Forms';
+	import type { SettingsForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore';
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
 
 	const	userStore = useUserStore()
+	const	notifStore = useNotifStore()
 
 	const	QRCode: Ref<string> = ref('')
 
@@ -65,44 +67,60 @@
 	}
 
 	const	checkSettings = () => {
-		let	error: string = ''
-
-		if (settingsData.username === userStore.me.username)
-			error = 'Cannot change with same username'
+		if (settingsData.username === userStore.me.username) {
+			notifStore.addNotif('error', 'Error', 'Same username')
+			return false
+		}
 		if (settingsData.oldPassword) {
-			if (!settingsData.newPassword)
-				error = error ? error + '\nEmpty new password' : 'Empty new password'
+			if (!settingsData.newPassword) {
+				notifStore.addNotif('error', 'Error', 'New password is empty')
+				return false
+			}
 			else {
-				if (settingsData.oldPassword === settingsData.newPassword)
-					error = error ? error + '\nCannot change with same password' : 'Cannot change with same password'
-				if (settingsData.newPassword !== settingsData.confirmPassword)
-					error = error ? error + '\nConfirm password is different' : 'Confirm password is different'
+				if (settingsData.oldPassword === settingsData.newPassword) {
+					notifStore.addNotif('error', 'Error', 'Cannot change with same password')
+					return false
+				}
+				if (settingsData.newPassword !== settingsData.confirmPassword) {
+					notifStore.addNotif('error', 'Error', 'Confirm password is different')
+					return false
+				}
 			}
 		}
-		if (settingsData.state2FA !== userStore.me.tfa_enabled && settingsData.code2FA.length < 6)
-			error = error ? error + '\nInvalid 2FA code' : 'Invalid 2FA code'
-
-
-		if (error) {
-			alert(error)
+		if (settingsData.state2FA !== userStore.me.tfa_enabled && settingsData.code2FA.length < 6) {
+			notifStore.addNotif('error', 'Error', 'Invalid 2FA code')
 			return false
 		}
 		return true
 	}
 
 	const	updateSettings = async() => {
-		if (!checkSettings())
-			return
-		if (settingsData.username && settingsData.username !== userStore.me.username)
+		if (!checkSettings()) return
+		let	update: boolean = false
+		if (settingsData.username && settingsData.username !== userStore.me.username) {
 			setUsername(settingsData.username)
-		if (settingsData.avatarFile)
-			setAvatar(settingsData.avatarFile)
-		if (settingsData.newPassword && !await setPassword(settingsData.oldPassword, settingsData.newPassword))
-			alert('wrong passord')
-		if (settingsData.state2FA !== userStore.me.tfa_enabled && !await toggle2FA(settingsData.code2FA)) {
-			settingsData.state2FA = !settingsData.state2FA
-			alert('wrong 2FA code')
+			update = true
 		}
+		if (settingsData.avatarFile) {
+			setAvatar(settingsData.avatarFile)
+			update = true
+		}
+		if (settingsData.newPassword) {
+			if (await setPassword(settingsData.oldPassword, settingsData.newPassword))
+				update = true
+			else
+				notifStore.addNotif('error', 'Error', 'Wrong password')
+		}
+		if (settingsData.state2FA !== userStore.me.tfa_enabled) {
+			if (await toggle2FA(settingsData.code2FA))
+				update = true
+			else {
+				settingsData.state2FA = !settingsData.state2FA
+				notifStore.addNotif('error', 'Error', 'Wrong 2FA code')
+			}
+		}
+		if (update) 
+			notifStore.addNotif('success', 'Success', 'Settings updated')
 	}
 
 	onMounted(async () => {
