@@ -92,7 +92,7 @@
 		player: {
 			id: 'wdwadwad',
 			username: 'Sethhh',
-			avatar: 'http://localhost:3000/default.png',
+			avatar: 'http://localhost:3000/avatars/default.png',
 			color: "#ff0000"
 		},
 	});
@@ -109,7 +109,7 @@
 		left: {
 			id: '',
 			username: 'Player 1',
-			avatar: 'http://localhost:3000/default.png',
+			avatar: 'http://localhost:3000/avatars/default.png',
 			score: 0,
 			level: 1,
 			experience: 0,
@@ -118,7 +118,7 @@
 		right: {
 			id: '',
 			username: 'Player 2',
-			avatar: 'http://localhost:3000/default.png',
+			avatar: 'http://localhost:3000/avatars/default.png',
 			score: 0,
 			level: 1,
 			experience: 0,
