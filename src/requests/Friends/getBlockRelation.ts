@@ -4,8 +4,7 @@ const getBlockRelation = async (targetId: string) => {
 	console.log('in getBlockRelation', targetId)
 	const { response, loading, error } = await useAxios(
 		'get',
-		'/channels/isBlocked',
-		{ targetId }
+		'/channels/isBlocked/' + targetId,
 	)
 	if (error.value) {
 		//	handle errors
