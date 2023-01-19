@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 	import Btn from "@/components/Utils/Btn.vue";
-import type { Player } from "@/types/User";
+	import type { Player } from "@/types/User";
 
 	interface Props {
 		state?: string;

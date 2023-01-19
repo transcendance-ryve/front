@@ -71,6 +71,12 @@
 	const canvas = ref<HTMLCanvasElement | null>(null);
 	let ctx: CanvasRenderingContext2D | null = null;
 
+	const countdown = reactive({
+		visible: false,
+		time: 0,
+		timer: 0,
+	});
+
 	let ratio = {
 		x: 1,
 		y: 1,
@@ -281,7 +287,7 @@
 		drawBall(game.ball);
 	}
 
-	const start = (data: { players: Players, width: number, height: number }): void => {
+	const start = (data: { players: Players, width: number, height: number, startTime: number }): void => {
 		defaultGrid.height = data.height;
 		defaultGrid.width = data.width;
 
@@ -293,6 +299,20 @@
 				y: canvas.value.height / defaultGrid.height
 			}
 		}
+
+
+		if (!data.startTime) return;
+		countdown.time = Math.floor((data.startTime - Date.now()) / 1000) + 1;
+		countdown.visible = true;
+		countdown.timer = setInterval(() => {
+			countdown.time = Math.floor((data.startTime - Date.now()) / 1000) + 1;
+
+			if (data.startTime - Date.now() <= 0) {
+				countdown.visible = false;
+				clearInterval(countdown.timer);
+				return;
+			}
+		}, 1000);
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
@@ -315,6 +335,9 @@
 				else endState.player = { color: "#FF4646", ...players.value.right };
 			} else if (userStore?.me.id === id) endState.state = "win";
 			else endState.state = "lose";
+
+			if (ctx && canvas.value)
+				ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
 		},
 		bonus_spawn: (data: Bonus) => {
 			bonus = { ...data, spawned: true}
@@ -356,6 +379,8 @@
 		window.removeEventListener("resize", resizeCanvas);
 
 		socket.emit('disconnect_game');
+
+		if (countdown.timer) clearInterval(countdown.timer);
 	});
 
 	const handleClick = () => {
@@ -396,6 +421,16 @@
 				:player="endState.player"
 				:close="() => { endState.visible = false; close() }"
 			/>
+
+			<div
+				v-if="countdown.visible"
+				class="game__content_countdown"
+			>
+				<div class="game__content_countdown_content">
+					<h1>{{ countdown.time }}</h1>
+					<h2>countdown before the game starts</h2>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>

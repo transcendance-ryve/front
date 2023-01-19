@@ -85,6 +85,20 @@
 				if (user.id === props.data.id)
 					props.data.status = 'OFFLINE'
 			}
+		},
+		{
+			name: 'user_in_game',
+			callback: (user: Partial<User>) => {
+				if (user.id === props.data.id)
+					props.data.status = 'INGAME'
+			}
+		},
+		{
+			name: 'user_left_game',
+			callback: (user: Partial<User>) => {
+				if (user.id === props.data.id)
+					props.data.status = 'ONLINE'
+			}
 		}
 	]
 	
