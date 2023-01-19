@@ -10,6 +10,7 @@
 	import router from '@/router'
 	import { onBeforeRouteUpdate } from 'vue-router'
 	import	getUserProfile from '../../requests/Profile/getUserProfile'
+	import getBlockRelation from '@/requests/Friends/getBlockRelation'
 	import type { ProfileData } from '@/types/ProfileData'
 	import type { userKeys } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
@@ -111,24 +112,24 @@
 				if (receiver.id === data.user.id) data.type = 3
 			}
 		},
-		{
-			name: 'targetBlocked',
-			callback: (id: string) => {
-				console.log('il est bloqué')
-				if (id === data.user.id) blockRelation.value = 1
-			}
-		},
-		{
-			name: 'userBlocked',
-			callback: (id: string) => {
-				console.log('je suis bloqué')
-				if (id === data.user.id) blockRelation.value = 2
-			}
-		},
-		{
-			name: 'noBlockedRelation',
-			callback: () => {blockRelation.value = 0; console.log('personne n\'est bloqué')}
-		},
+		// {
+		// 	name: 'targetBlocked',
+		// 	callback: (id: string) => {
+		// 		console.log('il est bloqué')
+		// 		if (id === data.user.id) blockRelation.value = 1
+		// 	}
+		// },
+		// {
+		// 	name: 'userBlocked',
+		// 	callback: (id: string) => {
+		// 		console.log('je suis bloqué')
+		// 		if (id === data.user.id) blockRelation.value = 2
+		// 	}
+		// },
+		// {
+		// 	name: 'noBlockedRelation',
+		// 	callback: () => {blockRelation.value = 0; console.log('personne n\'est bloqué')}
+		// },
 		{
 			name: 'user_blocked',
 			callback: (sender: any) => {
@@ -147,7 +148,8 @@
 				if (sender.id === data.user.id) {
 					console.log('user_unblocked')
 					blockRelation.value = -1
-					socket.emit('isBlockedRelation', { targetId: data.user.id })
+					// socket.emit('isBlockedRelation', { targetId: data.user.id })
+					whoIsBlocked()
 				}
 			}
 		},
@@ -156,15 +158,27 @@
 			callback: (receiver: any) => {
 				if (receiver.id === data.user.id) {
 					blockRelation.value = -1
-					socket.emit('isBlockedRelation', { targetId: data.user.id })
+					// socket.emit('isBlockedRelation', { targetId: data.user.id })
+					whoIsBlocked()
 				}
 			}
 		},
 	]
 
+	const	whoIsBlocked = async () => {
+		const	res = await getBlockRelation(data.user.id)
+		if (res === 'targetBlocked')
+			blockRelation.value = 1
+		else if (res === 'userBlocked')
+			blockRelation.value = 2
+		else
+			blockRelation.value = 0
+	}
+
 	onMounted(async () => {
 		//	404 for unknown id
 		await getUserProfile(router.currentRoute.value.params.id as string, data)
+		await whoIsBlocked()
 		socket.emit('isBlockedRelation', { targetId: data.user.id })
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
@@ -203,7 +217,7 @@
 		</div>
 		<div class="Profile-section">
 			<h2 class="Section-name">Match History</h2>
-			<MatchHistory :userId="router.currentRoute.value.params.id"/>
+			<MatchHistory :userId="(router.currentRoute.value.params.id as string)"/>
 		</div>
 	</div>
 
