@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, ref, type Ref, toRefs, type ToRefs, watch } from 'vue'
+	import { computed, toRefs, type ToRefs, watch } from 'vue'
 	import Status from './Status.vue'
 	import moment from 'moment'
 	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
@@ -21,9 +21,11 @@
 		target: Target
 		admin: boolean
 		userList: boolean
+		friendBlocked: boolean
 	}
 
 	const props = defineProps<Props>()
+	const { type, target, admin, userList, friendBlocked }: ToRefs<Readonly<Props>> = toRefs(props)
 
 	const actionBtns: ActionBtnValue[] = [
 		{
@@ -34,10 +36,10 @@
 
 		},
 		{
-			name: 'Block',
+			name: friendBlocked.value ? 'Unblock' : 'Block',
 			logo: logoBlockMsg,
 			color: '#FF8A00',
-			toolTip: 'Block'
+			toolTip: friendBlocked.value ? 'Unblock' : 'Block'
 		},
 		{
 			name: 'Delete',
@@ -47,7 +49,11 @@
 		}
 	]
 
-	const { type, target, admin, userList }: ToRefs<Readonly<Props>> = toRefs(props)
+	watch(friendBlocked, (newVal) => {
+		actionBtns[1].name = newVal ? 'Unblock' : 'Block'
+		actionBtns[1].toolTip = newVal ? 'Unblock' : 'Block'
+	})
+
 	const	btns = computed(() => {
 		if (type.value === 'Friend') {
 			if (target.value.status === 'In Game')
@@ -62,7 +68,7 @@
 			}]
 	})
 
-	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'delete'])
+	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'unblock', 'delete'])
 
 	const	manageOptions = (optionName: string) => {
 		if (optionName === 'Members')
@@ -78,6 +84,8 @@
 			emit('quit')
 		else if (optionName === 'Block')
 			emit('block')
+		else if (optionName === 'Unblock')
+			emit('unblock')
 		else if (optionName === 'Delete')
 			emit('delete')
 	}
@@ -99,6 +107,7 @@
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">
 						<ActionBtn
+							:class="{'ActionBtn--block': option.name === 'Unblock'}"
 							v-for="(option, index) in actionBtns"
 							:key="index"
 							:logo="option.logo"

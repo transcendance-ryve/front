@@ -10,7 +10,7 @@
 	interface Props {
 		type?: number
 		user: User
-		isBlocked: boolean | null
+		blockRelation: number
 	}
 
 	const	props = withDefaults(defineProps<Props>(), {
@@ -26,15 +26,15 @@
 			:user="user"
 			:sizeXL="true"
 		/>
-		<div class="ProfileTag-btnsWrap" v-if="isBlocked !== null">
+		<div class="ProfileTag-btnsWrap" v-if="blockRelation !== -1">
 			<Btn
 				v-if="type !== 1"
-				:type="isBlocked ? 8 : 7"
+				:type="blockRelation === 1 ? 8 : 7"
 				:logo="logoBlockMsg"
-				:value="isBlocked ? 'Unblock' : 'Block'"
-				:width="isBlocked ? '140em' : '121em'"
+				:value="blockRelation === 1 ? 'Unblock' : 'Block'"
+				:width="blockRelation === 1 ? '140em' : '121em'"
 				fontSize="16em"
-				@click="isBlocked ? $emit('unblock') : $emit('block')"
+				@click="blockRelation === 1 ? $emit('unblock') : $emit('block')"
 			/>
 			<Btn
 				v-if="type === 1"
@@ -64,7 +64,7 @@
 				@click="$emit('message')"
 			/>
 			<Btn
-				v-if="type === 3 && !isBlocked"
+				v-if="type === 3"
 				:type=1
 				:logo="logoAdd"
 				value="Add to friend"

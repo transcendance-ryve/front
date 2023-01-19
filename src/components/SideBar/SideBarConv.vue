@@ -41,6 +41,7 @@
 	const	socket = userStore.socket
 	const	convId: Ref<string> = ref('')
 	const	role: Ref<string> = ref('')
+	const	friendBlocked: Ref<boolean> = ref(false)
 	const	messages: Ref<any[]> = ref([])
 	const	totalMsg: Ref<number> = ref(1)
 	let		page: number = 0
@@ -84,7 +85,25 @@
 			console.log('incomingMessage dm', msg)
 			messages.value.push(msg)
 			totalMsg.value++
-		}}
+		}},
+		{
+			name: 'targetBlocked',
+			callback: (id: string) => {
+				if (id === sbStore.conv.id) friendBlocked.value = true
+			}
+		},
+		{
+			name: 'user_blocked_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === sbStore.conv.id) friendBlocked.value = true
+			}
+		},
+		{
+			name: 'user_unblocked_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === sbStore.conv.id) friendBlocked.value = false
+			}
+		}
 	]
 
 	const	chanListeners: SocketEvent[] = [
@@ -135,6 +154,7 @@
 		if (sbStore.conv.type === 'Friend') {
 			dataState.value = await getUser(sbStore.conv.id, 'id,avatar,username,status', target)			
 			socket.emit('DM', { DMInfo: { friendId: sbStore.conv.id } })
+			socket.emit('isBlockedRelation', { targetId: sbStore.conv.id })
 			friendListeners.forEach(listener => socket.on(listener.name, listener.callback))
 		}
 		else {
@@ -168,12 +188,15 @@
 				:target="target"
 				:admin="role === 'OWNER' || role === 'ADMIN' ? true : false"
 				:userList="userList"
+				:friendBlocked="friendBlocked"
 				@userList="userList = true"
 				@settings="settings = true"
 				@conv="userList = false"
 				@see="profileRedirect(target.id)"
 				@delete="removeFriend()"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
+				@block="socket.emit('block_user', { blockedId: target.id })"
+				@unblock="socket.emit('unblock_user', { blockedId: target.id })"
 			/>
 			<ConvContent
 				v-if="!userList && !dataState.error && !dataState.loading"

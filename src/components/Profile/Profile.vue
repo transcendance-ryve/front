@@ -18,7 +18,7 @@
 	const	socket = userStore.socket
 	const	sbStore = useSideBarStore()
 	const	contentStore = useContentStore()
-	const	userBlocked: Ref<boolean | null> = ref(null)
+	const	blockRelation: Ref<number> = ref(-1)
 	contentStore.state = 4
 
 	const	data: ProfileData = reactive({
@@ -112,45 +112,62 @@
 			}
 		},
 		{
-			name: 'blockStatus',
-			callback: (isBlocked: boolean, targetId: string) => {
-				if (targetId === data.user.id)
-					userBlocked.value = isBlocked
+			name: 'targetBlocked',
+			callback: (id: string) => {
+				console.log('il est bloqué')
+				if (id === data.user.id) blockRelation.value = 1
 			}
 		},
-		// {
-			// name: 'user_blocked',
-			// callback: (sender: any) => {
-			// 	if (sender.id === data.user.id) data.type = 3
-			// }
-		// },
+		{
+			name: 'userBlocked',
+			callback: (id: string) => {
+				console.log('je suis bloqué')
+				if (id === data.user.id) blockRelation.value = 2
+			}
+		},
+		{
+			name: 'noBlockedRelation',
+			callback: () => {blockRelation.value = 0; console.log('personne n\'est bloqué')}
+		},
+		{
+			name: 'user_blocked',
+			callback: (sender: any) => {
+				console.log('je suis bloqué')
+				if (sender.id === data.user.id && blockRelation.value !== 1) blockRelation.value = 2
+			}
+		},
 		{
 			name: 'user_blocked_submitted',
 			callback: (receiver: any) => {
-				if (receiver.id === data.user.id) userBlocked.value = true
+				console.log('il est bloqué')
+				if (receiver.id === data.user.id) blockRelation.value = 1
 			}
 		},
-		// {
-		// 	name: 'user_unblocked',
-		// 	callback: (sender: any) => {
-		// 		if (sender.id === data.user.id) userBlocked.value = false
-		// 	}
-		// },
+		{
+			name: 'user_unblocked',
+			callback: (sender: any) => {
+				if (sender.id === data.user.id) {
+					console.log('user_unblocked')
+					blockRelation.value = -1
+					socket.emit('isBlockedRelation', { targetId: data.user.id })
+				}
+			}
+		},
 		{
 			name: 'user_unblocked_submitted',
 			callback: (receiver: any) => {
-				if (receiver.id === data.user.id) userBlocked.value = false
+				if (receiver.id === data.user.id) {
+					blockRelation.value = -1
+					socket.emit('isBlockedRelation', { targetId: data.user.id })
+				}
 			}
 		},
 	]
-	//	isBlockedRelation({ targetId: data.user.id })
-	// blockRelationStatus()
-
 
 	onMounted(async () => {
 		//	404 for unknown id
 		await getUserProfile(router.currentRoute.value.params.id as string, data)
-		socket.emit('isBlocked', { targetId: data.user.id })
+		socket.emit('isBlockedRelation', { targetId: data.user.id })
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
@@ -166,7 +183,7 @@
 		<ProfileTag
 			:type="data.type"
 			:user="data.user"
-			:isBlocked="userBlocked"
+			:blockRelation="blockRelation"
 			@message="sbStore.openConv('Friend', data.user.id, false)"
 			@delete="socket.emit('remove_friend', { friendId: data.user.id })"
 			@add="socket.emit('add_friend', { friendId: data.user.id })"
