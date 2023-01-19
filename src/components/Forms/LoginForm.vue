@@ -56,9 +56,9 @@
 		<form @submit.prevent="submitForm">
 			<div class="Form-inputsWrap">
 				<BaseInput
-					id="UserName"
+					id="Email"
 					v-model="formData.email"
-					placeholder="Username or Email"
+					placeholder="Email"
 					:logo="logoProfile"
 				/>
 				<span
