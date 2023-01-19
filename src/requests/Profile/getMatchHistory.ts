@@ -12,13 +12,14 @@ const	replaceUrl = async (queries: Partial<MatchHistoryQueries>) => {
 	await router.push({ query: queries})
 }
 
-const	getMatchHistory = async (urlQueries: string, data: MatchHistoryData) => {
+const	getMatchHistory = async (urlQueries: string, userId: string, data: MatchHistoryData) => {
 
 	data.loadingData = true
 	const { response, loading, error } = await useAxios(
 		'get',
 		'/game/history'
-		+ urlQueries
+		+ urlQueries,
+		{ userId }
 	)
 	data.loadingData = loading.value
 	data.err = error.value

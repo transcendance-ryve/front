@@ -12,6 +12,12 @@
 	import { type LocationQuery, onBeforeRouteUpdate } from 'vue-router'
 	import { getMatchHistory, getQueriesInUrl, replaceUrl } from '@/requests/Profile/getMatchHistory'
 
+	interface props {
+		userId: string
+	}
+
+	const	props = defineProps<props>()
+
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	let		routeUpdating: boolean = false
 
@@ -82,7 +88,7 @@
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		getMatchHistory(getQueriesInUrl(to.fullPath), data)
+		getMatchHistory(getQueriesInUrl(to.fullPath), props.userId, data)
 		await nextTick()
 		routeUpdating = false
 	})
@@ -90,7 +96,7 @@
 	onMounted(async () => {
 		getUrlQueries(router.currentRoute.value.query)
 		checkQueries()
-		await getMatchHistory(getQueriesInUrl(router.currentRoute.value.fullPath), data)
+		await getMatchHistory(getQueriesInUrl(router.currentRoute.value.fullPath), props.userId, data)
 	})
 
 </script>

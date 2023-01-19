@@ -203,7 +203,7 @@
 		</div>
 		<div class="Profile-section">
 			<h2 class="Section-name">Match History</h2>
-			<MatchHistory />
+			<MatchHistory :userId="router.currentRoute.value.params.id"/>
 		</div>
 	</div>
 
