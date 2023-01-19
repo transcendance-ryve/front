@@ -13,6 +13,7 @@
 	import type { Channel } from '@/requests/SideBar/getChannelByID'
 	import getUser from '@/requests/SideBar/getUser'
 	import getMessages from '@/requests/SideBar/getMessages'
+	import getBlockRelation from '@/requests/Friends/getBlockRelation'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
@@ -82,7 +83,7 @@
 	const	friendListeners: SocketEvent[] = [
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
 		{ name: 'incomingMessage', callback: (msg: any) => {
-			console.log('incomingMessage dm', msg)
+			// console.log('incomingMessage dm', msg)
 			if (friendBlocked.value && msg.sender.id === target.value.id)
 				msg.content = 'This user is blocked'
 			messages.value.push(msg)
@@ -134,8 +135,10 @@
 				sbStore.state.section = 2
 			}
 		}},
-		{ name: 'incomingMessage', callback: (msg: any) => {
-			console.log('incomingMessage chan', msg)
+		{ name: 'incomingMessage', callback: async (msg: any) => {
+			// console.log('incomingMessage chan', msg)
+			if (await getBlockRelation(msg.sender.id) === 'targetBlocked')
+				msg.content = 'This user is blocked'
 			messages.value.push(msg)
 			totalMsg.value++
 		}},

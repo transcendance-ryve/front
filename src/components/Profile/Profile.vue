@@ -139,7 +139,7 @@
 		{
 			name: 'user_blocked_submitted',
 			callback: (receiver: any) => {
-				console.log('user_blocked_submitted')
+				// console.log('user_blocked_submitted')
 				if (receiver.id === data.user.id) blockRelation.value = 1
 			}
 		},
@@ -147,7 +147,7 @@
 			name: 'user_unblocked',
 			callback: (sender: any) => {
 				if (sender.id === data.user.id) {
-					console.log('user_unblocked')
+					// console.log('user_unblocked')
 					blockRelation.value = -1
 					// socket.emit('isBlockedRelation', { targetId: data.user.id })
 					whoIsBlocked()
@@ -168,7 +168,6 @@
 
 	const	whoIsBlocked = async () => {
 		const	res = await getBlockRelation(router.currentRoute.value.params.id as string)
-		console.log('targetId', data.user.id)
 		if (res === 'targetBlocked')
 			blockRelation.value = 1
 		else if (res === 'userBlocked')

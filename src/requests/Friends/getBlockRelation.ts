@@ -10,7 +10,6 @@ const getBlockRelation = async (targetId: string) => {
 		//	handle errors
 	}
 	else if (response.value) {
-		console.log('response in getBlockRelation', response.value)
 		return response.value
 	}
 }
