@@ -198,7 +198,6 @@
 				@click.stop="() => inviteToParty(true)"
 			/>
 
-
 		</div>
 		<div
 			class="SideBarTag-options"
