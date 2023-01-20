@@ -213,7 +213,7 @@
 				:logo="logoAdd"
 				width="386em"
 				height="44em"
-				@click.stop="addToFriend(data.id || '')"
+				@click.stop="addToFriend()"
 			/>
 
 			<BaseInput
