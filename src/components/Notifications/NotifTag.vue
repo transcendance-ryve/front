@@ -4,7 +4,6 @@
 	import { logoCloseNotif } from '@/assets/logoSVG'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import type { notification } from '@/stores/NotificationsStore'
-	import { useSideBarStore } from '@/stores/SideBarStore'
 
 	export interface Props {
 		notif: notification
@@ -13,7 +12,6 @@
 	const	props = defineProps<Props>()
 
 	const	notifStore = useNotifStore()
-	const	sbStore = useSideBarStore()
 	const	notifClose: Ref<boolean> = ref(false)
 	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
 	let		timer: number | undefined = undefined
