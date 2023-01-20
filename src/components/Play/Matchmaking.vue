@@ -88,6 +88,8 @@
 		for (let name in listeners) {
 			socket.off(name, listeners[name]);
 		}
+
+		socket.emit("leave_queue")
 	});
 
 	const decline = () => {
@@ -172,7 +174,14 @@
 				/>
 			</div>
 			
-			<p><span>{{ bonus ? usersInQueue.bonus : usersInQueue.normal }}</span> players in queue</p>
+			<p
+				v-if="state === State.Matchmaking || state === State.Waiting"
+			>
+				<span>
+					{{ bonus ? usersInQueue.bonus : usersInQueue.normal }}
+				</span>
+				players in queue
+			</p>
 		</div>
 	</div>
 </template>

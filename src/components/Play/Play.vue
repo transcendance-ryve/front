@@ -18,7 +18,7 @@
 		game_connected: () => {matchmakingVisible.value = false},
 		start: () => {matchmakingVisible.value = false},
 		reconnected_to_game: (hasGame: boolean) => {matchmakingVisible.value = !hasGame},
-		updateUser: (data: UserConnected) => { userStore.updateMe(data) },
+		updateUser: (data: UserConnected) => { userStore.updateMe(data) }
 	}
 
 	onMounted(() => {
@@ -27,12 +27,15 @@
 		}
 
 		socket.emit('connect_game');
+		socket.emit('join_play');
 	})
 
 	onUnmounted(() => {
 		for (let name in listeners) {
 			socket.off(name, listeners[name]);
 		}
+
+		socket.emit('leave_play');
 	})
 </script>
 

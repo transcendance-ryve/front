@@ -107,6 +107,8 @@
 		div {
 			display: flex;
 			column-gap: 20em;
+			background-color: transparent !important;
+
 
 			&:last-child {
 				background-color: $red;

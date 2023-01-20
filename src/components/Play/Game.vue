@@ -300,7 +300,7 @@
 			}
 		}
 
-
+		endState.visible = false;
 		if (!data.startTime) return;
 		countdown.time = Math.floor((data.startTime - Date.now()) / 1000) + 1;
 		countdown.visible = true;

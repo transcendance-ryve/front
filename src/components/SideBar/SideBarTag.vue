@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, ref, type Ref, onMounted, onUnmounted } from 'vue'
+	import { computed, ref, reactive, type Ref, onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
@@ -21,6 +21,10 @@
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	password: Ref<string> = ref('')
+	const 	gamemode = reactive({
+		show: false,
+		timer: 0,
+	})
 
 	const	getType = () => {
 		if (sbStore.state.section === 1)
@@ -67,8 +71,16 @@
 			})
 	}
 
-	const inviteToParty = () => {
-		socket.emit('send_game_request', { opponent: props.data.id, bonus: false });
+	const inviteToParty = (bonus: boolean) => {
+		gamemode.show = false;
+		socket.emit('send_game_request', { opponent: props.data.id, bonus });
+	}
+
+	const showGamemode = () => {
+		gamemode.show = true
+		gamemode.timer = setTimeout(() => {
+			gamemode.show = false
+		}, 2000);
 	}
 
 	const	listeners: SocketEvent[] = [
@@ -113,6 +125,9 @@
 		listeners.forEach((listener) => {
 			socket.off(listener.name, listener.callback)
 		})
+
+		if (gamemode.timer)
+			clearTimeout(gamemode.timer);
 	})
 
 </script>
@@ -145,14 +160,16 @@
 
 		<div class="SideBarTag-options" v-if="(sbStore.state.section == 1 && type == 1)">
 			<Btn
+				v-if="!gamemode.show"
 				class="SideBarTag-btn"
 				:type=1 value="Invite to party"
 				:logo="logoPlay"
 				width="185em"
 				height="44em"
-				@click.stop="inviteToParty"
+				@click.stop="showGamemode"
 			/>
 			<Btn
+				v-if="!gamemode.show"
 				class="SideBarTag-btn"
 				:type=2
 				value="Send message"
@@ -161,8 +178,28 @@
 				height="44em"
 				@click.stop="sbStore.openConv('Friend', data.id)"
 			/>
-		</div>
 
+			<Btn
+				v-if="gamemode.show"
+				class="SideBarTag-btn"
+				:type=1
+				value="Classic"
+				width="185em"
+				height="44em"
+				@click.stop="() => inviteToParty(false)"
+			/>
+			<Btn
+				v-if="gamemode.show"
+				class="SideBarTag-btn"
+				:type=2
+				value="Bonus"
+				width="185em"
+				height="44em"
+				@click.stop="() => inviteToParty(true)"
+			/>
+
+
+		</div>
 		<div
 			class="SideBarTag-options"
 			:class="{'SideBarTag-options--protected': data.status == 'PROTECTED'}"
