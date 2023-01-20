@@ -35,7 +35,7 @@
 			return sbStore.state.notifsState
 	}
 
-	const	addToFriend = (id: string) => {
+	const	addToFriend = () => {
 		socket.emit('add_friend', { friendId: props.data.id })
 	}
 
