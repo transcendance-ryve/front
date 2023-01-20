@@ -80,7 +80,7 @@
 		gamemode.show = true
 		gamemode.timer = setTimeout(() => {
 			gamemode.show = false
-		}, 2000);
+		}, 3000);
 	}
 
 	const	listeners: SocketEvent[] = [
