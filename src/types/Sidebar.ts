@@ -6,5 +6,5 @@ export interface	ContentData {
 	status: string,		//	user / chan		status
 	usersCount: number,	//	chan			users count
 	messages: any,		//	user / chan		messages
-	startTime: number
+	timeup: number		//	game_request	timeup
 }

@@ -31,24 +31,25 @@
 
 	const	getRawData = async () => {
 		let	fetchData: Partial<ContentData>[] = []
+		contentData.value = []
 
-		if (sbStore.state.section == 1) {
-			if (sbStore.state.friendsState == 1)
+		if (sbStore.state.section === 1) {
+			if (sbStore.state.friendsState === 1)
 				fetchData = await getFriends(dataState)
 			else if (toFind.value)
 				fetchData = await getAddFriendsList(toFind.value, dataState) as Partial<ContentData>[]
 		}
-		else if (sbStore.state.section == 2) {
-			if (sbStore.state.channelsState == 1) {
+		else if (sbStore.state.section === 2) {
+			if (sbStore.state.channelsState === 1) {
 				fetchData = await getMyChannels(dataState)
 			}
 			else if (toFind.value)
 				fetchData = await getChannels(toFind.value, dataState)
 		}
 		else {
-			if (sbStore.state.notifsState == 1)
+			if (sbStore.state.notifsState === 1)
 				fetchData = await getGameRequests(dataState)
-			else if (sbStore.state.notifsState == 2)
+			else if (sbStore.state.notifsState === 2)
 				fetchData = await getFriendsRequests(dataState)
 			else
 				fetchData = await getChannelsNotifs(dataState)
@@ -216,7 +217,10 @@
 		},
 		{
 			name: 'private_game_request',
-			callback: (sender: Partial<ContentData>) => {
+			// callback: (sender: Partial<ContentData>) => {
+				callback: (sender: any) => {
+				// const	sec = new Date(sender.timeup).getSeconds()
+				// console.log('in event private_game_request', sender, sec)
 				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1)
 					unshiftTag(sender);
 			}

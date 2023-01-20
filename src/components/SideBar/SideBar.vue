@@ -12,7 +12,12 @@
 	const	sbStore = useSideBarStore()
 	const	socket = useUserStore().socket
 	const	listeners: SocketEvent[] = [
-		{ name: 'private_game_request', callback: () => sbStore.notifications.game++ },
+		{ name: 'private_game_request', callback: () => {
+			sbStore.notifications.game++
+			// setTimeout()		delete notification after ?seconds ??
+		}},
+		{ name: 'game_request_decline', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
+		{ name: 'game_request_accept', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
 		{ name: 'friend_request', callback: () => sbStore.notifications.friend++ },
 		{ name: 'friend_accepted_submitted', callback: () => sbStore.notifications.friend-- },
 		{ name: 'friend_declined_submitted', callback: () => sbStore.notifications.friend-- },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, reactive, type Ref, onMounted, onUnmounted } from 'vue'
+	import { ref, reactive, type Ref, onMounted, onUnmounted, toRef } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
@@ -25,6 +25,8 @@
 		show: false,
 		timer: 0,
 	})
+	let		timeLeft: number
+	let		timerPercent: string
 
 	const	getType = () => {
 		if (sbStore.state.section === 1)
@@ -115,7 +117,19 @@
 	]
 	
 	onMounted(() => {
+		console.log('tag mounted', props.data)
 		type.value = getType()
+		if (sbStore.state.section === 3 && type.value === 1) {
+			timeLeft = new Date(props.data.timeup!).getMilliseconds()
+			timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
+			console.log('percent', timerPercent, timeLeft)
+			setTimeout(() => console.log('fin'), timeLeft)
+			setInterval(() => {
+				timeLeft = timeLeft - 100
+				timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
+				// console.log('percent', timerPercent)
+			}, 100)
+		}
 		listeners.forEach((listener) => {
 			socket.on(listener.name, listener.callback)
 		})
@@ -268,5 +282,6 @@
 <style>
 	.SideBarTag.countdown::after {
 		width: 100%;
+		/* width: v-bind(timerPercent); */
 	}
 </style>
