@@ -255,17 +255,6 @@
 					const	friend = contentData.value.find(item => item.id === res.sender.id)
 					if (friend) friend.messages = { content: res.content }
 				}
-			// 	if (userStore.me.id === res.sender.id)
-			// 		return
-			// 	const	convOpen = sbStore.conv.open
-			// 	if (res.channelName && ((convOpen && sbStore.conv.id !== convId) || !convOpen)) {
-			// 		notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar,
-			// 		() => sbStore.openConv('Channel', convId, false))
-			// 	}
-			// 	else if (!res.channelName && ((convOpen && sbStore.conv.id !== res.sender.id) || !convOpen))
-			// 		notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar,
-			// 		() => sbStore.openConv('Friend', res.sender.id, false))
-			// }
 			}
 		}
 	]
