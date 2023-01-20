@@ -12,6 +12,7 @@
 	border-bottom: 3em solid $white-200;
 	border-radius: 0 12em 12em 0;
 	animation: notifPop .5s ease-in-out;
+	position: relative;
 
 	.NotifTag-closeBtn {
 		cursor: pointer;
@@ -68,6 +69,17 @@
 			}
 		}
 	}
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 0%;
+		height: 2em;
+		opacity: 0.6;
+		animation: timer-animation 3s linear;
+	}
 }
 
 .NotifTag--infoB {
@@ -75,6 +87,9 @@
 		.Text-value {
 			color: $cheat-blue;
 		}
+	}
+	&::after {
+		background-color: $cheat-blue;
 	}
 }
 
@@ -84,6 +99,9 @@
 			color: $green;
 		}
 	}
+	&::after {
+		background-color: $green;
+	}
 }
 
 .NotifTag--error {
@@ -91,6 +109,9 @@
 		.Text-label {
 			color: $red;
 		}
+	}
+	&::after {
+		background-color: $red;
 	}
 }
 
@@ -100,6 +121,9 @@
 			color: #CCCF3C;
 		}
 	}
+	&::after {
+		background-color: #CCCF3C;
+	}
 }
 
 .NotifTag--infoG {
@@ -108,6 +132,9 @@
 			color: $green;
 		}
 	}
+	&::after {
+		background-color: $green;
+	}
 }
 
 .NotifTag--infoR {
@@ -115,6 +142,9 @@
 		.Text-value {
 			color: $red;
 		}
+	}
+	&::after {
+		background-color: $red;
 	}
 }
 
@@ -127,6 +157,9 @@
 			color: white;
 		}
 	}
+	&::after {
+		background-color: $cheat-blue;
+	}
 }
 
 .NotifTag--channelMessage {
@@ -137,6 +170,9 @@
 		.Text-value {
 			color: white;
 		}
+	}
+	&::after {
+		background-color: #CCCF3C;
 	}
 }
 
@@ -162,5 +198,17 @@
 	100% {
 		transform: translateX(-100%);
 		opacity: 0;
+	}
+}
+
+@keyframes timer-animation {
+	0% {
+		width: 97%;
+	}
+	10% {
+		width: 92%;
+	}
+	100% {
+		width: 0%;
 	}
 }

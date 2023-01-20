@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, type Ref } from 'vue'
+	import { ref, type Ref, onMounted, onUnmounted } from 'vue'
 	import { logoCloseNotif } from '@/assets/logoSVG'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import type { notification } from '@/stores/NotificationsStore'
@@ -23,7 +23,9 @@
 		setTimeout(() => notifStore.removeNotif(props.notif.id), 500)
 	}
 
-	timer = setTimeout(() => closeNotif(), 3000)
+	onMounted(() => timer = setTimeout(() => closeNotif(), 3000))
+
+	onUnmounted(() => clearTimeout(timer))
 
 </script>
 
