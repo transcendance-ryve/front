@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { computed, ref, reactive, type Ref, onMounted, onUnmounted } from 'vue'
+	import { ref, reactive, type Ref, onMounted, onUnmounted } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
