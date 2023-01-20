@@ -106,6 +106,24 @@
 			callback: (receiver: any) => {
 				if (receiver.id === sbStore.conv.id) friendBlocked.value = false
 			}
+		},
+		{
+			name: 'friend_removed',
+			callback: (sender: any) => {
+				if (sender.id === target.value.id) {
+					sbStore.conv.open = false
+					sbStore.state.section = 1
+				}
+			}
+		},
+		{
+			name: 'friend_removed_submitted',
+			callback: (receiver: any) => {
+				if (receiver.id === target.value.id) {
+					sbStore.conv.open = false
+					sbStore.state.section = 1
+				}
+			}
 		}
 	]
 
