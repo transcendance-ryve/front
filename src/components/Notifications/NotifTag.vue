@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-	import { ref, type Ref, withDefaults } from 'vue'
+	import { ref, type Ref } from 'vue'
 	import { logoCloseNotif } from '@/assets/logoSVG'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import type { notification } from '@/stores/NotificationsStore'
