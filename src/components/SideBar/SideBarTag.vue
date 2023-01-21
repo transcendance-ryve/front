@@ -3,7 +3,7 @@
 	import { ref, reactive, type Ref, onMounted, onUnmounted, toRef } from 'vue'
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock } from '../../assets/logoSVG'
+	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock, logoPlayCircle } from '../../assets/logoSVG'
 	import Status from './Status.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import Btn from '../Utils/Btn.vue'
@@ -113,7 +113,7 @@
 				if (user.id === props.data.id)
 					props.data.status = 'ONLINE'
 			}
-		}
+		},
 	]
 	
 	onMounted(() => {
@@ -174,8 +174,9 @@
 			<Btn
 				v-if="!gamemode.show"
 				class="SideBarTag-btn"
-				:type=1 value="Invite to party"
-				:logo="logoPlay"
+				:type=1
+				:value="data.status === 'INGAME' ? 'Spectate' : 'Invite to party'"
+				:logo="data.status === 'INGAME' ? logoPlayCircle : logoPlay"
 				width="185em"
 				height="44em"
 				@click.stop="showGamemode"
@@ -190,7 +191,6 @@
 				height="44em"
 				@click.stop="sbStore.openConv('Friend', data.id)"
 			/>
-
 			<Btn
 				v-if="gamemode.show"
 				class="SideBarTag-btn"
