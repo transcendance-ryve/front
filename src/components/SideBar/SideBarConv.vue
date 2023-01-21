@@ -154,7 +154,6 @@
 			}
 		}},
 		{ name: 'incomingMessage', callback: async (msg: any) => {
-			// console.log('incomingMessage chan', msg)
 			if (await getBlockRelation(msg.sender.id) === 'targetBlocked')
 				msg.content = 'This user is blocked'
 			messages.value.push(msg)
@@ -162,7 +161,6 @@
 		}},
 		{
 			name: 'roomUpdated', callback: (res: { name: string, status: string, avatar: string }) => {
-				console.log('room utpdated')
 				target.value.name = res.name
 				target.value.status = res.status
 				target.value.avatar = res.avatar
