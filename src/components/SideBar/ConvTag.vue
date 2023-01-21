@@ -75,9 +75,8 @@
 			emit('userList')
 		else if (optionName === 'See')
 			emit('see')
-		else if (optionName === 'Settings') {
+		else if (optionName === 'Settings')
 			emit('settings')
-		}
 		else if (optionName === 'Conversation')
 			emit('conv')
 		else if (optionName === 'Quit')
