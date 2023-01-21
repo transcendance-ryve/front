@@ -3,7 +3,7 @@
 	import { useUserStore } from '@/stores/UserStore'
 	import { ref, reactive, type Ref, onMounted, onUnmounted } from 'vue';
 	import Win from '../Play/Win.vue'
-	import Btn from '../Utils/Btn.vue'
+	import type { SocketEvent } from '@/types/Socket';
 
 	interface Player {
 		id: string,
@@ -289,7 +289,8 @@
 	}
 
 	const start = (data: { players: Players, width: number, height: number, startTime: number }): void => {
-		console.log(data);
+		listerners.push({ name: 'update', callback: update });
+		socket.on('update', update);
 
 		defaultGrid.height = data.height;
 		defaultGrid.width = data.width;
@@ -326,42 +327,43 @@
 		}
 	}
 
-	const listeners: any = {
-		start: start,
-		update: update,
-		score: updateScore,
-		gameWinner: (id: string) => {
-			endState.visible = true;
-			if (props.spectate) {
-				endState.state = "spectate"
-				if (id === players.value.left.id) endState.player = { color: "#0177FB", ...players.value.left };
-				else endState.player = { color: "#FF4646", ...players.value.right };
-			} else if (userStore?.me.id === id) endState.state = "win";
-			else endState.state = "lose";
+	const	listerners: SocketEvent[] = [
+		{ name: 'start', callback: start },
+		{ name: 'updateScore', callback: updateScore },
+		{
+			name: 'gameWinner',
+			callback: (id: string) => {
+				endState.visible = true;
+				if (props.spectate) {
+					endState.state = "spectate"
+					if (id === players.value.left.id) endState.player = { color: "#0177FB", ...players.value.left };
+					else endState.player = { color: "#FF4646", ...players.value.right };
+				} else if (userStore?.me.id === id) endState.state = "win";
+				else endState.state = "lose";
 
-			if (ctx && canvas.value)
-				ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+				if (ctx && canvas.value)
+					ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+			}
 		},
-		bonus_spawn: (data: Bonus) => {
-			bonusImg.src = data.imgURL;
-			bonus = { ...data, spawned: true}
+		{
+			name: 'bonus_spawn',
+			callback: (data: Bonus) => {
+				bonusImg.src = data.imgURL;
+				bonus = { ...data, spawned: true}
+			}
 		},
-		bonus_despawn: () => {
-			bonus.spawned = false;
-		}
-	}
+		{ name: 'bonus_despawn', callback: () =>  bonus.spawned = false }
+	]
 
 	/* onMounted && onUnmounted */
 
 	onMounted(() => {
-		for (let name in listeners)
-			socket.on(name, listeners[name]);
+		listerners.forEach(listener => socket.on(listener.name, listener.callback))
 
 		if (!props.spectate) {
 			window.addEventListener('keyup', handleKeyup, true);
 			window.addEventListener('keydown', handleKeydown, true);
 		}
-
 		window.addEventListener("resize", resizeCanvas);
 
 		if (canvas.value) {
@@ -373,8 +375,7 @@
 	});
 
 	onUnmounted(() => {
-		for (let name in listeners)
-			socket.off(name, listeners[name]);
+		listerners.forEach(listener => socket.off(listener.name, listener.callback))
 
 		if (!props.spectate) {
 			window.removeEventListener('keydown', handleKeydown, true);
