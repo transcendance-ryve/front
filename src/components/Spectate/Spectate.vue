@@ -3,6 +3,7 @@
 	import { onMounted, onUnmounted, reactive, watch, ref, type Ref, nextTick } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
+	import { useSideBarStore } from '@/stores/SideBarStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import { logoDesc, logoAsc } from '../../assets/logoSVG'
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
@@ -16,6 +17,7 @@
 
 	const	contentStore = useContentStore()
 	contentStore.state = 3
+	const	sbStore = useSideBarStore()
 
 	const	data: SpectateData = reactive({
 		games: [],
@@ -32,7 +34,7 @@
 	})
 	let	page: number = 0
 
-	const gameSelected = ref("");
+	const gameSelected: Ref<string> = ref("");
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['order', 'search']
@@ -51,6 +53,13 @@
 	watch(queries, async () => {
 		if (!apiCalled)
 			await replaceUrl({...queries})
+	})
+
+	watch(sbStore.spectate, () => {
+		if (sbStore.spectate.gameId) {
+			spectateGame(sbStore.spectate.gameId)
+			sbStore.spectate.gameId = ''
+		}
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
@@ -94,6 +103,10 @@
 		getSpectate(getQueriesInUrl(router.currentRoute.value.fullPath), page++, data)
 		socket.emit('onSpectate')
 		listerners.forEach(listener => socket.on(listener.name, listener.callback))
+		if (sbStore.spectate.gameId) {
+			spectateGame(sbStore.spectate.gameId)
+			sbStore.spectate.gameId = ''
+		}
 	})
 
 	onUnmounted(() => {

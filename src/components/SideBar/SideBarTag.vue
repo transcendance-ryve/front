@@ -10,6 +10,8 @@
 	import type { ContentData } from '@/types/Sidebar'
 	import type { User } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
+	import getPlayerGame from '@/requests/SideBar/getPlayerGame'
+	import router from '@/router'
 
 	export interface Props {
 		data: Partial<ContentData>
@@ -85,6 +87,11 @@
 		}, 3000);
 	}
 
+	const	spectateRedirect = async () => {
+		sbStore.spectate.gameId = await getPlayerGame(props.data.id!)
+		router.push({ path: '/spectate', query: { order: 'desc' } })
+	}
+
 	const	listeners: SocketEvent[] = [
 		{
 			name: 'user_connected',
@@ -120,10 +127,10 @@
 		// console.log('tag mounted', props.data)
 		type.value = getType()
 		if (sbStore.state.section === 3 && type.value === 1) {
-			timeLeft = new Date(props.data.timeup!).getMilliseconds()
+			timeLeft = new Date(props.data.timeup! - new Date().getMilliseconds()).getMilliseconds()
 			timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
 			console.log('percent', timerPercent, timeLeft)
-			setTimeout(() => console.log('fin'), timeLeft * 10)
+			setTimeout(() => console.log('fin'), timeLeft)
 			// setInterval(() => {
 				// timeLeft = timeLeft - 100
 				// timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
@@ -179,7 +186,7 @@
 				:logo="data.status === 'INGAME' ? logoPlayCircle : logoPlay"
 				width="185em"
 				height="44em"
-				@click.stop="showGamemode"
+				@click.stop="data.status === 'INGAME' ? spectateRedirect() : showGamemode()"
 			/>
 			<Btn
 				v-if="!gamemode.show"

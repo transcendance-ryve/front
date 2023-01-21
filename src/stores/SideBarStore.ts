@@ -1,4 +1,4 @@
-import { ref, reactive, computed } from 'vue'
+import { ref, type Ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useSideBarStore = defineStore('sbStore', () => {
@@ -21,7 +21,9 @@ export const useSideBarStore = defineStore('sbStore', () => {
 			&& (notifications.game || notifications.friend || notifications.channel))
 	})
 
-	const	newChan = ref(false)
+	const	newChan: Ref<boolean> = ref(false)
+
+	const	spectate = reactive({ gameId: '' })
 
 	const	conv = reactive({
 		open: false,
@@ -59,6 +61,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		notifications,
 		notifActive,
 		newChan,
+		spectate,
 		conv,
 		updateSection,
 		openConv,
