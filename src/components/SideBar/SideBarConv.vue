@@ -14,10 +14,11 @@
 	import getUser from '@/requests/SideBar/getUser'
 	import getMessages from '@/requests/SideBar/getMessages'
 	import getBlockRelation from '@/requests/Friends/getBlockRelation'
+	import getPlayerGame from '@/requests/SideBar/getPlayerGame'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
-	import { profileRedirect } from '@/router/index'
+	import router, { profileRedirect } from '@/router/index'
 	import type { SocketEvent } from '@/types/Socket'
 
 	const	dataState: Ref<axiosState> = ref({
@@ -96,19 +97,19 @@
 		},
 		{
 			name: 'user_blocked_submitted',
-			callback: (receiver: any) => {
+			callback: (receiver: Partial<Target>) => {
 				if (receiver.id === sbStore.conv.id) friendBlocked.value = true
 			}
 		},
 		{
 			name: 'user_unblocked_submitted',
-			callback: (receiver: any) => {
+			callback: (receiver: Partial<Target>) => {
 				if (receiver.id === sbStore.conv.id) friendBlocked.value = false
 			}
 		},
 		{
 			name: 'friend_removed',
-			callback: (sender: any) => {
+			callback: (sender: Partial<Target>) => {
 				if (sender.id === target.value.id) {
 					sbStore.conv.open = false
 					sbStore.state.section = 1
@@ -117,11 +118,39 @@
 		},
 		{
 			name: 'friend_removed_submitted',
-			callback: (receiver: any) => {
+			callback: (receiver: Partial<Target>) => {
 				if (receiver.id === target.value.id) {
 					sbStore.conv.open = false
 					sbStore.state.section = 1
 				}
+			}
+		},
+		{
+			name: 'user_connected',
+			callback: (user: Partial<Target>) => {
+				if (user.id === target.value.id)
+				target.value.status = 'ONLINE'
+			}
+		},
+		{
+			name: 'user_disconnected',
+			callback: (user: Partial<Target>) => {
+				if (user.id === target.value.id)
+					target.value.status = 'OFFLINE'
+			}
+		},
+		{
+			name: 'user_in_game',
+			callback: (user: Partial<Target>) => {
+				if (user.id === target.value.id)
+					target.value.status = 'INGAME'
+			}
+		},
+		{
+			name: 'user_left_game',
+			callback: (user:Partial<Target>) => {
+				if (user.id === target.value.id)
+					target.value.status = 'ONLINE'
 			}
 		}
 	]
@@ -168,8 +197,9 @@
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
 	]
 
-	const	spectate = () => {
-		
+	const	spectate = async () => {
+		sbStore.spectate.gameId = await getPlayerGame(target.value.id)
+		router.push({ path: '/spectate', query: { order: 'desc' } })
 	}
 
 	onMounted(async () => {
