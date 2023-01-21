@@ -57,9 +57,7 @@
 	const	btns = computed(() => {
 		if (type.value === 'Friend') {
 			if (target.value.status === 'In Game')
-				return [{ name: 'Spectate', logo: logoPlayCircle }, { name: 'See', logo: logoEye, }]
-			else
-				return [{ name: 'See', logo: logoEye }]
+				return [{ name: 'Spectate', logo: logoPlayCircle }]
 		}
 		else
 			return [{ name: 'Quit', logo: logoQuit }, {
@@ -67,6 +65,9 @@
 				logo: userList.value === true ? logoMsg :  admin.value ? logoSettings : logoPeople,
 			}]
 	})
+
+	const	btnsLength = computed(() => btns.value?.length || 0)
+	console.log('btnsLength', btnsLength.value)
 
 	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'unblock', 'delete'])
 
@@ -90,8 +91,6 @@
 			emit('delete')
 	}
 
-	const	name = props.target.name ? props.target.name : props.target.username
-
 </script>
 
 <template>
@@ -102,7 +101,7 @@
 				<img class="Infos-avatar" :src="target.avatar" alt="avatar">
 				<div class="Infos-content">
 					<div class="Infos-nameWrap">
-						<span class="Infos-name">{{ name }}</span>
+						<span class="Infos-name">{{ target.name || target.username }}</span>
 						<Status :status="target.status"/>
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">
@@ -134,3 +133,11 @@
 	</div>
 
 </template>
+
+<style lang="scss">
+
+	.Infos-content {
+		width: calc(298em - v-bind(btnsLength) * 48em - v-bind(btnsLength) * 8em);
+	}
+
+</style>

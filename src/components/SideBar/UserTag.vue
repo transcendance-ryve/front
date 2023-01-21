@@ -150,7 +150,6 @@
 <style lang="scss" scoped>
 
 	.UserTag-userNameWrap {
-		// max-width: 290em;
 		max-width: calc(338em - (32em * v-bind(optionsLength) + 16em * (v-bind(optionsLength))));
 	}
 

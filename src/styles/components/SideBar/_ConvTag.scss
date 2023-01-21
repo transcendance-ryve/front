@@ -12,9 +12,10 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
-
+		gap: 16em;
 
 		.ConvTag-infos {
+			// width: 100%;
 			display: flex;
 			align-items: center;
 			gap: 16em;
@@ -39,6 +40,9 @@
 						font-size: 16em;
 						font-weight: 600;
 						line-height: 100%;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 				}
 

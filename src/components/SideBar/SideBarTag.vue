@@ -158,15 +158,13 @@
 				:src="data.avatar"
 				alt="user-avatar"
 			>
-			<div class="Content-infosWrap">
-				<div class="Content-infos">
-					<div class="Infos-nameWrap">
-						<span class="Infos-name">{{data.name || data.username}}</span>
-						<Status :status="data.status"/>
-					</div>
+			<div class="Content-infos">
+				<div class="Infos-nameWrap">
+					<span class="Infos-name">{{data.name || data.username}}</span>
+					<Status :status="data.status"/>
 					<Status v-if="data.usersCount" :users="data.usersCount"/>
 				</div>
-				<div v-if="data.messages" class="LastMsgWrap">
+				<div v-if="(data.messages && data.messages[0]?.content) || data.messages?.content" class="LastMsgWrap">
 					<span class="LastMsg">{{data.messages[0]?.content || data.messages.content}}</span>
 				</div>
 			</div>

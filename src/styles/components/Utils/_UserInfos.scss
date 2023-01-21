@@ -36,7 +36,6 @@
 
 			.Level-percentWrap {
 				display: flex;
-				// width: 200em;
 				width: 100%;
 				height: 6em;
 				border-radius: 8em;
@@ -63,8 +62,8 @@
 .UserInfos--reverse {
 	flex-direction: row-reverse;
 
-	.UserInfos-content {
-		align-items: flex-end;
+	.Content-name {
+		text-align: right;
 	}
 
 	.Content-level {
