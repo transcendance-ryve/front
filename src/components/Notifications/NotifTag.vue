@@ -23,7 +23,7 @@
 		setTimeout(() => notifStore.removeNotif(props.notif.id), 500)
 	}
 
-	onMounted(() => timer = setTimeout(() => closeNotif(), 3000))
+	onMounted(() => timer = setTimeout(() => closeNotif(), 5000))
 
 	onUnmounted(() => clearTimeout(timer))
 
