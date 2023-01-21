@@ -95,7 +95,7 @@
 	const	pagesCount = computed(() => {
 		const	takeValue = parseInt(queries.take)
 		let	res: number = Math.round(data.count / takeValue)
-		if (data.count / takeValue > res)
+		if ((data.count / takeValue > res) || res === 0)
 			res++
 		return res
 	})
