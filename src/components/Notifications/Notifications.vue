@@ -19,7 +19,7 @@
 	import { useNotifStore } from '@/stores/NotificationsStore'
 	import { useSideBarStore } from '@/stores/SideBarStore';
 	import type { SocketEvent } from '@/types/Socket';
-	import { profileRedirect } from '@/router';
+	import router, { profileRedirect } from '@/router';
 
 	const	notifStore = useNotifStore()
 	const	userStore = useUserStore()
@@ -185,7 +185,8 @@
 		{
 			name: "game_request_accepted",
 			callback: (res: any) => {
-				console.log(res);
+				if (window.location.pathname !== '/play')
+					router.push({ path: '/play' });
 				notifStore.addNotif('infoY', res.username, 'game request accepted', res.avatar);
 			}
 		},
