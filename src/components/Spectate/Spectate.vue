@@ -23,11 +23,9 @@
 		loadingData: false,
 		err: null,
 	})
-	const	spectateContent: Ref<HTMLElement> = ref(null!);
 	let		apiCalled: boolean = false
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-
 	const	queries: SpectateQueries = reactive({
 		order: 'desc',
 		search: ''
