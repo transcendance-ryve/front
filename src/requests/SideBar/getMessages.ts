@@ -15,7 +15,6 @@ const getMessages = async (id: string, page: number, res: Ref<any[]>, totalMsg: 
 		dataState.error = error.value
 	}
 	else if (response.value) {
-		console.log('reponse in getMessages: ', response.value)
 		res.value = response.value.messages
 		totalMsg.value = response.value.total
 		dataState.loading = loading.value
