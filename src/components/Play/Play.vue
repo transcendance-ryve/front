@@ -12,12 +12,11 @@
 	contentStore.state = 1
 	const socket = userStore.socket;
 
-	const matchmakingVisible = ref(false);	
+	const matchmakingVisible = ref(true);	
 	
 	const	listeners: { [key: string]: (data?: any) => void } = {
 		game_connected: () => {matchmakingVisible.value = false},
 		start: () => {matchmakingVisible.value = false},
-		matchmacking: () => {matchmakingVisible.value = true},
 		reconnected_to_game: (hasGame: boolean) => {matchmakingVisible.value = !hasGame},
 		updateUser: (data: UserConnected) => { userStore.updateMe(data) }
 	}
