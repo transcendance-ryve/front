@@ -56,7 +56,7 @@
 
 	const	btns = computed(() => {
 		if (type.value === 'Friend') {
-			if (target.value.status === 'In Game')
+			if (target.value.status === 'INGAME')
 				return [{ name: 'Spectate', logo: logoPlayCircle }]
 		}
 		else
