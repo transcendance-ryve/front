@@ -68,7 +68,10 @@
 	const	listerners: SocketEvent[] = [
 		{
 			name: 'newGameStarted',
-			callback: (game: any) => data.games.unshift(game)
+			callback: (game: any) => {
+				if (!data.games.find(g => g.id === game.id))
+					data.games.unshift(game)
+			}
 		},
 		{
 			name: 'gameEnded',
