@@ -67,7 +67,6 @@
 	})
 
 	const	btnsLength = computed(() => btns.value?.length || 0)
-	console.log('btnsLength', btnsLength.value)
 
 	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'unblock', 'delete'])
 
