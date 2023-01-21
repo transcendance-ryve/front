@@ -9,7 +9,7 @@
 	background: rgba(36, 35, 51, 0.6);
 	box-shadow: 0 4em 4em rgba(0, 0, 0, 0.25);
 	backdrop-filter: blur(4px);
-	border-bottom: 3em solid $white-200;
+	border-bottom: 3px solid $white-200;
 	border-radius: 0 12em 12em 0;
 	animation: notifPop .5s ease-in-out;
 	position: relative;
@@ -76,7 +76,7 @@
 		top: 100%;
 		left: 0;
 		width: 0%;
-		height: 3em;
+		height: 3px;
 		opacity: 0.6;
 		animation: timer-animation 3s linear;
 	}
