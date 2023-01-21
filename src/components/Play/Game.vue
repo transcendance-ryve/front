@@ -380,6 +380,8 @@
 			window.removeEventListener('keydown', handleKeydown, true);
 			window.removeEventListener('keyup', handleKeyup, true);
 		}
+		else
+			socket.emit('leaveSpectateGame', { gameId: props.gameID });
 		window.removeEventListener("resize", resizeCanvas);
 
 		socket.emit('disconnect_game');
