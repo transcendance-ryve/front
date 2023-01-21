@@ -10,27 +10,34 @@
 	}
 
 	.UserInfos-content {
+		width: 200em;
 		display: flex;
 		flex-direction: column;
 		gap: 8em;
 
 		.Content-name {
+			width: 100%;
 			font-family: 'Poppins';
 			font-style: normal;
 			font-size: 22em;
 			font-weight: 500;
 			line-height: 100%;
 			color: white;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 
 		.Content-level {
+			width: 100%;
 			display: flex;
 			flex-direction: column;
 			gap: 6em;
 
 			.Level-percentWrap {
 				display: flex;
-				width: 200em;
+				// width: 200em;
+				width: 100%;
 				height: 6em;
 				border-radius: 8em;
 
@@ -100,6 +107,7 @@
 
 	.UserInfos-content {
 		gap: 6em;
+		width: 116em;
 
 		.Content-name {
 			font-size: 18em;
@@ -109,7 +117,6 @@
 			gap: 6em;
 
 			.Level-percentWrap {
-				width: 116em;
 				height: 4em;
 			}
 

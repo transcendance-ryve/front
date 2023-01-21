@@ -48,13 +48,16 @@
 			text-align: end;
 			max-width: 170em; //
 			gap: 8em;
-			// text-overflow: ellipsis;
 
 			.Text-label {
+				width: 100%;
 				font-size: 18em;
 				font-weight: 600;
 				line-height: 100%;
 				color: white;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 
 			.Text-value {
