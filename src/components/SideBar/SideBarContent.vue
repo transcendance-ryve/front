@@ -217,10 +217,7 @@
 		},
 		{
 			name: 'private_game_request',
-			// callback: (sender: Partial<ContentData>) => {
-				callback: (sender: any) => {
-				// const	sec = new Date(sender.timeup).getSeconds()
-				// console.log('in event private_game_request', sender, sec)
+			callback: (sender: Partial<ContentData>) => {
 				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1)
 					unshiftTag(sender);
 			}
