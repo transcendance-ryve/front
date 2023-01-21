@@ -29,20 +29,20 @@
 
 	const actionBtns: ActionBtnValue[] = [
 		{
-			name: 'See',
+			name: 'see',
 			logo: logoEye,
 			color: '#0177FB',
 			toolTip: 'View profile'
 
 		},
 		{
-			name: friendBlocked.value ? 'Unblock' : 'Block',
+			name: friendBlocked.value ? 'unblock' : 'block',
 			logo: logoBlockMsg,
 			color: '#FF8A00',
 			toolTip: friendBlocked.value ? 'Unblock' : 'Block'
 		},
 		{
-			name: 'Delete',
+			name: 'delete',
 			logo: logoTrash,
 			color: '#E32F2F',
 			toolTip: 'Delete'
@@ -50,44 +50,23 @@
 	]
 
 	watch(friendBlocked, (newVal) => {
-		actionBtns[1].name = newVal ? 'Unblock' : 'Block'
+		actionBtns[1].name = newVal ? 'unblock' : 'block'
 		actionBtns[1].toolTip = newVal ? 'Unblock' : 'Block'
 	})
 
 	const	btns = computed(() => {
 		if (type.value === 'Friend') {
 			if (target.value.status === 'INGAME')
-				return [{ name: 'Spectate', logo: logoPlayCircle }]
+				return [{ name: 'spectate', logo: logoPlayCircle }]
 		}
 		else
-			return [{ name: 'Quit', logo: logoQuit }, {
-				name: userList.value === true ? 'Conversation' : admin.value ? 'Settings' : 'Members',
+			return [{ name: 'quit', logo: logoQuit }, {
+				name: userList.value === true ? 'conversation' : admin.value ? 'settings' : 'usersList',
 				logo: userList.value === true ? logoMsg :  admin.value ? logoSettings : logoPeople,
 			}]
 	})
 
 	const	btnsLength = computed(() => btns.value?.length || 0)
-
-	const	emit = defineEmits(['see', 'userList', 'conv', 'settings', 'quit', 'block', 'unblock', 'delete'])
-
-	const	manageOptions = (optionName: string) => {
-		if (optionName === 'Members')
-			emit('userList')
-		else if (optionName === 'See')
-			emit('see')
-		else if (optionName === 'Settings')
-			emit('settings')
-		else if (optionName === 'Conversation')
-			emit('conv')
-		else if (optionName === 'Quit')
-			emit('quit')
-		else if (optionName === 'Block')
-			emit('block')
-		else if (optionName === 'Unblock')
-			emit('unblock')
-		else if (optionName === 'Delete')
-			emit('delete')
-	}
 
 </script>
 
@@ -104,13 +83,13 @@
 					</div>
 					<div class="Infos-options" v-if="type == 'Friend'">
 						<ActionBtn
-							:class="{'ActionBtn--block': option.name === 'Unblock'}"
+							:class="{'ActionBtn--block': option.name === 'unblock'}"
 							v-for="(option, index) in actionBtns"
 							:key="index"
 							:logo="option.logo"
 							:hoverColor="option.color"
 							:toolTip="option.toolTip"
-							@click="manageOptions(option.name)"
+							@click="$emit(option.name)"
 						/>
 					</div>
 					<span class="Infos-CreateDate" v-else>{{ 'Created ' + moment(target.createdAt).format('ll') }}</span>
@@ -122,7 +101,7 @@
 					:key="index"
 					class="ConvTag-Btns"
 					:class="{'ConvTag-Btns--smallLogo': btn.name == 'Conversation' || btn.name == 'Quit'}"
-					@click="manageOptions(btn.name)"
+					@click="$emit(btn.name)"
 				>
 					<span class="ConvTag-Btns-logo" v-html="btn.logo"></span>
 				</button>

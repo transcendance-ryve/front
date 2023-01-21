@@ -168,9 +168,9 @@
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
 	]
 
-	const	commonListeners: SocketEvent[] = [
-
-	]
+	const	spectate = () => {
+		
+	}
 
 	onMounted(async () => {
 		if (sbStore.conv.focus === true || window.innerWidth > 1440)
@@ -213,14 +213,15 @@
 				:admin="role === 'OWNER' || role === 'ADMIN' ? true : false"
 				:userList="userList"
 				:friendBlocked="friendBlocked"
-				@userList="userList = true"
+				@usersList="userList = true"
 				@settings="settings = true"
-				@conv="userList = false"
+				@conversation="userList = false"
 				@see="profileRedirect(target.id)"
 				@delete="removeFriend()"
 				@quit="socket.emit('leaveRoom', { channelId: target.id })"
 				@block="socket.emit('block_user', { blockedId: target.id })"
 				@unblock="socket.emit('unblock_user', { blockedId: target.id })"
+				@spectate="spectate()"
 			/>
 			<ConvContent
 				v-if="!userList && !dataState.error && !dataState.loading"
