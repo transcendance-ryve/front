@@ -117,7 +117,7 @@
 	]
 	
 	onMounted(() => {
-		console.log('tag mounted', props.data)
+		// console.log('tag mounted', props.data)
 		type.value = getType()
 		if (sbStore.state.section === 3 && type.value === 1) {
 			timeLeft = new Date(props.data.timeup!).getMilliseconds()
