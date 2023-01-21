@@ -19,15 +19,10 @@
 		}
 
 		.UserTag-userNameWrap {
-			// width: 100%;
 			display: flex;
-			// max-width: 290em;
 			background: $background-700;
 			border-radius: 24em;
 			padding: 8em 16em;
-			// white-space: nowrap;
-			// 	overflow: hidden;
-			// 	text-overflow: ellipsis;
 
 			.UserTag-userName {
 				width: 100%;
@@ -66,9 +61,7 @@
 }
 
 .UserTag--me {
-	background: #1e2030;
-	// background: rgba(27, 26, 39, 0.5);
-	background: rgba(31, 30, 44, 1);
+	background: rgba(31, 30, 44, 0.7);
 	.UserTag-infos{
 		.UserTag-userNameWrap {
 			background: #1c1c27;
