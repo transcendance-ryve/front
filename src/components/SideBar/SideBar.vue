@@ -8,6 +8,7 @@
 	import SideBarNewChan from './SideBarNewChan.vue'
 	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
 	import type { SocketEvent } from '@/types/Socket'
+	import router from '@/router'
 
 	const	sbStore = useSideBarStore()
 	const	socket = useUserStore().socket
@@ -18,6 +19,7 @@
 		}},
 		{ name: 'game_request_decline', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
 		{ name: 'game_request_accept', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
+		{ name: 'game_request_accepted', callback: () => router.push({ path: '/play' }) },
 		{ name: 'friend_request', callback: () => sbStore.notifications.friend++ },
 		{ name: 'friend_accepted_submitted', callback: () => sbStore.notifications.friend-- },
 		{ name: 'friend_declined_submitted', callback: () => sbStore.notifications.friend-- },
