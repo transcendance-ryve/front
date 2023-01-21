@@ -27,8 +27,8 @@
 		show: false,
 		timer: 0,
 	})
-	let		timeLeft: number
-	let		timerPercent: string
+	const	timerPercent: Ref<string> = ref('')
+	let		intervalID: number
 
 	const	getType = () => {
 		if (sbStore.state.section === 1)
@@ -124,18 +124,12 @@
 	]
 	
 	onMounted(() => {
-		// console.log('tag mounted', props.data)
 		type.value = getType()
 		if (sbStore.state.section === 3 && type.value === 1) {
-			timeLeft = new Date(props.data.timeup! - new Date().getMilliseconds()).getMilliseconds()
-			timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
-			console.log('percent', timerPercent, timeLeft)
-			setTimeout(() => console.log('fin'), timeLeft)
-			// setInterval(() => {
-				// timeLeft = timeLeft - 100
-				// timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
-				// console.log('percent', timerPercent)
-			// }, 100)
+			intervalID = setInterval(() => {
+				const	timeLeft = props.data.timeup! - Date.now()
+				timerPercent.value = `${timeLeft * 100 / 10000}%`
+			}, 50)
 		}
 		listeners.forEach((listener) => {
 			socket.on(listener.name, listener.callback)
@@ -149,6 +143,8 @@
 
 		if (gamemode.timer)
 			clearTimeout(gamemode.timer);
+		if (intervalID)
+			clearInterval(intervalID)
 	})
 
 </script>
@@ -286,7 +282,6 @@
 
 <style>
 	.SideBarTag.countdown::after {
-		/* width: 100%; */
 		width: v-bind(timerPercent);
 	}
 </style>
