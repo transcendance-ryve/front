@@ -123,12 +123,12 @@
 			timeLeft = new Date(props.data.timeup!).getMilliseconds()
 			timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
 			console.log('percent', timerPercent, timeLeft)
-			setTimeout(() => console.log('fin'), timeLeft)
-			setInterval(() => {
-				timeLeft = timeLeft - 100
-				timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
+			setTimeout(() => console.log('fin'), timeLeft * 10)
+			// setInterval(() => {
+				// timeLeft = timeLeft - 100
+				// timerPercent = `calc(100% - ${timeLeft * 100 / 60}%)`
 				// console.log('percent', timerPercent)
-			}, 100)
+			// }, 100)
 		}
 		listeners.forEach((listener) => {
 			socket.on(listener.name, listener.callback)
@@ -281,7 +281,7 @@
 
 <style>
 	.SideBarTag.countdown::after {
-		width: 100%;
-		/* width: v-bind(timerPercent); */
+		/* width: 100%; */
+		width: v-bind(timerPercent);
 	}
 </style>
