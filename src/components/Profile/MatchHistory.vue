@@ -83,12 +83,13 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
+		console.log('route updating', from.fullPath, to.fullPath, props.userId)
 		if (Object.keys(to.query).length === 0)
 			return false
 		routeUpdating = true
 		if (to.query !== from.query)
 			getUrlQueries(to.query)
-		getMatchHistory(getQueriesInUrl(to.fullPath), props.userId, data)
+		getMatchHistory(getQueriesInUrl(to.fullPath), to.params.id as string, data)
 		await nextTick()
 		routeUpdating = false
 	})
