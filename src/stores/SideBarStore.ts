@@ -41,7 +41,7 @@ export const useSideBarStore = defineStore('sbStore', () => {
 	}
 
 	function	openConv(type: string, id: string = '', focus: boolean = true) {
-		if (conv.open) {
+		if (conv.open && id !== conv.id) {
 			conv.open = false
 			setTimeout(() => {
 				conv.open = true
