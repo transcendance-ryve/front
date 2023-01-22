@@ -35,12 +35,27 @@
 		}
 	}
 
+	@media (max-width: $laptop) {
+		.ProfileTag-btnsWrap {
+			font-size: 0.9em;
+		}
+	}
+
 	@media (max-width: $tablet) {
 		font-size: 0.8em;
+		.ProfileTag-btnsWrap {
+			font-size: 1em;
+		}
+	}
+
+	@media (max-width: 640px) {
+		flex-direction: column;
+		gap: 32em;
 	}
 
 	@media (max-width: $phone) {
-		flex-direction: column;
-		gap: 32em;
+		.ProfileTag-btnsWrap {
+			font-size: 0.82em;
+		}
 	}
 }
