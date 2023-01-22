@@ -3,6 +3,7 @@
 	import { withDefaults } from 'vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import { logoSettings, logoTrash, logoMsg, logoAdd, logoAccept, logoRefuse, logoBlockMsg } from '../../assets/logoSVG'
+	import { useUserStore } from '@/stores/UserStore'
 	import Btn from '../Utils/Btn.vue'
 	import router from '@/router'
 	import type { User } from '@/types/User'
@@ -36,6 +37,9 @@
 				fontSize="16em"
 				@click="blockRelation === 1 ? $emit('unblock') : $emit('block')"
 			/>
+			<div v-if="type === 1" class="ProfileTag-status" :class="{ 'Status--active': useUserStore().me.tfa_enabled }">
+				<span class="Status-value">2FA</span>
+			</div>
 			<Btn
 				v-if="type === 1"
 				:type=5
