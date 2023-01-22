@@ -10,7 +10,8 @@
 		borderRadius?: string
 		toolTipFont?: string
 		dist?: string
-		shift?: boolean
+		shiftR?: boolean
+		shiftL?: boolean
 	}
 
 	withDefaults(defineProps<Props>(), {
@@ -21,14 +22,15 @@
 		borderRadius: '6em',
 		toolTipFont: '500 14em \'Poppins\'',
 		dist: '12em',
-		shift: false
+		shiftR: false,
+		shiftL: false
 	})
 
 </script>
 
 <template>
 
-	<div class="ToolTip" :class="{'Tooltip--shift': shift}">
+	<div class="ToolTip" :class="{'Tooltip--shiftR': shiftR, 'Tooltip--shiftL': shiftL}">
 		<span class="ToolTip-value">{{ value }}</span>
 	</div>
 

@@ -53,7 +53,7 @@
 		>
 			<img v-if="user?.id !== message.sender.id && !sameUser" :src="message.sender.avatar" alt="">
 			<span v-if="user?.id !== message.sender.id && !sameUser" class="ToolTip-container" @click="profileRedirect(message.sender.id)">
-				<Tooltip :value="message.sender.username" backgroundColor="#2e3042" />
+				<Tooltip :value="message.sender.username" backgroundColor="#2e3042" :shiftL="true"/>
 			</span>
 			<span class="message__value__wrapper" :class="{ current: user?.id === message.sender.id}">
 				<p class="message__value">{{ message.content }}</p>

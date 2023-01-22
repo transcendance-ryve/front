@@ -33,7 +33,7 @@
 			<button class="Game-btn" @click="$emit('classic')">Classic</button>
 			<button class="Game-btn" @click="$emit('bonus')">Bonus</button>
 		</div>
-		<ToolTip :value="toolTip" :shift="shift"/>
+		<ToolTip :value="toolTip" :shiftR="shift"/>
 	</button>
 
 </template>

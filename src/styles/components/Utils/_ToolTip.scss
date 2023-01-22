@@ -20,8 +20,12 @@
 	}
 }
 
-.Tooltip--shift {
+.Tooltip--shiftR {
 	left: unset;
 	transform: unset;
 	right: -16em;
+}
+.Tooltip--shiftL {
+	left: 0;
+	transform: unset;
 }
