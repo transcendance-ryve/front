@@ -2,7 +2,7 @@
 	import { reactive, computed, onMounted } from 'vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import useVuelidate from '@vuelidate/core'
-	import { required, minLength, helpers } from '@vuelidate/validators'
+	import { required, email, minLength, helpers } from '@vuelidate/validators'
 	import { logoProfile, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
 	import router from '@/router'
@@ -15,8 +15,9 @@
 
 	const	rules = computed(() => {
 		return {
-			email: {        //    custom error msg with helpers.withMessage
-				required: helpers.withMessage('Please enter a username', required),
+			email: {
+				required: helpers.withMessage('Please enter a Please enter an email address', required),
+				email: helpers.withMessage('Please enter a properly formatted email address', email)
 			},
 			password: {
 				required: helpers.withMessage('Please enter a password', required),
@@ -31,9 +32,8 @@
 
 	const	submitForm = async () => {
 		const    result = await v$.value.$validate();
-		if (result)    {
+		if (result)
 			emit('login', formData.email, formData.password)
-		}
 		else
 			alert('error, form not submitted')
 	}
@@ -59,6 +59,7 @@
 					id="Email"
 					v-model="formData.email"
 					placeholder="Email"
+					type="email"
 					:logo="logoProfile"
 				/>
 				<span

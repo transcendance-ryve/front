@@ -23,10 +23,10 @@
 
 	const	rules = computed(() => {
 		return {
-			username: {		//	custom error msg with helpers.withMessage
+			username: {
 				required: helpers.withMessage('Please enter a username', required),
-				minLength: helpers.withMessage('Username is too short (6 min)', minLength(6)),
-				maxLength: helpers.withMessage('Username is too long', maxLength(18))
+				minLength: helpers.withMessage('Username is too short (4 min)', minLength(4)),
+				maxLength: helpers.withMessage('Username is too long (18 max)', maxLength(18))
 			},
 			email: {
 				required: helpers.withMessage('Please enter an email address', required),
@@ -49,9 +49,8 @@
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
-		if (result)	{
+		if (result)
 			emit('register', formData.username, formData.email, formData.password)
-		}
 		else
 			alert('error, form not submitted')
 	}
@@ -66,7 +65,7 @@
 <template>
 	<div class="Form-wrap">
 		<button class="Form-42btn" @click.prevent="auth42">
-			<span class="Btn-value">Sign in with</span>
+			<span class="Btn-value">Sign up with</span>
 			<span class="Form-42btn-logo" v-html="logo42"></span>
 		</button>
 		<span class="or">OR</span>

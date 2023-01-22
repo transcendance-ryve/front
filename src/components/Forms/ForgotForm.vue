@@ -25,9 +25,8 @@
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
-		if (result)	{
+		if (result)
 			emit('forgotPassword', formData.email)
-		}
 		else
 			alert('error, form not submitted')
 	}

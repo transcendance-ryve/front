@@ -35,9 +35,8 @@
 
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
-		if (result)	{
+		if (result)
 			emit('resetPassword', formData.password)
-		}
 		else
 			alert('error, form not submitted')
 	}

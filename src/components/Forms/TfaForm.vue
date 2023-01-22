@@ -4,6 +4,7 @@
 	import useVuelidate from '@vuelidate/core'
 	import {
 		required,
+		minLength,
 		helpers
 	} from '@vuelidate/validators'
 	import { logoQrCode } from '../../assets/logoSVG'
@@ -17,6 +18,7 @@
 		return {
 			code: {
 				required: helpers.withMessage('Please enter your code', required),
+				minLength: helpers.withMessage('Code is too short (6 min)', minLength(6)),
 			}
 		}
 	})
