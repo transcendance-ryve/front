@@ -54,6 +54,9 @@ export const useSideBarStore = defineStore('sbStore', () => {
 		state.notifsState = 1
 		conv.open = false
 		newChan.value = false
+		notifications.game = 0
+		notifications.friend = 0
+		notifications.channel = 0
 	}
 
 	return {

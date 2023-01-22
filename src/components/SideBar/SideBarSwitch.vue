@@ -14,19 +14,12 @@
 	const	sbStore = useSideBarStore()
 
 	const	updateState = (newVal: number) => {
-		if (sbStore.state.section == 1)
+		if (sbStore.state.section === 1)
 			sbStore.state.friendsState = newVal
-		else if (sbStore.state.section == 2)
+		else if (sbStore.state.section === 2)
 			sbStore.state.channelsState = newVal
-		else {
+		else
 			sbStore.state.notifsState = newVal
-			if (newVal === 1)
-				sbStore.notifications.game = 0
-			else if (newVal === 2)
-				sbStore.notifications.friend = 0
-			else
-				sbStore.notifications.channel = 0
-		}
 	}
 
 	const	btn1 = computed(() => {
@@ -35,7 +28,7 @@
 		else if (sbStore.state.section == 2)
 			return 'Channels list'
 		else
-			return 'Game'
+			return 'Games'
 	})
 
 	const	btn2 = computed(() => {

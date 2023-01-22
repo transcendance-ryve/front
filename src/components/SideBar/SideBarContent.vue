@@ -65,6 +65,14 @@
 
 	watch(sbStore.state, async () => {
 		await getRawData()
+		if (sbStore.state.section === 3) {
+			if (sbStore.state.notifsState === 1)
+				sbStore.notifications.game = 0
+			else if (sbStore.state.notifsState === 2)
+				sbStore.notifications.friend = 0
+			else
+				sbStore.notifications.channel = 0
+		}
 		// sortData()
 	})
 
