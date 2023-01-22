@@ -1,10 +1,12 @@
 <script setup lang="ts">
 
-	import { computed } from 'vue'
+	import { computed, ref, type Ref, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
+	import Tooltip from '../Utils/Tooltip.vue'
 	import ActionBtn, { type ActionBtnValue } from './ActionBtn.vue'
+	import { profileRedirect } from '@/router'
 	import {
-		logoEye,
+		logoPlay,
 		logoTrash,
 		logoAdd,
 		logoMute,
@@ -24,12 +26,14 @@
 		section: 'Invitees',
 	})
 
+	const	userStore = useUserStore()
+
 	const actionBtns: ActionBtnValue[] = [
 		{
-			name: 'see',
-			logo: logoEye,
+			name: 'play',
+			logo: logoPlay,
 			color: '#0177FB',
-			toolTip: 'View profile'
+			toolTip: 'Invite to play'
 		},
 		{
 			name: 'delete',
@@ -95,13 +99,13 @@
 
 	const	options = computed(() => {
 		if (props.section === 'onlySee' || userStore.me.id === props.user.id)
-			return [actionBtns[0]]
+			return []
 		else if (props.section === 'noPrivileges')
 			return [actionBtns[0], props.user.isBlocked ? actionBtns[10] : actionBtns[9]]
 		else if (props.section === 'Invitees')
-			return [actionBtns[0], actionBtns[1]]
+			return [actionBtns[1]]
 		else if (props.section === 'Add')
-			return [actionBtns[0], actionBtns[2]]
+			return [actionBtns[2]]
 		else if (props.section === 'allPrivileges')
 			return [actionBtns[0], actionBtns[5], props.user.isMute ? actionBtns[3] : actionBtns[4], props.user.isBlocked ? actionBtns[10] : actionBtns[9], actionBtns[7]]
 		else if (props.section === 'allPrivilegesA')
@@ -114,17 +118,33 @@
 
 	const	optionsLength = computed(() => options.value.length)
 
-	const	userStore = useUserStore()
+	const	gameOptions: Ref<boolean> = ref(false)
+	let		timerID: number = 0
+
+	const	handleGameRequest = () => {
+		gameOptions.value = true
+		timerID = setTimeout(() => {
+			gameOptions.value = false
+		}, 5000)
+	}
+
+	onUnmounted(() => {
+		if (timerID)
+			clearTimeout(timerID)
+	})
 
 </script>
 
 <template>
 
-	<div class="UserTag" :class="{'UserTag--me': user.id === userStore.me.id}">
+	<div class="UserTag" :class="{'UserTag--me': user.id === useUserStore().me.id}">
 		<div class="UserTag-infos">
 			<img class="UserTag-avatar" :src="user.avatar" alt="user-avatar">
-			<span class="UserTag-userNameWrap">
-				<span class="UserTag-userName">{{ user.username }}</span>
+			<span class="UserTag-userNameWrap" :class="{'UserNameWrap--min': gameOptions}" @click="profileRedirect(user.id)">
+				<span class="UserTag-userName">
+					{{ user.username }}
+				</span>
+				<Tooltip value="View profile" />
 			</span>
 		</div>
 		<div class="UserTag-options">
@@ -133,14 +153,18 @@
 				:class="{
 					'ActionBtn--mute': option.name === 'unmute',
 					'ActionBtn--ban': option.name === 'unban',
-					'ActionBtn--block': option.name === 'unblock'
-					}"
+					'ActionBtn--block': option.name === 'unblock',
+					'ActionBtn--game': option.name === 'play' && gameOptions
+				}"
 				:key="index"
 				:logo="option.logo"
 				:hoverColor="option.color"
 				:toolTip="option.toolTip"
 				:shift="index === options.length - 1 ? true : false"
-				@click="$emit(option.name, user)"
+				:gameRequest="option.name === 'play' && gameOptions"
+				@click="option.name === 'play' ? handleGameRequest() : $emit(option.name, user)"
+				@classic="$emit('inviteToParty', user.id, false)"
+				@bonus="$emit('inviteToParty', user.id, true)"
 			/>
 		</div>
 	</div>

@@ -4,6 +4,8 @@
 	align-items: center;
 	justify-content: center;
 	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 	visibility: hidden;
 
 	.ToolTip-value {
@@ -19,5 +21,7 @@
 }
 
 .Tooltip--shift {
+	left: unset;
+	transform: unset;
 	right: -16em;
 }

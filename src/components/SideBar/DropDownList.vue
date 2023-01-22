@@ -78,6 +78,11 @@
 		socket.emit('unblock_user', { blockedId: user.id })
 	}
 
+	const	inviteToParty = (id: string, bonus: boolean) => {
+		
+		socket.emit('send_game_request', { opponent: id, bonus })
+	}
+
 </script>
 
 <template>
@@ -107,6 +112,7 @@
 				@block="blockUser"
 				@unblock="unblockUser"
 				@see="(user) => profileRedirect(user.id)"
+				@inviteToParty="inviteToParty"
 			/>
 		</div>
 	</div>

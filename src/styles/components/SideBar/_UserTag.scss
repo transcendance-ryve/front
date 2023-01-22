@@ -23,10 +23,11 @@
 			background: $background-700;
 			border-radius: 24em;
 			padding: 8em 16em;
+			position: relative;
+			cursor: pointer;
 
 			.UserTag-userName {
 				width: 100%;
-				// display: flex;
 				font-weight: 500;
 				font-size: 16em;
 				line-height: 100%;
@@ -35,6 +36,14 @@
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+			&:hover {
+				.ToolTip {
+					visibility: visible;
+				}
+			}
+		}
+		.UserNameWrap--min {
+			max-width: 48em;
 		}
 	}
 

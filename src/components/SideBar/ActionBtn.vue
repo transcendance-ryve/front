@@ -15,10 +15,12 @@
 		hoverColor: string
 		toolTip: string
 		shift?: boolean
+		gameRequest?: boolean
 	}
 
 	const props = withDefaults(defineProps<Props>(), {
-		shift: false
+		shift: false,
+		gameRequest: false
 	})
 
 </script>
@@ -27,6 +29,10 @@
 
 	<button class="ActionBtn">
 		<span class="ActionBtn-logo" v-html="logo"></span>
+		<div class="ActionBtn-game" v-if="gameRequest">
+			<button class="Game-btn" @click="$emit('classic')">Classic</button>
+			<button class="Game-btn" @click="$emit('bonus')">Bonus</button>
+		</div>
 		<ToolTip :value="toolTip" :shift="shift"/>
 	</button>
 
