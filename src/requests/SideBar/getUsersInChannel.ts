@@ -1,7 +1,7 @@
 import useAxios from '@/requests/useAxios'
 import type { axiosState } from '@/requests/useAxios'
 
-const getUsersInChannel = async (id: string, dataState: axiosState) => {
+const getUsersInChannel = async (id: string, dataState: axiosState = {} as axiosState) => {
 
 	dataState.loading = true
 	const { response, loading, error } = await useAxios(

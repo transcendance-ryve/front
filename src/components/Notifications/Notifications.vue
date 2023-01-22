@@ -13,13 +13,14 @@
 
 <script setup lang="ts">
 
-	import { onMounted, onUnmounted } from 'vue';
+	import { onMounted, onUnmounted } from 'vue'
 	import NotifTag from './NotifTag.vue'
 	import { useUserStore } from '@/stores/UserStore'
 	import { useNotifStore } from '@/stores/NotificationsStore'
-	import { useSideBarStore } from '@/stores/SideBarStore';
-	import type { SocketEvent } from '@/types/Socket';
-	import router, { profileRedirect } from '@/router';
+	import { useSideBarStore } from '@/stores/SideBarStore'
+	import type { SocketEvent } from '@/types/Socket'
+	import router, { profileRedirect } from '@/router'
+	import getBlockRelation from '@/requests/Friends/getBlockRelation'
 
 	const	notifStore = useNotifStore()
 	const	userStore = useUserStore()
@@ -149,8 +150,8 @@
 		},
 		{
 			name: 'incomingMessage',
-			callback: (res: any, convId: string) => {
-				if (userStore.me.id === res.sender.id)
+			callback: async (res: any, convId: string) => {
+				if (userStore.me.id === res.sender.id || await getBlockRelation(res.sender.id) === 'targetBlocked')
 					return
 				const	convOpen = sbStore.conv.open
 				if (res.channelName && ((convOpen && sbStore.conv.id !== convId) || !convOpen)) {

@@ -167,7 +167,10 @@
 					<Status :status="data.status"/>
 					<Status v-if="data.usersCount" :users="data.usersCount"/>
 				</div>
-				<div v-if="(data.messages && data.messages[0]?.content) || data.messages?.content" class="LastMsgWrap">
+				<div v-if="(data.messages && data.messages[0]?.content)
+					|| data.messages?.content"
+					class="LastMsgWrap"
+				>
 					<span class="LastMsg">{{data.messages[0]?.content || data.messages.content}}</span>
 				</div>
 			</div>

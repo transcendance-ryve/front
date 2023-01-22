@@ -10,8 +10,8 @@
 	import { useSideBarStore } from '../../stores/SideBarStore'
 	import type { axiosState } from '@/requests/useAxios'
 	import getChannelsByID from '@/requests/SideBar/getChannelByID'
-	import type { Channel } from '@/requests/SideBar/getChannelByID'
 	import getUser from '@/requests/SideBar/getUser'
+	import getUsersInChannel from '@/requests/SideBar/getUsersInChannel'
 	import getMessages from '@/requests/SideBar/getMessages'
 	import getBlockRelation from '@/requests/Friends/getBlockRelation'
 	import getPlayerGame from '@/requests/SideBar/getPlayerGame'
@@ -63,6 +63,12 @@
 		return false
 	}
 
+	const	reloadConv = () => {
+		page = 0
+		messages.value = []
+		getConvMessages()
+	}
+
 	const	removeFriend = () => {
 		socket.emit('remove_friend', { friendId: target.value.id })
 		sbStore.conv.open = false
@@ -82,29 +88,10 @@
 
 	const	friendListeners: SocketEvent[] = [
 		{ name: 'DMChan', callback: (id: string) => { convId.value = id } },
-		{ name: 'incomingMessage', callback: (msg: any) => {
-			// console.log('incomingMessage dm', msg)
-			if (friendBlocked.value && msg.sender.id === target.value.id)
-				msg.content = 'This user is blocked'
-			messages.value.push(msg)
-			totalMsg.value++
-		}},
 		{
 			name: 'targetBlocked',
 			callback: (id: string) => {
 				if (id === sbStore.conv.id) friendBlocked.value = true
-			}
-		},
-		{
-			name: 'user_blocked_submitted',
-			callback: (receiver: Partial<Target>) => {
-				if (receiver.id === sbStore.conv.id) friendBlocked.value = true
-			}
-		},
-		{
-			name: 'user_unblocked_submitted',
-			callback: (receiver: Partial<Target>) => {
-				if (receiver.id === sbStore.conv.id) friendBlocked.value = false
 			}
 		},
 		{
@@ -181,12 +168,6 @@
 				sbStore.state.section = 2
 			}
 		}},
-		{ name: 'incomingMessage', callback: async (msg: any) => {
-			if (await getBlockRelation(msg.sender.id) === 'targetBlocked')
-				msg.content = 'This user is blocked'
-			messages.value.push(msg)
-			totalMsg.value++
-		}},
 		{
 			name: 'roomUpdated', callback: (res: { name: string, status: string, avatar: string }) => {
 				target.value.name = res.name
@@ -195,6 +176,46 @@
 			}
 		},
 		{ name: 'roomLeft', callback: () => { sbStore.conv.open = false; sbStore.state.section = 2 } }
+	]
+
+	const	commonListeners: SocketEvent[] = [
+		{
+			name: 'incomingMessage',
+			callback: async (msg: any) => {
+				if (sbStore.conv.type === 'Friend' && friendBlocked.value && msg.sender.id === target.value.id)
+					msg.content = 'This user is blocked'
+				else if (await getBlockRelation(msg.sender.id) === 'targetBlocked')
+					msg.content = 'This user is blocked'
+				messages.value.push(msg)
+				totalMsg.value++
+			}
+		},
+		{
+			name: 'user_blocked_submitted',
+			callback: (receiver: Partial<Target>) => {
+				if (receiver.id === sbStore.conv.id)
+					friendBlocked.value = true
+				messages.value.forEach((msg: any) => {
+					if (msg.sender.id === receiver.id)
+						msg.content = 'This user is blocked'
+				})
+			}
+		},
+		{
+			name: 'user_unblocked_submitted',
+			callback: async (receiver: Partial<Target>) => {
+				if (sbStore.conv.type === 'Friend' && receiver.id === sbStore.conv.id) {
+					friendBlocked.value = false
+					reloadConv()
+				}
+				else if (sbStore.conv.type === 'Channel') {
+					const	users: Partial<Target>[] = await getUsersInChannel(sbStore.conv.id)
+					if (users.some((user: Partial<Target>) => user.id === receiver.id))
+						reloadConv()
+				}
+			}
+		},
+
 	]
 
 	const	spectate = async () => {
@@ -217,6 +238,7 @@
 			socket.emit('getRole', { channelId: convId.value })
 			chanListeners.forEach(listener => socket.on(listener.name, listener.callback))
 		}
+		commonListeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
 	onUnmounted(() => {
@@ -224,6 +246,7 @@
 			friendListeners.forEach(listener => socket.off(listener.name, listener.callback))
 		else
 			chanListeners.forEach(listener => socket.off(listener.name, listener.callback))
+		commonListeners.forEach(listener => socket.off(listener.name, listener.callback))
 	})
 
 </script>

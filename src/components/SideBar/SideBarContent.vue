@@ -16,6 +16,7 @@
 	import getChannels from '@/requests/SideBar/getChannels'
 	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
 	import getGameRequests from '@/requests/Game/getGameRequests'
+	import getBlockRelation from '@/requests/Friends/getBlockRelation'
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { SocketEvent } from '@/types/Socket'
 
@@ -256,7 +257,9 @@
 		},
 		{
 			name: 'incomingMessage',
-			callback: (res: any, convId: string) => {
+			callback: async (res: any, convId: string) => {
+				if (await getBlockRelation(res.sender.id) === 'targetBlocked')
+					return
 				if (res.channelName && sbStore.state.section === 2 && sbStore.state.channelsState === 1) {
 					const	chan = contentData.value.find(item => item.id === convId)
 					if (chan) chan.messages[0] = { content: res.content }
