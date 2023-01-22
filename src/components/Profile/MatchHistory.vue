@@ -146,10 +146,12 @@
 				:key=index
 			>
 				<VersusTag
+					:class="{'VersusTag--opponent': game.left.id !== props.userId}"
 					:player="game.left"
 					@click="profileRedirect(game.left.id || '')"
 				/>
 				<VersusTag
+					:class="{'VersusTag--opponent': game.right.id !== props.userId}"
 					:player="game.right"
 					:reverse="true"
 					@click="profileRedirect(game.right.id || '')"
