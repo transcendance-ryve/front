@@ -83,7 +83,6 @@
 	})
 
 	onBeforeRouteUpdate(async (to, from) => {
-		console.log('route updating', from.fullPath, to.fullPath, props.userId)
 		if (Object.keys(to.query).length === 0)
 			return false
 		routeUpdating = true
