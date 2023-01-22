@@ -32,6 +32,8 @@
 			return 'allPrivilegesA'
 		else if (props.label === 'Users' && (props.admin || props.owner))
 			return 'allPrivileges'
+		else if ((props.admin && !props.owner) && props.label === 'Administrators')
+			return 'noPrivileges'
 		else if ((!props.admin && !props.owner) && (props.label === 'Administrators' || props.label === 'Users'))
 			return 'noPrivileges'
 		else
