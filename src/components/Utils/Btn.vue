@@ -34,7 +34,7 @@
 	>
 		<span
 			class="Btn-logo"
-			:class="{'Logo--fill': fillLogo == true}"
+			:class="{'Logo--fill': fillLogo === true}"
 			v-if="logo" v-html="logo"
 		>
 		</span>

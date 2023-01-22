@@ -217,10 +217,10 @@
 		<div
 			class="SideBarTag-options"
 			:class="{'SideBarTag-options--protected': data.status === 'PROTECTED'}"
-			v-if="type === 2 && sbStore.state.section != 3"
+			v-if="type === 2 && sbStore.state.section !== 3"
 		>
 			<Btn
-				v-if="sbStore.state.section == 1"
+				v-if="sbStore.state.section === 1"
 				class="SideBarTag-btn"
 				:type=1
 				value="Add"

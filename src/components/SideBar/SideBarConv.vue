@@ -234,7 +234,7 @@
 		<div
 			v-if="!settings"
 			class="SideBarConv-contentWrap"
-			:class="{'ContentWrap--List': userList == true}"
+			:class="{'ContentWrap--List': userList === true}"
 		>
 			<ConvTag
 				v-if="!dataState.error && !dataState.loading"

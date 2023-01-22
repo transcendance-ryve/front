@@ -41,7 +41,7 @@
 		<div class="SideBar-sectionsBtns">
 			<button
 				class="SectionsBtns"
-				:class="{ 'SectionBtns--selected': sbStore.state.section == 1 && sbStore.conv.open != true }"
+				:class="{ 'SectionBtns--selected': sbStore.state.section === 1 && sbStore.conv.open !== true }"
 				@click="sbStore.updateSection(1)"
 			>
 				<span class="SectionsBtns-Logo" v-html="logoFriends"></span>
@@ -50,9 +50,9 @@
 			<button
 				class="SectionsBtns"
 				:class="{ 'SectionBtns--selected':
-					sbStore.state.section == 2 &&
-					sbStore.newChan == false &&
-					sbStore.conv.open != true
+					sbStore.state.section === 2 &&
+					sbStore.newChan === false &&
+					sbStore.conv.open !== true
 				}"
 				@click="sbStore.updateSection(2)"
 			>
@@ -61,15 +61,15 @@
 			</button>
 			<button
 				class="SectionsBtns"
-				:class="{ 'SectionBtns--selected': sbStore.state.section == 3 }"
+				:class="{ 'SectionBtns--selected': sbStore.state.section === 3 }"
 				@click="sbStore.updateSection(3)"
 			>
 				<span class="SectionsBtns-Logo" :class="{'Notif-active': sbStore.notifActive}" v-html="logoNotifs"></span>
 			</button>
 		</div>
 
-		<SideBarConv v-if="sbStore.conv.open == true" />
-		<SideBarNewChan v-else-if="sbStore.newChan == true" />
+		<SideBarConv v-if="sbStore.conv.open === true" />
+		<SideBarNewChan v-else-if="sbStore.newChan === true" />
 		<SideBarContent v-else />
 	</section>
 

@@ -11,12 +11,12 @@
 	}>();
 
 	const	pagesBtn = computed(() => {
-		if (props.pagesSize == 2)
+		if (props.pagesSize === 2)
 			return [1, 2]
 		else if ((props.pagesSize > 1 && props.pagesSize < 4) ||
-			props.pagesSize > 3 && props.page == 1)
+			props.pagesSize > 3 && props.page === 1)
 			return [1, 2, 3]
-		else if (props.pagesSize > 3 && props.page == props.pagesSize)
+		else if (props.pagesSize > 3 && props.page === props.pagesSize)
 			return [props.pagesSize - 2, props.pagesSize - 1, props.pagesSize]
 		else
 			return [props.page -1, props.page, props.page + 1]
@@ -39,7 +39,7 @@
 			v-for="n in pagesBtn"
 			:key=n
 			class="PagesSelector-Btn"
-			:class="{'Pages--selected': page == n}"
+			:class="{'Pages--selected': page === n}"
 			@click="$emit('update', n)"
 		>
 			<span class="Btn-value">{{ n }}</span>

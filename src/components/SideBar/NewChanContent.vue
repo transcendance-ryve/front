@@ -43,7 +43,7 @@
 		if (toFind.value && sectionSelected.value === 'Add') {
 			addList.value = await getUsers(toFind.value, dataState)
 			addList.value = addList.value.filter(user => {
-				return !isInvited(user) && user.id != userStore.me.id
+				return !isInvited(user) && user.id !== userStore.me.id
 			})
 		}
 	})
@@ -52,7 +52,7 @@
 		if (sectionSelected.value === 'Add' && toFind.value) {
 			addList.value = await getUsers(toFind.value, dataState)
 			addList.value = addList.value.filter(user => {
-				return !isInvited(user) && user.id != userStore.me.id
+				return !isInvited(user) && user.id !== userStore.me.id
 			})
 		}
 	})
@@ -98,7 +98,7 @@
 		<div class="Content-btns">
 			<SwitchBtn
 				value="Invitees"
-				:selected="sectionSelected == 'Invitees'"
+				:selected="sectionSelected === 'Invitees'"
 				:logo="logoFriends"
 				height="44em"
 				@click="sectionSelected = 'Invitees'"
@@ -106,7 +106,7 @@
 
 			<SwitchBtn
 				value="Add"
-				:selected="sectionSelected == 'Add'"
+				:selected="sectionSelected === 'Add'"
 				:logo="logoAdd"
 				height="44em"
 				@click="sectionSelected = 'Add'"

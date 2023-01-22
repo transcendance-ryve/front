@@ -13,7 +13,7 @@
 	})
 
 	const	statusClass = computed(() => {
-		if (props.status == 'IN GAME')
+		if (props.status === 'IN GAME')
 			return 'Status--INGAME'
 		else
 		 return 'Status--' + props.status

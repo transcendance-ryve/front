@@ -23,38 +23,38 @@
 	}
 
 	const	btn1 = computed(() => {
-		if (sbStore.state.section == 1)
+		if (sbStore.state.section === 1)
 			return 'Friends list'
-		else if (sbStore.state.section == 2)
+		else if (sbStore.state.section === 2)
 			return 'Channels list'
 		else
 			return 'Games'
 	})
 
 	const	btn2 = computed(() => {
-		if (sbStore.state.section == 1)
+		if (sbStore.state.section === 1)
 			return 'Add friends'
-		else if (sbStore.state.section == 2)
+		else if (sbStore.state.section === 2)
 			return 'Join'
 		else
 			return 'Friends'
 	})
 
 	const	isSelected = (btn: number) => {
-		if ((sbStore.state.section == 1 && sbStore.state.friendsState == btn) ||
-				(sbStore.state.section == 2 && sbStore.state.channelsState == btn) ||
-				(sbStore.state.section == 3 && sbStore.state.notifsState == btn))
+		if ((sbStore.state.section === 1 && sbStore.state.friendsState === btn) ||
+				(sbStore.state.section === 2 && sbStore.state.channelsState === btn) ||
+				(sbStore.state.section === 3 && sbStore.state.notifsState === btn))
 			return true
 		return false
 	}
 
 	const	getLogo = (btn: number) => {
-		if ((sbStore.state.section == 1 || sbStore.state.section == 2) && btn == 1)
+		if ((sbStore.state.section === 1 || sbStore.state.section === 2) && btn === 1)
 			return logoList
-		else if ((sbStore.state.section == 1 || sbStore.state.section == 2) && btn == 2)
+		else if ((sbStore.state.section === 1 || sbStore.state.section === 2) && btn === 2)
 			return logoAdd
 		else {
-			if (btn == 1)
+			if (btn === 1)
 				return logoPlay
 			else
 				return logoFriends

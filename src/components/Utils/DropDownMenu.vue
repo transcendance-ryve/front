@@ -22,7 +22,7 @@
 	const	emit = defineEmits(['select'])
 
 	const	optionsToSelect = computed(() => {
-		return props.options.filter(val => val != props.selectValue)
+		return props.options.filter(val => val !== props.selectValue)
 	})
 
 	const	selectVal = (value: any) => {

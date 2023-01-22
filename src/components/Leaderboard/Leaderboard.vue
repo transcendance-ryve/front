@@ -184,7 +184,7 @@
 		<div
 			v-if="!data.err"
 			class="Leaderboard-content"
-			:class="{'Leaderboard-content--maxSize': pagesCount == 1}"
+			:class="{'Leaderboard-content--maxSize': pagesCount === 1}"
 		>
 			<leaderboardTag
 				v-for="(user, index) in data.users"

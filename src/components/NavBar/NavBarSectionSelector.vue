@@ -19,7 +19,7 @@
 		<RouterLink
 			to="/play"
 			class="Options-link"
-			:class="{'Link--selected': contentStore.state == 1}"
+			:class="{'Link--selected': contentStore.state === 1}"
 			@click="updateState(1)"
 		>
 			<span class="Link-logo" v-html="logoPlay"></span>
@@ -28,7 +28,7 @@
 		<RouterLink
 			to="/leaderboard"
 			class="Options-link"
-			:class="{'Link--selected': contentStore.state == 2}"
+			:class="{'Link--selected': contentStore.state === 2}"
 			@click="updateState(2)"
 		>
 			<span class="Link-logo" v-html="logoLeaderboard"></span>
@@ -37,7 +37,7 @@
 		<RouterLink
 			to="/spectate"
 			class="Options-link"
-			:class="{'Link--selected': contentStore.state == 3}"
+			:class="{'Link--selected': contentStore.state === 3}"
 			@click="updateState(3)"
 		>
 			<span class="Link-logo" v-html="logoSpectate"></span>

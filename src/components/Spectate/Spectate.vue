@@ -158,7 +158,7 @@
 				</button>
 				<button
 					class="OrderBtn"
-					:class="{'OrderBtn--selected': queries.order == 'asc'}"
+					:class="{'OrderBtn--selected': queries.order === 'asc'}"
 					@click="queries.order = 'asc'"
 				>
 					<span class="OrderBtn-logo" v-html="logoAsc"></span>

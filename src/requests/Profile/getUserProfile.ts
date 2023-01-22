@@ -17,7 +17,7 @@ const	getType = (id: string, status: string, senderId: string) => {
 const getUserProfile = async (id: string, data: ProfileData) => {
 	const userStore = useUserStore()
 
-	if (id == userStore.me.id) {
+	if (id === userStore.me.id) {
 		data.type = 1
 		data.user = userStore.me
 	}

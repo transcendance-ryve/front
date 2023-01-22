@@ -296,7 +296,7 @@
 		<SearchInput @search="(val) => toFind = val"/>
 
 		<button
-			v-if="sbStore.state.section == 2 && sbStore.state.channelsState == 1"
+			v-if="sbStore.state.section === 2 && sbStore.state.channelsState === 1"
 			class="Content-newChanBtn"
 			@click="sbStore.newChan = true"
 		>

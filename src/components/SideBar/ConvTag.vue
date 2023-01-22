@@ -81,7 +81,7 @@
 						<span class="Infos-name">{{ target.name || target.username }}</span>
 						<Status :status="target.status"/>
 					</div>
-					<div class="Infos-options" v-if="type == 'Friend'">
+					<div class="Infos-options" v-if="type === 'Friend'">
 						<ActionBtn
 							:class="{'ActionBtn--block': option.name === 'unblock'}"
 							v-for="(option, index) in actionBtns"
@@ -100,7 +100,7 @@
 					v-for="(btn, index) in btns"
 					:key="index"
 					class="ConvTag-Btns"
-					:class="{'ConvTag-Btns--smallLogo': btn.name == 'Conversation' || btn.name == 'Quit'}"
+					:class="{'ConvTag-Btns--smallLogo': btn.name === 'Conversation' || btn.name === 'Quit'}"
 					@click="$emit(btn.name)"
 				>
 					<span class="ConvTag-Btns-logo" v-html="btn.logo"></span>

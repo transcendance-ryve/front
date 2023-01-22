@@ -27,7 +27,7 @@
 			@resetPassword="resetPassword"
 			@tfaCode="tfaCallback"
 		/>
-		<div class="Login-redirect" v-if="router.currentRoute.value.name == 'register'">
+		<div class="Login-redirect" v-if="router.currentRoute.value.name === 'register'">
 			<span>Already have an account ?</span>
 			<button @click="loginRedirect()">Login here</button>
 		</div>
