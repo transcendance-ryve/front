@@ -41,10 +41,21 @@ export const useSideBarStore = defineStore('sbStore', () => {
 	}
 
 	function	openConv(type: string, id: string = '', focus: boolean = true) {
-		conv.open = true
-		conv.type = type
-		conv.id = id
-		conv.focus = focus
+		if (conv.open) {
+			conv.open = false
+			setTimeout(() => {
+				conv.open = true
+				conv.type = type
+				conv.id = id
+				conv.focus = focus
+			}, 0)
+		}
+		else {
+			conv.open = true
+			conv.type = type
+			conv.id = id
+			conv.focus = focus
+		}
 	}
 
 	function	resetState() {
