@@ -119,7 +119,6 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-	console.log(from.fullPath, to.fullPath)
 	const	userStore = useUserStore()
 
 	if (!to.fullPath.includes('/accounts') && !userStore.loginApi
