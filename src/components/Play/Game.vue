@@ -317,7 +317,7 @@
 				clearInterval(countdown.timer);
 				return;
 			}
-		}, 1000);
+		}, 100);
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
