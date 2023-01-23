@@ -31,6 +31,10 @@ html, body, #app {
 	font-family: 'Poppins';
 }
 
+#app {
+	position: relative;
+}
+
 span {
 	-moz-user-select: none; /* Firefox */
 	-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */

@@ -16,7 +16,11 @@
 
 	.NotifTag-closeBtn {
 		cursor: pointer;
+		width: 36em;
+		height: 36em;
 		svg {
+			width: 100%;
+			height: 100%;
 			fill: $white-200;
 			transition: fill .15s;
 		}

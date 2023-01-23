@@ -4,7 +4,20 @@
 	align-items: flex-start;	//
 	position: absolute;
 	left: 0;
-	top: 20em;
+	top: 134px;
 	gap: 12em;
 	z-index: 2;
+
+	@media (min-width: 1920px) {
+		font-size: 1px;
+	}
+
+	@media (max-width: $laptopL) {
+		top: 120px;
+		font-size: 0.8px;
+	}
+
+	@media (max-width: $tablet) {
+		font-size: 0.7px;
+	}
 }
