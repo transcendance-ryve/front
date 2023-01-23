@@ -276,7 +276,10 @@
 		if (!ctx || !canvas.value) return;
 		
 		ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
-		if (bonus.spawned)
+		
+		drawPaddles(game.paddles);
+		drawBall(game.ball);
+		if (bonus.spawned) {
 			ctx.drawImage(
 				bonusImg,
 				bonus.x * ratio.x,
@@ -284,8 +287,7 @@
 				(bonus.w * ratio.x + bonus.h * ratio.y) / 2,
 				(bonus.w * ratio.x + bonus.h * ratio.y) / 2,
 			);
-		drawPaddles(game.paddles);
-		drawBall(game.ball);
+		}
 	}
 
 	const start = (data: { players: Players, width: number, height: number, startTime: number }): void => {
