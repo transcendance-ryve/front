@@ -10,7 +10,7 @@ export const	auth42 = async () => {
 
 export async function	callBack(code: string) {
 	const	res = await useAxios('get', 'auth/42/callback?code=' + code)
-	if (res.response.value) {
+	if (!res.error.value && res.response.value) {
 		const { tfa, token, id } = res.response.value
 
 		if (tfa)

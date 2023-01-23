@@ -33,7 +33,7 @@ const	useAxios = async (method: Methods, url: string, body: object | any = null,
 			userStore.loginApi = false
 			sbStore.resetState()
 			if (!router.currentRoute.value.fullPath.includes('/accounts'))
-				router.push({ path: '/accounts' })
+					router.push({ path: '/accounts' })
 		}
 		error.value = err
 	}
