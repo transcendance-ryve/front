@@ -3,7 +3,7 @@ import useAxios from '@/requests/useAxios'
 
 const setAvatar = async (old_password: string, password: string) => {
 
-	const { response, loading, error } = await useAxios(
+	const { error } = await useAxios(
 		'put',
 		'/users/password',
 		{ old_password, password },
@@ -12,9 +12,6 @@ const setAvatar = async (old_password: string, password: string) => {
 		if (error.value.response?.status === 409) {
 			return false
 		}
-	}
-	else if (response.value) {
-		//	handle success
 	}
 	return true
 }

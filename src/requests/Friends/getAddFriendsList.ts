@@ -10,11 +10,9 @@ const getAddFriendsList = async (toFind: string, dataState: axiosState) => {
 		'/users/friends/relationship'
 		+ '?select=id,username,avatar,status&search=' + toFind
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		const	res: Partial<ContentData>[] = []
 		response.value.users.forEach((item: any) => {
 			if (item.status === 'NONE') {

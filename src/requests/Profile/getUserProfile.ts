@@ -29,10 +29,7 @@ const getUserProfile = async (id: string, data: ProfileData) => {
 			+ id
 			+ '?select=id,username,avatar,level,experience,next_level,rank_point,wins,loses,played'
 		)
-		if (error.value) {
-			//	handle errors
-		}
-		else if (response.value) {
+		if (!error.value) {
 			data.type = getType(id, response.value.status, response.value.sender)
 			data.user = response.value.user
 		}

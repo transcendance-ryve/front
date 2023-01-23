@@ -108,16 +108,12 @@
 		if (settingsData.newPassword) {
 			if (await setPassword(settingsData.oldPassword, settingsData.newPassword))
 				update = true
-			else
-				notifStore.addNotif('error', 'Error', 'Wrong password')
 		}
 		if (settingsData.state2FA !== userStore.me.tfa_enabled) {
 			if (await toggle2FA(settingsData.code2FA))
 				update = true
-			else {
+			else
 				settingsData.state2FA = !settingsData.state2FA
-				notifStore.addNotif('error', 'Error', 'Wrong 2FA code')
-			}
 		}
 		if (update) 
 			notifStore.addNotif('success', 'Success', 'Settings updated')
