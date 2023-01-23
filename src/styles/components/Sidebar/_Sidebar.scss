@@ -86,7 +86,23 @@
 			right: -350px;
 		}
 		@media (max-width: $tablet) {
-			right: -430px;
+			@media (min-height: 790px) {
+				right: -430px;
+			}
+			@media (max-height: 790px) {
+				right: -360px;
+			}
+		}
+	}
+
+	@media (max-width: 640px) {
+		width: 350px;
+		right: -330px;
+		font-size: 0.8px;
+		@media (max-height: 790px) {
+			width: 300px;
+			right: -280px;
+			font-size: 0.76px;
 		}
 	}
 
