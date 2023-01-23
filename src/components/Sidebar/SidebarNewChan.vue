@@ -30,7 +30,8 @@
 	const	uploadAvatar = (e:any) => {
 		form.avatarFile = e.target.files[0]
 		const	reader: FileReader = new FileReader()
-		reader.readAsDataURL(form.avatarFile as File)
+		if (form.avatarFile)
+			reader.readAsDataURL(form.avatarFile as File)
 		reader.onload = (e:any) => {
 			form.avatar = e.target.result
 		}

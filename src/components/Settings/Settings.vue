@@ -46,7 +46,8 @@
 	const	uploadAvatar = (e:any) => {
 		settingsData.avatarFile = e.target.files[0]
 		const	reader: FileReader = new FileReader()
-		reader.readAsDataURL(settingsData.avatarFile as File)
+		if (settingsData.avatarFile)
+			reader.readAsDataURL(settingsData.avatarFile as File)
 		reader.onload = (e:any) => {
 			settingsData.avatar = e.target.result
 		}
