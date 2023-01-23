@@ -7,15 +7,15 @@
 
 	const	updateState = (value: number) => {
 		contentStore.state = value
-		if (contentStore.navBarListOpen)
-			contentStore.navBarListOpen = false
+		if (contentStore.navbarListOpen)
+			contentStore.navbarListOpen = false
 	}
 
 </script>
 
 <template>
 
-	<div class="NavBarSectionSelector">
+	<div class="NavbarSectionSelector">
 		<RouterLink
 			to="/play"
 			class="Options-link"

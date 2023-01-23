@@ -3,7 +3,7 @@
 	import { onMounted, onUnmounted, reactive, watch, ref, type Ref, nextTick } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import { useSideBarStore } from '@/stores/SideBarStore'
+	import { useSidebarStore } from '@/stores/SidebarStore'
 	import SearchInput from '../Utils/SearchInput.vue'
 	import { logoDesc, logoAsc } from '../../assets/logoSVG'
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
@@ -17,7 +17,7 @@
 
 	const	contentStore = useContentStore()
 	contentStore.state = 3
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 
 	const	data: SpectateData = reactive({
 		games: [],

@@ -1,22 +1,22 @@
 <script setup lang="ts">
 
 	import { reactive, ref, watch, computed, type Ref, onMounted, onUnmounted } from 'vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '../../stores/SidebarStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import SideBarSwitch from './SideBarSwitch.vue'
+	import SidebarSwitch from './SidebarSwitch.vue'
 	import SearchInput from '../Utils/SearchInput.vue'
-	import SideBarTag from './SideBarTag.vue'
+	import SidebarTag from './SidebarTag.vue'
 	import router, { profileRedirect } from '@/router'
 	import type { axiosState } from '@/requests/useAxios'
 	import type { ContentData } from '@/types/Sidebar'
-	import getFriends from '@/requests/Friends/getFriends'
-	import getAddFriendsList from '@/requests/Friends/getAddFriendsList'
-	import getFriendsRequests from '@/requests/Friends/getFriendsRequests'
-	import getMyChannels from '@/requests/SideBar/getMyChannels'
-	import getChannels from '@/requests/SideBar/getChannels'
-	import getChannelsNotifs from '@/requests/SideBar/getChannelsNotifs'
-	import getGameRequests from '@/requests/Game/getGameRequests'
-	import getBlockRelation from '@/requests/Friends/getBlockRelation'
+	import getFriends from '@/requests/Sidebar/Friends/getFriends'
+	import getAddFriendsList from '@/requests/Sidebar/Friends/getAddFriendsList'
+	import getFriendsRequests from '@/requests/Sidebar/Friends/getFriendsRequests'
+	import getMyChannels from '@/requests/Sidebar/Channels/getMyChannels'
+	import getChannels from '@/requests/Sidebar/Channels/getChannels'
+	import getChannelsNotifs from '@/requests/Sidebar/Channels/getChannelsNotifs'
+	import getGameRequests from '@/requests/Sidebar/Games/getGameRequests'
+	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { SocketEvent } from '@/types/Socket'
 
@@ -24,7 +24,7 @@
 		error: null,
 		loading: false
 	})
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 
@@ -293,10 +293,10 @@
 
 <template>
 
-	<div class="SideBar-content-wrap">
-		<SideBarSwitch/>
+	<div class="Sidebar-content-wrap">
+		<SidebarSwitch/>
 
-		<SearchInput @search="(val) => toFind = val"/>
+		<SearchInput @search="(val: string) => toFind = val"/>
 
 		<button
 			v-if="sbStore.state.section === 2 && sbStore.state.channelsState === 1"
@@ -306,8 +306,8 @@
 			<span class="NewChanBtn-value">Create new channel</span>
 		</button>
 
-		<div class="SideBar-content" v-if="!dataState.error">
-			<SideBarTag
+		<div class="Sidebar-content" v-if="!dataState.error">
+			<SidebarTag
 				v-for="(item, index) in data"
 				:key="index"
 				:data="item"

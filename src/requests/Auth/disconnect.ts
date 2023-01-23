@@ -1,7 +1,7 @@
 import useAxios from '@/requests/useAxios'
 import router from '@/router'
 import { useUserStore } from '@/stores/UserStore'
-import { useSideBarStore } from '@/stores/SideBarStore'
+import { useSidebarStore } from '@/stores/SidebarStore'
 import type { UserConnected } from '@/types/User'
 
 const disconnect = async () => {
@@ -13,7 +13,7 @@ const disconnect = async () => {
 	if (!error.value) {
 		localStorage.clear()
 		const	userStore = useUserStore()
-		const	sbStore = useSideBarStore()
+		const	sbStore = useSidebarStore()
 		userStore.me = {} as UserConnected
 		userStore.loginApi = false
 		userStore.socket.disconnect()

@@ -7,14 +7,14 @@
 	import ChanSettings from './ChanSettings.vue'
 	import BaseInput from '../Utils/BaseInput.vue'
 	import { logoSend } from '../../assets/logoSVG'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '../../stores/SidebarStore'
 	import type { axiosState } from '@/requests/useAxios'
-	import getChannelsByID from '@/requests/SideBar/getChannelByID'
-	import getUser from '@/requests/SideBar/getUser'
-	import getUsersInChannel from '@/requests/SideBar/getUsersInChannel'
-	import getMessages from '@/requests/SideBar/getMessages'
-	import getBlockRelation from '@/requests/Friends/getBlockRelation'
-	import getPlayerGame from '@/requests/SideBar/getPlayerGame'
+	import getChannelsByID from '@/requests/Sidebar/Channels/getChannelByID'
+	import getUser from '@/requests/Sidebar/getUser'
+	import getUsersInChannel from '@/requests/Sidebar/Channels/getUsersInChannel'
+	import getMessages from '@/requests/Sidebar/getMessages'
+	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
+	import getPlayerGame from '@/requests/Sidebar/Games/getPlayerGame'
 	import { useUserStore } from '@/stores/UserStore'
 	import type { Target } from '@/types/User'
 	import type { TargetTag } from '@/types/User'
@@ -35,7 +35,7 @@
 		createdAt: 0
 	})
 
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	input: Ref<string> = ref('')
 	const	userList = ref(false)
 	const	settings = ref(false)
@@ -253,10 +253,10 @@
 
 <template>
 
-	<div class="SideBarConv">
+	<div class="SidebarConv">
 		<div
 			v-if="!settings"
-			class="SideBarConv-contentWrap"
+			class="SidebarConv-contentWrap"
 			:class="{'ContentWrap--List': userList === true}"
 		>
 			<ConvTag

@@ -5,7 +5,7 @@
 	import { useUserStore } from '../../stores/UserStore'
 	import router from '../../router/index' //
 	import { logoRyve } from '../../assets/logoSVG'
-	import NavBarSectionSelector from './NavBarSectionSelector.vue'
+	import NavbarSectionSelector from './NavbarSectionSelector.vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import UserMenu from './UserMenu.vue'
 
@@ -17,15 +17,15 @@
 	const	manageResponsive = () => {
 		if (window.innerWidth <= 1440)
 			userInfoXS.value = true
-		else if (contentStore.navBarListOpen)
-			contentStore.navBarListOpen = false
+		else if (contentStore.navbarListOpen)
+			contentStore.navbarListOpen = false
 		window.addEventListener('resize', () => {
 			if (window.innerWidth <= 1440)
 				userInfoXS.value = true
 			else
 				userInfoXS.value = false
-			if (window.innerWidth > 768 && contentStore.navBarListOpen)
-				contentStore.navBarListOpen = false
+			if (window.innerWidth > 768 && contentStore.navbarListOpen)
+				contentStore.navbarListOpen = false
 		})
 	}
 	manageResponsive()
@@ -34,25 +34,25 @@
 
 <template>
 
-	<div class="NavBar-wrapper">
-		<div class="NavBar">
+	<div class="Navbar-wrapper">
+		<div class="Navbar">
 			<img
-				v-if="!contentStore.navBarListOpen"
-				class="NavBarList-logo"
+				v-if="!contentStore.navbarListOpen"
+				class="NavbarList-logo"
 				src="../../assets/logoList.svg"
 				alt="list"
-				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
+				@click="contentStore.navbarListOpen = !contentStore.navbarListOpen"
 			>
 			<img
 				v-else
-				class="NavBarList-logo"
+				class="NavbarList-logo"
 				src="../../assets/logoCross.svg"
 				alt="list"
-				@click="contentStore.navBarListOpen = !contentStore.navBarListOpen"
+				@click="contentStore.navbarListOpen = !contentStore.navbarListOpen"
 			>
-			<span class="NavBar-logo" v-html="logoRyve" @click="router.push({ path:'/' })"></span>
-			<div class="NavBar-content">
-				<NavBarSectionSelector class="Content-options"/>
+			<span class="Navbar-logo" v-html="logoRyve" @click="router.push({ path:'/' })"></span>
+			<div class="Navbar-content">
+				<NavbarSectionSelector class="Content-options"/>
 				<UserInfos
 					:user="userStore.me"
 					xpBackground="#242635"
@@ -63,8 +63,8 @@
 				</UserInfos>
 			</div>
 		</div>
-		<div class="NavBarList-options" v-if="contentStore.navBarListOpen">
-			<NavBarSectionSelector/>
+		<div class="NavbarList-options" v-if="contentStore.navbarListOpen">
+			<NavbarSectionSelector/>
 		</div>
 	</div>
 

@@ -7,7 +7,7 @@
 	import StatusBtns from './StatusBtns.vue'
 	import Btn from '../Utils/Btn.vue'
 	import ConvList from './ConvList.vue'
-	import editChannel from '@/requests/SideBar/editChannel'
+	import editChannel from '@/requests/Sidebar/Channels/editChannel'
 	import type { EditChanForm } from '@/types/Forms'
 	import type { Target } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'

@@ -2,7 +2,7 @@ import axios, { type AxiosResponse } from 'axios'
 import { ref, type Ref } from 'vue'
 import router from '../router/index'
 import { useUserStore } from '../stores/UserStore'
-import { useSideBarStore } from '@/stores/SideBarStore'
+import { useSidebarStore } from '@/stores/SidebarStore'
 import type { UserConnected } from '@/types/User'
 import { useNotifStore } from '@/stores/NotificationsStore'
 
@@ -26,7 +26,7 @@ const	useAxios = async (method: Methods, url: string, body: object | any = null,
 		useNotifStore().addNotif('error', 'Error', err.response?.data?.message)
 		if (err.response?.status === 401) {
 			const	userStore = useUserStore()
-			const	sbStore = useSideBarStore()
+			const	sbStore = useSidebarStore()
 
 			localStorage.clear()
 			userStore.me = {} as UserConnected

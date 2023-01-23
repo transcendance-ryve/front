@@ -1,4 +1,4 @@
-.NavBar-wrapper {
+.Navbar-wrapper {
 	font-size: 1px;
 	display: flex;
 	flex-direction: column;
@@ -8,19 +8,19 @@
 	box-shadow: 0 4em 6em rgba(0, 0, 0, 0.2);
 	position: relative;
 
-	.NavBar {
+	.Navbar {
 		width: 100%;
 		max-width: 1792px;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
-		.NavBarList-logo {
+		.NavbarList-logo {
 			display: none;
 			cursor: pointer;
 		}
 
-		.NavBar-logo {
+		.Navbar-logo {
 			cursor: pointer;
 			width: 84em;
 			height: 66em;
@@ -31,7 +31,7 @@
 			}
 		}
 
-		.NavBar-content {
+		.Navbar-content {
 			display: flex;
 			gap: 96em;
 		}
@@ -46,7 +46,7 @@
 		}
 	}
 
-	.NavBarList-options {
+	.NavbarList-options {
 		display: flex;
 		justify-content: center;
 		position: absolute;
@@ -57,7 +57,7 @@
 		background: $background-700;
 		box-shadow: 0 6em 6em rgba(0, 0, 0, 0.3);
 
-		.NavBarSectionSelector {
+		.NavbarSectionSelector {
 			display: flex;
 			flex-direction: column;
 			height: auto;
@@ -70,12 +70,12 @@
 
 	@media (max-width: $laptopL) {
 		padding: 24em 42em;
-		.NavBar {
-			.NavBar-logo {
+		.Navbar {
+			.Navbar-logo {
 				width: 66em;
 				height: 52em;
 			}
-			.NavBar-content {
+			.Navbar-content {
 				gap: 40em;
 			}
 		}
@@ -83,8 +83,8 @@
 
 	@media (max-width: $tablet) {
 		padding: 24em 32em;
-			.NavBar {
-			.NavBarList-logo {
+			.Navbar {
+			.NavbarList-logo {
 				display: block;
 				width: 30em;
 				margin-right: 150em;
@@ -96,8 +96,8 @@
 	}
 
 	@media (max-width: 580px) {
-			.NavBar {
-			.NavBarList-logo {
+			.Navbar {
+			.NavbarList-logo {
 				margin-right: 22em;
 			}
 			.UserInfos {

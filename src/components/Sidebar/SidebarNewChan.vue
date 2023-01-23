@@ -10,13 +10,13 @@
 	import StatusBtns from './StatusBtns.vue'
 	import NewChanContent from './NewChanContent.vue'
 	import Btn from '../Utils/Btn.vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '../../stores/SidebarStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import createRoom from '@/requests/SideBar/createRoom'
+	import createRoom from '@/requests/Sidebar/Channels/createRoom'
 	import type { CreateChanForm } from '@/types/Forms'
 	import type { SocketEvent } from '@/types/Socket'
 
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 
 	const	form: CreateChanForm = reactive({
 		name: '',
@@ -69,7 +69,7 @@
 
 <template>
 
-	<div class="SideBar-newChan">
+	<div class="Sidebar-newChan">
 		<div class="NewChan-infos">
 			<UploadAvatar :avatar="form.avatar" id="channelAvatar-input" @change="uploadAvatar"/>
 			<div class="Infos-content">
@@ -81,7 +81,7 @@
 					inputHeight="42em"
 					inputFont="500 14em 'Poppins'"
 				/>
-				<StatusBtns :status="form.status" @statusChanged="status => form.status = status"/>
+				<StatusBtns :status="form.status" @statusChanged="(status: string) => form.status = status"/>
 			</div>
 		</div>
 

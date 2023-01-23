@@ -1,16 +1,16 @@
 <script setup lang="ts">
 
 	import { onMounted, onUnmounted } from 'vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '@/stores/SidebarStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import SideBarContent from './SideBarContent.vue'
-	import SideBarConv from './SideBarConv.vue'
-	import SideBarNewChan from './SideBarNewChan.vue'
+	import SidebarContent from './SidebarContent.vue'
+	import SidebarConv from './SidebarConv.vue'
+	import SidebarNewChan from './SidebarNewChan.vue'
 	import { logoFriends, logoChannels, logoNotifs } from '../../assets/logoSVG'
 	import type { SocketEvent } from '@/types/Socket'
 	import router from '@/router'
 
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	socket = useUserStore().socket
 	const	listeners: SocketEvent[] = [
 		{ name: 'private_game_request', callback: () => sbStore.notifications.game++ },
@@ -38,7 +38,7 @@
 <template>
 
 	<section class="BodyLayout-sidebar">
-		<div class="SideBar-sectionsBtns">
+		<div class="Sidebar-sectionsBtns">
 			<button
 				class="SectionsBtns"
 				:class="{ 'SectionBtns--selected': sbStore.state.section === 1 && sbStore.conv.open !== true }"
@@ -68,9 +68,9 @@
 			</button>
 		</div>
 
-		<SideBarConv v-if="sbStore.conv.open === true" />
-		<SideBarNewChan v-else-if="sbStore.newChan === true" />
-		<SideBarContent v-else />
+		<SidebarConv v-if="sbStore.conv.open === true" />
+		<SidebarNewChan v-else-if="sbStore.newChan === true" />
+		<SidebarContent v-else />
 	</section>
 
 </template>

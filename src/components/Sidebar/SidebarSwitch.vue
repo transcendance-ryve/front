@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 	import { computed } from 'vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '../../stores/SidebarStore'
 	import SwitchBtn from './SwitchBtn.vue'
 	import {
 		logoList,
@@ -11,7 +11,7 @@
 		logoChannels
 		} from '../../assets/logoSVG'
 
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 
 	const	updateState = (newVal: number) => {
 		if (sbStore.state.section === 1)
@@ -66,7 +66,7 @@
 
 <template>
 
-	<div class="SideBar-switch">
+	<div class="Sidebar-switch">
 		<SwitchBtn
 			:value="btn1"
 			:selected="isSelected(1)"
@@ -94,7 +94,7 @@
 
 <style lang="scss">
 
-	.SideBar-switch {
+	.Sidebar-switch {
 		display: flex;
 	}
 

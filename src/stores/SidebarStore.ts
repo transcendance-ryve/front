@@ -1,7 +1,7 @@
 import { ref, type Ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useSideBarStore = defineStore('sbStore', () => {
+export const useSidebarStore = defineStore('sbStore', () => {
 
 	const	state = reactive({
 		section: 1,

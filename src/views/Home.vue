@@ -1,11 +1,11 @@
 <template>
 	<div class="Home" v-if="userStore.loginApi">
-		<NavBar />
+		<Navbar />
 		<main class="BodyLayout">
 			<section class="BodyLayout-mainContent">
 				<RouterView />
 			</section>
-			<SideBar />
+			<Sidebar />
 		</main>
 	</div>
 
@@ -16,16 +16,16 @@
 	import { onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '../stores/UserStore'
 	import { useNotifStore } from '../stores/NotificationsStore'
-	import { useSideBarStore } from '../stores/SideBarStore'
+	import { useSidebarStore } from '../stores/SidebarStore'
 	import { RouterView } from 'vue-router'
 	import router, { profileRedirect } from '@/router'
-	import NavBar from '../components/NavBar/NavBar.vue'
-	import SideBar from '../components/SideBar/SideBar.vue'
-	import getBlockRelation from '@/requests/Friends/getBlockRelation'
+	import Navbar from '../components/Navbar/Navbar.vue'
+	import Sidebar from '../components/Sidebar/Sidebar.vue'
+	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
 	import type { SocketEvent } from '@/types/Socket'
 	
 	const	notifStore = useNotifStore()
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	userStore = useUserStore()
 	userStore.connectSocket()
 

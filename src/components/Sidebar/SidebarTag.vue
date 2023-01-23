@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 	import { ref, reactive, type Ref, onMounted, onUnmounted, toRef } from 'vue'
-	import { useSideBarStore } from '../../stores/SideBarStore'
+	import { useSidebarStore } from '../../stores/SidebarStore'
 	import { useUserStore } from '@/stores/UserStore'
 	import { logoPlay, logoSend, logoAdd, logoJoin, logoAccept, logoRefuse, logoLock, logoPlayCircle } from '../../assets/logoSVG'
 	import Status from './Status.vue'
@@ -10,7 +10,7 @@
 	import type { ContentData } from '@/types/Sidebar'
 	import type { User } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
-	import getPlayerGame from '@/requests/SideBar/getPlayerGame'
+	import getPlayerGame from '@/requests/Sidebar/Games/getPlayerGame'
 	import router from '@/router'
 
 	export interface Props {
@@ -19,7 +19,7 @@
 
 	const	props = defineProps<Props>()
 	const	type: Ref<number> = ref(0)
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	password: Ref<string> = ref('')
@@ -152,10 +152,10 @@
 <template>
 
 	<div
-		class="SideBarTag"
+		class="SidebarTag"
 		:class="{countdown: sbStore.state.section === 3 && type === 1}"
 	>
-		<div class="SideBarTag-content">
+		<div class="SidebarTag-content">
 			<img
 				class="Content-avatar"
 				:src="data.avatar"
@@ -176,10 +176,10 @@
 			</div>
 		</div>
 
-		<div class="SideBarTag-options" v-if="(sbStore.state.section === 1 && type === 1)">
+		<div class="SidebarTag-options" v-if="(sbStore.state.section === 1 && type === 1)">
 			<Btn
 				v-if="!gamemode.show"
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=1
 				:value="data.status === 'INGAME' ? 'Spectate' : 'Invite to party'"
 				:logo="data.status === 'INGAME' ? logoPlayCircle : logoPlay"
@@ -189,7 +189,7 @@
 			/>
 			<Btn
 				v-if="!gamemode.show"
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=2
 				value="Send message"
 				:logo="logoSend"
@@ -199,7 +199,7 @@
 			/>
 			<Btn
 				v-if="gamemode.show"
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=1
 				value="Classic"
 				width="185em"
@@ -208,7 +208,7 @@
 			/>
 			<Btn
 				v-if="gamemode.show"
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=2
 				value="Bonus"
 				width="185em"
@@ -218,13 +218,13 @@
 
 		</div>
 		<div
-			class="SideBarTag-options"
-			:class="{'SideBarTag-options--protected': data.status === 'PROTECTED'}"
+			class="SidebarTag-options"
+			:class="{'SidebarTag-options--protected': data.status === 'PROTECTED'}"
 			v-if="type === 2 && sbStore.state.section !== 3"
 		>
 			<Btn
 				v-if="sbStore.state.section === 1"
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=1
 				value="Add"
 				:logo="logoAdd"
@@ -247,8 +247,8 @@
 
 			<Btn
 				v-if="sbStore.state.section === 2"
-				class="SideBarTag-btn"
-				:class="{'SideBarTag-btn--inactive': !password}"
+				class="SidebarTag-btn"
+				:class="{'SidebarTag-btn--inactive': !password}"
 				:type=1
 				value="Join"
 				:logo="logoJoin"
@@ -258,9 +258,9 @@
 			/>
 		</div>
 
-		<div v-if="sbStore.state.section === 3" class="SideBarTag-options">
+		<div v-if="sbStore.state.section === 3" class="SidebarTag-options">
 			<Btn
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=1
 				value="Accept"
 				:logo="logoAccept"
@@ -269,7 +269,7 @@
 				@click.stop="notifAccept(data.id || '')"
 			/>
 			<Btn
-				class="SideBarTag-btn"
+				class="SidebarTag-btn"
 				:type=2
 				value="Refuse"
 				:logo="logoRefuse"
@@ -284,7 +284,7 @@
 </template>
 
 <style>
-	.SideBarTag.countdown::after {
+	.SidebarTag.countdown::after {
 		width: v-bind(timerPercent);
 	}
 </style>

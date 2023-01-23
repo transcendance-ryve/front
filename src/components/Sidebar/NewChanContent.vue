@@ -8,7 +8,7 @@
 	import LoaderSpinner from '../Utils/LoaderSpinner.vue'
 	import type { TargetTag } from '@/types/User'
 	import { useUserStore } from '@/stores/UserStore'
-	import getUsers from '@/requests/SideBar/getUsers'
+	import getUsers from '@/requests/Sidebar/getUsers'
 	import type { axiosState } from '@/requests/useAxios'
 	import { profileRedirect } from '@/router/index'
 
