@@ -35,7 +35,7 @@
 		:class="[classNames, {'NotifTag--close': notifClose }]"
 		@click="notif.handleClick"
 	>
-		<span class="NotifTag-closeBtn" v-html="logoCloseNotif" @click="closeNotif()"></span>
+		<span class="NotifTag-closeBtn" v-html="logoCloseNotif" @click.stop="closeNotif()"></span>
 		<div class="NotifTag-content">
 			<img v-if="notif.avatar" class="Content-avatar" :src="notif.avatar" alt="">
 			<div class="Content-text">
