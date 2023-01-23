@@ -18,9 +18,9 @@
 			return true;
 		const	currentMessage = props.messages[index],
 				prevMessage = props.messages[index - 1];
-		const	currentTime = new Date(currentMessage.createdAt).getUTCMinutes(),
-				prevTime = new Date(prevMessage.createdAt).getUTCMinutes();
-		if (currentTime - prevTime > 3)
+		const	currentTime: number = new Date(currentMessage.createdAt).getTime(),
+				prevTime: number = new Date(prevMessage.createdAt).getTime();
+		if (currentTime - prevTime >= 30000)
 			return true;
 		return false;
 	}
