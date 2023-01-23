@@ -10,6 +10,7 @@
 	} from '@vuelidate/validators'
 	import { logoLock } from '../../assets/logoSVG'
 	import type { ResetPasswordForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore'
 
 	const	formData: ResetPasswordForm = reactive({
 		password: '',
@@ -31,14 +32,14 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const emit = defineEmits(['resetPassword'])
-
+	const	emit = defineEmits(['resetPassword'])
+	const	{ addNotif } = useNotifStore()
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)
 			emit('resetPassword', formData.password)
 		else
-			alert('error, form not submitted')
+			addNotif('error', 'Error', 'Invalid form')
 	}
 
 	onMounted(() => {

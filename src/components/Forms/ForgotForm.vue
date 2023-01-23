@@ -5,6 +5,7 @@
 	import { required, email, helpers } from '@vuelidate/validators'
 	import { logoEmail } from '../../assets/logoSVG'
 	import type { ForgotPasswordForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore'
 
 	const	formData: ForgotPasswordForm = reactive({
 		email: '',
@@ -22,13 +23,13 @@
 	const	v$ = useVuelidate(rules, formData)
 
 	const	emit = defineEmits(['forgotPassword'])
-
+	const	{ addNotif } = useNotifStore()
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)
 			emit('forgotPassword', formData.email)
 		else
-			alert('error, form not submitted')
+			addNotif('error', 'Error', 'Invalid form')
 	}
 
 	onMounted(() => {
