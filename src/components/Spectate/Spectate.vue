@@ -187,7 +187,7 @@
 			<LoaderSpinner size="30em" v-if="data.loadingData"/>
 			<span
 					class="Content-noResult"
-					v-if="queries.search && !data.loadingData && !data.err && !data.games.length"
+					v-if="!data.loadingData && !data.err && !data.games.length"
 				>
 					No results
 			</span>
