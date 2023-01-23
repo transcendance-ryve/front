@@ -4,13 +4,13 @@ import router from '../router/index'
 import { useUserStore } from '../stores/UserStore'
 import { useSideBarStore } from '@/stores/SideBarStore'
 import type { UserConnected } from '@/types/User'
+import { useNotifStore } from '@/stores/NotificationsStore'
 
 
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
 
 type		Methods = "head" | "options" | "put" | "post" | "patch" | "delete" | "get"
-// type	useAxiosRes = { reponse: Ref<any>, error: Ref<any>, loading: Ref<boolean> }
 export type	axiosState = { error: any, loading: boolean }
 
 const	useAxios = async (method: Methods, url: string, body: object | any = null, header: object | any = null) => {
@@ -23,7 +23,7 @@ const	useAxios = async (method: Methods, url: string, body: object | any = null,
 		response.value = res.data
 	}
 	catch (err: any) {
-		console.log('error', err)
+		useNotifStore().addNotif('error', 'Error', err.response?.data?.message)
 		if (err.response?.status === 401) {
 			const	userStore = useUserStore()
 			const	sbStore = useSideBarStore()
