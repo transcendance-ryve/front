@@ -12,11 +12,9 @@ const getChannelByID = async (id: string, res: Ref<Partial<Channel>>) => {
 		'/channels/'
 		+ id
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		res.value = response.value
 		dataState.loading = loading.value
 	}

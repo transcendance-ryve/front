@@ -24,11 +24,9 @@ const getUsers = async (id: string, select: string, user: Ref<Partial<User>>) =>
 		'/users/'
 		+ id + '?select=' + select
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		dataState.loading = loading.value
 		user.value = response.value
 	}

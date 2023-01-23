@@ -10,11 +10,9 @@ const getMessages = async (id: string, page: number, res: Ref<any[]>, totalMsg: 
 		'/channels/messages/'
 		+ id + '?take=30&page=' + page
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		res.value = response.value.messages
 		totalMsg.value = response.value.total
 		dataState.loading = loading.value

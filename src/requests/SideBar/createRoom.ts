@@ -6,7 +6,7 @@ const createRoom = async (data: CreateChanForm) => {
 	let	formData = new FormData()
 	formData.set('image', data.avatarFile as File);
 
-	const { response, loading, error } = await useAxios(
+	await useAxios(
 		'post',
 		'/channels/createRoom',
 		{

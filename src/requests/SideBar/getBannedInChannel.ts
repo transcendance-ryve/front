@@ -14,6 +14,7 @@ const   getUserTagArray = (response: any[]) => {
 			role: 'MEMBER',
 			isMute: false,
 			isBan: true,
+			isBlocked: false,
 		})
 	})
 	return res
@@ -27,11 +28,9 @@ const   getBannedInChannels = async (channelId: string, dataState: axiosState) =
 		'/channels/banned/'
 		+ channelId
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		dataState.loading = loading.value
 		return getUserTagArray(response.value)
 	}
