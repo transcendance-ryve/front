@@ -14,6 +14,7 @@
 	import type { ProfileData } from '@/types/ProfileData'
 	import type { userKeys } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
+	import NotFound from '@/views/NotFound.vue'
 
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
@@ -112,24 +113,6 @@
 				if (receiver.id === data.user.id) data.type = 3
 			}
 		},
-		// {
-		// 	name: 'targetBlocked',
-		// 	callback: (id: string) => {
-		// 		console.log('il est bloqué')
-		// 		if (id === data.user.id) blockRelation.value = 1
-		// 	}
-		// },
-		// {
-		// 	name: 'userBlocked',
-		// 	callback: (id: string) => {
-		// 		console.log('je suis bloqué')
-		// 		if (id === data.user.id) blockRelation.value = 2
-		// 	}
-		// },
-		// {
-		// 	name: 'noBlockedRelation',
-		// 	callback: () => {blockRelation.value = 0; console.log('personne n\'est bloqué')}
-		// },
 		{
 			name: 'user_blocked',
 			callback: (sender: any) => {
@@ -139,7 +122,6 @@
 		{
 			name: 'user_blocked_submitted',
 			callback: (receiver: any) => {
-				// console.log('user_blocked_submitted')
 				if (receiver.id === data.user.id) blockRelation.value = 1
 			}
 		},
@@ -147,9 +129,7 @@
 			name: 'user_unblocked',
 			callback: (sender: any) => {
 				if (sender.id === data.user.id) {
-					// console.log('user_unblocked')
 					blockRelation.value = -1
-					// socket.emit('isBlockedRelation', { targetId: data.user.id })
 					whoIsBlocked()
 				}
 			}
@@ -159,7 +139,6 @@
 			callback: (receiver: any) => {
 				if (receiver.id === data.user.id) {
 					blockRelation.value = -1
-					// socket.emit('isBlockedRelation', { targetId: data.user.id })
 					whoIsBlocked()
 				}
 			}
@@ -177,13 +156,11 @@
 	}
 
 	onMounted(async () => {
-		//	404 for unknown id
 		await getUserProfile(router.currentRoute.value.params.id as string, data)
 		if (data.type === 1)
 			blockRelation.value = 0
 		else
 			await whoIsBlocked()
-		// socket.emit('isBlockedRelation', { targetId: data.user.id })
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
 	})
 
@@ -224,5 +201,6 @@
 			<MatchHistory :userId="(router.currentRoute.value.params.id as string)"/>
 		</div>
 	</div>
+	<NotFound v-else-if="data.err?.response?.status === 404"/>
 
 </template>

@@ -23,6 +23,7 @@ const	useAxios = async (method: Methods, url: string, body: object | any = null,
 		response.value = res.data
 	}
 	catch (err: any) {
+		console.log('err', err)
 		useNotifStore().addNotif('error', 'Error', err.response?.data?.message)
 		if (err.response?.status === 401) {
 			const	userStore = useUserStore()

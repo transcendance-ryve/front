@@ -4,5 +4,5 @@ export interface ProfileData {
 	user: User,
 	type: number,
 	loadingData: boolean,
-	err: null
+	err: any
 }

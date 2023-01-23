@@ -10,6 +10,7 @@ import RegisterForm from '../components/Forms/RegisterForm.vue'
 import LoginForm from '../components/Forms/LoginForm.vue'
 import ForgotForm from '../components/Forms/ForgotForm.vue'
 import TfaForm from '../components/Forms/TfaForm.vue'
+import NotFound from '../views/NotFound.vue'
 import { useUserStore } from '../stores/UserStore'
 import { callBack } from '@/requests/Auth/auth42'
 
@@ -101,10 +102,11 @@ const router = createRouter({
 				},
 			]
 		},
-		// {
-		// 	path: '*',
-		// 	redirect: { name: 'home' },
-		// }
+		{
+			path: '/:pathMatch(.*)*',
+			name: 'not-found',
+			component: NotFound,
+		}
 		// {
 		// 	path: '/about',
 		// 	name: 'about',
@@ -117,6 +119,7 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
+	console.log(from.fullPath, to.fullPath)
 	const	userStore = useUserStore()
 
 	if (!to.fullPath.includes('/accounts') && !userStore.loginApi
