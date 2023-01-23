@@ -4,7 +4,7 @@ import { useUserStore } from '@/stores/UserStore'
 
 const register = async (username: string, email:string, password:string) => {
 
-	const { response, loading, error } = await useAxios(
+	await useAxios(
 		'post',
 		'/auth/forgot-password',
 		{ email }

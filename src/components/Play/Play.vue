@@ -2,10 +2,8 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import Game from '@/components/Play/Game.vue'
 	import Matchmaking from '@/components/Play/Matchmaking.vue'
-	import Win from '@/components/Play/Win.vue'
-	import { ref, reactive, onMounted, onUnmounted } from 'vue'
+	import { ref, onMounted, onUnmounted } from 'vue'
 	import { useUserStore } from '@/stores/UserStore'
-	import type { UserConnected } from '@/types/User'
 
 	const userStore = useUserStore();
 	const	contentStore = useContentStore()
@@ -18,7 +16,6 @@
 		game_connected: () => {matchmakingVisible.value = false},
 		start: () => {matchmakingVisible.value = false},
 		reconnected_to_game: (hasGame: boolean) => {matchmakingVisible.value = !hasGame},
-		updateUser: (data: UserConnected) => { userStore.updateMe(data) }
 	}
 
 	onMounted(() => {

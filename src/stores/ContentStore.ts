@@ -3,10 +3,10 @@ import { defineStore } from 'pinia'
 
 export const useContentStore = defineStore('contentStore', () => {
 	const	state = ref(1)
-	const	navBarListOpen = ref(false)
+	const	navbarListOpen = ref(false)
 
 	return {
 		state,
-		navBarListOpen
+		navbarListOpen
 	}
 })

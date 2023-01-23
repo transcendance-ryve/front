@@ -3,21 +3,21 @@
 	import { ref, type Ref, onMounted, onUnmounted, reactive } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '@/stores/UserStore'
-	import { useSideBarStore } from '@/stores/SideBarStore'
+	import { useSidebarStore } from '@/stores/SidebarStore'
 	import ProfileTag from './ProfileTag.vue'
 	import ProfileStat from './ProfileStat.vue'
 	import MatchHistory from './MatchHistory.vue'
 	import router from '@/router'
 	import { onBeforeRouteUpdate } from 'vue-router'
 	import	getUserProfile from '../../requests/Profile/getUserProfile'
-	import getBlockRelation from '@/requests/Friends/getBlockRelation'
+	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
 	import type { ProfileData } from '@/types/ProfileData'
 	import type { userKeys } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
 
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-	const	sbStore = useSideBarStore()
+	const	sbStore = useSidebarStore()
 	const	contentStore = useContentStore()
 	const	blockRelation: Ref<number> = ref(-1)
 	contentStore.state = 4

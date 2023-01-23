@@ -9,6 +9,7 @@
 	} from '@vuelidate/validators'
 	import { logoQrCode } from '../../assets/logoSVG'
 	import type { TfaForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore'
 
 	const	formData: TfaForm = reactive({
 		code: '',
@@ -30,15 +31,15 @@
 			e.target.value = e.target.value.slice(0, 6)
 	}
 
-	const emit = defineEmits(['tfaCode'])
-
+	const	emit = defineEmits(['tfaCode'])
+	const	{ addNotif } = useNotifStore()
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
 			emit('tfaCode', formData.code)
 		}
 		else
-			alert('error, form not submitted')
+			addNotif('error', 'Error', 'Invalid form')
 	}
 
 	onMounted(() => {

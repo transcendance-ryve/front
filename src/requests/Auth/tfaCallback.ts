@@ -6,15 +6,12 @@ const tfaCallback = async (code: string) => {
 	const	id = router.currentRoute.value.query.id
 	const	token = router.currentRoute.value.query.token
 
-	const { response, loading, error } = await useAxios(
+	const { response, error } = await useAxios(
 		'post',
 		'/auth/tfa/callback',
 		{ id, token, code }
 	)
-	if (error.value) {
-		//	handle errors
-	}
-	else if (response.value) {
+	if (!error.value) {
 		const	userStore = useUserStore()
 		userStore.updateMe(response.value)
 		userStore.loginApi = true

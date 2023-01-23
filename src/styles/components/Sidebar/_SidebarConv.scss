@@ -1,0 +1,17 @@
+.SidebarConv {
+	width: 100%;
+	height: calc(100% - 72em);
+
+	.SidebarConv-contentWrap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 32em 16em 16em;
+		width: 100%;
+		height: calc(100% - 72em);
+		gap: 32em;
+	}
+	.ContentWrap--List {
+		height: 100%;
+	}
+}

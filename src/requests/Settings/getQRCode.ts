@@ -8,11 +8,9 @@ const getQRCode = async (dataState: axiosState) => {
 		'get',
 		'/auth/tfa/qrcode'
 	)
-	if (error.value) {
-		//	handle errors
+	if (error.value)
 		dataState.error = error.value
-	}
-	else if (response.value) {
+	else {
 		dataState.loading = loading.value
 		return response.value
 	}

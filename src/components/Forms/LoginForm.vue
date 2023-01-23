@@ -7,6 +7,7 @@
 	import { auth42 } from '@/requests/Auth/auth42'
 	import router from '@/router'
 	import type { LoginForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore'
 
 	const	formData: LoginForm = reactive({
 		email: '',
@@ -29,13 +30,13 @@
 	const	v$ = useVuelidate(rules, formData)
 
 	const	emit = defineEmits(['login'])
-
+	const	{ addNotif } = useNotifStore()
 	const	submitForm = async () => {
 		const    result = await v$.value.$validate();
 		if (result)
 			emit('login', formData.email, formData.password)
 		else
-			alert('error, form not submitted')
+			addNotif('error', 'Error', 'Invalid form')
 	}
 
 	onMounted(() => {

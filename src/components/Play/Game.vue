@@ -4,6 +4,7 @@
 	import { ref, reactive, type Ref, onMounted, onUnmounted } from 'vue';
 	import Win from '../Play/Win.vue'
 	import type { SocketEvent } from '@/types/Socket';
+	import type { UserConnected } from '@/types/User'
 
 	interface Player {
 		id: string,
@@ -318,7 +319,7 @@
 				clearInterval(countdown.timer);
 				return;
 			}
-		}, 1000);
+		}, 100);
 	}
 
 	const updateScore = (data: { id: string, score: number }): void => {
@@ -331,7 +332,7 @@
 
 	const	listerners: SocketEvent[] = [
 		{ name: 'start', callback: start },
-		{ name: 'updateScore', callback: updateScore },
+		{ name: 'score', callback: updateScore },
 		{
 			name: 'gameWinner',
 			callback: (id: string) => {
@@ -354,7 +355,16 @@
 				bonus = { ...data, spawned: true}
 			}
 		},
-		{ name: 'bonus_despawn', callback: () =>  bonus.spawned = false }
+		{ name: 'bonus_despawn', callback: () =>  bonus.spawned = false },
+		{ name: 'updateUser', callback: (data: UserConnected) => {
+				userStore.updateMe(data)
+				const	player: Player = players.value.left.id === data.id ? players.value.left : players.value.right;
+				player.username = userStore.me.username;
+				player.level = userStore.me.level;
+				player.experience = userStore.me.experience;
+				player.next_level = userStore.me.next_level;
+			}
+		}
 	]
 
 	/* onMounted && onUnmounted */

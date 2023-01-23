@@ -1,0 +1,52 @@
+.Sidebar-content-wrap {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: calc(100% - 72em);
+	padding: 32em 16em 16em;
+	gap: 16em;
+
+	.Content-newChanBtn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20em 18em;
+		background: $background-700;
+		border: none;
+		border-radius: 6em;
+		color: $cheat-blue;
+
+		.NewChanBtn-value {
+			font-family: 'Poppins';
+			font-weight: 600;
+			font-size: 16em;
+			line-height: 100%;
+		}
+		&:hover {
+			background: $dark-blue;
+			color: white;
+			transition: 150ms ease-in-out;
+		}
+	}
+
+	.Sidebar-content {
+		display: flex;
+		height: 100%;
+		border-radius: 6em;
+		flex-direction: column;
+		gap: 16em;
+		overflow-y: scroll;
+
+		.Content-noResult {
+			color: white;
+			font-size: 18em;
+			text-align: center;
+		}
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+		-ms-overflow-style: none;  /* IE and Edge */
+		scrollbar-width: none;  /* Firefox */
+	}
+}

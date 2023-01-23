@@ -13,6 +13,7 @@
 	import { logoProfile, logoEmail, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
 	import type { RegisterForm } from '@/types/Forms'
+	import { useNotifStore } from '@/stores/NotificationsStore'
 
 	const	formData: RegisterForm = reactive({
 		username: '',
@@ -45,14 +46,14 @@
 
 	const	v$ = useVuelidate(rules, formData)
 
-	const emit = defineEmits(['register'])
-
+	const	emit = defineEmits(['register'])
+	const	{ addNotif } = useNotifStore()
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)
 			emit('register', formData.username, formData.email, formData.password)
 		else
-			alert('error, form not submitted')
+			addNotif('error', 'Error', 'Invalid form')
 	}
 
 	onMounted(() => {
