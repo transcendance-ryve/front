@@ -31,6 +31,8 @@
 
 	const	socket = userStore.socket
 
+	const	incomingMessageBreak: string[] = []
+
 	const	listeners: SocketEvent[] = [
 		{
 			name: 'user_connected',
@@ -159,12 +161,28 @@
 					return
 				const	convOpen = sbStore.conv.open
 				if (res.channelName && ((convOpen && sbStore.conv.id !== convId) || !convOpen)) {
+					if (!incomingMessageBreak.includes(convId)) {
+						notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar,
+						() => sbStore.openConv('Channel', convId, false))
+						incomingMessageBreak.push(convId)
+						const	timeoutID = setTimeout(() => {
+							incomingMessageBreak.splice(incomingMessageBreak.indexOf(convId), 1)
+							clearTimeout(timeoutID)
+						}, 5000)
+					}
 					notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar,
 					() => sbStore.openConv('Channel', convId, false))
 				}
 				else if (!res.channelName && ((convOpen && sbStore.conv.id !== res.sender.id) || !convOpen))
-					notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar,
-					() => sbStore.openConv('Friend', res.sender.id, false))
+					if (!incomingMessageBreak.includes(res.sender.id)) {
+						notifStore.addNotif('privateMessage', res.sender.username, res.content, res.sender.avatar,
+						() => sbStore.openConv('Friend', res.sender.id, false))
+						incomingMessageBreak.push(res.sender.id)
+						const	timeoutID = setTimeout(() => {
+							incomingMessageBreak.splice(incomingMessageBreak.indexOf(res.sender.id), 1)
+							clearTimeout(timeoutID)
+						}, 5000)
+					}
 			}
 		},
 		{
