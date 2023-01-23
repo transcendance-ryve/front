@@ -18,7 +18,7 @@
 	import { useNotifStore } from '../stores/NotificationsStore'
 	import { useSideBarStore } from '../stores/SideBarStore'
 	import { RouterView } from 'vue-router'
-	import router from '@/router'
+	import router, { profileRedirect } from '@/router'
 	import NavBar from '../components/NavBar/NavBar.vue'
 	import SideBar from '../components/SideBar/SideBar.vue'
 	import getBlockRelation from '@/requests/Friends/getBlockRelation'
