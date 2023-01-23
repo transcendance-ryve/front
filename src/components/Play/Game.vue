@@ -329,7 +329,7 @@
 
 	const	listerners: SocketEvent[] = [
 		{ name: 'start', callback: start },
-		{ name: 'updateScore', callback: updateScore },
+		{ name: 'score', callback: updateScore },
 		{
 			name: 'gameWinner',
 			callback: (id: string) => {
