@@ -123,7 +123,7 @@ router.beforeEach(async (to, from) => {
 		&& !to.fullPath.includes('/accounts/login/tfa'))
 		return { name: 'register' }
 	else if (to.fullPath.includes('/accounts') && userStore.loginApi)
-		return { name: 'home' }
+		return { path: '/' }
 })
 
 export const profileRedirect = (id: string) => {

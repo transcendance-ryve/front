@@ -19,6 +19,7 @@
 	import { useSidebarStore } from '../stores/SidebarStore'
 	import { RouterView } from 'vue-router'
 	import router, { profileRedirect } from '@/router'
+	import { onBeforeRouteLeave } from 'vue-router'
 	import Navbar from '../components/Navbar/Navbar.vue'
 	import Sidebar from '../components/Sidebar/Sidebar.vue'
 	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
@@ -233,6 +234,12 @@
 		}
 	]
 
+	onBeforeRouteLeave((to, from, next) => {
+		if (to.path.includes('/accounts') && userStore.loginApi)
+			next(false)
+		else
+			next(true)
+	})
 
 	onMounted(() => {
 		listeners.forEach(listener => socket.on(listener.name, listener.callback))
