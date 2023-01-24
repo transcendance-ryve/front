@@ -23,7 +23,6 @@
 	}
 
 	const	props = defineProps<Props>()
-
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
 	const	dataState: axiosState = reactive({
@@ -32,15 +31,10 @@
 	})
 	const	sectionSelected = ref('Users')
 	const	toFind = ref('')
-
 	const	usersInChannel: Ref<TargetTag[]> = ref([])
-
 	const	addListData: Ref<TargetTag[]> = ref([])
-
 	const	bannedListData: Ref<TargetTag[]> = ref([])
-
 	const	pendingListData: Ref<TargetTag[]> = ref([])
-
 	const	adminListData: Ref<TargetTag[]> = ref([])
 	const	userListData: Ref<TargetTag[]> = ref([])
 

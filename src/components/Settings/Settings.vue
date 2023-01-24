@@ -21,10 +21,8 @@
 
 	const	contentStore = useContentStore()
 	contentStore.state = 5
-
 	const	userStore = useUserStore()
 	const	notifStore = useNotifStore()
-
 	const	QRCode: Ref<string> = ref('')
 
 	const	dataState: axiosState = reactive({
