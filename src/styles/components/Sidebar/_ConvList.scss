@@ -4,7 +4,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 32em;
-	// background: orange !important;
 
 	.ConvList-switch {
 		display: flex;
@@ -16,7 +15,6 @@
 		gap: 16em;
 		width: 100%;
 		height: calc(100% - calc(44em + 32em));
-		// background: red;
 
 		.ConvList-content {
 			width: 100%;

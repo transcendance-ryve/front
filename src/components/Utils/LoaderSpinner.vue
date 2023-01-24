@@ -35,7 +35,6 @@
 	}
 
 	.Loader-spinner div:after {
-		// height: calc(14em * 100 / v-bind(sizeValue));
 		height: calc(v-bind(size) / 4.5);
 	}
 

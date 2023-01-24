@@ -3,7 +3,7 @@
 	import { ref, type Ref } from 'vue'
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
-	import router from '../../router/index' //
+	import router from '../../router/index'
 	import { logoRyve, logoNavbarList, logoNavbarCloseList } from '../../assets/logoSVG'
 	import NavbarSectionSelector from './NavbarSectionSelector.vue'
 	import UserInfos from '../Utils/UserInfos.vue'

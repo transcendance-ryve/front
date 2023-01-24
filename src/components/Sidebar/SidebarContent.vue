@@ -182,7 +182,7 @@
 		},
 		{
 			name: 'invitationAccepted',
-			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 } // state a verif sans
+			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 }
 		},
 		{
 			name: 'invitationDeclined',
@@ -193,7 +193,7 @@
 		},
 		{
 			name: 'joinRoomSuccess',
-			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 } // state a verif sans
+			callback: (id: string) => { sbStore.openConv('Channel', id); sbStore.state.section = 0 }
 		},
 		{
 			name: 'banned',
