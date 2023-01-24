@@ -33,10 +33,6 @@
 					display: flex;
 					align-items: center;
 					gap: 8em;
-					-moz-user-select:text; /* Firefox */
-					-webkit-user-select: text; /* Chrome, Safari, Opéra depuis la version 15 */
-					-ms-user-select: text; /* Internet explorer depuis la version 10 et Edge */
-					user-select: text; /* Propriété standard */
 
 					.Infos-name {
 						color: white;
@@ -46,6 +42,10 @@
 						white-space: nowrap;
 						overflow: hidden;
 						text-overflow: ellipsis;
+						-moz-user-select:text; /* Firefox */
+						-webkit-user-select: text; /* Chrome, Safari, Opéra depuis la version 15 */
+						-ms-user-select: text; /* Internet explorer depuis la version 10 et Edge */
+						user-select: text; /* Propriété standard */
 					}
 				}
 
