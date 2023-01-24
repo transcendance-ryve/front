@@ -26,10 +26,10 @@
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			-moz-user-select: unset; /* Firefox */
-			-webkit-user-select: unset; /* Chrome, Safari, Opéra depuis la version 15 */
-			-ms-user-select: unset; /* Internet explorer depuis la version 10 et Edge */
-			user-select: unset; /* Propriété standard */
+			-moz-user-select:text; /* Firefox */
+			-webkit-user-select: text; /* Chrome, Safari, Opéra depuis la version 15 */
+			-ms-user-select: text; /* Internet explorer depuis la version 10 et Edge */
+			user-select: text; /* Propriété standard */
 		}
 
 		.Content-level {

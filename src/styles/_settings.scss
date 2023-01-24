@@ -46,6 +46,13 @@ button {
 	font-weight: 400;
 }
 
+input {
+	-moz-user-select: text; /* Firefox */
+	-webkit-user-select: text; /* Chrome, Safari, Opéra depuis la version 15 */
+	-ms-user-select: text; /* Internet explorer depuis la version 10 et Edge */
+	user-select: text; /* Propriété standard */
+}
+
 $laptopL: 1440px;	// xl
 $laptop: 1024px;	// lg
 $tablet: 768px;		// md
