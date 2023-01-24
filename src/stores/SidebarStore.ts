@@ -1,5 +1,6 @@
 import { ref, type Ref, reactive, computed } from 'vue'
 import { defineStore } from 'pinia'
+import type { notifKey } from '@/types/Sidebar'
 
 export const useSidebarStore = defineStore('sbStore', () => {
 
@@ -15,6 +16,23 @@ export const useSidebarStore = defineStore('sbStore', () => {
 		friend: 0,
 		channel: 0
 	})
+
+	const	increaseNotif = (key: notifKey) => {
+		let	currentNotifStateKey
+		if (state.notifsState === 1)
+			currentNotifStateKey = 'game'
+		else if (state.notifsState === 2)
+			currentNotifStateKey = 'friend'
+		else if (state.notifsState === 3)
+			currentNotifStateKey = 'channel'
+		if (state.section !== 3 || (state.section === 3 && key !== currentNotifStateKey))
+			notifications[key]++
+	}
+
+	const	decreaseNotif = (key: notifKey) => {
+		if (notifications[key] > 0)
+			notifications[key]--
+	}
 
 	const	notifActive = computed(() => {
 		return (state.section !== 3
@@ -77,6 +95,8 @@ export const useSidebarStore = defineStore('sbStore', () => {
 		newChan,
 		spectate,
 		conv,
+		increaseNotif,
+		decreaseNotif,
 		updateSection,
 		openConv,
 		resetState

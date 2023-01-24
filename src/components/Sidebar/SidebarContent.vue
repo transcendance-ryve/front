@@ -27,7 +27,6 @@
 	const	sbStore = useSidebarStore()
 	const	userStore = useUserStore()
 	const	socket = userStore.socket
-
 	const	contentData: Ref<Partial<ContentData>[]> = ref([])
 
 	const	getRawData = async () => {
@@ -58,12 +57,6 @@
 		contentData.value = fetchData
 	}
 
-	// const	sortData = () => {
-		// contentData.sort((a, b) => {
-		// 	return a.time! - b.time!
-		// })
-	// }
-
 	watch(sbStore.state, async () => {
 		await getRawData()
 		if (sbStore.state.section === 3) {
@@ -74,7 +67,6 @@
 			else
 				sbStore.notifications.channel = 0
 		}
-		// sortData()
 	})
 
 	const	toFind: Ref<string> = ref('')

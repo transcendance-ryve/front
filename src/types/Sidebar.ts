@@ -8,3 +8,5 @@ export interface	ContentData {
 	messages: any,		//	user / chan		messages
 	timeup: number		//	game_request	timeup
 }
+
+export type notifKey = 'game' | 'friend' | 'channel'

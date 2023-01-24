@@ -13,16 +13,16 @@
 	const	sbStore = useSidebarStore()
 	const	socket = useUserStore().socket
 	const	listeners: SocketEvent[] = [
-		{ name: 'private_game_request', callback: () => sbStore.notifications.game++ },
-		{ name: 'game_request_timeup', callback: () => sbStore.notifications.game-- },
-		{ name: 'game_request_decline', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
-		{ name: 'game_request_accept', callback: () => sbStore.notifications.game ? sbStore.notifications.game-- : '' },
+		{ name: 'private_game_request', callback: () => sbStore.increaseNotif('game') },
+		{ name: 'game_request_timeup', callback: () => sbStore.decreaseNotif('game') },
+		{ name: 'game_request_decline', callback: () => sbStore.decreaseNotif('game') },
+		{ name: 'game_request_accept', callback: () => sbStore.decreaseNotif('game') },
 		{ name: 'game_request_accepted', callback: () => router.push({ path: '/play' }) },
-		{ name: 'friend_request', callback: () => sbStore.notifications.friend++ },
-		{ name: 'friend_accepted_submitted', callback: () => sbStore.notifications.friend-- },
-		{ name: 'friend_declined_submitted', callback: () => sbStore.notifications.friend-- },
-		{ name: 'chanInvitationReceived', callback: () => sbStore.notifications.channel++ },
-		{ name: 'chanInvitationDeleted', callback: () => sbStore.notifications.channel-- },
+		{ name: 'friend_request', callback: () => sbStore.increaseNotif('friend') },
+		{ name: 'friend_accepted_submitted', callback: () => sbStore.decreaseNotif('friend') },
+		{ name: 'friend_declined_submitted', callback: () => sbStore.decreaseNotif('friend') },
+		{ name: 'chanInvitationReceived', callback: () => sbStore.increaseNotif('channel') },
+		{ name: 'chanInvitationDeleted', callback: () => sbStore.decreaseNotif('channel') },
 	]
 
 	onMounted(() => {
