@@ -30,9 +30,7 @@
 	const	sbStore = useSidebarStore()
 	const	userStore = useUserStore()
 	userStore.connectSocket()
-
 	const	socket = userStore.socket
-
 	const	incomingMessageBreak: string[] = []
 
 	const	listeners: SocketEvent[] = [
