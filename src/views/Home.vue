@@ -181,8 +181,6 @@
 							clearTimeout(timeoutID)
 						}, 5000)
 					}
-					notifStore.addNotif('channelMessage', res.channelName, res.content, res.sender.avatar,
-					() => sbStore.openConv('Channel', convId, false))
 				}
 				else if (!res.channelName && ((convOpen && sbStore.conv.id !== res.sender.id) || !convOpen))
 					if (!incomingMessageBreak.includes(res.sender.id)) {
