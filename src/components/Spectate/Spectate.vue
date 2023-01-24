@@ -18,7 +18,7 @@
 	const	contentStore = useContentStore()
 	contentStore.state = 3
 	const	sbStore = useSidebarStore()
-
+	const	gameSelected: Ref<string> = ref("")
 	const	data: SpectateData = reactive({
 		games: [],
 		count: 1,
@@ -33,8 +33,6 @@
 		search: ''
 	})
 	let	page: number = 0
-
-	const gameSelected: Ref<string> = ref("");
 
 	const	getUrlQueries = (urlQueries: LocationQuery) => {
 		const	queriesNames: queriesKeys[] = ['order', 'search']
