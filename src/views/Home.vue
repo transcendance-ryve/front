@@ -24,6 +24,7 @@
 	import Sidebar from '../components/Sidebar/Sidebar.vue'
 	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
 	import type { SocketEvent } from '@/types/Socket'
+	import type { UserConnected } from '@/types/User'
 	
 	const	notifStore = useNotifStore()
 	const	sbStore = useSidebarStore()
@@ -35,6 +36,7 @@
 	const	incomingMessageBreak: string[] = []
 
 	const	listeners: SocketEvent[] = [
+		{ name: 'updateUser', callback: (data: UserConnected) => userStore.updateMe(data) },
 		{
 			name: 'user_connected',
 			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'connected', res.avatar, () => profileRedirect(res.id))
