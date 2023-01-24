@@ -26,8 +26,12 @@
 	const	closed = ref(false)
 
 	const	userTagType = () => {
-		if (props.label === 'Banned' && (props.admin || props.owner))
-			return 'banned'
+		if (props.label === 'Banned') {
+			if (props.admin || props.owner)
+				return 'banned'
+			else
+				return 'onlySee'
+		}
 		else if (props.label === 'Administrators' && props.owner)
 			return 'allPrivilegesA'
 		else if (props.label === 'Users' && (props.admin || props.owner))

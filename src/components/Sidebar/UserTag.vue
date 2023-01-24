@@ -111,7 +111,7 @@
 		else if (props.section === 'allPrivilegesA')
 			return [actionBtns[0], actionBtns[6], props.user.isBlocked ? actionBtns[10] : actionBtns[9]]
 		else if (props.section === 'banned')
-			return [actionBtns[0], actionBtns[8]]
+			return [actionBtns[8]]
 		else
 			return []
 	})
