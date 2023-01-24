@@ -430,7 +430,7 @@
 			<div
 				v-if="spectate && !endState.visible"
 				class="game__canvas_leave">
-				<button @click="handleClick">Leave spectate</button>
+				<button @click="handleClick"><span class="game__canvas_leave_btn">Leave spectate</span></button>
 			</div>
 
 			<Win

@@ -112,12 +112,6 @@
 	<div
 		class="matchmaking_content"
 	>
-		<button
-			style="font-size: 18px; padding: 10px; border-radius: 6px;"
-			@click="socket.emit('game_connect')"
-		>
-			Dev start
-		</button>
 		<div class="matchmaking_content__header">
 			<h1>
 				Matchmaking
@@ -151,25 +145,25 @@
 				v-if="state === State.Matchmaking || state === State.Waiting || state === State.Accepted"
 				:value="state === State.Matchmaking ? 'Start game' : 'Cancel'"
 				:class="{ btn_red: state === State.Waiting || state === State.Accepted }"
-				fontSize="18px"
-				width="150px"
-				height="50px"
+				fontSize="18em"
+				width="150em"
+				height="50em"
 				@click="toggleMatchmaking"
 			/>
 			<div v-if="state === State.Found">
 				<Btn
 					value="Accept"
-					fontSize="18px"
-					width="150px"
-					height="50px"
+					fontSize="18em"
+					width="150em"
+					height="50em"
 					@click="accept"
 				/>
 				<Btn
 					class="btn_red"
 					value="Decline"
-					fontSize="18px"
-					width="150px"
-					height="50px"
+					fontSize="18em"
+					width="150em"
+					height="50em"
 					@click="decline"
 				/>
 			</div>

@@ -13,6 +13,18 @@
 	position: absolute;
 	top: 0;
 	left: 0;
+
+	@media (max-width: $tablet) {
+		font-size: 0.9em;
+	}
+
+	@media (max-width: $phone) {
+		font-size: 0.78em;
+	}
+
+	@media (max-width: 320px) {
+		font-size: 3.7rem;
+	}
 }
 
 .win__content {
@@ -21,7 +33,7 @@
 	align-items: center;
 	flex-direction: column;
 
-	row-gap: 60px;
+	row-gap: 60em;
 }
 
 .win__content_brand {
@@ -31,7 +43,7 @@
 	align-items: center;
 	flex-direction: column;
 
-	row-gap: 10px;
+	row-gap: 10em;
 
 	&.win h1 {
 		color: $green;
@@ -61,12 +73,12 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	row-gap: 32px;
+	row-gap: 32em;
 	width: 100%;
 
 	img {
-		width: 96px;
-		height: 96px;
+		width: 96em;
+		height: 96em;
 		border-radius: 100%;
 	}
 
@@ -76,5 +88,14 @@
 
 		color: $white;
 		font-weight: 500;
+		white-space: pre-wrap;
+	}
+
+	@media (max-width: $phone) {
+		font-size: 0.9em;
+	}
+
+	@media (max-width: 320px) {
+		font-size: 3.2rem;
 	}
 }

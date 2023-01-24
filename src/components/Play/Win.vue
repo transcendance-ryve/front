@@ -9,12 +9,12 @@
 				<h1>Loser</h1>
 				<h2>You loose the game</h2>
 			</div>
-			<Btn value="Back to matchmaking" width="240px" height="50px" fontSize="18px" @click="handleClick" />
+			<Btn value="Back to matchmaking" width="240em" height="50em" fontSize="18em" @click="handleClick" />
 		</div>
 		<div v-if="state === 'spectate' && player" class="win__content_brand_spectate">
-			<img :src="player.avatar" alt="avatar" :style="{'border': '4px solid ' + player.color}">
-			<h1><span :style="{'color': player.color}">{{ player?.username }}</span> won the game</h1>
-			<Btn value="Leave spectate" width="200px" height="50px" fontSize="18px" @click="handleClick" />
+			<img :src="player.avatar" alt="avatar" :style="{'border': '4em solid ' + player.color}">
+			<h1><span class="winner_name" :style="{'color': player.color}">{{ player?.username }}</span> won the game</h1>
+			<Btn value="Leave spectate" width="200em" height="50em" fontSize="18em" @click="handleClick" />
 		</div>
 	</div>
 </template>

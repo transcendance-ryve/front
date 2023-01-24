@@ -115,10 +115,29 @@
 			}
 		}
 	}
+
+	@media (max-width: $laptopL) {
+		font-size: 1.2em;
+	}
+
+	@media (max-width: $laptop) {
+		font-size: 1.1em;
+	}
+
+	@media (max-width: $tablet) {
+		font-size: 0.96em;
+	}
+
+	@media (max-width: $phone) {
+		font-size: 0.82em;
+	}
+
+	@media (max-width: 320px) {
+		font-size: 4rem;
+	}
+	
 }
 
 .btn_red {
 	background-color: $red !important;
 }
-
-

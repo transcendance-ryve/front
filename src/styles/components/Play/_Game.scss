@@ -8,7 +8,7 @@
 	.game__header {
 		display: flex;
 		background-color: $background-600;
-		border-radius: 6px;
+		border-radius: 6em;
 	}
 
 	.game__canvas_container {
@@ -16,7 +16,7 @@
 		width: 100%;
 		height: 100%;
 		background: linear-gradient(to right, $dark-blue, $red);
-		border-radius: 6px;
+		border-radius: 6em;
 		padding: calc(100% * 0.006);
 		column-gap: calc(100% * 0.006);
 		position: relative;
@@ -25,13 +25,13 @@
 			width: inherit;
 			height: 100%;
 			background: $background-600;
-			border-radius: 6px;
+			border-radius: 6em;
 		}
 
 		.game__canvas {
 			position: absolute;
-			top: 0px;
-			left: 0px;
+			top: 0;
+			left: 0;
 			width: 100%;
 			height: 100%;
 		}
@@ -42,8 +42,8 @@
 		align-items: center;
 		justify-content: center;
 		position: absolute;
-		top: 0px;
-		left: 0px;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 		
@@ -53,10 +53,10 @@
 		.game__content_countdown_content {
 			display: flex;
 			flex-direction: column;
-			row-gap: 20px;
+			row-gap: 20em;
 			align-items: center;
 			justify-content: center;
-			padding: 60px;
+			padding: 60em;
 
 			h1 {
 				font-size: 120em;
@@ -78,17 +78,23 @@
 	position: absolute;
 
 	display: flex;
-	bottom: 30px;
-	left: 30px;
+	bottom: 30em;
+	left: 30em;
 
 	button {
 		pointer-events: cursor;
-
-		padding: 12px;
-		border: 2px solid $red;
-		border-radius: 6px;
-		font-size: 14px;
-		color: $red;
+		padding: 12em;
+		border: 2em solid $red;
+		border-radius: 6em;
 		background-color: rgba(255, 70, 70, 0.1);
+	
+		.game__canvas_leave_btn {
+			font-size: 14em;
+			color: $red;
+		}
+	}
+
+	@media (max-width: 320px) {
+		font-size: 4.4rem;
 	}
 }
