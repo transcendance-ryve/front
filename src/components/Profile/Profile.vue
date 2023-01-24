@@ -12,7 +12,7 @@
 	import	getUserProfile from '../../requests/Profile/getUserProfile'
 	import getBlockRelation from '@/requests/Sidebar/Friends/getBlockRelation'
 	import type { ProfileData } from '@/types/ProfileData'
-	import type { userKeys } from '@/types/User'
+	import type { User, userKeys } from '@/types/User'
 	import type { SocketEvent } from '@/types/Socket'
 	import NotFound from '@/views/NotFound.vue'
 
@@ -24,19 +24,7 @@
 	contentStore.state = 4
 
 	const	data: ProfileData = reactive({
-		user: {
-			id: '',
-			username: '',
-			avatar: '',
-			status: '',
-			level: 0,
-			experience: 0,
-			next_level: 0,
-			rank_point: 0,
-			wins: 0,
-			loses: 0,
-			played: 0,
-		},
+		user: {} as User,
 		type: 1,
 		loadingData: false,
 		err: null
