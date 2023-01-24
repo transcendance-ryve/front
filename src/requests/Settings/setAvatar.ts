@@ -1,7 +1,6 @@
 import useAxios from '@/requests/useAxios'
 import { useUserStore } from '@/stores/UserStore'
 
-
 const setAvatar = async (avatarFile: File) => {
 
 	let	formData = new FormData()

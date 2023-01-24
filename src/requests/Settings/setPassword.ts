@@ -1,6 +1,5 @@
 import useAxios from '@/requests/useAxios'
 
-
 const setAvatar = async (old_password: string, password: string) => {
 
 	const { error } = await useAxios(

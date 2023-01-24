@@ -6,7 +6,6 @@ import { useSidebarStore } from '@/stores/SidebarStore'
 import type { UserConnected } from '@/types/User'
 import { useNotifStore } from '@/stores/NotificationsStore'
 
-
 axios.defaults.baseURL = 'http://localhost:3000'
 axios.defaults.withCredentials = true
 
