@@ -14,6 +14,7 @@
 	const	notifStore = useNotifStore()
 	const	notifClose: Ref<boolean> = ref(false)
 	const	classNames: string = 'NotifTag NotifTag--' + props.notif.type
+	const	cursor: string = props.notif.handleClick ? 'pointer' : 'default'
 	let		timer: number | undefined = undefined
 
 	const	closeNotif = () => {
@@ -46,3 +47,11 @@
 	</div>
 
 </template>
+
+<style lang="scss" scoped>
+
+	.NotifTag {
+		cursor: v-bind(cursor);
+	}
+
+</style>
