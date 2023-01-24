@@ -72,6 +72,14 @@
 			}
 		}
 	}
+	@media (max-width: $phone) {
+		.game__header {
+			flex-direction: column;
+		}
+	}
+	@media (max-width: 320px) {
+		font-size: 4.6rem;
+	}
 }
 
 .game__canvas_leave {
