@@ -11,7 +11,6 @@
 
 	const	contentStore = useContentStore()
 	const	userStore = useUserStore()
-
 	let		userInfoXS: Ref<boolean> = ref(false)
 
 	const	manageResponsive = () => {
