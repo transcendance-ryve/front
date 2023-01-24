@@ -357,7 +357,6 @@
 		},
 		{ name: 'bonus_despawn', callback: () =>  bonus.spawned = false },
 		{ name: 'updateUser', callback: (data: UserConnected) => {
-				userStore.updateMe(data)
 				const	player: Player = players.value.left.id === data.id ? players.value.left : players.value.right;
 				player.username = userStore.me.username;
 				player.level = userStore.me.level;
