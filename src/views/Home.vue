@@ -197,7 +197,6 @@
 		{
 			name: "private_game_request",
 			callback: (res: any) => {
-				console.log(res);
 				notifStore.addNotif('infoY', res.username, 'game request', res.avatar,
 				() => {
 					sbStore.updateSection(3)

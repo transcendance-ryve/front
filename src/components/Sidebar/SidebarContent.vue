@@ -233,7 +233,6 @@
 		{
 			name: 'game_request_accept',
 			callback: (sender: Partial<ContentData>) => {
-				console.log('in event game_request_accept', sender)
 				if (sbStore.state.section === 3 && sbStore.state.notifsState === 1) {
 					removeTag(sender);
 					router.push({ path: '/play' });

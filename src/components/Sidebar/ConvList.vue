@@ -137,7 +137,6 @@
 		{
 			name: 'newUserInRoom',
 			callback: (target: TargetTag) => {
-				console.log('new user in room')
 				pendingListData.value = pendingListData.value.filter((u: TargetTag) => u.id !== target.id)
 				userListData.value.push(target)
 				socket.emit('isBlocked', { targetId: target.id })
@@ -182,7 +181,6 @@
 		{
 			name: 'userMuted',
 			callback: (id: string) => {
-				console.log('userMuted', id)
 				const	userMuted: TargetTag | undefined = userListData.value.find((user: TargetTag) => user.id === id)
 				if (userMuted)
 					userMuted.isMute = true
