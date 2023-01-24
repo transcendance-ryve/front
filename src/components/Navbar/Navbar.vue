@@ -4,7 +4,7 @@
 	import { useContentStore } from '../../stores/ContentStore'
 	import { useUserStore } from '../../stores/UserStore'
 	import router from '../../router/index' //
-	import { logoRyve } from '../../assets/logoSVG'
+	import { logoRyve, logoNavbarList, logoNavbarCloseList } from '../../assets/logoSVG'
 	import NavbarSectionSelector from './NavbarSectionSelector.vue'
 	import UserInfos from '../Utils/UserInfos.vue'
 	import UserMenu from './UserMenu.vue'
@@ -36,20 +36,18 @@
 
 	<div class="Navbar-wrapper">
 		<div class="Navbar">
-			<img
+			<span
 				v-if="!contentStore.navbarListOpen"
 				class="NavbarList-logo"
-				src="../../assets/logoList.svg"
-				alt="list"
+				v-html="logoNavbarList"
 				@click="contentStore.navbarListOpen = !contentStore.navbarListOpen"
-			>
-			<img
+			></span>
+			<span
 				v-else
 				class="NavbarList-logo"
-				src="../../assets/logoCross.svg"
-				alt="list"
+				v-html="logoNavbarCloseList"
 				@click="contentStore.navbarListOpen = !contentStore.navbarListOpen"
-			>
+			></span>
 			<span class="Navbar-logo" v-html="logoRyve" @click="router.push({ path:'/' })"></span>
 			<div class="Navbar-content">
 				<NavbarSectionSelector class="Content-options"/>

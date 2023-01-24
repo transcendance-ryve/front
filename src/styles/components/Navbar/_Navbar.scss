@@ -16,6 +16,7 @@
 		justify-content: space-between;
 
 		.NavbarList-logo {
+
 			display: none;
 			cursor: pointer;
 		}
@@ -83,11 +84,16 @@
 
 	@media (max-width: $tablet) {
 		padding: 24em 32em;
-			.Navbar {
+		.Navbar {
 			.NavbarList-logo {
 				display: block;
 				width: 30em;
+				height: 30em;
 				margin-right: 150em;
+				svg {
+					width: 100%;
+					height: 100%;
+				}
 			}
 			.Content-options {
 				display: none;
