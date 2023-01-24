@@ -21,9 +21,9 @@
 	})
 
 	const	v$ = useVuelidate(rules, formData)
-
 	const	emit = defineEmits(['forgotPassword'])
 	const	{ addNotif } = useNotifStore()
+
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)

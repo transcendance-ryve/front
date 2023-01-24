@@ -45,9 +45,9 @@
 	})
 
 	const	v$ = useVuelidate(rules, formData)
-
 	const	emit = defineEmits(['register'])
 	const	{ addNotif } = useNotifStore()
+
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)

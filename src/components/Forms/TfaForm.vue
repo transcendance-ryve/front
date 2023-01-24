@@ -25,14 +25,9 @@
 	})
 
 	const	v$ = useVuelidate(rules, formData)
-
-	const	updateCode2FA = (e:any) => {
-		if (e.target.value.length >= 6)
-			e.target.value = e.target.value.slice(0, 6)
-	}
-
 	const	emit = defineEmits(['tfaCode'])
 	const	{ addNotif } = useNotifStore()
+
 	const	submitForm = async () => {
 		const	result = await v$.value.$validate();
 		if (result)	{
@@ -40,6 +35,11 @@
 		}
 		else
 			addNotif('error', 'Error', 'Invalid form')
+	}
+
+	const	updateCode2FA = (e:any) => {
+		if (e.target.value.length >= 6)
+			e.target.value = e.target.value.slice(0, 6)
 	}
 
 	onMounted(() => {
