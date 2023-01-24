@@ -5,6 +5,7 @@
 	gap: 8em;
 	border: none;
 	border-radius: 6em;
+	box-shadow: 3em 3em 5em 0em rgba(0, 0, 0, 0.3);
 
 	.Btn-value {
 		font-family: 'Poppins';
@@ -22,6 +23,9 @@
 		}
 	}
 
+	&:hover {
+		opacity: 0.9;
+	}
 }
 
 
