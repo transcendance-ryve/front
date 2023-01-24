@@ -111,7 +111,6 @@
 				sbStore.state.notifsState = 3
 			})
 		},
-
 		{
 			name: 'roomCreated',
 			callback: () => notifStore.addNotif('success', 'Success', 'Channel created')
@@ -120,50 +119,37 @@
 			name: 'joinRoomSuccess',
 			callback: () => notifStore.addNotif('success', 'Success', 'channel joined')
 		},
-
 		{
-			name: 'acceptInvitationFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
+			name: "private_game_request",
+			callback: (res: any) => {
+				notifStore.addNotif('infoY', res.username, 'game request', res.avatar,
+				() => {
+					sbStore.updateSection(3)
+					sbStore.state.notifsState = 1
+				});
+			}
 		},
 		{
-			name: 'messageRoomFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
+			name: "game_request_declined",
+			callback: (res: any) => {
+				notifStore.addNotif('infoR', res.username, 'game request declined', res.avatar);
+			}
 		},
 		{
-			name: 'inviteToRoomFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
+			name: "game_request_accepted",
+			callback: (res: any) => {
+				if (window.location.pathname !== '/play')
+					router.push({ path: '/play' });
+				notifStore.addNotif('infoG', res.username, 'game request accepted', res.avatar);
+			}
 		},
 		{
-			name: 'createRoomFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
+			name: 'user_blocked_submitted',
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'is blocked', res.avatar)
 		},
 		{
-			name: 'joinRoomFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'promoteUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'demoteUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'muteUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'unmuteUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'banUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
-		},
-		{
-			name: 'unbanUserFailed',
-			callback: (err: string) => notifStore.addNotif('error', 'Error', err)
+			name: 'user_unblocked_submitted',
+			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'is unblocked', res.avatar)
 		},
 		{
 			name: 'incomingMessage',
@@ -194,44 +180,24 @@
 					}
 			}
 		},
-		{
-			name: "private_game_request",
-			callback: (res: any) => {
-				notifStore.addNotif('infoY', res.username, 'game request', res.avatar,
-				() => {
-					sbStore.updateSection(3)
-					sbStore.state.notifsState = 1
-				});
-			}
-		},
-		{
-			name: "game_request_error",
-			callback: (res: any) => {
-				notifStore.addNotif('error', 'Error', res);
-			}
-		},
-		{
-			name: "game_request_declined",
-			callback: (res: any) => {
-				notifStore.addNotif('infoR', res.username, 'game request declined', res.avatar);
-			}
-		},
-		{
-			name: "game_request_accepted",
-			callback: (res: any) => {
-				if (window.location.pathname !== '/play')
-					router.push({ path: '/play' });
-				notifStore.addNotif('infoG', res.username, 'game request accepted', res.avatar);
-			}
-		},
-		{
-			name: 'user_blocked_submitted',
-			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'is blocked', res.avatar)
-		},
-		{
-			name: 'user_unblocked_submitted',
-			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'is unblocked', res.avatar)
-		}
+		{ name: 'accept_friend_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'accept_decline_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'friend_request_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'friend_removed_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'used_blocked_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'used_unblocked_failure', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: "game_request_error", callback: (res: any) => notifStore.addNotif('error', 'Error', res) },
+		{ name: 'acceptInvitationFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'messageRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'inviteToRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'createRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'joinRoomFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'promoteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'demoteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'muteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'unmuteUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'banUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) },
+		{ name: 'unbanUserFailed', callback: (err: string) => notifStore.addNotif('error', 'Error', err) }
 	]
 
 	onBeforeRouteLeave((to, from, next) => {
