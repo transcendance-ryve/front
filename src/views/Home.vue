@@ -41,11 +41,11 @@
 		},
 		{
 			name: 'friend_accepted',
-			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar, () => profileRedirect(res.id))
+			callback: (res: any) => notifStore.addNotif('infoB', res.username, 'new friend', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'friend_accepted_submitted',
-			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'new friend', res.avatar, () => profileRedirect(res.id))
+			callback: (res: any) => notifStore.addNotif('infoB', res.username, 'new friend', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'friend_request_submitted',
@@ -66,19 +66,19 @@
 		},
 		{
 			name: 'friend_declined',
-			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'declined your invitation', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'friend_removed',
-			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'has deleted you', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'has deleted you', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'friend_declined_submitted',
-			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'invitation declined', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'invitation declined', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'friend_removed_submitted',
-			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'friend removed', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'friend removed', res.avatar, () => profileRedirect(res.id))
 		},
 		{
 			name: 'invitationDeclined',
@@ -95,11 +95,19 @@
 
 		{
 			name: 'friend_request',
-			callback: (res: any) => notifStore.addNotif('infoB', res.username, 'new friend invitation', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoB', res.username, 'new friend invitation', res.avatar,
+			() => {
+				sbStore.updateSection(3)
+				sbStore.state.notifsState = 2
+			})
 		},
 		{
 			name: 'chanInvitationReceived',
-			callback: (res: any) => notifStore.addNotif('infoY', res.name, 'new channel invitation', res.avatar)
+			callback: (res: any) => notifStore.addNotif('infoY', res.name, 'new channel invitation', res.avatar,
+			() => {
+				sbStore.updateSection(3)
+				sbStore.state.notifsState = 3
+			})
 		},
 
 		{
@@ -190,13 +198,16 @@
 			name: "private_game_request",
 			callback: (res: any) => {
 				console.log(res);
-				notifStore.addNotif('infoY', res.username, 'game request', res.avatar);
+				notifStore.addNotif('infoY', res.username, 'game request', res.avatar,
+				() => {
+					sbStore.updateSection(3)
+					sbStore.state.notifsState = 1
+				});
 			}
 		},
 		{
 			name: "game_request_error",
 			callback: (res: any) => {
-				console.log(res);
 				notifStore.addNotif('error', 'Error', res);
 			}
 		},
@@ -211,23 +222,13 @@
 			callback: (res: any) => {
 				if (window.location.pathname !== '/play')
 					router.push({ path: '/play' });
-				notifStore.addNotif('infoY', res.username, 'game request accepted', res.avatar);
+				notifStore.addNotif('infoG', res.username, 'game request accepted', res.avatar);
 			}
 		},
-
-
-		// {
-		// 	name: 'user_blocked',
-		// 	callback: (res: any) => console.log('user_blocked', res)
-		// },
 		{
 			name: 'user_blocked_submitted',
 			callback: (res: any) => notifStore.addNotif('infoR', res.username, 'is blocked', res.avatar)
 		},
-		// {
-		// 	name: 'user_unblocked',
-		// 	callback: (res: any) => console.log('user_unblocked', res)
-		// },
 		{
 			name: 'user_unblocked_submitted',
 			callback: (res: any) => notifStore.addNotif('infoG', res.username, 'is unblocked', res.avatar)
