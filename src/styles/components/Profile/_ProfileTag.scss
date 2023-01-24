@@ -37,14 +37,14 @@
 
 	@media (max-width: $laptop) {
 		.ProfileTag-btnsWrap {
-			font-size: 0.9em;
+			font-size: 0.8em;
 		}
 	}
 
 	@media (max-width: $tablet) {
 		font-size: 0.8em;
 		.ProfileTag-btnsWrap {
-			font-size: 1em;
+			font-size: 0.9em;
 		}
 	}
 
@@ -55,7 +55,7 @@
 
 	@media (max-width: $phone) {
 		.ProfileTag-btnsWrap {
-			font-size: 0.82em;
+			font-size: 0.7em;
 		}
 	}
 }
