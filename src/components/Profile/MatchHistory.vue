@@ -17,7 +17,6 @@
 	}
 
 	const	props = defineProps<props>()
-
 	const	menuTake: string[] = ['10', '20', '50', '100']
 	let		routeUpdating: boolean = false
 
