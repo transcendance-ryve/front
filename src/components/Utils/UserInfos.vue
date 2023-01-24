@@ -27,12 +27,7 @@
 		percent = Number.isInteger(percent) ? percent : parseFloat(percent.toFixed(2))
 		return percent.toString() + '%'
 	})
-	// const	username = computed(() => {
-	// 	if (props.user.username!.length > 10)
-	// 		return props.user.username!.slice(0, 10) + '.'
-	// 	else
-	// 		return props.user.username
-	// })
+
 	const	borderAvatar: string = props.avatarBorder ?
 		'4em solid' + props.mainColor : 'none'
 	const	avatarWidth: string = props.avatarBorder ? '72em' : '64em'
