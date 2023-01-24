@@ -2,6 +2,7 @@ import useAxios from '@/requests/useAxios'
 import router from '@/router'
 import { useUserStore } from '@/stores/UserStore'
 import { useSidebarStore } from '@/stores/SidebarStore'
+import { useNotifStore } from '@/stores/NotificationsStore'
 import type { UserConnected } from '@/types/User'
 
 const disconnect = async () => {
@@ -18,6 +19,7 @@ const disconnect = async () => {
 		userStore.loginApi = false
 		userStore.socket.disconnect()
 		sbStore.resetState()
+		useNotifStore().addNotif('success', 'Succes', 'You are now disconnected')
 		if (!router.currentRoute.value.fullPath.includes('/accounts'))
 			router.push({ path: '/accounts' })
 	}

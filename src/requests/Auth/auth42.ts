@@ -1,6 +1,7 @@
 import useAxios from '@/requests/useAxios'
 import router from '@/router'
 import { useUserStore } from '@/stores/UserStore'
+import { useNotifStore } from '@/stores/NotificationsStore'
 
 export const	auth42 = async () => {
     const res = await useAxios('get', '/auth/42/redirect')
@@ -24,6 +25,7 @@ export async function	callBack(code: string) {
 		const userStore = useUserStore()
 		userStore.updateMe(res.response.value)
 		userStore.loginApi = true
+		useNotifStore().addNotif('success', 'Succes', 'You are now logged in')
 		router.push({ path: '/' })
 	}
 }

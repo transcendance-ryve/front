@@ -1,6 +1,7 @@
 import useAxios from '@/requests/useAxios'
 import router from '@/router'
 import { useUserStore } from '@/stores/UserStore'
+import { useNotifStore } from '@/stores/NotificationsStore'
 
 const login = async (email:string, password:string) => {
 
@@ -22,6 +23,7 @@ const login = async (email:string, password:string) => {
 		const	userStore = useUserStore()
 		userStore.updateMe(response.value)
 		userStore.loginApi = true
+		useNotifStore().addNotif('success', 'Success', 'You are now logged in')
 		router.push({ path: '/' })
 	}
 }
