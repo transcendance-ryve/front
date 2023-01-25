@@ -15,7 +15,9 @@ const setAvatar = async (avatarFile: File) => {
 	if (!error.value) {
 		const	userStore = useUserStore()
 		userStore.updateMe(response.value)
+		return true
 	}
+	return false
 }
 
 export default setAvatar

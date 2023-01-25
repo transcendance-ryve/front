@@ -111,12 +111,12 @@
 		if (!checkSettings()) return
 		let	update: boolean = false
 		if (settingsData.username && settingsData.username !== userStore.me.username) {
-			setUsername(settingsData.username)
-			update = true
+			if (await setUsername(settingsData.username))
+				update = true
 		}
 		if (settingsData.avatarFile) {
-			setAvatar(settingsData.avatarFile)
-			update = true
+			if (setAvatar(settingsData.avatarFile))
+				update = true
 		}
 		if (settingsData.newPassword) {
 			if (await setPassword(settingsData.oldPassword, settingsData.newPassword))
