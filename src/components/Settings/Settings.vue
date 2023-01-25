@@ -66,13 +66,27 @@
 	}
 
 	const	checkSettings = () => {
-		if (settingsData.username === userStore.me.username) {
-			notifStore.addNotif('error', 'Error', 'Same username')
-			return false
+		if (settingsData.username) {
+			if (settingsData.username === userStore.me.username) {
+				notifStore.addNotif('error', 'Error', 'Same username')
+				return false
+			}
+			else if (settingsData.username.length < 4) {
+				notifStore.addNotif('error', 'Error', 'Username is too short (4 min)')
+				return false
+			}
+			else if (settingsData.username.length > 18) {
+				notifStore.addNotif('error', 'Error', 'Username is too long (18 max)')
+				return false
+			}
 		}
 		if (settingsData.oldPassword) {
 			if (!settingsData.newPassword) {
 				notifStore.addNotif('error', 'Error', 'New password is empty')
+				return false
+			}
+			else if(settingsData.newPassword.length < 6) {
+				notifStore.addNotif('error', 'Error', 'Password is too short (6 min)')
 				return false
 			}
 			else {
