@@ -10,15 +10,6 @@ export interface LoginForm {
 	password: string;
 }
 
-export interface ForgotPasswordForm {
-	email: string;
-}
-
-export interface ResetPasswordForm {
-	password: string;
-	confirmPassword: string;
-}
-
 export interface TfaForm {
 	code: string;
 }

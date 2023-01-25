@@ -3,7 +3,6 @@
 	import router from '@/router/index'
 	import register from '@/requests/Auth/register'
 	import login from '@/requests/Auth/login'
-	import forgotPassword from '@/requests/Auth/forgotPassword'
 	import tfaCallback from '@/requests/Auth/tfaCallback'
 
 	const	loginRedirect = () => router.push({path:'/accounts/login'})
@@ -16,7 +15,6 @@
 		<RouterView
 			@register="register"
 			@login="login"
-			@forgotPassword="forgotPassword"
 			@tfaCode="tfaCallback"
 		/>
 		<div class="Login-redirect" v-if="router.currentRoute.value.name === 'register'">

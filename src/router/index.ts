@@ -8,7 +8,6 @@ import Settings from '../components/Settings/Settings.vue'
 import Accounts from '../views/Accounts.vue'
 import RegisterForm from '../components/Forms/RegisterForm.vue'
 import LoginForm from '../components/Forms/LoginForm.vue'
-import ForgotForm from '../components/Forms/ForgotForm.vue'
 import TfaForm from '../components/Forms/TfaForm.vue'
 import NotFound from '../views/NotFound.vue'
 import { useUserStore } from '../stores/UserStore'
@@ -94,12 +93,7 @@ const router = createRouter({
 					path: 'login/tfa',
 					name: 'tfa',
 					component: TfaForm,
-				},
-				{
-					path: 'forgot-password',
-					name: 'forgot-password',
-					component: ForgotForm,
-				},
+				}
 			]
 		},
 		{

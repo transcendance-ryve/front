@@ -60,25 +60,6 @@
 		line-height: 1.375em;
 	}
 
-	.Form-forgotBtn {
-		border: none;
-		background: none;
-		align-self: flex-end;
-		margin-top: 32em;
-
-		.ForgotBtn-value {
-			font-family: 'Poppins';
-			font-weight: 600;
-			font-size: 16em;
-			line-height: 24px;
-			color: $white-200;
-			&:hover {
-				text-decoration: underline;
-				color: white;
-			}
-		}
-	}
-
 	form {
 		display: flex;
 		flex-direction: column;

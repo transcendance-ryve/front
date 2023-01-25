@@ -5,7 +5,6 @@
 	import { required, email, minLength, helpers } from '@vuelidate/validators'
 	import { logoProfile, logoLock, logo42 } from '../../assets/logoSVG'
 	import { auth42 } from '@/requests/Auth/auth42'
-	import router from '@/router'
 	import type { LoginForm } from '@/types/Forms'
 	import { useNotifStore } from '@/stores/NotificationsStore'
 
@@ -82,9 +81,6 @@
 					{{ v$.password.$errors[0].$message }}
 				</span>
 			</div>
-			<button class="Form-forgotBtn" type="button" @click="router.push({path: '/accounts/forgot-password'})">
-				<span class="ForgotBtn-value">Forgot your password?</span>
-			</button>
 			<button
 				class="Form-submitBtn"
 				type="submit"
