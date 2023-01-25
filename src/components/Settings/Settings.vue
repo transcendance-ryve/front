@@ -115,7 +115,7 @@
 				update = true
 		}
 		if (settingsData.avatarFile) {
-			if (setAvatar(settingsData.avatarFile))
+			if (await setAvatar(settingsData.avatarFile))
 				update = true
 		}
 		if (settingsData.newPassword) {
